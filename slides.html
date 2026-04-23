@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claro Acelera · Apresentação de Slides · Rodrigo Braga</title>
+  <meta name="description" content="Pitch executivo do Claro Acelera — 12 slides com a intervenção comercial especializada em rede de canal telecom.">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Claro Acelera · Pitch Executivo">
+  <meta property="og:description" content="Apresentação executiva em 12 slides — business case condensado para reunião de diretoria.">
+  <meta property="og:image" content="https://claro-acelera.vercel.app/assets/images/og-image.png">
+  <meta property="og:url" content="https://claro-acelera.vercel.app/slides.html">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Claro Acelera">
+  <meta property="og:locale" content="pt_BR">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Claro Acelera · Pitch Executivo">
+  <meta name="twitter:image" content="https://claro-acelera.vercel.app/assets/images/og-image.png">
+
+  <meta name="theme-color" content="#EC1C24">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════ TOKENS ═══════════════════════════════ */
+    :root {
+      /* Paleta Claro oficial */
+      --claro-red: #EC1C24;
+      --claro-red-deep: #B71318;
+      --claro-red-light: #FF4048;
+      --claro-red-glow: rgba(236, 28, 36, 0.4);
+      --claro-red-pale: #FFF0F1;
+      --claro-yellow: #FFCD00;
+      --claro-yellow-soft: #FFE27A;
+      --claro-yellow-pale: #FFF9E0;
+
+      /* Dark suavizado — cinza-grafite em vez de preto absoluto */
+      --ink: #1F1F22;
+      --charcoal: #2A2A2E;
+      --surface: #353538;
+      --surface-raised: #3D3D42;
+
+      /* Light */
+      --cream: #FAFAF7;
+      --paper: #FFFFFF;
+      --stone: #F2F0EB;
+
+      /* Aliases (mapeiam dourado antigo → amarelo/vermelho Claro) */
+      --gold: var(--claro-yellow);
+      --gold-soft: var(--claro-yellow);
+      --gold-deep: var(--claro-red-deep);
+
+      /* Text */
+      --text-dark: #1A1A1A;
+      --text-light: #FAFAF7;
+      --muted: #A0A0A8;
+      --muted-2: #6B6B6B;
+      --muted-dark: #58585E;
+
+      /* Borders */
+      --border-dark: rgba(255, 255, 255, 0.1);
+      --border-warm: rgba(255, 205, 0, 0.3);
+    }
+
+    /* ═══════════════════════════════ RESET ═══════════════════════════════ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--ink);
+      color: var(--text-light);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+      height: 100vh;
+      cursor: none;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* GRAIN */
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; line-height: 1.15; font-weight: 800; }
+    /* Destaques em títulos: Outfit 900 em amarelo Claro (em fundo dark) ou vermelho (em fundo light) */
+    em {
+      font-family: 'Outfit', sans-serif;
+      font-style: normal;
+      font-weight: 900;
+      color: var(--claro-yellow);
+      letter-spacing: -0.03em;
+    }
+    .bg-light em { color: var(--claro-red); }
+
+    /* ═══════════════════════════════ SLIDE ENGINE ═══════════════════════════════ */
+    .deck {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 7rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      overflow: hidden;
+    }
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Backgrounds — dark suave (cinza-grafite), não preto pesado */
+    .bg-dark {
+      background: linear-gradient(140deg, #2A2A2E 0%, #1F1F22 60%, #2A2A2E 100%);
+      color: var(--text-light);
+    }
+    .bg-charcoal {
+      background: linear-gradient(140deg, #323236 0%, #26262A 100%);
+      color: var(--text-light);
+    }
+    .bg-light { background: var(--cream); color: var(--text-dark); }
+
+    /* ═══════════════════════════════ BACKGROUND IMAGE LAYER ═══════════════════════════════ */
+    /* Glass escuro sobre imagem — atmosfera, não protagonismo */
+    .s-bg-photo {
+      position: absolute; inset: 0; z-index: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.16;
+      filter: saturate(0.65) contrast(1.05) blur(1px);
+      pointer-events: none;
+    }
+    .s-bg-photo::after {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(20,20,22,0.45) 0%, rgba(20,20,22,0.82) 100%),
+        linear-gradient(135deg, rgba(20,20,22,0.5) 0%, rgba(20,20,22,0.75) 100%);
+    }
+    /* Variação para slides charcoal — ainda mais sutil */
+    .bg-charcoal .s-bg-photo { opacity: 0.13; }
+
+    /* ═══════════════════════════════ AUTHOR BLOCK (logo PulsarH uniformizado) ═══════════════════════════════ */
+    .author-block {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.25rem 1.5rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      position: relative; z-index: 1;
+      backdrop-filter: blur(8px);
+      transition: all 0.4s cubic-bezier(.2,.8,.2,1);
+    }
+    .author-block:hover {
+      border-color: rgba(255,205,0,0.25);
+      background: rgba(255,255,255,0.06);
+    }
+    .author-logo-wrap {
+      flex-shrink: 0;
+      width: 96px; height: 96px;
+      display: grid; place-items: center;
+      background: #FFFFFF;
+      border-radius: 50%;
+      padding: 1rem;
+      box-shadow:
+        0 0 0 1px rgba(255,205,0,0.2),
+        0 8px 28px rgba(255,205,0,0.22),
+        0 0 60px rgba(236,28,36,0.12);
+      animation: logoBreathe 4.5s ease-in-out infinite;
+    }
+    .author-logo {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    @keyframes logoBreathe {
+      0%, 100% {
+        box-shadow: 0 0 0 1px rgba(255,205,0,0.2), 0 8px 28px rgba(255,205,0,0.22), 0 0 60px rgba(236,28,36,0.12);
+        transform: translateY(0);
+      }
+      50% {
+        box-shadow: 0 0 0 2px rgba(255,205,0,0.35), 0 14px 40px rgba(255,205,0,0.38), 0 0 80px rgba(236,28,36,0.22);
+        transform: translateY(-3px);
+      }
+    }
+
+    /* ═══════════════════════════════ CRONOGRAMA BOX (float + glow) ═══════════════════════════════ */
+    .cronograma-box {
+      padding: 1.5rem 1.75rem;
+      background: linear-gradient(135deg, rgba(236,28,36,0.18) 0%, rgba(255,205,0,0.1) 100%);
+      border: 1px solid rgba(236,28,36,0.3);
+      border-radius: 14px;
+      text-align: center;
+      position: relative; z-index: 1;
+      overflow: hidden;
+      animation: floatSoft 6s ease-in-out infinite;
+    }
+    .cronograma-box::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 100% at 50% 100%, rgba(255,205,0,0.2) 0%, transparent 70%);
+      animation: glowPulse 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes floatSoft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    /* ═══════════════════════════════ GLOW + FLOAT em s-big-idea (slide 5 Tese) ═══════════════════════════════ */
+    .s-big-idea {
+      animation: floatSoft 7s ease-in-out infinite;
+    }
+    .s-big-idea::before {
+      animation: gradientShimmer 3s linear infinite;
+      background-size: 200% 100%;
+    }
+    @keyframes gradientShimmer {
+      0% { background-position: 0% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    /* ═══════════════════════════════ CTA FINAL NA ESCALA (slide 10) — glow ═══════════════════════════════ */
+    .scale-highlight {
+      animation: glowYellow 3.5s ease-in-out infinite;
+    }
+    @keyframes glowYellow {
+      0%, 100% { text-shadow: 0 0 0 rgba(255,205,0,0); }
+      50% { text-shadow: 0 0 20px rgba(255,205,0,0.5), 0 0 40px rgba(255,205,0,0.25); }
+    }
+
+    .bg-dark em { color: var(--claro-yellow); }
+    .bg-charcoal em { color: var(--claro-yellow); }
+    .bg-light em { color: var(--claro-red); }
+
+    /* Radial glows com acentos Claro (amarelo + vermelho, em vez de dourado) */
+    .slide::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+    }
+    .bg-dark::after {
+      background:
+        radial-gradient(ellipse 60% 40% at 85% 15%, rgba(236,28,36,0.15), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 10% 90%, rgba(255,205,0,0.08), transparent 60%);
+    }
+    .bg-charcoal::after {
+      background:
+        radial-gradient(ellipse 50% 40% at 90% 10%, rgba(236,28,36,0.12), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 5% 85%, rgba(255,205,0,0.06), transparent 55%);
+    }
+
+    /* ═══════════════════════════════ TYPOGRAPHY ═══════════════════════════════ */
+    .s-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      padding: 0.4rem 0.9rem;
+      background: rgba(237, 28, 36, 0.08);
+      border: 1px solid rgba(237, 28, 36, 0.28);
+      border-radius: 999px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: #FF6B70;
+      margin-bottom: 1.75rem;
+      position: relative; z-index: 1;
+    }
+    .bg-light .s-eyebrow { background: rgba(237,28,36,0.06); border-color: rgba(237,28,36,0.2); color: var(--claro-red-deep); }
+    .s-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--claro-red); box-shadow: 0 0 12px var(--claro-red-glow); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    .s-title {
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      line-height: 1.0;
+      margin-bottom: 1.5rem;
+      position: relative; z-index: 1;
+    }
+    .s-subtitle {
+      font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--muted);
+      max-width: 750px;
+      position: relative; z-index: 1;
+    }
+    .bg-light .s-subtitle { color: var(--muted-2); }
+    .s-subtitle strong { color: var(--text-light); font-weight: 600; }
+    .bg-light .s-subtitle strong { color: var(--text-dark); }
+
+    .s-body {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--muted);
+      position: relative; z-index: 1;
+    }
+    .bg-light .s-body { color: var(--muted-2); }
+    .s-body strong { color: var(--text-light); font-weight: 600; }
+    .bg-light .s-body strong { color: var(--text-dark); }
+
+    .s-num {
+      position: absolute; top: 3.5rem; right: 5rem;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: clamp(4rem, 8vw, 8rem); line-height: 1;
+      color: rgba(255,205,0,0.12);
+      pointer-events: none; user-select: none;
+      letter-spacing: -0.05em;
+    }
+    .bg-light .s-num { color: rgba(236,28,36,0.08); }
+
+    /* ═══════════════════════════════ QUOTE ═══════════════════════════════ */
+    .s-quote {
+      margin: 1.5rem 0;
+      padding: 1.75rem 2.25rem;
+      border-left: 4px solid var(--claro-red);
+      background: rgba(236,28,36,0.06);
+      border-radius: 0 12px 12px 0;
+      font-family: 'Inter', sans-serif;
+      font-style: italic;
+      font-size: clamp(1rem, 1.4vw, 1.2rem);
+      line-height: 1.55;
+      color: var(--text-light);
+      font-weight: 400;
+      position: relative; z-index: 1;
+      max-width: 850px;
+    }
+    .bg-light .s-quote {
+      color: var(--text-dark);
+      background: var(--claro-red-pale);
+    }
+
+    /* ═══════════════════════════════ LISTS ═══════════════════════════════ */
+    .s-list {
+      list-style: none; margin: 1.25rem 0; padding: 0;
+      position: relative; z-index: 1;
+    }
+    .s-list li {
+      position: relative;
+      padding-left: 1.75rem;
+      margin-bottom: 0.6rem;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+    .bg-light .s-list li { color: var(--muted-2); }
+    .s-list li::before {
+      content: ''; position: absolute;
+      left: 0; top: 0.65em;
+      width: 0.55rem; height: 1px;
+      background: var(--claro-red);
+    }
+    .s-list li strong { color: var(--text-light); font-weight: 600; }
+    .bg-light .s-list li strong { color: var(--text-dark); }
+
+    /* ═══════════════════════════════ GRIDS ═══════════════════════════════ */
+    .s-grid-5 {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.85rem;
+      margin: 1.5rem 0; position: relative; z-index: 1;
+    }
+    .s-grid-3 {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+      margin: 1.5rem 0; position: relative; z-index: 1;
+    }
+    .s-grid-2 {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+      margin: 1.5rem 0; position: relative; z-index: 1;
+    }
+
+    .s-card {
+      padding: 1.5rem 1.25rem;
+      background: linear-gradient(170deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      backdrop-filter: blur(10px);
+    }
+    .s-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--claro-red), var(--claro-yellow));
+    }
+    .bg-light .s-card {
+      background: #FFFFFF;
+      border: 1px solid rgba(10,10,10,0.08);
+    }
+    .s-card-num {
+      font-family: 'Outfit', sans-serif; font-weight: 900;
+      font-size: 1.5rem; color: var(--claro-yellow); margin-bottom: 0.6rem;
+      letter-spacing: -0.02em;
+    }
+    .bg-light .s-card-num { color: var(--claro-red); }
+    .s-card-title {
+      font-family: 'Outfit', sans-serif; font-weight: 800;
+      font-size: 1rem; color: var(--text-light); margin-bottom: 0.35rem;
+    }
+    .bg-light .s-card-title { color: var(--text-dark); }
+    .s-card-tag {
+      font-family: 'Inter', sans-serif; font-style: italic;
+      font-size: 0.85rem; color: var(--claro-yellow); font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    .bg-light .s-card-tag { color: var(--claro-red); }
+    .s-card-desc {
+      font-size: 0.82rem; line-height: 1.5; color: var(--muted);
+    }
+
+    /* ═══════════════════════════════ TABLE ═══════════════════════════════ */
+    .s-table-wrap { position: relative; z-index: 1; margin: 1.5rem 0; overflow-x: auto; }
+    .s-table {
+      width: 100%; border-collapse: collapse;
+      background: var(--ink); border-radius: 14px;
+      overflow: hidden; border: 1px solid var(--border-dark);
+      font-size: 0.88rem;
+    }
+    .s-table thead th {
+      padding: 0.9rem 1rem;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem; font-weight: 700; text-align: left;
+      background: rgba(237,28,36,0.06);
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--claro-red);
+      border-bottom: 1px solid var(--border-warm);
+    }
+    .s-table tbody td {
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: var(--muted);
+    }
+    .s-table tbody td:first-child { color: var(--gold-soft); font-weight: 700; font-family: 'Outfit', sans-serif; }
+    .s-table tbody td:nth-child(3) { color: var(--text-light); font-weight: 500; }
+
+    /* Pack overview rows */
+    .s-pack-row {
+      display: grid;
+      grid-template-columns: 2.5rem 1fr auto auto;
+      gap: 1rem; align-items: center;
+      padding: 0.9rem 1.25rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border-dark);
+      border-left: 3px solid var(--claro-red);
+      border-radius: 10px;
+      margin-bottom: 0.5rem;
+      position: relative; z-index: 1;
+    }
+    .s-pack-num { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.3rem; color: var(--claro-yellow); letter-spacing: -0.02em; }
+    .s-pack-name { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 0.95rem; }
+    .s-pack-name small { display: block; font-weight: 500; font-size: 0.75rem; color: var(--muted); }
+    .s-pack-price { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.85rem; color: var(--gold-soft); white-space: nowrap; }
+    .s-pack-dur {
+      font-family: 'Outfit', sans-serif; font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--claro-red);
+      padding: 0.25rem 0.6rem; border: 1px solid rgba(237,28,36,0.3);
+      border-radius: 999px; white-space: nowrap;
+    }
+
+    /* Method blocks */
+    .s-method {
+      padding: 1.5rem 1.5rem;
+      background: #FFFFFF;
+      border: 1px solid rgba(10,10,10,0.08);
+      border-radius: 16px;
+      overflow: hidden; position: relative;
+    }
+    .s-method::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--claro-red), var(--claro-yellow));
+    }
+    .s-method-icon { font-size: 1.4rem; margin-bottom: 0.75rem; }
+    .s-method-sub {
+      font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--claro-red);
+      margin-bottom: 0.35rem;
+    }
+    .s-method-title {
+      font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 800;
+      color: var(--text-dark); margin-bottom: 0.6rem;
+    }
+    .s-method-title span { font-family: 'Outfit', sans-serif; font-style: normal; color: var(--claro-red); font-weight: 900; letter-spacing: -0.02em; }
+    .s-method-body { color: var(--muted-2); font-size: 0.85rem; line-height: 1.55; }
+    .s-method-body ul { list-style: none; margin: 0.5rem 0 0; padding: 0; }
+    .s-method-body ul li { padding-left: 1.2rem; margin-bottom: 0.3rem; position: relative; font-size: 0.82rem; }
+    .s-method-body ul li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 0.45rem; height: 1px; background: var(--claro-red); }
+
+    /* Selos */
+    .s-selos { display: flex; gap: 1.5rem; justify-content: center; margin: 2rem 0; position: relative; z-index: 1; }
+    .s-selo {
+      padding: 1.5rem 1.25rem; text-align: center;
+      background: #FFFFFF; border: 1px solid rgba(10,10,10,0.08);
+      border-radius: 14px; width: 140px;
+    }
+    .s-selo.top {
+      background: linear-gradient(165deg, #FFFBF1 0%, #FFFFFF 100%);
+      border: 1px solid rgba(255,205,0,0.5);
+      box-shadow: 0 8px 28px rgba(255,205,0,0.18);
+    }
+    .s-selo-ring {
+      width: 56px; height: 56px; margin: 0 auto 0.75rem;
+      border-radius: 50%; display: grid; place-items: center;
+      background: linear-gradient(145deg, var(--claro-red), var(--claro-red-deep));
+      color: #fff; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.3rem;
+      box-shadow: 0 6px 16px rgba(237,28,36,0.3);
+    }
+    .s-selo.top .s-selo-ring {
+      background: linear-gradient(145deg, var(--claro-yellow), #E5B800);
+      color: var(--text-dark); box-shadow: 0 6px 18px rgba(255,205,0,0.4);
+    }
+    .s-selo-name { font-family: 'Outfit', sans-serif; font-size: 0.82rem; font-weight: 800; color: var(--text-dark); line-height: 1.2; }
+
+    /* Metric card */
+    .s-metric {
+      padding: 1.5rem;
+      background: #FFFFFF; border: 1px solid rgba(10,10,10,0.08);
+      border-radius: 14px; overflow: hidden; position: relative;
+    }
+    .s-metric::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--claro-red);
+    }
+    .s-metric-label {
+      font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--claro-red);
+      margin-bottom: 0.35rem;
+    }
+    .s-metric-who {
+      font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 800;
+      color: var(--text-dark); margin-bottom: 0.75rem;
+    }
+    .s-metric ul { list-style: none; margin: 0; padding: 0; }
+    .s-metric ul li {
+      position: relative; padding-left: 1.2rem; margin-bottom: 0.4rem;
+      font-size: 0.82rem; color: var(--muted-2); line-height: 1.45;
+    }
+    .s-metric ul li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 0.45rem; height: 1px; background: var(--claro-red); }
+
+    /* Timeline compact */
+    .s-timeline { position: relative; z-index: 1; margin: 1rem 0; padding-left: 3rem; }
+    .s-timeline::before {
+      content: ''; position: absolute; left: 14px; top: 0; bottom: 0; width: 2px;
+      background: linear-gradient(180deg, var(--claro-red), rgba(237,28,36,0.15));
+    }
+    .s-tl-item { position: relative; padding-bottom: 1.25rem; }
+    .s-tl-item:last-child { padding-bottom: 0; }
+    .s-tl-dot {
+      position: absolute; left: -2.25rem; top: 0;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--ink); border: 2px solid var(--claro-red);
+      display: grid; place-items: center;
+      font-family: 'Outfit', sans-serif; font-size: 0.55rem; font-weight: 800; color: var(--claro-red);
+    }
+    .s-tl-title { font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 800; color: var(--text-light); margin-bottom: 0.15rem; }
+    .s-tl-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.45; }
+    .s-tl-dur {
+      display: inline-block; margin-top: 0.3rem;
+      font-family: 'Outfit', sans-serif; font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold);
+      padding: 0.2rem 0.5rem; background: rgba(197,165,114,0.08);
+      border: 1px solid rgba(197,165,114,0.25); border-radius: 999px;
+    }
+
+    /* Layers */
+    .s-layer {
+      padding: 1.25rem 1.25rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border-dark);
+      border-radius: 14px; overflow: hidden; position: relative;
+    }
+    .s-layer::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      background: linear-gradient(180deg, var(--claro-red), var(--claro-yellow));
+    }
+    .s-layer-num { font-family: 'Outfit', sans-serif; font-weight: 900; color: var(--claro-yellow); font-size: 1.4rem; margin-bottom: 0.4rem; letter-spacing: -0.02em; }
+    .s-layer-title { font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 800; color: var(--text-light); margin-bottom: 0.3rem; }
+    .s-layer-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.45; }
+    .s-layer-scale {
+      display: inline-block; margin-top: 0.5rem;
+      padding: 0.2rem 0.55rem;
+      background: rgba(197,165,114,0.08); border: 1px solid rgba(197,165,114,0.25);
+      border-radius: 999px;
+      font-family: 'Outfit', sans-serif; font-size: 0.58rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold);
+    }
+
+    /* ═══════════════════════════════ CONTROLS ═══════════════════════════════ */
+    .slide-controls {
+      position: fixed; bottom: 2rem; right: 3rem;
+      display: flex; align-items: center; gap: 1rem;
+      z-index: 1000;
+      cursor: auto;
+    }
+    .slide-counter {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+      color: var(--muted-2);
+    }
+    .slide-counter .current { color: var(--gold); font-size: 1rem; }
+    .slide-btn {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border-dark);
+      background: rgba(20,20,24,0.8);
+      backdrop-filter: blur(12px);
+      color: var(--text-light);
+      font-size: 1rem;
+      display: grid; place-items: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .slide-btn:hover { border-color: var(--claro-red); color: var(--claro-red); }
+
+    .progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px; z-index: 1000;
+      background: linear-gradient(90deg, var(--claro-red), var(--claro-yellow));
+      transition: width 0.4s ease;
+    }
+
+    /* Logo Claro fixo top-left — badge com fundo vermelho Claro pra funcionar em qualquer slide */
+    .brand-top {
+      position: fixed; top: 1.5rem; left: 2rem; z-index: 1000;
+      display: flex; align-items: center; gap: 0.9rem;
+      padding: 0.55rem 1rem 0.55rem 0.85rem;
+      background: var(--claro-red);
+      border-radius: 999px;
+      box-shadow: 0 6px 18px rgba(236,28,36,0.25);
+    }
+    .brand-top-logo {
+      height: 24px; width: auto;
+    }
+    .brand-top-divider {
+      width: 1px; height: 18px;
+      background: rgba(255,255,255,0.3);
+    }
+    .brand-top-text {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800; font-size: 0.82rem;
+      letter-spacing: -0.01em;
+      color: #fff;
+    }
+    .brand-top-text em { color: var(--claro-yellow); font-family: 'Outfit'; font-style: normal; font-weight: 900; }
+
+    /* Home link agora no top-right (junto do doc-link) */
+    .home-link {
+      position: fixed; top: 2rem; right: 2.5rem; z-index: 1000;
+      font-family: 'Outfit', sans-serif; font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--muted-2); cursor: pointer;
+      transition: color 0.25s ease;
+      padding: 0.4rem 0.85rem;
+      border: 1px solid var(--border-dark);
+      border-radius: 999px;
+      background: rgba(20,20,24,0.4);
+      backdrop-filter: blur(8px);
+    }
+    .home-link:hover { color: var(--claro-red); border-color: rgba(236,28,36,0.4); }
+    .bg-light .home-link { color: var(--muted-2); background: rgba(250,250,247,0.7); border-color: rgba(0,0,0,0.1); }
+
+    /* Fullscreen btn */
+    .fs-btn {
+      position: fixed; bottom: 2rem; left: 2.5rem; z-index: 1000;
+      font-family: 'Outfit', sans-serif; font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted-dark); cursor: pointer;
+      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--border-dark); border-radius: 6px;
+      background: rgba(20,20,24,0.6); backdrop-filter: blur(8px);
+      transition: all 0.25s ease;
+    }
+    .fs-btn:hover { color: var(--gold); border-color: var(--border-warm); }
+
+    /* Big idea special */
+    .s-big-idea {
+      padding: 2.5rem 3rem;
+      background: linear-gradient(135deg, rgba(236,28,36,0.12) 0%, rgba(255,205,0,0.06) 100%);
+      border: 1px solid rgba(255,205,0,0.3);
+      border-radius: 18px;
+      position: relative; overflow: hidden; z-index: 1;
+      margin: 1.5rem 0;
+      backdrop-filter: blur(10px);
+    }
+    .s-big-idea::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--claro-red), var(--claro-yellow));
+    }
+    .s-big-idea p {
+      font-family: 'Outfit', sans-serif; font-style: normal;
+      font-size: clamp(1.15rem, 1.7vw, 1.55rem); line-height: 1.4;
+      color: var(--text-light); margin: 0;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+    }
+    .s-big-idea p em { color: var(--claro-yellow); }
+
+    /* Two column layout */
+    .s-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; position: relative; z-index: 1; }
+    .s-col {}
+
+    /* ═══════════════════════════════ IMAGE PLACEHOLDERS ═══════════════════════════════ */
+    .s-img {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid var(--border-warm);
+    }
+    .s-img .ph-grad {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 80% 20%, rgba(237,28,36,0.22), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 20% 90%, rgba(197,165,114,0.14), transparent 60%),
+        linear-gradient(135deg, #14101C 0%, #0B0B0E 100%);
+    }
+    .bg-light .s-img { border-color: rgba(237,28,36,0.18); }
+    .bg-light .s-img .ph-grad {
+      background:
+        radial-gradient(ellipse 60% 40% at 80% 20%, rgba(237,28,36,0.14), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 20% 90%, rgba(197,165,114,0.22), transparent 60%),
+        linear-gradient(135deg, #FAFAF7 0%, #E8DFCD 100%);
+    }
+    .s-img .ph-grain {
+      position: absolute; inset: 0; opacity: 0.15;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .s-img .ph-label {
+      position: absolute; bottom: 0.75rem; left: 0.75rem;
+      font-family: 'Outfit', sans-serif; font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(197,165,114,0.55); padding: 0.25rem 0.55rem;
+      background: rgba(0,0,0,0.4); border: 1px solid rgba(197,165,114,0.25);
+      border-radius: 4px;
+    }
+    .bg-light .s-img .ph-label {
+      color: rgba(183,19,24,0.75);
+      background: rgba(250,250,247,0.7);
+      border-color: rgba(237,28,36,0.3);
+    }
+
+    /* Slide com imagem lateral — capa hero */
+    .s-hero-split {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative; z-index: 1;
+      height: 100%;
+    }
+    .s-hero-split .s-hero-text {
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .s-hero-split .s-img {
+      aspect-ratio: 4/5;
+      width: 100%;
+      max-height: 70vh;
+    }
+
+    /* Mini-banner image top do slide */
+    .s-img-banner {
+      width: 100%;
+      aspect-ratio: 21/6;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Portrait image for CTA */
+    .s-img-portrait {
+      aspect-ratio: 4/5;
+      width: 100%;
+      max-height: 55vh;
+    }
+
+    /* ═══════════════════════════════ MOBILE RESPONSIVE ═══════════════════════════════ */
+    @media (max-width: 900px) {
+      body { overflow-y: auto; height: auto; }
+      .deck {
+        width: 100%; height: auto;
+        padding: 5rem 0 8rem;
+      }
+      /* No mobile: slides stackam verticalmente em vez de serem absolutos */
+      .slide {
+        position: relative;
+        inset: auto;
+        opacity: 1;
+        pointer-events: auto;
+        padding: 3rem 1.5rem 3.5rem;
+        min-height: 80vh;
+        margin-bottom: 1rem;
+        border-top: 1px solid rgba(255,255,255,0.05);
+      }
+      .slide:first-of-type { border-top: none; }
+
+      /* Brand top — menor, fixo */
+      .brand-top {
+        top: 1rem; left: 1rem;
+        padding: 0.45rem 0.85rem 0.45rem 0.7rem;
+        gap: 0.6rem;
+      }
+      .brand-top-logo { height: 20px; }
+      .brand-top-text { font-size: 0.72rem; }
+
+      /* Home/Doc link — empilha no top-right */
+      .home-link {
+        top: 1rem; right: 1rem;
+        font-size: 0.65rem;
+        padding: 0.35rem 0.7rem;
+      }
+
+      /* Fullscreen btn — ocultar no mobile */
+      .fs-btn { display: none; }
+
+      /* Controles bottom — centralizados e mais compactos */
+      .slide-controls {
+        bottom: 1rem; right: 50%;
+        transform: translateX(50%);
+        gap: 0.6rem;
+        background: rgba(20,20,24,0.85);
+        backdrop-filter: blur(12px);
+        padding: 0.5rem 0.85rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255,255,255,0.1);
+      }
+      .slide-counter { font-size: 0.65rem; }
+      .slide-counter .current { font-size: 0.85rem; }
+      .slide-btn { width: 34px; height: 34px; font-size: 0.9rem; }
+
+      /* Progress bar mais visível */
+      .progress-bar { display: none; }
+
+      /* Typography escalona */
+      .s-title { font-size: clamp(1.6rem, 6vw, 2.4rem) !important; line-height: 1.1; }
+      .s-subtitle { font-size: clamp(0.95rem, 3.5vw, 1.1rem) !important; }
+      .s-num {
+        top: 1rem; right: 1rem;
+        font-size: clamp(2.5rem, 10vw, 4rem);
+      }
+      .s-eyebrow { font-size: 0.6rem; margin-bottom: 1.25rem; padding: 0.3rem 0.75rem; }
+
+      /* GRIDS → 1-2 colunas no mobile */
+      .s-grid-5 { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+      .s-grid-3 { grid-template-columns: 1fr; gap: 0.75rem; }
+      .s-grid-2 { grid-template-columns: 1fr; }
+      .s-cols { grid-template-columns: 1fr; gap: 1.25rem; }
+      .s-hero-split { grid-template-columns: 1fr; gap: 1.25rem; }
+      .s-hero-split .s-img { max-height: 200px; aspect-ratio: 16/10; }
+      .s-img-banner { aspect-ratio: 16/9; margin-bottom: 1rem; }
+
+      /* Cards e blocos */
+      .s-card { padding: 1.25rem 1rem; }
+      .s-card-title { font-size: 0.95rem; }
+      .s-card-tag { font-size: 0.78rem; }
+      .s-card-desc { font-size: 0.78rem; }
+      .s-method { padding: 1.25rem 1.1rem; }
+      .s-method-title { font-size: 1.1rem; }
+      .s-pack-row {
+        grid-template-columns: auto 1fr;
+        gap: 0.7rem;
+        padding: 0.8rem 1rem;
+      }
+      .s-pack-price, .s-pack-dur {
+        grid-column: span 2;
+        justify-self: start;
+      }
+
+      /* Big idea no slide 5 */
+      .s-big-idea { padding: 1.5rem 1.5rem; }
+      .s-big-idea p { font-size: clamp(1rem, 4vw, 1.25rem) !important; }
+
+      /* Author block no slide 12 */
+      .author-block {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.25rem 1rem;
+        gap: 1rem;
+      }
+      .author-logo-wrap { width: 80px; height: 80px; padding: 0.75rem; }
+      .cronograma-box { padding: 1.25rem 1rem; }
+
+      /* Tabelas — horizontal scroll */
+      .s-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .s-table { font-size: 0.78rem; min-width: 480px; }
+      .s-table th, .s-table td { padding: 0.65rem 0.75rem; }
+
+      /* Timeline compacto */
+      .s-timeline { padding-left: 2.25rem; }
+      .s-tl-title { font-size: 0.9rem; }
+      .s-tl-desc { font-size: 0.78rem; }
+      .s-tl-item { padding-bottom: 1rem; }
+      .s-tl-dot { left: -1.9rem; width: 16px; height: 16px; font-size: 0.5rem; }
+
+      /* Layers */
+      .s-layer { padding: 1rem 1rem; }
+      .s-layer-title { font-size: 0.88rem; }
+      .s-layer-desc { font-size: 0.75rem; }
+
+      /* Metrics */
+      .s-metric { padding: 1.25rem 1rem; }
+      .s-metric-who { font-size: 1rem; }
+
+      /* Background photos mais escuros no mobile pra texto legível */
+      .s-bg-photo { opacity: 0.1 !important; }
+      .s-bg-photo::after {
+        background: rgba(20,20,22,0.88) !important;
+      }
+    }
+
+    /* Mobile pequeno */
+    @media (max-width: 480px) {
+      .slide { padding: 2.5rem 1.25rem 3rem; min-height: auto; }
+      .s-grid-5 { grid-template-columns: 1fr; }
+      .s-title { font-size: clamp(1.4rem, 7vw, 2rem) !important; }
+      .brand-top-text { display: none; }
+      .brand-top-divider { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- LOGO CLARO FIXO TOP-LEFT -->
+  <div class="brand-top">
+    <a href="index.html" style="display:flex;align-items:center;gap:0.9rem;">
+      <img src="assets/images/claro-logo-white.svg" alt="Claro" class="brand-top-logo">
+      <div class="brand-top-divider"></div>
+      <div class="brand-top-text"><em>Acelera</em></div>
+    </a>
+  </div>
+
+  <a href="doc.html" class="home-link">Documento →</a>
+  <div class="fs-btn" id="fsBtn">Tela cheia</div>
+
+  <div class="deck" id="deck">
+
+    <!-- ════════════ SLIDE 01 — CAPA ════════════ -->
+    <div class="slide bg-dark active" data-slide="1">
+      <div class="s-num">01</div>
+      <div class="s-hero-split">
+        <div class="s-hero-text">
+          <div class="s-eyebrow"><span class="s-dot"></span><span>Business Case · Rentabilização de Canal · Abril 2026</span></div>
+          <h1 class="s-title" style="font-size: clamp(3rem, 6vw, 5.5rem);">Claro <em>Acelera</em></h1>
+          <p class="s-subtitle" style="margin-bottom: 2.5rem;">Intervenção comercial especializada em rede de parceiros — por quem viveu <strong>21 anos dentro da loja</strong>.</p>
+          <div style="display: flex; gap: 2rem; font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; color: var(--claro-yellow); position: relative; z-index: 1; flex-wrap: wrap;">
+            <span>Rodrigo Braga</span>
+            <span style="color: var(--muted-2);">·</span>
+            <span>Especialista em varejo</span>
+            <span style="color: var(--muted-2);">·</span>
+            <span>7 anos Gerente Nacional</span>
+          </div>
+        </div>
+        <div class="s-img">
+          <img src="assets/images/hero-main.jpg" alt="Parceiro Claro em sua loja" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════ SLIDE 02 — O PROBLEMA ════════════ -->
+    <div class="slide bg-light" data-slide="2">
+      <div class="s-num">02</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>Leitura de Canal</span></div>
+      <h2 class="s-title">O problema do canal,<br>traduzido em <em>KPI</em>.</h2>
+      <p class="s-subtitle" style="margin-bottom: 1.25rem;">Não é falta de produto. Não é falta de informação. É <strong>ausência de intervenção comercial especializada</strong> que combine método, indicador e linguagem de varejo real.</p>
+      <ul class="s-list">
+        <li><strong>Penetração de serviço baixa</strong> — vende só o que o cliente pediu</li>
+        <li><strong>Abordagem reativa</strong> — sem método consultivo no balcão</li>
+        <li><strong>Gestão amadora</strong> — sem ritual, sem indicador, sem cadência</li>
+        <li><strong>Baixa percepção de valor em capacitação</strong> — vê despesa, não alavanca</li>
+        <li><strong>Desengajamento de marca</strong> — se enxerga como revendedor, não como extensão da Claro</li>
+      </ul>
+    </div>
+
+    <!-- ════════════ SLIDE 03 — ESPECIALISTA VS GENERALISTA (NOVO) ════════════ -->
+    <div class="slide bg-dark" data-slide="3">
+      <div class="s-bg-photo" style="background-image: url('assets/images/embaixador-selo.jpg'); background-position: right center;"></div>
+      <div class="s-num">03</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>Posicionamento</span></div>
+      <h2 class="s-title">Especialista em varejo · não <em>generalista</em>.</h2>
+      <p class="s-subtitle" style="margin-bottom: 1.5rem;">Esse é um problema de <strong>rede de canal telecom</strong>. Tratar como desenvolvimento genérico de MPE é passar por cima da especificidade que faz o problema existir.</p>
+      <div class="s-table-wrap" style="margin-top: 0.75rem;">
+        <table class="s-table" style="font-size: 0.85rem;">
+          <thead>
+            <tr><th>Consultoria generalista</th><th>Claro Acelera</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="color: var(--muted); font-weight: 500;">Empreendedorismo amplo de MPE</td><td>Varejo de canal telecom</td></tr>
+            <tr><td style="color: var(--muted); font-weight: 500;">Consultor externo com framework padrão</td><td>Executivo com 21 anos dentro da loja</td></tr>
+            <tr><td style="color: var(--muted); font-weight: 500;">Curso / trilha de desenvolvimento</td><td>Intervenção comercial com ritual e indicador</td></tr>
+            <tr><td style="color: var(--muted); font-weight: 500;">Cobertura massiva genérica</td><td>Ondas com KPI auditável por ciclo</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top: 1.5rem; padding: 1.1rem 1.5rem; background: linear-gradient(135deg, rgba(236,28,36,0.15), rgba(255,205,0,0.08)); border: 1px solid rgba(255,205,0,0.3); border-radius: 12px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text-light); line-height: 1.4; position: relative; z-index: 1;">
+        <em>21 anos de chão de loja.</em> Não é consultoria de fora olhando pra dentro. É de dentro ensinando a rentabilizar.
+      </div>
+    </div>
+
+    <!-- ════════════ SLIDE 04 — LEITURA DO PARCEIRO ════════════ -->
+    <div class="slide bg-charcoal" data-slide="4">
+      <div class="s-num">04</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>Perfil de Canal</span></div>
+      <h2 class="s-title" style="font-size: clamp(1.8rem, 3.5vw, 3rem); margin-bottom: 1.25rem;">O parceiro <em>classes C, D, E</em>.</h2>
+      <p class="s-subtitle" style="margin-bottom: 1.25rem;">90% da rede atual. O segmento com maior gap em penetração de serviço — <strong>onde cada ponto percentual de melhoria impacta mais</strong>.</p>
+      <div class="s-img s-img-banner">
+        <img src="assets/images/avatar-parceiro.jpg" alt="Parceiro Claro atendendo cliente" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="s-grid-3">
+        <div style="padding: 1.25rem 1.35rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-left: 3px solid var(--claro-red); border-radius: 10px;">
+          <div style="font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.5rem;">Perfil Operacional</div>
+          <div style="font-size: 0.85rem; line-height: 1.55; color: var(--text-light);">PDV 1-5 colaboradores · R$20k-150k/mês · dono em regime de presença · investimento em capacitação próximo de zero.</div>
+        </div>
+        <div style="padding: 1.25rem 1.35rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-left: 3px solid var(--claro-red); border-radius: 10px;">
+          <div style="font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.5rem;">Comportamento Atual</div>
+          <div style="font-size: 0.85rem; line-height: 1.55; color: var(--text-light);">Venda reativa · sem ritual · sem dashboard · ticket abaixo do potencial do PDV.</div>
+        </div>
+        <div style="padding: 1.25rem 1.35rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-left: 3px solid var(--claro-red); border-radius: 10px;">
+          <div style="font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.5rem;">O que aceita</div>
+          <div style="font-size: 0.85rem; line-height: 1.55; color: var(--text-light);">Material em celular com caso de loja igual à dele · ferramenta que ele vê funcionando antes de pagar · autor que viveu o que ele vive.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════ SLIDE 05 — A TESE ════════════ -->
+    <div class="slide bg-dark" data-slide="5">
+      <div class="s-num">05</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>A Tese</span></div>
+      <div class="s-big-idea" style="margin-top: 2rem;">
+        <p style="font-size: clamp(1.3rem, 2.1vw, 1.95rem); line-height: 1.35;">A loja que vende <strong style="color: var(--claro-yellow); font-weight: 900;">produto</strong> vive da margem que o cliente já decidiu pagar.<br>A loja que vende <strong style="color: var(--claro-yellow); font-weight: 900;">serviço</strong> decide o quanto o cliente vai pagar.</p>
+      </div>
+      <div style="margin-top: 2rem; padding: 1.5rem 1.75rem; background: linear-gradient(135deg, rgba(236,28,36,0.15), rgba(255,205,0,0.08)); border: 1px solid rgba(236,28,36,0.3); border-radius: 14px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--text-light); line-height: 1.4; position: relative; z-index: 1;">
+        A Claro oferece o <em>produto</em>. O Claro Acelera oferece ao parceiro o <em>método</em> — e à Claro, a rede que o vende.
+      </div>
+    </div>
+
+    <!-- ════════════ SLIDE 06 — MÉTODO (PESSOAS · PROCESSOS · IA) ════════════ -->
+    <div class="slide bg-light" data-slide="6">
+      <div class="s-num">06</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>Método</span></div>
+      <h2 class="s-title">Três camadas · cinco <em>pilares</em> · um só método.</h2>
+      <p class="s-subtitle" style="margin-bottom: 1.25rem;"><strong>Pessoas, Processos, Tecnologia IA</strong> — aplicados sobre cinco pilares da mentalidade do lojista. É a arquitetura que a consultoria generalista não entrega.</p>
+      <div class="s-grid-3">
+        <div class="s-method">
+          <div class="s-method-icon">🧠</div>
+          <div class="s-method-sub">Camada 1 · Pessoas</div>
+          <div class="s-method-title">Mentalidade do <span>lojista</span></div>
+          <div class="s-method-body">
+            5 pilares que separam a loja que rentabiliza da que estagna:
+            <ul>
+              <li><strong>Conexão</strong> — onde mercado e cliente se cruzam no balcão</li>
+              <li><strong>Produtividade</strong> — vender mais em menos tempo</li>
+              <li><strong>Humildade</strong> — reconhecer que o jogo mudou</li>
+              <li><strong>Sistêmica</strong> — decidir por dado, não por feeling</li>
+              <li><strong>Humana</strong> — cuidar de cliente e time na mesma régua</li>
+            </ul>
+          </div>
+        </div>
+        <div class="s-method">
+          <div class="s-method-icon">🔁</div>
+          <div class="s-method-sub">Camada 2 · Processos</div>
+          <div class="s-method-title">Metodologia <span>PULSAR</span></div>
+          <div class="s-method-body">
+            Cadência operacional de 6 rituais · semanal:
+            <ul>
+              <li><strong>P</strong> — Planejar</li>
+              <li><strong>U</strong> — Usar / Executar</li>
+              <li><strong>L</strong> — Lapidar</li>
+              <li><strong>S</strong> — Sustentar</li>
+              <li><strong>A</strong> — Alavancar</li>
+              <li><strong>R</strong> — Replicar</li>
+            </ul>
+            <p style="margin-top: 0.75rem; font-size: 0.78rem; color: var(--claro-red); font-weight: 600;">+ Filtro <strong>H</strong> — humanização aplicada a cada decisão.</p>
+          </div>
+        </div>
+        <div class="s-method">
+          <div class="s-method-icon">⚡</div>
+          <div class="s-method-sub">Camada 3 · Tecnologia IA</div>
+          <div class="s-method-title">Produtividade <span>e escala</span></div>
+          <div class="s-method-body">
+            IA aplicada como camada estrutural — não bandeira:
+            <ul>
+              <li>Análise de dados do PDV</li>
+              <li>Capacitação contínua assistida</li>
+              <li>Inteligência comercial</li>
+              <li>Automação do repetitivo</li>
+            </ul>
+            <p style="margin-top: 0.75rem; font-size: 0.78rem; color: var(--muted-2); font-weight: 500;">Toda capacidade entregue como função comercial — não como tecnologia a consumir.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════ SLIDE 07 — 5 PACOTES ════════════ -->
+    <div class="slide bg-dark" data-slide="7">
+      <div class="s-bg-photo" style="background-image: url('assets/images/time-loja.jpg'); background-position: right center;"></div>
+      <div class="s-num">07</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>Arquitetura</span></div>
+      <h2 class="s-title">Uma <em>escada</em> de valor — do gratuito ao premium.</h2>
+      <p class="s-subtitle" style="margin-bottom: 1rem;">Cinco pacotes. Cada um com KPI comercial mensurável. Entra por onde o parceiro cabe. <strong>Sobe por resultado, não por tempo de casa.</strong></p>
+      <div style="position: relative; z-index: 1; margin-top: 1rem;">
+        <div class="s-pack-row">
+          <div class="s-pack-num">I</div>
+          <div class="s-pack-name">Claro Acelera Start <small>Porta de entrada · Self-service</small></div>
+          <div class="s-pack-price">R$ 0 · Gratuito</div>
+          <div class="s-pack-dur">Contínuo</div>
+        </div>
+        <div class="s-pack-row">
+          <div class="s-pack-num">II</div>
+          <div class="s-pack-name">Claro Acelera Ativador <small>Primeira transformação</small></div>
+          <div class="s-pack-price">R$ 500 · 50/50 Claro</div>
+          <div class="s-pack-dur">30 dias</div>
+        </div>
+        <div class="s-pack-row">
+          <div class="s-pack-num">III</div>
+          <div class="s-pack-name">Claro Acelera Operador <small>Sistema de gestão</small></div>
+          <div class="s-pack-price">R$ 800 · Parceiro</div>
+          <div class="s-pack-dur">90 dias</div>
+        </div>
+        <div class="s-pack-row">
+          <div class="s-pack-num">IV</div>
+          <div class="s-pack-name">Claro Acelera Master <small>Diferenciação</small></div>
+          <div class="s-pack-price">R$ 1.500–2.500</div>
+          <div class="s-pack-dur">120 dias</div>
+        </div>
+        <div class="s-pack-row">
+          <div class="s-pack-num">V</div>
+          <div class="s-pack-name">Claro Acelera Embaixador <small>Referência regional</small></div>
+          <div class="s-pack-price">R$ 5.000+</div>
+          <div class="s-pack-dur">180 dias</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════ SLIDE 08 — META COMERCIAL POR PACOTE ════════════ -->
+    <div class="slide bg-charcoal" data-slide="8">
+      <div class="s-bg-photo" style="background-image: url('assets/images/dashboard-celular.jpg'); background-position: right center;"></div>
+      <div class="s-num">08</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>Meta por Pacote</span></div>
+      <h2 class="s-title">Cada pacote entrega <em>resultado comercial mensurável</em>.</h2>
+      <div class="s-table-wrap">
+        <table class="s-table">
+          <thead>
+            <tr><th>Pacote</th><th>Meta comercial mensurável</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Start</td><td>Baseline diagnosticada · <strong style="color: var(--text-light);">3 oportunidades de serviço</strong> mapeadas por PDV</td></tr>
+            <tr><td>Ativador</td><td><strong style="color: var(--text-light);">+15% penetração de serviço</strong> · +1 serviço por venda (30 dias)</td></tr>
+            <tr><td>Operador</td><td><strong style="color: var(--text-light);">+25% ticket médio</strong> · cadência PULSAR instalada (90 dias)</td></tr>
+            <tr><td>Master</td><td><strong style="color: var(--text-light);">+40% faturamento</strong> · dashboard ativo · time em ciclo contínuo (120 dias)</td></tr>
+            <tr><td>Embaixador</td><td><strong style="color: var(--text-light);">Top 10% de penetração regional</strong> · NPS final ≥70 · indicação orgânica (180 dias)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ════════════ SLIDE 09 — WORKSHOPS ════════════ -->
+    <div class="slide bg-light" data-slide="9">
+      <div class="s-num">09</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>Ativação Presencial</span></div>
+      <h2 class="s-title" style="font-size: clamp(1.8rem, 3.5vw, 3rem); margin-bottom: 1.25rem;">Ativação presencial como alavanca <em>de canal</em>.</h2>
+      <p class="s-subtitle" style="margin-bottom: 1.25rem;">Três formatos presenciais co-assinados Claro × Rodrigo Braga — para operar em complemento aos pacotes digitais.</p>
+      <div class="s-img s-img-banner">
+        <img src="assets/images/workshop-regional.jpg" alt="Workshop Regional Claro Acelera" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="s-cols">
+        <div class="s-col">
+          <h4 style="font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.75rem;">Workshops Regionais</h4>
+          <ul class="s-list">
+            <li><strong>1 dia presencial</strong>, 40 vagas por edição</li>
+            <li>Versão intensiva do Ativador + hot seat + networking</li>
+            <li>4 edições/ano — SP, RJ, BH, Recife</li>
+            <li>Parceiros do Operador, Master e Embaixador</li>
+          </ul>
+          <h4 style="font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--claro-red); margin: 1.5rem 0 0.75rem;">Palestras · Rodrigo Braga</h4>
+          <ul class="s-list">
+            <li><strong>Liderança na Era da IA</strong> — 60min</li>
+            <li><strong>Superação no Varejo</strong> — 45min</li>
+            <li><strong>Alta Performance com time e IA aplicada</strong> — 60min</li>
+          </ul>
+        </div>
+        <div class="s-col">
+          <h4 style="font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.75rem;">Conteúdo Claro integrado</h4>
+          <ul class="s-list">
+            <li><strong>Positivação de PDV</strong> — padronização visual</li>
+            <li><strong>Treinamento de Serviços Claro</strong> — conteúdo técnico</li>
+            <li><strong>Identidade Visual</strong> — kits de marca</li>
+            <li><strong>Campanhas sazonais</strong> — ativação de datas</li>
+          </ul>
+          <p class="s-body" style="margin-top: 1.5rem; font-family: 'Inter', sans-serif; font-style: italic; color: var(--claro-red); font-weight: 600; font-size: 1.05rem; padding: 1rem 1.25rem; background: var(--claro-red-pale); border-left: 3px solid var(--claro-red); border-radius: 0 8px 8px 0;">
+            Módulo "Claro na Prática" — co-assinado Claro x Rodrigo Braga.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════ SLIDE 10 — TRÊS CENÁRIOS DE ESCALA ════════════ -->
+    <div class="slide bg-dark" data-slide="10">
+      <div class="s-bg-photo" style="background-image: url('assets/images/ia-gentes-whatsapp.jpg'); background-position: left center;"></div>
+      <div class="s-num">10</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>Escala</span></div>
+      <h2 class="s-title">Três cenários. O <em>apetite</em> decide.</h2>
+      <p class="s-subtitle" style="margin-bottom: 1.5rem;">Modular. Cada cenário com KPI auditável por onda. Ponto de decisão formal entre ciclos. <strong>Escala que prova antes de expandir.</strong></p>
+      <div class="s-grid-3" style="margin-top: 0.5rem;">
+        <div style="padding: 1.5rem 1.4rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--claro-red); opacity: 0.6;"></div>
+          <div style="font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.4rem;">Cenário 01</div>
+          <div style="font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.5rem; color: var(--text-light); letter-spacing: -0.02em;">Moderado</div>
+          <div style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--claro-yellow); margin: 0.75rem 0 0.3rem;">300 parceiros</div>
+          <div style="font-size: 0.82rem; color: var(--muted); margin-bottom: 0.85rem;">12 meses</div>
+          <div style="font-size: 0.82rem; color: var(--muted); line-height: 1.5;">Prova de conceito regional · primeiros cases documentados.</div>
+        </div>
+        <div style="padding: 1.5rem 1.4rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,205,0,0.3); border-radius: 14px; position: relative; overflow: hidden; box-shadow: 0 8px 24px rgba(255,205,0,0.08);">
+          <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--claro-red), var(--claro-yellow));"></div>
+          <div style="font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.4rem;">Cenário 02 · Recomendado</div>
+          <div style="font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.5rem; color: var(--text-light); letter-spacing: -0.02em;">Realista</div>
+          <div style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--claro-yellow); margin: 0.75rem 0 0.3rem;">1.000 parceiros</div>
+          <div style="font-size: 0.82rem; color: var(--muted); margin-bottom: 0.85rem;">18 meses</div>
+          <div style="font-size: 0.82rem; color: var(--muted); line-height: 1.5;">Escala validada em 3-4 regiões do país.</div>
+        </div>
+        <div style="padding: 1.5rem 1.4rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--claro-yellow); opacity: 0.6;"></div>
+          <div style="font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.4rem;">Cenário 03</div>
+          <div style="font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.5rem; color: var(--text-light); letter-spacing: -0.02em;">Desafiador</div>
+          <div style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--claro-yellow); margin: 0.75rem 0 0.3rem;">3.000 parceiros</div>
+          <div style="font-size: 0.82rem; color: var(--muted); margin-bottom: 0.85rem;">24 meses</div>
+          <div style="font-size: 0.82rem; color: var(--muted); line-height: 1.5;">Cobertura nacional · rede de instrutores regionais.</div>
+        </div>
+      </div>
+      <div style="margin-top: 1.5rem; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--claro-yellow); position: relative; z-index: 1; text-align: center;">
+        Oposto de cobertura massiva que aposta antes de medir.
+      </div>
+    </div>
+
+    <!-- ════════════ SLIDE 11 — MÉTRICAS ════════════ -->
+    <div class="slide bg-light" data-slide="11">
+      <div class="s-num">11</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>Métricas</span></div>
+      <h2 class="s-title">As métricas que <em>importam</em>.</h2>
+      <p class="s-subtitle" style="margin-bottom: 1.25rem;">A Claro recebe relatório trimestral de acompanhamento. <strong>Não "certificado emitido". Indicador comercial.</strong></p>
+      <div class="s-grid-3">
+        <div class="s-metric" style="border: 1px solid rgba(236,28,36,0.3); box-shadow: 0 8px 24px rgba(236,28,36,0.08);">
+          <div class="s-metric-label">📊 Para a Claro</div>
+          <div class="s-metric-who">Retorno do contrato</div>
+          <ul>
+            <li>Penetração de serviço por PDV</li>
+            <li>Ticket médio do cliente final</li>
+            <li>Churn de canal</li>
+            <li>NPS final</li>
+            <li>Parceiros migrando de classe</li>
+            <li>Embaixadores formados por região</li>
+          </ul>
+        </div>
+        <div class="s-metric">
+          <div class="s-metric-label">Para o parceiro</div>
+          <div class="s-metric-who">Justifica a mensalidade</div>
+          <ul>
+            <li>Faturamento (antes vs. depois)</li>
+            <li>Conversão de visitante</li>
+            <li>Ticket médio</li>
+            <li>Horas preso na loja</li>
+            <li>NPS do cliente</li>
+          </ul>
+        </div>
+        <div class="s-metric">
+          <div class="s-metric-label">Para o programa</div>
+          <div class="s-metric-who">Operação saudável</div>
+          <ul>
+            <li>NPS parceiro por pacote (meta: >80)</li>
+            <li>Taxa de conclusão (meta: >75%)</li>
+            <li>Taxa de upgrade de pacote</li>
+            <li>CAC vs. LTV</li>
+            <li>Instrutores Regionais formados</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════ SLIDE 12 — GO-TO-MARKET (PRÓXIMOS PASSOS) ════════════ -->
+    <div class="slide bg-dark" data-slide="12">
+      <div class="s-num">12</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>Go-to-Market</span></div>
+      <h2 class="s-title">Do contrato ao primeiro parceiro <em>ativo</em>.</h2>
+      <div class="s-cols" style="margin-top: 0.5rem;">
+        <div class="s-col">
+          <div class="s-timeline">
+            <div class="s-tl-item">
+              <div class="s-tl-dot">1</div>
+              <div class="s-tl-title">Alinhamento</div>
+              <div class="s-tl-desc">Escopo, modelo comercial e cenário de escala.</div>
+              <div class="s-tl-dur">Reunião 2h + follow-up</div>
+            </div>
+            <div class="s-tl-item">
+              <div class="s-tl-dot">2</div>
+              <div class="s-tl-title">Construção dos Entregáveis</div>
+              <div class="s-tl-desc">Conteúdo, playbooks, plataforma e IA aplicada.</div>
+              <div class="s-tl-dur">45 dias</div>
+            </div>
+            <div class="s-tl-item">
+              <div class="s-tl-dot">3</div>
+              <div class="s-tl-title">Piloto Controlado de Refinamento</div>
+              <div class="s-tl-desc">Grupo piloto de 10 parceiros · ajuste fino do método.</div>
+              <div class="s-tl-dur">30 dias · em paralelo</div>
+            </div>
+            <div class="s-tl-item">
+              <div class="s-tl-dot">4</div>
+              <div class="s-tl-title">Ativação Comercial do Programa</div>
+              <div class="s-tl-desc">Landing, scripts, mecânica de cobrança, lançamento.</div>
+              <div class="s-tl-dur">20 dias</div>
+            </div>
+            <div class="s-tl-item">
+              <div class="s-tl-dot">5</div>
+              <div class="s-tl-title">Onda 1 em Operação</div>
+              <div class="s-tl-desc">100 parceiros · acompanhamento diário nos primeiros 30 dias.</div>
+              <div class="s-tl-dur">90 dias</div>
+            </div>
+          </div>
+        </div>
+        <div class="s-col" style="display: flex; flex-direction: column; justify-content: center; gap: 1.25rem;">
+          <div class="author-block">
+            <div class="author-logo-wrap">
+              <img src="assets/images/rodrigo-braga.png" alt="PulsarH.ai" class="author-logo">
+            </div>
+            <div>
+              <div style="font-family: 'Outfit', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.35rem;">Metodologia</div>
+              <div style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.15rem; color: var(--text-light); margin-bottom: 0.35rem; letter-spacing: -0.01em;">Rodrigo Braga</div>
+              <div style="color: var(--muted); font-size: 0.78rem; line-height: 1.4;">Especialista em varejo · 21 anos de chão de loja · 7 como Gerente Nacional. R$1 bilhão em operação · 4.500 vendedores liderados.</div>
+            </div>
+          </div>
+          <div class="cronograma-box">
+            <div style="font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.5rem;">Cronograma</div>
+            <div style="font-family: 'Outfit', sans-serif; font-size: 2.2rem; font-weight: 900; color: var(--text-light); letter-spacing: -0.03em; line-height: 1.1;">~3 <em style="font-size: 1.5rem;">meses</em></div>
+            <div style="color: var(--muted); font-size: 0.82rem; margin-top: 0.5rem; line-height: 1.4;">do contrato ao primeiro parceiro ativo<br><span style="color: var(--claro-yellow); font-weight: 700;">Onda 1 com KPI validado em 120 dias.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="slide-controls">
+    <div class="slide-counter"><span class="current" id="currentSlide">01</span> / 12</div>
+    <button class="slide-btn" id="prevBtn">←</button>
+    <button class="slide-btn" id="nextBtn">→</button>
+  </div>
+
+  <script>
+    // ═══════════════════════════════ SLIDE ENGINE ═══════════════════════════════
+    const slides = document.querySelectorAll('.slide');
+    const total = slides.length;
+    let current = 0;
+
+    const counterEl = document.getElementById('currentSlide');
+    const progressEl = document.getElementById('progressBar');
+
+    function goTo(n) {
+      if (n < 0 || n >= total) return;
+      slides[current].classList.remove('active');
+      current = n;
+      slides[current].classList.add('active');
+      counterEl.textContent = String(current + 1).padStart(2, '0');
+      progressEl.style.width = ((current + 1) / total * 100) + '%';
+      // Mobile: scroll suave para o slide
+      if (window.innerWidth <= 900) {
+        slides[current].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // Mobile: atualizar counter conforme usuário scrolla
+    if (window.innerWidth <= 900) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const idx = Array.from(slides).indexOf(e.target);
+            if (idx >= 0 && idx !== current) {
+              current = idx;
+              counterEl.textContent = String(current + 1).padStart(2, '0');
+              progressEl.style.width = ((current + 1) / total * 100) + '%';
+            }
+          }
+        });
+      }, { threshold: 0.4 });
+      slides.forEach(s => io.observe(s));
+    }
+
+    function next() { goTo(current + 1); }
+    function prev() { goTo(current - 1); }
+
+    document.getElementById('nextBtn').addEventListener('click', next);
+    document.getElementById('prevBtn').addEventListener('click', prev);
+
+    // Keyboard
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') { e.preventDefault(); next(); }
+      if (e.key === 'ArrowLeft' || e.key === 'Backspace') { e.preventDefault(); prev(); }
+      if (e.key === 'Home') { e.preventDefault(); goTo(0); }
+      if (e.key === 'End') { e.preventDefault(); goTo(total - 1); }
+      if (e.key === 'f' || e.key === 'F') { toggleFS(); }
+      if (e.key === 'Escape' && document.fullscreenElement) { document.exitFullscreen(); }
+    });
+
+    // Click on slide to advance
+    document.getElementById('deck').addEventListener('click', (e) => {
+      if (e.target.closest('.slide-controls') || e.target.closest('.home-link') || e.target.closest('.fs-btn')) return;
+      const x = e.clientX / window.innerWidth;
+      if (x < 0.3) prev(); else next();
+    });
+
+    // Fullscreen
+    function toggleFS() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen();
+      }
+    }
+    document.getElementById('fsBtn').addEventListener('click', toggleFS);
+
+    // Init progress
+    progressEl.style.width = (1 / total * 100) + '%';
+
+    // Show cursor on controls
+    document.querySelector('.slide-controls').style.cursor = 'auto';
+    document.querySelector('.home-link').style.cursor = 'pointer';
+    document.querySelector('.fs-btn').style.cursor = 'pointer';
+
+    // Custom cursor — show on move, hide after idle
+    let cursorTimeout;
+    document.addEventListener('mousemove', () => {
+      document.body.style.cursor = 'default';
+      clearTimeout(cursorTimeout);
+      cursorTimeout = setTimeout(() => { document.body.style.cursor = 'none'; }, 2000);
+    });
+  </script>
+
+</body>
+</html>

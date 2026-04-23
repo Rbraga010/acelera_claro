@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claro Acelera · Proposta Comercial · Rodrigo Braga</title>
+  <meta name="description" content="Intervenção comercial especializada que rentabiliza a rede de parceiros Claro — com Pessoas, Processos e Tecnologia IA. 21 anos de varejo real aplicados ao canal.">
+
+  <!-- Open Graph (WhatsApp, Facebook, LinkedIn) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Claro Acelera · Proposta Comercial">
+  <meta property="og:description" content="Intervenção comercial especializada em rede de parceiros Claro — por quem viveu 21 anos dentro da loja. Rodrigo Braga × PulsarH.ai.">
+  <meta property="og:image" content="https://claro-acelera.vercel.app/assets/images/og-image.png">
+  <meta property="og:url" content="https://claro-acelera.vercel.app/">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:site_name" content="Claro Acelera">
+  <meta property="og:locale" content="pt_BR">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Claro Acelera · Proposta Comercial">
+  <meta name="twitter:description" content="Intervenção comercial especializada em rede de parceiros Claro — por quem viveu 21 anos dentro da loja.">
+  <meta name="twitter:image" content="https://claro-acelera.vercel.app/assets/images/og-image.png">
+
+  <!-- Theme -->
+  <meta name="theme-color" content="#EC1C24">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════ TOKENS ═══════════════════════════════ */
+    :root {
+      /* Paleta Claro oficial */
+      --claro-red: #EC1C24;
+      --claro-red-deep: #B71318;
+      --claro-red-light: #FF4048;
+      --claro-red-glow: rgba(236, 28, 36, 0.4);
+      --claro-red-pale: #FFF0F1;
+      --claro-yellow: #FFCD00;
+      --claro-yellow-soft: #FFE27A;
+      --claro-yellow-pale: #FFF9E0;
+
+      /* Dark suavizado */
+      --ink: #1F1F22;
+      --charcoal: #2A2A2E;
+      --surface: #353538;
+      --surface-raised: #3D3D42;
+
+      --cream: #FAFAF7;
+      --paper: #FFFFFF;
+      --stone: #F2F0EB;
+
+      /* Aliases (dourado antigo → amarelo Claro) */
+      --gold: var(--claro-yellow);
+      --gold-soft: var(--claro-yellow);
+      --gold-deep: var(--claro-red-deep);
+
+      --text-dark: #1A1A1A;
+      --text-light: #FAFAF7;
+      --muted: #A0A0A8;
+      --muted-2: #6B6B6B;
+      --border-dark: rgba(255, 255, 255, 0.1);
+      --border-light: rgba(10, 10, 10, 0.08);
+      --border-warm: rgba(255, 205, 0, 0.3);
+    }
+
+    /* ═══════════════════════════════ RESET ═══════════════════════════════ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--ink);
+      color: var(--text-light);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { border: none; background: none; cursor: pointer; font: inherit; color: inherit; }
+
+    /* ═══════════════════════════════ GRAIN GLOBAL ═══════════════════════════════ */
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ═══════════════════════════════ TYPOGRAPHY ═══════════════════════════════ */
+    h1, h2, h3, h4, h5 { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; line-height: 1.15; font-weight: 800; }
+    /* Destaques: Outfit 900 em amarelo Claro (dark) ou vermelho (light) */
+    h1 em, h2 em, h3 em, h4 em,
+    .t-hero em, .card-title em,
+    .serif-italic {
+      font-family: 'Outfit', sans-serif;
+      font-style: normal;
+      font-weight: 900;
+      color: var(--claro-yellow);
+      letter-spacing: -0.03em;
+    }
+
+    .t-hero     { font-size: clamp(3rem, 7vw, 6.5rem); letter-spacing: -0.035em; line-height: 0.95; font-weight: 900; }
+    .t-section  { font-size: clamp(2.2rem, 4.5vw, 3.75rem); letter-spacing: -0.03em; line-height: 1.05; font-weight: 800; }
+    .t-sub      { font-size: clamp(1.5rem, 2.5vw, 2rem); letter-spacing: -0.02em; line-height: 1.15; font-weight: 700; }
+    .t-lead     { font-size: clamp(1.05rem, 1.4vw, 1.25rem); line-height: 1.55; color: var(--muted); font-weight: 400; }
+
+    /* ═══════════════════════════════ EYEBROW ═══════════════════════════════ */
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      padding: 0.5rem 1rem;
+      background: rgba(237, 28, 36, 0.08);
+      border: 1px solid rgba(237, 28, 36, 0.28);
+      border-radius: 999px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: #FF6B70;
+    }
+    .eyebrow-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--claro-red);
+      box-shadow: 0 0 12px var(--claro-red-glow);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    /* ═══════════════════════════════ HERO NAV ═══════════════════════════════ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      padding: 2rem 4rem 6rem;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: #2A2A2E;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0; z-index: 0;
+      background:
+        linear-gradient(180deg, rgba(31,31,34,0.85) 0%, rgba(31,31,34,0.6) 40%, rgba(31,31,34,0.9) 100%),
+        url('assets/images/hero-main.jpg');
+      background-size: cover;
+      background-position: center right;
+    }
+    .hero::after {
+      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 40% at 80% 15%, rgba(236,28,36,0.25), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 15% 90%, rgba(255,205,0,0.12), transparent 60%);
+    }
+    .hero::after {
+      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 64px 64px;
+      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+              mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    }
+
+    .hero-nav {
+      position: relative; z-index: 2;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 0;
+      max-width: 1400px; margin: 0 auto; width: 100%;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 1.25rem; }
+    .nav-brand-logo {
+      height: 36px; width: auto;
+      display: block;
+    }
+    .nav-brand-divider {
+      width: 1px; height: 28px;
+      background: rgba(255,255,255,0.2);
+    }
+    .nav-brand-text {
+      font-family: 'Outfit', sans-serif; font-weight: 800;
+      font-size: 1.05rem; letter-spacing: -0.01em;
+      color: var(--text-light);
+    }
+    .nav-brand-text span { color: var(--claro-yellow); font-style: normal; font-family: 'Outfit', sans-serif; font-weight: 900; letter-spacing: -0.02em; }
+    .nav-meta {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted);
+      margin-top: 0.2rem;
+    }
+    .nav-meta-right {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      padding: 0.4rem 0.9rem;
+      border: 1px solid var(--border-warm);
+      border-radius: 999px;
+    }
+
+    /* ═══════════════════════════════ HERO BODY ═══════════════════════════════ */
+    .hero-body {
+      position: relative; z-index: 2;
+      max-width: 1400px; margin: 0 auto;
+      flex: 1; display: flex; flex-direction: column; justify-content: center;
+      padding: 4rem 0;
+      width: 100%;
+    }
+    .hero-body .eyebrow { margin-bottom: 2rem; animation: fade-up 1s cubic-bezier(.2,.8,.2,1) both; animation-delay: .1s; }
+    .hero-body .t-hero {
+      max-width: 1100px;
+      margin-bottom: 2rem;
+      color: var(--text-light);
+      animation: fade-up 1s cubic-bezier(.2,.8,.2,1) both; animation-delay: .3s;
+    }
+    .hero-body .t-hero em { color: var(--claro-yellow); font-family: 'Outfit', sans-serif; font-style: normal; font-weight: 900; letter-spacing: -0.03em; }
+    .hero-sub {
+      max-width: 760px;
+      font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+      color: var(--muted);
+      margin-bottom: 3.5rem;
+      line-height: 1.55;
+      animation: fade-up 1s cubic-bezier(.2,.8,.2,1) both; animation-delay: .5s;
+    }
+
+    .hero-meta-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border-dark);
+      animation: fade-up 1s cubic-bezier(.2,.8,.2,1) both; animation-delay: .7s;
+    }
+    .meta-item-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .meta-item-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.05rem; font-weight: 600;
+      color: var(--text-light);
+      line-height: 1.35;
+    }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ═══════════════════════════════ CARDS SECTION ═══════════════════════════════ */
+    .cards-section {
+      position: relative;
+      background: var(--charcoal);
+      padding: 7rem 4rem;
+      border-top: 1px solid var(--border-dark);
+    }
+    .cards-inner { max-width: 1400px; margin: 0 auto; }
+    .cards-label { margin-bottom: 4rem; max-width: 800px; }
+    .cards-label-small {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .cards-label-big {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.75rem); font-weight: 800;
+      letter-spacing: -0.025em; line-height: 1.1;
+      color: var(--text-light);
+    }
+    .cards-label-big em { color: var(--claro-yellow); font-family: 'Outfit', sans-serif; font-style: normal; font-weight: 900; letter-spacing: -0.03em; }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .card {
+      position: relative;
+      display: flex; flex-direction: column;
+      min-height: 480px;
+      padding: 3rem 2.75rem 2.75rem;
+      background: linear-gradient(165deg, var(--surface) 0%, var(--charcoal) 100%);
+      border: 1px solid var(--border-dark);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: all 0.6s cubic-bezier(.2,.8,.2,1);
+    }
+    .card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--claro-red) 0%, var(--claro-yellow) 100%);
+      transform: scaleX(0.25); transform-origin: left;
+      transition: transform 0.6s cubic-bezier(.2,.8,.2,1);
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(237,28,36,0.28);
+      box-shadow: 0 28px 70px rgba(237,28,36,0.14);
+    }
+    .card:hover::before { transform: scaleX(1); }
+
+    .card-num {
+      position: absolute; top: 1.5rem; right: 2rem;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 4.5rem; line-height: 1;
+      color: rgba(255,205,0,0.2);
+      pointer-events: none; user-select: none;
+      letter-spacing: -0.05em;
+    }
+    .card-slides .card-num { color: rgba(236,28,36,0.25); }
+
+    .card-badge {
+      display: inline-flex; align-items: center;
+      padding: 0.4rem 0.85rem;
+      background: rgba(237, 28, 36, 0.1);
+      border: 1px solid rgba(237, 28, 36, 0.3);
+      border-radius: 999px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: #FF6B70;
+      margin-bottom: 2rem;
+      width: fit-content;
+    }
+    .card-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(1.7rem, 2.4vw, 2.2rem); font-weight: 800;
+      line-height: 1.1; letter-spacing: -0.025em;
+      color: var(--text-light);
+      margin-bottom: 1.25rem;
+    }
+    .card-title em { color: var(--claro-yellow); font-family: 'Outfit', sans-serif; font-style: normal; font-weight: 900; letter-spacing: -0.03em; }
+    .card-desc {
+      font-size: 1rem; line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .card-specs {
+      display: flex; gap: 2rem;
+      margin-top: auto; margin-bottom: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-dark);
+    }
+    .card-spec-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+    .card-spec-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem; font-weight: 700;
+      color: var(--gold-soft);
+    }
+
+    .card-cta {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700; font-size: 0.95rem;
+      color: var(--claro-red);
+      transition: gap 0.3s ease;
+    }
+    .card:hover .card-cta { gap: 1.1rem; }
+    .card-cta-arrow {
+      display: inline-block;
+      transition: transform 0.4s cubic-bezier(.2,.8,.2,1);
+    }
+    .card:hover .card-cta-arrow { transform: translateX(6px); }
+
+    /* ═══════════════════════════════ CONTEXT SECTION ═══════════════════════════════ */
+    .context-section {
+      position: relative;
+      background: var(--ink);
+      padding: 8rem 4rem;
+      overflow: hidden;
+    }
+    .context-section::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 50% 40% at 85% 50%, rgba(237,28,36,0.08), transparent 60%),
+        radial-gradient(ellipse 60% 50% at 15% 50%, rgba(197,165,114,0.06), transparent 60%);
+    }
+    .context-inner {
+      position: relative;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .context-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 2.5rem;
+      display: inline-flex; align-items: center; gap: 0.75rem;
+    }
+    .context-label::before {
+      content: ''; width: 2.5rem; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold));
+    }
+    .context-body p {
+      font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+      line-height: 1.6;
+      color: var(--text-light);
+      font-weight: 300;
+      margin-bottom: 1.75rem;
+    }
+    .context-body p strong { color: var(--claro-yellow); font-weight: 700; }
+    .context-body p:last-child {
+      font-family: 'Outfit', sans-serif;
+      font-style: normal;
+      font-size: clamp(1.3rem, 1.9vw, 1.75rem);
+      color: var(--claro-yellow);
+      font-weight: 800;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      margin-top: 3rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border-warm);
+    }
+
+    /* ═══════════════════════════════ FOOTER ═══════════════════════════════ */
+    .site-footer {
+      background: #1A1A1A;
+      padding: 5rem 4rem 3rem;
+      border-top: 1px solid var(--border-dark);
+      position: relative;
+    }
+    .footer-inner {
+      max-width: 1400px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 3rem; flex-wrap: wrap;
+    }
+    .footer-signature {
+      max-width: 500px;
+    }
+    .sig-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.35rem; font-weight: 800;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .sig-role {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+    .sig-meta {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .footer-links {
+      display: flex; flex-direction: column; gap: 0.85rem;
+      min-width: 200px;
+    }
+    .footer-links-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .footer-links a {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem; font-weight: 600;
+      color: var(--text-light);
+      transition: color 0.3s ease;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .footer-links a:hover { color: var(--claro-red); }
+    .footer-bottom {
+      max-width: 1400px; margin: 4rem auto 0;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-dark);
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted-2);
+    }
+
+    /* ═══════════════════════════════ RESPONSIVE ═══════════════════════════════ */
+    /* ═══════════════════════════════ MOBILE 900px ═══════════════════════════════ */
+    @media (max-width: 900px) {
+      .hero, .cards-section, .context-section, .site-footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .hero { padding-top: 1.5rem; padding-bottom: 4rem; min-height: auto; }
+      .hero-nav { flex-wrap: wrap; gap: 1rem; }
+      .nav-brand-logo { height: 28px; }
+      .nav-brand-text { font-size: 0.95rem; }
+      .nav-meta-right { font-size: 0.62rem; }
+
+      .hero-body { padding: 3rem 0 2rem; }
+      .hero-body .t-hero { font-size: clamp(2.2rem, 10vw, 3.8rem) !important; }
+      .hero-sub { font-size: clamp(0.95rem, 3.5vw, 1.1rem); margin-bottom: 2.5rem; }
+      .hero-meta-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+        padding-top: 2rem;
+      }
+      .meta-item-value { font-size: 0.88rem; line-height: 1.3; }
+      .meta-item-label { font-size: 0.58rem; }
+
+      .cards-section, .context-section { padding-top: 4rem; padding-bottom: 4rem; }
+      .cards-label-big { font-size: clamp(1.5rem, 6vw, 2rem); }
+      .cards-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+      .card { min-height: auto; padding: 2.25rem 1.75rem 2rem; }
+      .card-num { font-size: 3.5rem; top: 1.25rem; right: 1.5rem; }
+      .card-title { font-size: clamp(1.5rem, 5vw, 1.9rem); }
+      .card-desc { font-size: 0.95rem; margin-bottom: 2rem; }
+      .card-specs { flex-wrap: wrap; gap: 1.25rem; padding-top: 1.5rem; margin-bottom: 1.5rem; }
+
+      .context-body p { font-size: clamp(1rem, 3.5vw, 1.2rem); }
+
+      .footer-inner { flex-direction: column; gap: 2.5rem; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; font-size: 0.6rem; }
+    }
+
+    /* ═══════════════════════════════ MOBILE 480px (pequeno) ═══════════════════════════════ */
+    @media (max-width: 480px) {
+      .hero { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .hero-body .t-hero { font-size: clamp(2rem, 11vw, 3.2rem) !important; }
+      .hero-meta-row { grid-template-columns: 1fr; gap: 1rem; }
+      .nav-meta-right { display: none; }
+      .cards-section, .context-section, .site-footer { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .card { padding: 2rem 1.5rem 1.75rem; }
+      .card-num { font-size: 2.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!-- ══ HERO                                                             ══ -->
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <nav class="hero-nav">
+      <div class="nav-brand">
+        <img src="assets/images/claro-logo-white.svg" alt="Claro" class="nav-brand-logo">
+        <div class="nav-brand-divider"></div>
+        <div>
+          <div class="nav-brand-text"><span>Acelera</span></div>
+          <div class="nav-meta">Proposta Comercial · 2026</div>
+        </div>
+      </div>
+      <div class="nav-meta-right">V2.0 · Abril 2026</div>
+    </nav>
+
+    <div class="hero-body">
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        <span>Proposta Comercial · Rentabilização de Canal · 2026</span>
+      </div>
+      <h1 class="t-hero">
+        Rentabilizando o parceiro Claro — do balcão ao <em>serviço</em>.
+      </h1>
+      <p class="hero-sub">
+        Um programa de intervenção comercial que aumenta penetração de serviço, ticket médio e margem dos parceiros Claro classes C, D e E — com Pessoas, Processos e Tecnologia IA aplicados por quem viveu 21 anos dentro da loja.
+      </p>
+      <div class="hero-meta-row">
+        <div class="meta-item">
+          <div class="meta-item-label">Escala</div>
+          <div class="meta-item-value">3 cenários — 300 · 1.000 · 3.000 parceiros</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-item-label">Método</div>
+          <div class="meta-item-value">Pessoas · Processos · Tecnologia IA</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-item-label">Canal</div>
+          <div class="meta-item-value">Parceiros Claro classes C, D, E</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-item-label">Modelo</div>
+          <div class="meta-item-value">Ondas com KPI auditável por onda</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!-- ══ 2 CARDS                                                          ══ -->
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <section class="cards-section">
+    <div class="cards-inner">
+      <div class="cards-label">
+        <div class="cards-label-small">Dois formatos de leitura</div>
+        <div class="cards-label-big">O <em>business case</em> completo ou o pitch executivo.</div>
+      </div>
+
+      <div class="cards-grid">
+        <!-- CARD 1 — DOC -->
+        <a href="doc.html" class="card card-doc">
+          <span class="card-num">01</span>
+          <span class="card-badge">Business Case Completo</span>
+          <h3 class="card-title">Documento <em>Completo</em></h3>
+          <p class="card-desc">
+            A intervenção em detalhes — leitura do canal, método, arquitetura dos 5 pacotes, três cenários de escala com KPI por onda e plano de go-to-market. Leitura para quem vai levar ao comitê.
+          </p>
+          <div class="card-specs">
+            <div>
+              <div class="card-spec-label">Formato</div>
+              <div class="card-spec-value">Business case</div>
+            </div>
+            <div>
+              <div class="card-spec-label">Leitura</div>
+              <div class="card-spec-value">~15 minutos</div>
+            </div>
+            <div>
+              <div class="card-spec-label">Seções</div>
+              <div class="card-spec-value">14</div>
+            </div>
+          </div>
+          <span class="card-cta">
+            Abrir documento
+            <span class="card-cta-arrow">→</span>
+          </span>
+        </a>
+
+        <!-- CARD 2 — SLIDES -->
+        <a href="slides.html" class="card card-slides">
+          <span class="card-num">02</span>
+          <span class="card-badge">Pitch Executivo</span>
+          <h3 class="card-title">Apresentação de <em>Slides</em></h3>
+          <p class="card-desc">
+            O business case condensado para a reunião de diretoria — navegação por teclado, modo tela cheia e linha narrativa enxuta. Direto ao que interessa a quem decide.
+          </p>
+          <div class="card-specs">
+            <div>
+              <div class="card-spec-label">Formato</div>
+              <div class="card-spec-value">13 slides</div>
+            </div>
+            <div>
+              <div class="card-spec-label">Duração</div>
+              <div class="card-spec-value">30 minutos</div>
+            </div>
+            <div>
+              <div class="card-spec-label">Modo</div>
+              <div class="card-spec-value">Apresentação</div>
+            </div>
+          </div>
+          <span class="card-cta">
+            Iniciar apresentação
+            <span class="card-cta-arrow">→</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!-- ══ CONTEXT                                                          ══ -->
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <section class="context-section">
+    <div class="context-inner">
+      <div class="context-label">O que é o Claro Acelera</div>
+      <div class="context-body">
+        <p>
+          O Claro Acelera é uma intervenção comercial desenhada para aumentar a rentabilidade da rede de parceiros Claro — hoje predominantemente focada em produto, com baixa penetração de serviço e margem sob pressão. O programa atua em <strong>três camadas integradas: Pessoas, Processos e Tecnologia IA</strong>, aplicadas sobre cinco pilares de mentalidade do lojista.
+        </p>
+        <p>
+          A arquitetura tem 5 pacotes escalonados do gratuito ao premium, três cenários de escala (300, 1.000 e 3.000 parceiros) com KPI auditável por onda, e dois entregáveis que a consultoria genérica não entrega: <strong>especialização em varejo telecom</strong> e <strong>21 anos de operação real</strong> — sete como Gerente Nacional de rede com 4.500 vendedores e R$1 bilhão/ano em faturamento.
+        </p>
+        <p>
+          Não é treinamento. Não é curso. É <strong>intervenção comercial com método, tecnologia e acompanhamento de indicador</strong> — conduzida por quem viveu do outro lado do balcão.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!-- ══ FOOTER                                                           ══ -->
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-signature">
+        <div class="sig-name">Rodrigo Braga</div>
+        <div class="sig-role">Especialista em varejo · 21 anos de chão de loja · 7 como Gerente Nacional</div>
+        <div class="sig-meta">R$1 bilhão/ano em operação · 4.500 vendedores liderados · Canal telecom</div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-links-label">Navegue</div>
+        <a href="doc.html">Documento completo →</a>
+        <a href="slides.html">Apresentação de slides →</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>Claro Acelera · Proposta Comercial · V2.0 · Abril 2026</div>
+      <div>Elaborado por Rodrigo Braga</div>
+    </div>
+  </footer>
+
+</body>
+</html>
