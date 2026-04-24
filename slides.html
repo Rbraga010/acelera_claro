@@ -3,55 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Claro Acelera · Apresentação de Slides · Rodrigo Braga</title>
-  <meta name="description" content="Pitch executivo do Claro Acelera — 12 slides com a intervenção comercial especializada em rede de canal telecom.">
+  <title>Rentabiliza.ai · Pitch Executivo · para a Claro</title>
+  <meta name="description" content="Rentabiliza.ai — pitch executivo em 12 slides. Plataforma de gestão, humanização e IA aplicada ao PDV dos parceiros Claro.">
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Claro Acelera · Pitch Executivo">
+  <meta property="og:title" content="Rentabiliza.ai · Pitch Executivo para a Claro">
   <meta property="og:description" content="Apresentação executiva em 12 slides — business case condensado para reunião de diretoria.">
   <meta property="og:image" content="https://claro-acelera.vercel.app/assets/images/og-image.png">
   <meta property="og:url" content="https://claro-acelera.vercel.app/slides.html">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:site_name" content="Claro Acelera">
+  <meta property="og:site_name" content="Rentabiliza.ai">
   <meta property="og:locale" content="pt_BR">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Claro Acelera · Pitch Executivo">
+  <meta name="twitter:title" content="Rentabiliza.ai · Pitch Executivo para a Claro">
   <meta name="twitter:image" content="https://claro-acelera.vercel.app/assets/images/og-image.png">
 
-  <meta name="theme-color" content="#EC1C24">
+  <meta name="theme-color" content="#0D1117">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="assets/brand/logo-mono-amber.svg">
+
+  <!-- Rentabiliza.ai Design Tokens -->
+  <link rel="stylesheet" href="assets/brand/rentabiliza-tokens.css">
   <style>
     /* ═══════════════════════════════ TOKENS ═══════════════════════════════ */
     :root {
-      /* Paleta Claro oficial */
-      --claro-red: #EC1C24;
-      --claro-red-deep: #B71318;
-      --claro-red-light: #FF4048;
-      --claro-red-glow: rgba(236, 28, 36, 0.4);
-      --claro-red-pale: #FFF0F1;
-      --claro-yellow: #FFCD00;
-      --claro-yellow-soft: #FFE27A;
-      --claro-yellow-pale: #FFF9E0;
+      /* Paleta Rentabiliza.ai (aliases Claro → âmbar) */
+      --claro-red: #F4B93E;              /* âmbar — protagonista */
+      --claro-red-deep: #B8881D;
+      --claro-red-light: #FFC856;
+      --claro-red-glow: rgba(244, 185, 62, 0.35);
+      --claro-red-pale: rgba(244, 185, 62, 0.08);
+      --claro-yellow: #F4B93E;
+      --claro-yellow-soft: #FFC856;
+      --claro-yellow-pale: rgba(244, 185, 62, 0.12);
 
-      /* Dark suavizado — cinza-grafite em vez de preto absoluto */
-      --ink: #1F1F22;
-      --charcoal: #2A2A2E;
-      --surface: #353538;
-      --surface-raised: #3D3D42;
+      /* Dark Rentabiliza — noite profunda */
+      --ink: #0D1117;
+      --charcoal: #1A2430;
+      --surface: #242F3E;
+      --surface-raised: #2D3B4F;
 
       /* Light */
-      --cream: #FAFAF7;
-      --paper: #FFFFFF;
-      --stone: #F2F0EB;
+      --cream: #F4F1E8;                  /* papel */
+      --paper: #FAFAF7;
+      --stone: #EAE6D6;
 
-      /* Aliases (mapeiam dourado antigo → amarelo/vermelho Claro) */
+      /* Aliases gold → âmbar */
       --gold: var(--claro-yellow);
       --gold-soft: var(--claro-yellow);
       --gold-deep: var(--claro-red-deep);
@@ -65,7 +66,37 @@
 
       /* Borders */
       --border-dark: rgba(255, 255, 255, 0.1);
-      --border-warm: rgba(255, 205, 0, 0.3);
+      --border-warm: rgba(244, 185, 62, 0.35);
+    }
+
+    /* Typography overrides — todas fontes agora são Rentabiliza */
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    h1, h2, h3, h4, h5,
+    .s-title, .slide-title {
+      font-family: 'Fraunces', 'Times New Roman', serif !important;
+      font-variation-settings: "SOFT" 50, "WONK" 0;
+      font-weight: 500 !important;
+      letter-spacing: -0.02em;
+    }
+    .s-title em, .slide-title em, h1 em, h2 em, h3 em,
+    em, .s-card-tag, .s-method-title span {
+      font-family: 'Fraunces', 'Times New Roman', serif !important;
+      font-style: italic !important;
+      font-weight: 600 !important;
+      color: var(--claro-red) !important;
+      letter-spacing: -0.01em !important;
+    }
+    .s-eyebrow, .s-num, .s-pack-num, .s-pack-price, .s-pack-dur,
+    .s-card-num, .s-method-sub, .s-metric-label, .s-layer-num, .s-tl-dur,
+    .brand-top-text, .home-link, .fs-btn, .slide-counter,
+    .author-logo-wrap + div > div:first-child {
+      font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+      letter-spacing: 0.08em;
+    }
+    .s-eyebrow, .s-method-sub, .s-metric-label {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 600;
     }
 
     /* ═══════════════════════════════ RESET ═══════════════════════════════ */
@@ -154,99 +185,47 @@
     /* Variação para slides charcoal — ainda mais sutil */
     .bg-charcoal .s-bg-photo { opacity: 0.13; }
 
-    /* ═══════════════════════════════ AUTHOR BLOCK (logo PulsarH uniformizado) ═══════════════════════════════ */
+    /* ═══════════════════════════════ AUTHOR BLOCK — wordmark Rentabiliza ═══════════════════════════════ */
     .author-block {
       display: flex;
       align-items: center;
-      gap: 1.5rem;
-      padding: 1.25rem 1.5rem;
-      background: rgba(255,255,255,0.04);
+      gap: 1.25rem;
+      padding: 1.5rem 1.75rem;
+      background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
+      border-radius: 12px;
       position: relative; z-index: 1;
-      backdrop-filter: blur(8px);
-      transition: all 0.4s cubic-bezier(.2,.8,.2,1);
+      transition: border-color 200ms ease-out, transform 200ms ease-out;
     }
     .author-block:hover {
-      border-color: rgba(255,205,0,0.25);
-      background: rgba(255,255,255,0.06);
+      border-color: rgba(244,185,62,0.4);
+      transform: translateY(-2px);
     }
-    .author-logo-wrap {
+    .author-wordmark {
       flex-shrink: 0;
-      width: 96px; height: 96px;
-      display: grid; place-items: center;
-      background: #FFFFFF;
-      border-radius: 50%;
-      padding: 1rem;
-      box-shadow:
-        0 0 0 1px rgba(255,205,0,0.2),
-        0 8px 28px rgba(255,205,0,0.22),
-        0 0 60px rgba(236,28,36,0.12);
-      animation: logoBreathe 4.5s ease-in-out infinite;
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "SOFT" 50, "WONK" 0;
+      font-size: 42px; line-height: 1;
+      display: inline-flex; align-items: baseline;
+      letter-spacing: -0.02em;
     }
-    .author-logo {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      display: block;
-    }
-    @keyframes logoBreathe {
-      0%, 100% {
-        box-shadow: 0 0 0 1px rgba(255,205,0,0.2), 0 8px 28px rgba(255,205,0,0.22), 0 0 60px rgba(236,28,36,0.12);
-        transform: translateY(0);
-      }
-      50% {
-        box-shadow: 0 0 0 2px rgba(255,205,0,0.35), 0 14px 40px rgba(255,205,0,0.38), 0 0 80px rgba(236,28,36,0.22);
-        transform: translateY(-3px);
-      }
-    }
+    .author-wordmark .r-name { font-style: italic; font-weight: 600; color: var(--text-light); }
+    .author-wordmark .r-dot { color: var(--claro-red); font-weight: 600; }
+    .author-wordmark .r-ai { color: var(--claro-red); font-weight: 300; font-size: 0.65em; margin-left: 0.02em; }
 
-    /* ═══════════════════════════════ CRONOGRAMA BOX (float + glow) ═══════════════════════════════ */
+    /* ═══════════════════════════════ CRONOGRAMA BOX (Rentabiliza: sóbrio) ═══════════════════════════════ */
     .cronograma-box {
       padding: 1.5rem 1.75rem;
-      background: linear-gradient(135deg, rgba(236,28,36,0.18) 0%, rgba(255,205,0,0.1) 100%);
-      border: 1px solid rgba(236,28,36,0.3);
-      border-radius: 14px;
+      background: rgba(244,185,62,0.08);
+      border: 1px solid rgba(244,185,62,0.35);
+      border-radius: 12px;
       text-align: center;
       position: relative; z-index: 1;
-      overflow: hidden;
-      animation: floatSoft 6s ease-in-out infinite;
+      transition: border-color 200ms ease-out, transform 200ms ease-out;
     }
-    .cronograma-box::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 70% 100% at 50% 100%, rgba(255,205,0,0.2) 0%, transparent 70%);
-      animation: glowPulse 4s ease-in-out infinite;
-      pointer-events: none;
-    }
-    @keyframes floatSoft {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-    }
-    @keyframes glowPulse {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
-    }
-
-    /* ═══════════════════════════════ GLOW + FLOAT em s-big-idea (slide 5 Tese) ═══════════════════════════════ */
-    .s-big-idea {
-      animation: floatSoft 7s ease-in-out infinite;
-    }
-    .s-big-idea::before {
-      animation: gradientShimmer 3s linear infinite;
-      background-size: 200% 100%;
-    }
-    @keyframes gradientShimmer {
-      0% { background-position: 0% 0; }
-      100% { background-position: 200% 0; }
-    }
-
-    /* ═══════════════════════════════ CTA FINAL NA ESCALA (slide 10) — glow ═══════════════════════════════ */
-    .scale-highlight {
-      animation: glowYellow 3.5s ease-in-out infinite;
-    }
-    @keyframes glowYellow {
-      0%, 100% { text-shadow: 0 0 0 rgba(255,205,0,0); }
-      50% { text-shadow: 0 0 20px rgba(255,205,0,0.5), 0 0 40px rgba(255,205,0,0.25); }
+    .cronograma-box:hover {
+      border-color: rgba(244,185,62,0.6);
+      transform: translateY(-2px);
     }
 
     .bg-dark em { color: var(--claro-yellow); }
@@ -259,13 +238,13 @@
     }
     .bg-dark::after {
       background:
-        radial-gradient(ellipse 60% 40% at 85% 15%, rgba(236,28,36,0.15), transparent 60%),
-        radial-gradient(ellipse 70% 50% at 10% 90%, rgba(255,205,0,0.08), transparent 60%);
+        radial-gradient(ellipse 60% 40% at 85% 15%, rgba(244,185,62,0.15), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 10% 90%, rgba(244,185,62,0.08), transparent 60%);
     }
     .bg-charcoal::after {
       background:
-        radial-gradient(ellipse 50% 40% at 90% 10%, rgba(236,28,36,0.12), transparent 55%),
-        radial-gradient(ellipse 60% 40% at 5% 85%, rgba(255,205,0,0.06), transparent 55%);
+        radial-gradient(ellipse 50% 40% at 90% 10%, rgba(244,185,62,0.12), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 5% 85%, rgba(244,185,62,0.06), transparent 55%);
     }
 
     /* ═══════════════════════════════ TYPOGRAPHY ═══════════════════════════════ */
@@ -320,18 +299,18 @@
       font-family: 'Outfit', sans-serif;
       font-weight: 900;
       font-size: clamp(4rem, 8vw, 8rem); line-height: 1;
-      color: rgba(255,205,0,0.12);
+      color: rgba(244,185,62,0.12);
       pointer-events: none; user-select: none;
       letter-spacing: -0.05em;
     }
-    .bg-light .s-num { color: rgba(236,28,36,0.08); }
+    .bg-light .s-num { color: rgba(244,185,62,0.08); }
 
     /* ═══════════════════════════════ QUOTE ═══════════════════════════════ */
     .s-quote {
       margin: 1.5rem 0;
       padding: 1.75rem 2.25rem;
       border-left: 4px solid var(--claro-red);
-      background: rgba(236,28,36,0.06);
+      background: rgba(244,185,62,0.06);
       border-radius: 0 12px 12px 0;
       font-family: 'Inter', sans-serif;
       font-style: italic;
@@ -508,8 +487,8 @@
     }
     .s-selo.top {
       background: linear-gradient(165deg, #FFFBF1 0%, #FFFFFF 100%);
-      border: 1px solid rgba(255,205,0,0.5);
-      box-shadow: 0 8px 28px rgba(255,205,0,0.18);
+      border: 1px solid rgba(244,185,62,0.5);
+      box-shadow: 0 8px 28px rgba(244,185,62,0.18);
     }
     .s-selo-ring {
       width: 56px; height: 56px; margin: 0 auto 0.75rem;
@@ -520,7 +499,7 @@
     }
     .s-selo.top .s-selo-ring {
       background: linear-gradient(145deg, var(--claro-yellow), #E5B800);
-      color: var(--text-dark); box-shadow: 0 6px 18px rgba(255,205,0,0.4);
+      color: var(--text-dark); box-shadow: 0 6px 18px rgba(244,185,62,0.4);
     }
     .s-selo-name { font-family: 'Outfit', sans-serif; font-size: 0.82rem; font-weight: 800; color: var(--text-dark); line-height: 1.2; }
 
@@ -631,29 +610,40 @@
       transition: width 0.4s ease;
     }
 
-    /* Logo Claro fixo top-left — badge com fundo vermelho Claro pra funcionar em qualquer slide */
+    /* Brand-top — wordmark Rentabiliza fixo top-left */
     .brand-top {
-      position: fixed; top: 1.5rem; left: 2rem; z-index: 1000;
-      display: flex; align-items: center; gap: 0.9rem;
-      padding: 0.55rem 1rem 0.55rem 0.85rem;
-      background: var(--claro-red);
-      border-radius: 999px;
-      box-shadow: 0 6px 18px rgba(236,28,36,0.25);
+      position: fixed; top: 1.25rem; left: 1.5rem; z-index: 1000;
+      display: flex; align-items: baseline; gap: 0.6rem;
+      padding: 0.4rem 0.85rem;
+      background: rgba(13,17,23,0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md, 8px);
     }
-    .brand-top-logo {
-      height: 24px; width: auto;
+    .brand-top-wordmark {
+      font-family: 'Fraunces', 'Times New Roman', serif;
+      font-variation-settings: "SOFT" 50, "WONK" 0;
+      font-size: 18px; line-height: 1;
+      display: inline-flex; align-items: baseline;
+      letter-spacing: -0.02em;
     }
+    .brand-top-wordmark .r-name { font-style: italic; font-weight: 600; color: #F4F1E8; }
+    .brand-top-wordmark .r-dot { color: var(--claro-red); font-weight: 600; }
+    .brand-top-wordmark .r-ai { color: var(--claro-red); font-weight: 300; font-size: 0.65em; margin-left: 0.02em; }
     .brand-top-divider {
-      width: 1px; height: 18px;
-      background: rgba(255,255,255,0.3);
+      width: 1px; height: 14px;
+      background: rgba(255,255,255,0.18);
+      align-self: center;
     }
     .brand-top-text {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 800; font-size: 0.82rem;
-      letter-spacing: -0.01em;
-      color: #fff;
+      font-family: 'JetBrains Mono', monospace !important;
+      font-weight: 600; font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
-    .brand-top-text em { color: var(--claro-yellow); font-family: 'Outfit'; font-style: normal; font-weight: 900; }
+    .brand-top-text em { color: var(--claro-red); font-family: inherit; font-style: normal; font-weight: 600; }
 
     /* Home link agora no top-right (junto do doc-link) */
     .home-link {
@@ -668,7 +658,7 @@
       background: rgba(20,20,24,0.4);
       backdrop-filter: blur(8px);
     }
-    .home-link:hover { color: var(--claro-red); border-color: rgba(236,28,36,0.4); }
+    .home-link:hover { color: var(--claro-red); border-color: rgba(244,185,62,0.4); }
     .bg-light .home-link { color: var(--muted-2); background: rgba(250,250,247,0.7); border-color: rgba(0,0,0,0.1); }
 
     /* Fullscreen btn */
@@ -687,8 +677,8 @@
     /* Big idea special */
     .s-big-idea {
       padding: 2.5rem 3rem;
-      background: linear-gradient(135deg, rgba(236,28,36,0.12) 0%, rgba(255,205,0,0.06) 100%);
-      border: 1px solid rgba(255,205,0,0.3);
+      background: linear-gradient(135deg, rgba(244,185,62,0.12) 0%, rgba(244,185,62,0.06) 100%);
+      border: 1px solid rgba(244,185,62,0.3);
       border-radius: 18px;
       position: relative; overflow: hidden; z-index: 1;
       margin: 1.5rem 0;
@@ -930,12 +920,12 @@
 
   <div class="progress-bar" id="progressBar"></div>
 
-  <!-- LOGO CLARO FIXO TOP-LEFT -->
+  <!-- WORDMARK RENTABILIZA TOP-LEFT -->
   <div class="brand-top">
-    <a href="index.html" style="display:flex;align-items:center;gap:0.9rem;">
-      <img src="assets/images/claro-logo-white.svg" alt="Claro" class="brand-top-logo">
-      <div class="brand-top-divider"></div>
-      <div class="brand-top-text"><em>Acelera</em></div>
+    <a href="index.html" style="display:inline-flex; align-items:baseline; gap:0.6rem;" aria-label="Rentabiliza.ai">
+      <span class="brand-top-wordmark"><span class="r-name">Rentabiliza</span><span class="r-dot">.</span><span class="r-ai">ai</span></span>
+      <span class="brand-top-divider"></span>
+      <span class="brand-top-text">para a Claro</span>
     </a>
   </div>
 
@@ -1001,7 +991,7 @@
           </tbody>
         </table>
       </div>
-      <div style="margin-top: 1.5rem; padding: 1.1rem 1.5rem; background: linear-gradient(135deg, rgba(236,28,36,0.15), rgba(255,205,0,0.08)); border: 1px solid rgba(255,205,0,0.3); border-radius: 12px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text-light); line-height: 1.4; position: relative; z-index: 1;">
+      <div style="margin-top: 1.5rem; padding: 1.1rem 1.5rem; background: linear-gradient(135deg, rgba(244,185,62,0.15), rgba(244,185,62,0.08)); border: 1px solid rgba(244,185,62,0.3); border-radius: 12px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text-light); line-height: 1.4; position: relative; z-index: 1;">
         <em>21 anos de chão de loja.</em> Não é consultoria de fora olhando pra dentro. É de dentro ensinando a rentabilizar.
       </div>
     </div>
@@ -1038,7 +1028,7 @@
       <div class="s-big-idea" style="margin-top: 2rem;">
         <p style="font-size: clamp(1.3rem, 2.1vw, 1.95rem); line-height: 1.35;">A loja que vende <strong style="color: var(--claro-yellow); font-weight: 900;">produto</strong> vive da margem que o cliente já decidiu pagar.<br>A loja que vende <strong style="color: var(--claro-yellow); font-weight: 900;">serviço</strong> decide o quanto o cliente vai pagar.</p>
       </div>
-      <div style="margin-top: 2rem; padding: 1.5rem 1.75rem; background: linear-gradient(135deg, rgba(236,28,36,0.15), rgba(255,205,0,0.08)); border: 1px solid rgba(236,28,36,0.3); border-radius: 14px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--text-light); line-height: 1.4; position: relative; z-index: 1;">
+      <div style="margin-top: 2rem; padding: 1.5rem 1.75rem; background: linear-gradient(135deg, rgba(244,185,62,0.15), rgba(244,185,62,0.08)); border: 1px solid rgba(244,185,62,0.3); border-radius: 14px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--text-light); line-height: 1.4; position: relative; z-index: 1;">
         A Claro oferece o <em>produto</em>. O Claro Acelera oferece ao parceiro o <em>método</em> — e à Claro, a rede que o vende.
       </div>
     </div>
@@ -1219,7 +1209,7 @@
           <div style="font-size: 0.82rem; color: var(--muted); margin-bottom: 0.85rem;">12 meses</div>
           <div style="font-size: 0.82rem; color: var(--muted); line-height: 1.5;">Prova de conceito regional · primeiros cases documentados.</div>
         </div>
-        <div style="padding: 1.5rem 1.4rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,205,0,0.3); border-radius: 14px; position: relative; overflow: hidden; box-shadow: 0 8px 24px rgba(255,205,0,0.08);">
+        <div style="padding: 1.5rem 1.4rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(244,185,62,0.3); border-radius: 14px; position: relative; overflow: hidden; box-shadow: 0 8px 24px rgba(244,185,62,0.08);">
           <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--claro-red), var(--claro-yellow));"></div>
           <div style="font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.4rem;">Cenário 02 · Recomendado</div>
           <div style="font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.5rem; color: var(--text-light); letter-spacing: -0.02em;">Realista</div>
@@ -1248,7 +1238,7 @@
       <h2 class="s-title">As métricas que <em>importam</em>.</h2>
       <p class="s-subtitle" style="margin-bottom: 1.25rem;">A Claro recebe relatório trimestral de acompanhamento. <strong>Não "certificado emitido". Indicador comercial.</strong></p>
       <div class="s-grid-3">
-        <div class="s-metric" style="border: 1px solid rgba(236,28,36,0.3); box-shadow: 0 8px 24px rgba(236,28,36,0.08);">
+        <div class="s-metric" style="border: 1px solid rgba(244,185,62,0.3); box-shadow: 0 8px 24px rgba(244,185,62,0.08);">
           <div class="s-metric-label">📊 Para a Claro</div>
           <div class="s-metric-who">Retorno do contrato</div>
           <ul>
@@ -1327,13 +1317,13 @@
         </div>
         <div class="s-col" style="display: flex; flex-direction: column; justify-content: center; gap: 1.25rem;">
           <div class="author-block">
-            <div class="author-logo-wrap">
-              <img src="assets/images/rodrigo-braga.png" alt="PulsarH.ai" class="author-logo">
-            </div>
+            <span class="author-wordmark">
+              <span class="r-name">Rentabiliza</span><span class="r-dot">.</span><span class="r-ai">ai</span>
+            </span>
             <div>
-              <div style="font-family: 'Outfit', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.35rem;">Metodologia</div>
-              <div style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.15rem; color: var(--text-light); margin-bottom: 0.35rem; letter-spacing: -0.01em;">Rodrigo Braga</div>
-              <div style="color: var(--muted); font-size: 0.78rem; line-height: 1.4;">Especialista em varejo · 21 anos de chão de loja · 7 como Gerente Nacional. R$1 bilhão em operação · 4.500 vendedores liderados.</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.35rem;">Plataforma</div>
+              <div style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.1rem; color: var(--text-light); margin-bottom: 0.35rem; letter-spacing: -0.01em;">Gestão · Humanização · IA no PDV</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 600;">PulsarH.ai × TradeUp</div>
             </div>
           </div>
           <div class="cronograma-box">

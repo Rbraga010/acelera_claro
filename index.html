@@ -3,574 +3,499 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Claro Acelera · Proposta Comercial · Rodrigo Braga</title>
-  <meta name="description" content="Intervenção comercial especializada que rentabiliza a rede de parceiros Claro — com Pessoas, Processos e Tecnologia IA. 21 anos de varejo real aplicados ao canal.">
+  <title>Rentabiliza.ai — para a Claro</title>
+  <meta name="description" content="Rentabiliza.ai — plataforma de gestão, humanização e IA aplicada ao PDV de parceiros de telecom. Para a Claro. Uma iniciativa PulsarH.ai × TradeUp.">
 
-  <!-- Open Graph (WhatsApp, Facebook, LinkedIn) -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Claro Acelera · Proposta Comercial">
-  <meta property="og:description" content="Intervenção comercial especializada em rede de parceiros Claro — por quem viveu 21 anos dentro da loja. Rodrigo Braga × PulsarH.ai.">
+  <meta property="og:title" content="Rentabiliza.ai · para a Claro">
+  <meta property="og:description" content="Gestão, humanização e IA no PDV dos parceiros Claro — PulsarH.ai × TradeUp.">
   <meta property="og:image" content="https://claro-acelera.vercel.app/assets/images/og-image.png">
-  <meta property="og:url" content="https://claro-acelera.vercel.app/">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:type" content="image/png">
-  <meta property="og:site_name" content="Claro Acelera">
+  <meta property="og:url" content="https://claro-acelera.vercel.app/">
+  <meta property="og:site_name" content="Rentabiliza.ai">
   <meta property="og:locale" content="pt_BR">
 
-  <!-- Twitter Card -->
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Claro Acelera · Proposta Comercial">
-  <meta name="twitter:description" content="Intervenção comercial especializada em rede de parceiros Claro — por quem viveu 21 anos dentro da loja.">
+  <meta name="twitter:title" content="Rentabiliza.ai · para a Claro">
+  <meta name="twitter:description" content="Gestão, humanização e IA no PDV dos parceiros Claro.">
   <meta name="twitter:image" content="https://claro-acelera.vercel.app/assets/images/og-image.png">
 
-  <!-- Theme -->
-  <meta name="theme-color" content="#EC1C24">
+  <meta name="theme-color" content="#0D1117">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="assets/brand/logo-mono-amber.svg">
+
+  <!-- Rentabiliza.ai Design Tokens -->
+  <link rel="stylesheet" href="assets/brand/rentabiliza-tokens.css">
+
   <style>
-    /* ═══════════════════════════════ TOKENS ═══════════════════════════════ */
-    :root {
-      /* Paleta Claro oficial */
-      --claro-red: #EC1C24;
-      --claro-red-deep: #B71318;
-      --claro-red-light: #FF4048;
-      --claro-red-glow: rgba(236, 28, 36, 0.4);
-      --claro-red-pale: #FFF0F1;
-      --claro-yellow: #FFCD00;
-      --claro-yellow-soft: #FFE27A;
-      --claro-yellow-pale: #FFF9E0;
-
-      /* Dark suavizado */
-      --ink: #1F1F22;
-      --charcoal: #2A2A2E;
-      --surface: #353538;
-      --surface-raised: #3D3D42;
-
-      --cream: #FAFAF7;
-      --paper: #FFFFFF;
-      --stone: #F2F0EB;
-
-      /* Aliases (dourado antigo → amarelo Claro) */
-      --gold: var(--claro-yellow);
-      --gold-soft: var(--claro-yellow);
-      --gold-deep: var(--claro-red-deep);
-
-      --text-dark: #1A1A1A;
-      --text-light: #FAFAF7;
-      --muted: #A0A0A8;
-      --muted-2: #6B6B6B;
-      --border-dark: rgba(255, 255, 255, 0.1);
-      --border-light: rgba(10, 10, 10, 0.08);
-      --border-warm: rgba(255, 205, 0, 0.3);
-    }
-
-    /* ═══════════════════════════════ RESET ═══════════════════════════════ */
+    /* =========================================================================
+       PAGE SPECIFIC STYLES — Landing (Rentabiliza.ai × Claro)
+       ========================================================================= */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', sans-serif;
-      background: var(--ink);
-      color: var(--text-light);
-      line-height: 1.6;
+      background: var(--r-bg);
+      color: var(--r-fg);
+      font-family: var(--r-font-body);
+      line-height: var(--r-lh-body);
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
-      min-height: 100vh;
     }
     a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
     button { border: none; background: none; cursor: pointer; font: inherit; color: inherit; }
+    img { max-width: 100%; display: block; }
 
-    /* ═══════════════════════════════ GRAIN GLOBAL ═══════════════════════════════ */
-    body::before {
-      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999;
-      opacity: 0.04;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    /* ═══════════════════════════════ NAV ═══════════════════════════════ */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(13, 17, 23, 0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--r-border);
     }
+    .nav-inner {
+      max-width: var(--r-container-max);
+      margin: 0 auto;
+      padding: 16px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px;
+    }
+    .nav-left {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .nav-wordmark {
+      font-family: var(--r-font-display);
+      font-size: 22px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: baseline;
+      letter-spacing: -0.02em;
+      font-variation-settings: var(--r-fraunces-axes);
+    }
+    .nav-wordmark .r-name { font-style: italic; font-weight: 600; color: var(--r-fg); }
+    .nav-wordmark .r-dot { color: var(--r-amber); font-weight: 600; }
+    .nav-wordmark .r-ai { color: var(--r-amber); font-weight: 300; font-size: 0.65em; margin-left: 0.02em; }
 
-    /* ═══════════════════════════════ TYPOGRAPHY ═══════════════════════════════ */
-    h1, h2, h3, h4, h5 { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; line-height: 1.15; font-weight: 800; }
-    /* Destaques: Outfit 900 em amarelo Claro (dark) ou vermelho (light) */
-    h1 em, h2 em, h3 em, h4 em,
-    .t-hero em, .card-title em,
-    .serif-italic {
-      font-family: 'Outfit', sans-serif;
-      font-style: normal;
-      font-weight: 900;
-      color: var(--claro-yellow);
-      letter-spacing: -0.03em;
+    .nav-pipe {
+      width: 1px; height: 18px;
+      background: var(--r-border-dark-hover);
     }
-
-    .t-hero     { font-size: clamp(3rem, 7vw, 6.5rem); letter-spacing: -0.035em; line-height: 0.95; font-weight: 900; }
-    .t-section  { font-size: clamp(2.2rem, 4.5vw, 3.75rem); letter-spacing: -0.03em; line-height: 1.05; font-weight: 800; }
-    .t-sub      { font-size: clamp(1.5rem, 2.5vw, 2rem); letter-spacing: -0.02em; line-height: 1.15; font-weight: 700; }
-    .t-lead     { font-size: clamp(1.05rem, 1.4vw, 1.25rem); line-height: 1.55; color: var(--muted); font-weight: 400; }
-
-    /* ═══════════════════════════════ EYEBROW ═══════════════════════════════ */
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 0.75rem;
-      padding: 0.5rem 1rem;
-      background: rgba(237, 28, 36, 0.08);
-      border: 1px solid rgba(237, 28, 36, 0.28);
-      border-radius: 999px;
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em;
-      text-transform: uppercase; color: #FF6B70;
-    }
-    .eyebrow-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--claro-red);
-      box-shadow: 0 0 12px var(--claro-red-glow);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-
-    /* ═══════════════════════════════ HERO NAV ═══════════════════════════════ */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      padding: 2rem 4rem 6rem;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      background: #2A2A2E;
-    }
-    .hero::before {
-      content: ''; position: absolute; inset: 0; z-index: 0;
-      background:
-        linear-gradient(180deg, rgba(31,31,34,0.85) 0%, rgba(31,31,34,0.6) 40%, rgba(31,31,34,0.9) 100%),
-        url('assets/images/hero-main.jpg');
-      background-size: cover;
-      background-position: center right;
-    }
-    .hero::after {
-      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-      background:
-        radial-gradient(ellipse 60% 40% at 80% 15%, rgba(236,28,36,0.25), transparent 60%),
-        radial-gradient(ellipse 70% 50% at 15% 90%, rgba(255,205,0,0.12), transparent 60%);
-    }
-    .hero::after {
-      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-      background-size: 64px 64px;
-      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
-              mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
-    }
-
-    .hero-nav {
-      position: relative; z-index: 2;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1rem 0;
-      max-width: 1400px; margin: 0 auto; width: 100%;
-    }
-    .nav-brand { display: flex; align-items: center; gap: 1.25rem; }
-    .nav-brand-logo {
-      height: 36px; width: auto;
-      display: block;
-    }
-    .nav-brand-divider {
-      width: 1px; height: 28px;
-      background: rgba(255,255,255,0.2);
-    }
-    .nav-brand-text {
-      font-family: 'Outfit', sans-serif; font-weight: 800;
-      font-size: 1.05rem; letter-spacing: -0.01em;
-      color: var(--text-light);
-    }
-    .nav-brand-text span { color: var(--claro-yellow); font-style: normal; font-family: 'Outfit', sans-serif; font-weight: 900; letter-spacing: -0.02em; }
-    .nav-meta {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--muted);
-      margin-top: 0.2rem;
+    .nav-for {
+      font-family: var(--r-font-mono);
+      font-size: 12px;
+      letter-spacing: var(--r-tr-eyebrow);
+      text-transform: uppercase;
+      color: var(--r-fg-muted);
     }
     .nav-meta-right {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--gold);
-      padding: 0.4rem 0.9rem;
-      border: 1px solid var(--border-warm);
-      border-radius: 999px;
+      font-family: var(--r-font-mono);
+      font-size: 11px;
+      letter-spacing: var(--r-tr-eyebrow);
+      text-transform: uppercase;
+      color: var(--r-fg-muted);
     }
 
-    /* ═══════════════════════════════ HERO BODY ═══════════════════════════════ */
-    .hero-body {
-      position: relative; z-index: 2;
-      max-width: 1400px; margin: 0 auto;
-      flex: 1; display: flex; flex-direction: column; justify-content: center;
-      padding: 4rem 0;
-      width: 100%;
+    /* ═══════════════════════════════ HERO ═══════════════════════════════ */
+    .hero {
+      position: relative;
+      padding: 120px 32px 96px;
+      background: var(--r-bg);
+      overflow: hidden;
     }
-    .hero-body .eyebrow { margin-bottom: 2rem; animation: fade-up 1s cubic-bezier(.2,.8,.2,1) both; animation-delay: .1s; }
-    .hero-body .t-hero {
-      max-width: 1100px;
-      margin-bottom: 2rem;
-      color: var(--text-light);
-      animation: fade-up 1s cubic-bezier(.2,.8,.2,1) both; animation-delay: .3s;
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 85% 0%, rgba(244,185,62,0.08), transparent 60%),
+        radial-gradient(ellipse 50% 40% at 0% 100%, rgba(244,185,62,0.04), transparent 50%);
+      pointer-events: none;
     }
-    .hero-body .t-hero em { color: var(--claro-yellow); font-family: 'Outfit', sans-serif; font-style: normal; font-weight: 900; letter-spacing: -0.03em; }
+    .hero-inner {
+      max-width: var(--r-container-max);
+      margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .hero .r-eyebrow {
+      margin-bottom: 32px;
+    }
+    .hero-title {
+      font-family: var(--r-font-display);
+      font-variation-settings: var(--r-fraunces-axes);
+      font-size: var(--r-fs-display-xl);
+      font-weight: 500;
+      line-height: 1.02;
+      letter-spacing: var(--r-tr-display);
+      color: var(--r-fg);
+      max-width: 960px;
+      margin-bottom: 32px;
+    }
+    .hero-title em {
+      font-style: italic;
+      font-weight: 600;
+      color: var(--r-amber);
+    }
     .hero-sub {
-      max-width: 760px;
-      font-size: clamp(1.1rem, 1.5vw, 1.35rem);
-      color: var(--muted);
-      margin-bottom: 3.5rem;
-      line-height: 1.55;
-      animation: fade-up 1s cubic-bezier(.2,.8,.2,1) both; animation-delay: .5s;
+      font-size: var(--r-fs-body-lg);
+      color: var(--r-fg-muted);
+      max-width: 720px;
+      line-height: var(--r-lh-body);
+      margin-bottom: 64px;
     }
 
-    .hero-meta-row {
+    .meta-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
-      padding-top: 2.5rem;
-      border-top: 1px solid var(--border-dark);
-      animation: fade-up 1s cubic-bezier(.2,.8,.2,1) both; animation-delay: .7s;
+      gap: 24px;
+      padding-top: 40px;
+      border-top: 1px solid var(--r-border);
     }
     .meta-item-label {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--gold);
-      margin-bottom: 0.6rem;
+      font-family: var(--r-font-mono);
+      font-size: var(--r-fs-eyebrow);
+      font-weight: 600;
+      letter-spacing: var(--r-tr-eyebrow);
+      text-transform: uppercase;
+      color: var(--r-amber);
+      margin-bottom: 10px;
     }
     .meta-item-value {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.05rem; font-weight: 600;
-      color: var(--text-light);
-      line-height: 1.35;
-    }
-
-    @keyframes fade-up {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      font-family: var(--r-font-body);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--r-fg);
+      line-height: 1.4;
     }
 
     /* ═══════════════════════════════ CARDS SECTION ═══════════════════════════════ */
     .cards-section {
-      position: relative;
-      background: var(--charcoal);
-      padding: 7rem 4rem;
-      border-top: 1px solid var(--border-dark);
+      padding: 96px 32px;
+      background: var(--r-bg);
+      border-top: 1px solid var(--r-border);
     }
-    .cards-inner { max-width: 1400px; margin: 0 auto; }
-    .cards-label { margin-bottom: 4rem; max-width: 800px; }
-    .cards-label-small {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--gold);
-      margin-bottom: 1rem;
+    .cards-inner {
+      max-width: var(--r-container-max);
+      margin: 0 auto;
     }
-    .cards-label-big {
-      font-family: 'Outfit', sans-serif;
-      font-size: clamp(1.8rem, 3vw, 2.75rem); font-weight: 800;
-      letter-spacing: -0.025em; line-height: 1.1;
-      color: var(--text-light);
+    .cards-head {
+      margin-bottom: 56px;
+      max-width: 720px;
     }
-    .cards-label-big em { color: var(--claro-yellow); font-family: 'Outfit', sans-serif; font-style: normal; font-weight: 900; letter-spacing: -0.03em; }
-
+    .cards-head .r-eyebrow { margin-bottom: 20px; }
+    .cards-head h2 {
+      font-family: var(--r-font-display);
+      font-variation-settings: var(--r-fraunces-axes);
+      font-size: var(--r-fs-display-md);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: var(--r-tr-display);
+      color: var(--r-fg);
+    }
+    .cards-head h2 em {
+      font-style: italic;
+      font-weight: 600;
+      color: var(--r-amber);
+    }
     .cards-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+      gap: 24px;
     }
 
     .card {
       position: relative;
       display: flex; flex-direction: column;
-      min-height: 480px;
-      padding: 3rem 2.75rem 2.75rem;
-      background: linear-gradient(165deg, var(--surface) 0%, var(--charcoal) 100%);
-      border: 1px solid var(--border-dark);
-      border-radius: 24px;
+      min-height: 440px;
+      padding: 32px;
+      background: var(--r-bg-elev);
+      border: 1px solid var(--r-border);
+      border-radius: var(--r-radius-lg);
+      transition:
+        border-color var(--r-transition-base),
+        transform var(--r-transition-base),
+        background var(--r-transition-base);
       overflow: hidden;
-      transition: all 0.6s cubic-bezier(.2,.8,.2,1);
-    }
-    .card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--claro-red) 0%, var(--claro-yellow) 100%);
-      transform: scaleX(0.25); transform-origin: left;
-      transition: transform 0.6s cubic-bezier(.2,.8,.2,1);
     }
     .card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(237,28,36,0.28);
-      box-shadow: 0 28px 70px rgba(237,28,36,0.14);
+      border-color: var(--r-amber-border);
+      transform: translateY(-2px);
     }
-    .card:hover::before { transform: scaleX(1); }
 
     .card-num {
-      position: absolute; top: 1.5rem; right: 2rem;
-      font-family: 'Outfit', sans-serif;
-      font-weight: 900;
-      font-size: 4.5rem; line-height: 1;
-      color: rgba(255,205,0,0.2);
-      pointer-events: none; user-select: none;
-      letter-spacing: -0.05em;
+      position: absolute; top: 24px; right: 28px;
+      font-family: var(--r-font-mono);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: var(--r-tr-mono);
+      color: var(--r-fg-muted);
     }
-    .card-slides .card-num { color: rgba(236,28,36,0.25); }
 
-    .card-badge {
-      display: inline-flex; align-items: center;
-      padding: 0.4rem 0.85rem;
-      background: rgba(237, 28, 36, 0.1);
-      border: 1px solid rgba(237, 28, 36, 0.3);
-      border-radius: 999px;
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em;
-      text-transform: uppercase; color: #FF6B70;
-      margin-bottom: 2rem;
+    .card-tag {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--r-font-mono);
+      font-size: var(--r-fs-eyebrow);
+      font-weight: 600;
+      letter-spacing: var(--r-tr-eyebrow);
+      text-transform: uppercase;
+      color: var(--r-amber);
+      padding: 6px 10px;
+      border: 1px solid var(--r-amber);
+      border-radius: var(--r-radius-md);
+      margin-bottom: 24px;
       width: fit-content;
     }
+
     .card-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: clamp(1.7rem, 2.4vw, 2.2rem); font-weight: 800;
-      line-height: 1.1; letter-spacing: -0.025em;
-      color: var(--text-light);
-      margin-bottom: 1.25rem;
+      font-family: var(--r-font-display);
+      font-variation-settings: var(--r-fraunces-axes);
+      font-size: 36px;
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: var(--r-tr-display);
+      color: var(--r-fg);
+      margin-bottom: 16px;
     }
-    .card-title em { color: var(--claro-yellow); font-family: 'Outfit', sans-serif; font-style: normal; font-weight: 900; letter-spacing: -0.03em; }
+    .card-title em {
+      font-style: italic;
+      font-weight: 600;
+      color: var(--r-amber);
+    }
+
     .card-desc {
-      font-size: 1rem; line-height: 1.6;
-      color: var(--muted);
-      margin-bottom: 2.5rem;
+      font-size: var(--r-fs-body-md);
+      line-height: var(--r-lh-body);
+      color: var(--r-fg-muted);
+      margin-bottom: 32px;
     }
 
     .card-specs {
-      display: flex; gap: 2rem;
-      margin-top: auto; margin-bottom: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border-dark);
+      display: flex; gap: 32px; flex-wrap: wrap;
+      margin-top: auto; margin-bottom: 28px;
+      padding-top: 28px;
+      border-top: 1px solid var(--r-border);
     }
     .card-spec-label {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--muted);
-      margin-bottom: 0.35rem;
+      font-family: var(--r-font-mono);
+      font-size: 10px; font-weight: 600;
+      letter-spacing: var(--r-tr-eyebrow);
+      text-transform: uppercase;
+      color: var(--r-fg-muted);
+      margin-bottom: 4px;
     }
     .card-spec-value {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.95rem; font-weight: 700;
-      color: var(--gold-soft);
+      font-family: var(--r-font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--r-fg);
+      letter-spacing: var(--r-tr-mono);
     }
 
     .card-cta {
-      display: inline-flex; align-items: center; gap: 0.75rem;
-      font-family: 'Outfit', sans-serif;
-      font-weight: 700; font-size: 0.95rem;
-      color: var(--claro-red);
-      transition: gap 0.3s ease;
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--r-font-body);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--r-amber);
+      transition: gap var(--r-transition-base);
     }
-    .card:hover .card-cta { gap: 1.1rem; }
+    .card:hover .card-cta { gap: 14px; }
     .card-cta-arrow {
-      display: inline-block;
-      transition: transform 0.4s cubic-bezier(.2,.8,.2,1);
+      font-family: var(--r-font-mono);
+      transition: transform var(--r-transition-base);
     }
-    .card:hover .card-cta-arrow { transform: translateX(6px); }
+    .card:hover .card-cta-arrow { transform: translateX(4px); }
 
     /* ═══════════════════════════════ CONTEXT SECTION ═══════════════════════════════ */
     .context-section {
-      position: relative;
-      background: var(--ink);
-      padding: 8rem 4rem;
-      overflow: hidden;
-    }
-    .context-section::before {
-      content: ''; position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 50% 40% at 85% 50%, rgba(237,28,36,0.08), transparent 60%),
-        radial-gradient(ellipse 60% 50% at 15% 50%, rgba(197,165,114,0.06), transparent 60%);
+      padding: 128px 32px;
+      background: var(--r-bg-elev);
+      border-top: 1px solid var(--r-border);
     }
     .context-inner {
-      position: relative;
-      max-width: 1100px; margin: 0 auto;
+      max-width: 900px; margin: 0 auto;
     }
-    .context-label {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.22em;
-      text-transform: uppercase; color: var(--gold);
-      margin-bottom: 2.5rem;
-      display: inline-flex; align-items: center; gap: 0.75rem;
-    }
-    .context-label::before {
-      content: ''; width: 2.5rem; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold));
-    }
+    .context-section .r-eyebrow { margin-bottom: 40px; }
     .context-body p {
-      font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+      font-family: var(--r-font-body);
+      font-size: 20px;
       line-height: 1.6;
-      color: var(--text-light);
-      font-weight: 300;
-      margin-bottom: 1.75rem;
+      color: var(--r-fg);
+      font-weight: 400;
+      margin-bottom: 28px;
     }
-    .context-body p strong { color: var(--claro-yellow); font-weight: 700; }
-    .context-body p:last-child {
-      font-family: 'Outfit', sans-serif;
-      font-style: normal;
-      font-size: clamp(1.3rem, 1.9vw, 1.75rem);
-      color: var(--claro-yellow);
-      font-weight: 800;
-      line-height: 1.3;
-      letter-spacing: -0.02em;
-      margin-top: 3rem;
-      padding-top: 3rem;
-      border-top: 1px solid var(--border-warm);
+    .context-body p strong { color: var(--r-amber); font-weight: 500; }
+
+    .context-accent {
+      font-family: var(--r-font-display) !important;
+      font-variation-settings: var(--r-fraunces-axes);
+      font-style: italic;
+      font-weight: 600 !important;
+      font-size: 28px !important;
+      color: var(--r-fg) !important;
+      line-height: 1.35 !important;
+      margin-top: 56px !important;
+      padding-top: 40px !important;
+      border-top: 1px solid var(--r-border);
+      position: relative;
+    }
+    .context-accent::before {
+      content: "";
+      position: absolute; top: -1px; left: 0;
+      width: 56px; height: 1px;
+      background: var(--r-amber);
     }
 
     /* ═══════════════════════════════ FOOTER ═══════════════════════════════ */
-    .site-footer {
-      background: #1A1A1A;
-      padding: 5rem 4rem 3rem;
-      border-top: 1px solid var(--border-dark);
-      position: relative;
+    .footer {
+      background: var(--r-bg);
+      padding: 80px 32px 40px;
+      border-top: 1px solid var(--r-border);
     }
     .footer-inner {
-      max-width: 1400px; margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: flex-start;
-      gap: 3rem; flex-wrap: wrap;
+      max-width: var(--r-container-max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 48px;
+      align-items: flex-start;
     }
-    .footer-signature {
-      max-width: 500px;
+    .footer-brand {
+      max-width: 560px;
     }
-    .sig-name {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.35rem; font-weight: 800;
-      color: var(--text-light);
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.01em;
+    .footer-wordmark {
+      font-family: var(--r-font-display);
+      font-variation-settings: var(--r-fraunces-axes);
+      font-size: 36px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: baseline;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
     }
-    .sig-role {
-      font-size: 0.95rem;
-      color: var(--muted);
-      margin-bottom: 0.75rem;
-      line-height: 1.5;
+    .footer-wordmark .r-name { font-style: italic; font-weight: 600; color: var(--r-fg); }
+    .footer-wordmark .r-dot { color: var(--r-amber); font-weight: 600; }
+    .footer-wordmark .r-ai { color: var(--r-amber); font-weight: 300; font-size: 0.65em; margin-left: 0.02em; }
+    .footer-tagline {
+      font-family: var(--r-font-body);
+      font-size: 16px;
+      color: var(--r-fg-muted);
+      line-height: 1.55;
+      margin-bottom: 28px;
     }
-    .sig-meta {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--gold);
+    .footer-sig {
+      font-family: var(--r-font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: var(--r-tr-eyebrow);
+      text-transform: uppercase;
+      color: var(--r-amber);
     }
-    .footer-links {
-      display: flex; flex-direction: column; gap: 0.85rem;
-      min-width: 200px;
+    .footer-sig span { color: var(--r-fg-muted); margin: 0 6px; }
+
+    .footer-nav {
+      display: flex; flex-direction: column; gap: 10px;
+      min-width: 180px;
     }
-    .footer-links-label {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--muted);
-      margin-bottom: 0.5rem;
+    .footer-nav-label {
+      font-family: var(--r-font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: var(--r-tr-eyebrow);
+      text-transform: uppercase;
+      color: var(--r-fg-muted);
+      margin-bottom: 8px;
     }
-    .footer-links a {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.95rem; font-weight: 600;
-      color: var(--text-light);
-      transition: color 0.3s ease;
-      display: inline-flex; align-items: center; gap: 0.5rem;
+    .footer-nav a {
+      font-family: var(--r-font-body);
+      font-size: 14px;
+      color: var(--r-fg);
+      transition: color var(--r-transition-base);
     }
-    .footer-links a:hover { color: var(--claro-red); }
+    .footer-nav a:hover { color: var(--r-amber); }
+
     .footer-bottom {
-      max-width: 1400px; margin: 4rem auto 0;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border-dark);
-      display: flex; justify-content: space-between; align-items: center;
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--muted-2);
+      max-width: var(--r-container-max);
+      margin: 56px auto 0;
+      padding-top: 32px;
+      border-top: 1px solid var(--r-border);
+      display: flex; justify-content: space-between;
+      font-family: var(--r-font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: var(--r-tr-eyebrow);
+      text-transform: uppercase;
+      color: var(--r-fg-muted);
     }
 
     /* ═══════════════════════════════ RESPONSIVE ═══════════════════════════════ */
-    /* ═══════════════════════════════ MOBILE 900px ═══════════════════════════════ */
     @media (max-width: 900px) {
-      .hero, .cards-section, .context-section, .site-footer { padding-left: 1.5rem; padding-right: 1.5rem; }
-      .hero { padding-top: 1.5rem; padding-bottom: 4rem; min-height: auto; }
-      .hero-nav { flex-wrap: wrap; gap: 1rem; }
-      .nav-brand-logo { height: 28px; }
-      .nav-brand-text { font-size: 0.95rem; }
-      .nav-meta-right { font-size: 0.62rem; }
-
-      .hero-body { padding: 3rem 0 2rem; }
-      .hero-body .t-hero { font-size: clamp(2.2rem, 10vw, 3.8rem) !important; }
-      .hero-sub { font-size: clamp(0.95rem, 3.5vw, 1.1rem); margin-bottom: 2.5rem; }
-      .hero-meta-row {
-        grid-template-columns: 1fr 1fr;
-        gap: 1.25rem;
-        padding-top: 2rem;
-      }
-      .meta-item-value { font-size: 0.88rem; line-height: 1.3; }
-      .meta-item-label { font-size: 0.58rem; }
-
-      .cards-section, .context-section { padding-top: 4rem; padding-bottom: 4rem; }
-      .cards-label-big { font-size: clamp(1.5rem, 6vw, 2rem); }
-      .cards-grid { grid-template-columns: 1fr; gap: 1.25rem; }
-      .card { min-height: auto; padding: 2.25rem 1.75rem 2rem; }
-      .card-num { font-size: 3.5rem; top: 1.25rem; right: 1.5rem; }
-      .card-title { font-size: clamp(1.5rem, 5vw, 1.9rem); }
-      .card-desc { font-size: 0.95rem; margin-bottom: 2rem; }
-      .card-specs { flex-wrap: wrap; gap: 1.25rem; padding-top: 1.5rem; margin-bottom: 1.5rem; }
-
-      .context-body p { font-size: clamp(1rem, 3.5vw, 1.2rem); }
-
-      .footer-inner { flex-direction: column; gap: 2.5rem; }
-      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; font-size: 0.6rem; }
-    }
-
-    /* ═══════════════════════════════ MOBILE 480px (pequeno) ═══════════════════════════════ */
-    @media (max-width: 480px) {
-      .hero { padding-left: 1.25rem; padding-right: 1.25rem; }
-      .hero-body .t-hero { font-size: clamp(2rem, 11vw, 3.2rem) !important; }
-      .hero-meta-row { grid-template-columns: 1fr; gap: 1rem; }
+      .nav-inner { padding: 14px 20px; }
       .nav-meta-right { display: none; }
-      .cards-section, .context-section, .site-footer { padding-left: 1.25rem; padding-right: 1.25rem; }
-      .card { padding: 2rem 1.5rem 1.75rem; }
-      .card-num { font-size: 2.8rem; }
+      .hero { padding: 72px 20px 64px; }
+      .hero-title { font-size: clamp(40px, 9vw, 64px); }
+      .hero-sub { font-size: 16px; margin-bottom: 48px; }
+      .meta-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .cards-section, .context-section, .footer { padding-left: 20px; padding-right: 20px; }
+      .cards-section { padding-top: 64px; padding-bottom: 64px; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .card { min-height: auto; padding: 28px; }
+      .card-title { font-size: 28px; }
+      .context-section { padding-top: 80px; padding-bottom: 80px; }
+      .context-body p { font-size: 17px; }
+      .context-accent { font-size: 22px !important; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 12px; }
+    }
+    @media (max-width: 480px) {
+      .hero-title { font-size: clamp(34px, 10vw, 48px); }
+      .meta-grid { grid-template-columns: 1fr; }
+      .nav-for { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
-  <!-- ══ HERO                                                             ══ -->
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
-  <section class="hero">
-    <nav class="hero-nav">
-      <div class="nav-brand">
-        <img src="assets/images/claro-logo-white.svg" alt="Claro" class="nav-brand-logo">
-        <div class="nav-brand-divider"></div>
-        <div>
-          <div class="nav-brand-text"><span>Acelera</span></div>
-          <div class="nav-meta">Proposta Comercial · 2026</div>
-        </div>
+  <!-- ══ NAV STICKY ══ -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-left">
+        <a href="/" class="nav-wordmark" aria-label="Rentabiliza.ai">
+          <span class="r-name">Rentabiliza</span><span class="r-dot">.</span><span class="r-ai">ai</span>
+        </a>
+        <div class="nav-pipe"></div>
+        <span class="nav-for">para a Claro</span>
       </div>
       <div class="nav-meta-right">V2.0 · Abril 2026</div>
-    </nav>
+    </div>
+  </nav>
 
-    <div class="hero-body">
-      <div class="eyebrow">
-        <span class="eyebrow-dot"></span>
-        <span>Proposta Comercial · Rentabilização de Canal · 2026</span>
-      </div>
-      <h1 class="t-hero">
-        Rentabilizando o parceiro Claro — do balcão ao <em>serviço</em>.
+  <!-- ══ HERO ══ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="r-eyebrow">Proposta Comercial · Rentabilização de Canal · 2026</div>
+      <h1 class="hero-title">
+        Rentabilizando o parceiro Claro — do balcão ao <em>serviço.</em>
       </h1>
       <p class="hero-sub">
-        Um programa de intervenção comercial que aumenta penetração de serviço, ticket médio e margem dos parceiros Claro classes C, D e E — com Pessoas, Processos e Tecnologia IA aplicados por quem viveu 21 anos dentro da loja.
+        Uma plataforma de intervenção comercial que aumenta penetração de serviço, ticket médio e margem dos parceiros Claro classes C, D e E — com gestão, humanização e IA aplicadas no PDV.
       </p>
-      <div class="hero-meta-row">
-        <div class="meta-item">
+      <div class="meta-grid">
+        <div>
           <div class="meta-item-label">Escala</div>
           <div class="meta-item-value">3 cenários — 300 · 1.000 · 3.000 parceiros</div>
         </div>
-        <div class="meta-item">
+        <div>
           <div class="meta-item-label">Método</div>
           <div class="meta-item-value">Pessoas · Processos · Tecnologia IA</div>
         </div>
-        <div class="meta-item">
+        <div>
           <div class="meta-item-label">Canal</div>
           <div class="meta-item-value">Parceiros Claro classes C, D, E</div>
         </div>
-        <div class="meta-item">
+        <div>
           <div class="meta-item-label">Modelo</div>
           <div class="meta-item-value">Ondas com KPI auditável por onda</div>
         </div>
@@ -578,21 +503,18 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
-  <!-- ══ 2 CARDS                                                          ══ -->
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!-- ══ 2 CARDS ══ -->
   <section class="cards-section">
     <div class="cards-inner">
-      <div class="cards-label">
-        <div class="cards-label-small">Dois formatos de leitura</div>
-        <div class="cards-label-big">O <em>business case</em> completo ou o pitch executivo.</div>
+      <div class="cards-head">
+        <div class="r-eyebrow">Dois formatos de leitura</div>
+        <h2>O <em>business case</em> completo ou o pitch executivo.</h2>
       </div>
 
       <div class="cards-grid">
-        <!-- CARD 1 — DOC -->
-        <a href="doc.html" class="card card-doc">
+        <a href="doc.html" class="card">
           <span class="card-num">01</span>
-          <span class="card-badge">Business Case Completo</span>
+          <span class="card-tag">Business Case</span>
           <h3 class="card-title">Documento <em>Completo</em></h3>
           <p class="card-desc">
             A intervenção em detalhes — leitura do canal, método, arquitetura dos 5 pacotes, três cenários de escala com KPI por onda e plano de go-to-market. Leitura para quem vai levar ao comitê.
@@ -604,23 +526,22 @@
             </div>
             <div>
               <div class="card-spec-label">Leitura</div>
-              <div class="card-spec-value">~15 minutos</div>
+              <div class="card-spec-value">~15 min</div>
             </div>
             <div>
               <div class="card-spec-label">Seções</div>
-              <div class="card-spec-value">14</div>
+              <div class="card-spec-value">13</div>
             </div>
           </div>
           <span class="card-cta">
             Abrir documento
-            <span class="card-cta-arrow">→</span>
+            <span class="card-cta-arrow">↗</span>
           </span>
         </a>
 
-        <!-- CARD 2 — SLIDES -->
-        <a href="slides.html" class="card card-slides">
+        <a href="slides.html" class="card">
           <span class="card-num">02</span>
-          <span class="card-badge">Pitch Executivo</span>
+          <span class="card-tag">Pitch Executivo</span>
           <h3 class="card-title">Apresentação de <em>Slides</em></h3>
           <p class="card-desc">
             O business case condensado para a reunião de diretoria — navegação por teclado, modo tela cheia e linha narrativa enxuta. Direto ao que interessa a quem decide.
@@ -628,65 +549,67 @@
           <div class="card-specs">
             <div>
               <div class="card-spec-label">Formato</div>
-              <div class="card-spec-value">13 slides</div>
+              <div class="card-spec-value">12 slides</div>
             </div>
             <div>
               <div class="card-spec-label">Duração</div>
-              <div class="card-spec-value">30 minutos</div>
+              <div class="card-spec-value">30 min</div>
             </div>
             <div>
               <div class="card-spec-label">Modo</div>
-              <div class="card-spec-value">Apresentação</div>
+              <div class="card-spec-value">Pitch</div>
             </div>
           </div>
           <span class="card-cta">
             Iniciar apresentação
-            <span class="card-cta-arrow">→</span>
+            <span class="card-cta-arrow">↗</span>
           </span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
-  <!-- ══ CONTEXT                                                          ══ -->
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!-- ══ CONTEXT ══ -->
   <section class="context-section">
     <div class="context-inner">
-      <div class="context-label">O que é o Claro Acelera</div>
+      <div class="r-eyebrow">O que é o Rentabiliza.ai</div>
       <div class="context-body">
         <p>
-          O Claro Acelera é uma intervenção comercial desenhada para aumentar a rentabilidade da rede de parceiros Claro — hoje predominantemente focada em produto, com baixa penetração de serviço e margem sob pressão. O programa atua em <strong>três camadas integradas: Pessoas, Processos e Tecnologia IA</strong>, aplicadas sobre cinco pilares de mentalidade do lojista.
+          Rentabiliza.ai é uma plataforma de intervenção comercial desenhada para aumentar a rentabilidade da rede de parceiros Claro — hoje predominantemente focada em produto, com baixa penetração de serviço e margem sob pressão. A plataforma atua em três camadas integradas — <strong>Pessoas, Processos e Tecnologia IA</strong> — aplicadas sobre cinco pilares de mentalidade do lojista.
         </p>
         <p>
-          A arquitetura tem 5 pacotes escalonados do gratuito ao premium, três cenários de escala (300, 1.000 e 3.000 parceiros) com KPI auditável por onda, e dois entregáveis que a consultoria genérica não entrega: <strong>especialização em varejo telecom</strong> e <strong>21 anos de operação real</strong> — sete como Gerente Nacional de rede com 4.500 vendedores e R$1 bilhão/ano em faturamento.
+          A arquitetura tem 5 pacotes escalonados do gratuito ao premium, três cenários de escala (300, 1.000 e 3.000 parceiros) com KPI auditável por onda, e dois entregáveis que a consultoria genérica não entrega: <strong>especialização em varejo telecom</strong> e método autoral validado em operação real — 21 anos dentro da loja, 7 como Gerente Nacional de rede com 4.500 vendedores e R$ 1 bilhão/ano em faturamento.
         </p>
-        <p>
-          Não é treinamento. Não é curso. É <strong>intervenção comercial com método, tecnologia e acompanhamento de indicador</strong> — conduzida por quem viveu do outro lado do balcão.
+        <p class="context-accent">
+          Não é treinamento. Não é curso. É <em>intervenção comercial com método, tecnologia e acompanhamento de indicador</em> — conduzida por quem viveu do outro lado do balcão.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
-  <!-- ══ FOOTER                                                           ══ -->
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
-  <footer class="site-footer">
+  <!-- ══ FOOTER ══ -->
+  <footer class="footer">
     <div class="footer-inner">
-      <div class="footer-signature">
-        <div class="sig-name">Rodrigo Braga</div>
-        <div class="sig-role">Especialista em varejo · 21 anos de chão de loja · 7 como Gerente Nacional</div>
-        <div class="sig-meta">R$1 bilhão/ano em operação · 4.500 vendedores liderados · Canal telecom</div>
+      <div class="footer-brand">
+        <div class="footer-wordmark">
+          <span class="r-name">Rentabiliza</span><span class="r-dot">.</span><span class="r-ai">ai</span>
+        </div>
+        <p class="footer-tagline">
+          Plataforma de gestão, humanização e IA aplicada ao PDV de parceiros de telecom. Para a Claro.
+        </p>
+        <div class="footer-sig">
+          PulsarH.ai <span>×</span> TradeUp
+        </div>
       </div>
-      <div class="footer-links">
-        <div class="footer-links-label">Navegue</div>
-        <a href="doc.html">Documento completo →</a>
-        <a href="slides.html">Apresentação de slides →</a>
+      <div class="footer-nav">
+        <div class="footer-nav-label">Navegue</div>
+        <a href="doc.html">Documento completo ↗</a>
+        <a href="slides.html">Apresentação ↗</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <div>Claro Acelera · Proposta Comercial · V2.0 · Abril 2026</div>
-      <div>Elaborado por Rodrigo Braga</div>
+      <div>Rentabiliza.ai · Proposta para a Claro · V2.0 · Abril 2026</div>
+      <div>PulsarH.ai × TradeUp</div>
     </div>
   </footer>
 

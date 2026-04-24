@@ -6,6 +6,9 @@ package.json
 # Build utilities (not needed at runtime)
 og-builder.js
 
+# Brand-assets source (fonts + SVGs já foram copiados pra /assets)
+brand-assets/
+
 # Vercel
 .vercel/
 

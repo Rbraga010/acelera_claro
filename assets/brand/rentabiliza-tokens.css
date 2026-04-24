@@ -1,0 +1,458 @@
+/* =========================================================================
+   Rentabiliza.ai — Brand Tokens + Primitives
+   Paleta, tipografia, spacing, componentes de marca e efeitos elegantes.
+   Base: Linear + Vercel + Stripe. Restrained. Modern Brazilian serious.
+   ========================================================================= */
+
+/* ---------- Local variable fonts ---------- */
+@font-face {
+  font-family: "Fraunces";
+  src: url("../fonts/Fraunces-Variable.ttf") format("truetype-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Fraunces";
+  src: url("../fonts/Fraunces-Italic-Variable.ttf") format("truetype-variations");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-Variable.ttf") format("truetype-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-Italic-Variable.ttf") format("truetype-variations");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../fonts/JetBrainsMono-Variable.ttf") format("truetype-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../fonts/JetBrainsMono-Italic-Variable.ttf") format("truetype-variations");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* =========================================================================
+   1. TOKENS (raw)
+   ========================================================================= */
+:root {
+  /* Surfaces */
+  --r-bg-primary-dark: #0D1117;       /* noite profunda */
+  --r-bg-secondary-dark: #1A2430;     /* grafite superfície */
+  --r-bg-tertiary-dark: #242F3E;      /* card elevado */
+  --r-bg-primary-light: #F4F1E8;      /* papel */
+  --r-bg-secondary-light: #FAFAF7;    /* branco-off */
+
+  /* Text */
+  --r-text-on-dark: #F4F1E8;
+  --r-text-on-light: #0D1117;
+  --r-text-muted-dark: #8B8B93;
+  --r-text-muted-light: #5F5E5A;
+
+  /* Brand colors — usar com escassez */
+  --r-amber: #F4B93E;                 /* protagonista */
+  --r-amber-hover: #FFC856;           /* hover */
+  --r-amber-soft: rgba(244, 185, 62, 0.12);
+  --r-amber-border: rgba(244, 185, 62, 0.4);
+  --r-mint: #3DDC97;                  /* só KPI positivo / dado vivo */
+  --r-coral: #FF6B47;                 /* só humanização / gente */
+
+  /* Borders */
+  --r-border-dark: rgba(255, 255, 255, 0.08);
+  --r-border-dark-hover: rgba(255, 255, 255, 0.16);
+  --r-border-light: rgba(13, 17, 23, 0.08);
+  --r-border-light-hover: rgba(13, 17, 23, 0.16);
+
+  /* Semantic (default: dark surface — 70% das superfícies) */
+  --r-bg: var(--r-bg-primary-dark);
+  --r-bg-elev: var(--r-bg-secondary-dark);
+  --r-bg-elev-2: var(--r-bg-tertiary-dark);
+  --r-fg: var(--r-text-on-dark);
+  --r-fg-muted: var(--r-text-muted-dark);
+  --r-border: var(--r-border-dark);
+  --r-border-hover: var(--r-border-dark-hover);
+
+  /* Typography */
+  --r-font-display: "Fraunces", "Times New Roman", serif;
+  --r-font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --r-font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+
+  --r-fraunces-soft: 50;
+  --r-fraunces-wonk: 0;
+  --r-fraunces-axes: "SOFT" var(--r-fraunces-soft), "WONK" var(--r-fraunces-wonk);
+
+  /* Display scale */
+  --r-fs-display-xl: clamp(56px, 7vw, 104px);
+  --r-fs-display-lg: clamp(44px, 5.5vw, 72px);
+  --r-fs-display-md: clamp(32px, 4vw, 48px);
+  --r-fs-display-sm: 28px;
+
+  /* Body */
+  --r-fs-body-lg: 20px;
+  --r-fs-body-md: 16px;
+  --r-fs-body-sm: 14px;
+
+  /* Mono */
+  --r-fs-mono-md: 13px;
+  --r-fs-eyebrow: 11px;
+
+  /* Line heights + tracking */
+  --r-lh-heading: 1.15;
+  --r-lh-body: 1.6;
+  --r-tr-display: -0.02em;
+  --r-tr-subheading: -0.01em;
+  --r-tr-body: 0em;
+  --r-tr-mono: 0.08em;
+  --r-tr-eyebrow: 0.12em;
+
+  /* Spacing base 4px */
+  --r-s-1: 4px;   --r-s-2: 8px;   --r-s-3: 12px;
+  --r-s-4: 16px;  --r-s-5: 20px;  --r-s-6: 24px;
+  --r-s-8: 32px;  --r-s-10: 40px; --r-s-12: 48px;
+  --r-s-16: 64px; --r-s-20: 80px; --r-s-24: 96px;
+  --r-s-32: 128px;
+
+  /* Radii — só 3 steps */
+  --r-radius-md: 8px;   /* buttons, tags */
+  --r-radius-lg: 12px;  /* cards */
+  --r-radius-xl: 16px;  /* dashboards, large tiles */
+
+  /* Transitions — 120-200ms, ease ou ease-out. Nunca bounce. */
+  --r-transition-fast: 120ms ease-out;
+  --r-transition-base: 160ms ease-out;
+  --r-transition-slow: 200ms ease-out;
+
+  /* Container */
+  --r-container-max: 1200px;
+  --r-container-pad: 32px;
+}
+
+/* Light surface scope — aplicar .surface-light no container */
+.surface-light {
+  --r-bg: var(--r-bg-primary-light);
+  --r-bg-elev: var(--r-bg-secondary-light);
+  --r-bg-elev-2: #FFFFFF;
+  --r-fg: var(--r-text-on-light);
+  --r-fg-muted: var(--r-text-muted-light);
+  --r-border: var(--r-border-light);
+  --r-border-hover: var(--r-border-light-hover);
+}
+
+/* =========================================================================
+   2. TYPOGRAPHY BASE
+   ========================================================================= */
+.r-hero, .r-h1, .r-h2, .r-h3 {
+  font-family: var(--r-font-display);
+  font-variation-settings: var(--r-fraunces-axes);
+  font-weight: 500;
+  line-height: var(--r-lh-heading);
+  letter-spacing: var(--r-tr-display);
+  color: var(--r-fg);
+}
+.r-hero { font-size: var(--r-fs-display-xl); font-weight: 500; }
+.r-h1   { font-size: var(--r-fs-display-lg); font-weight: 500; }
+.r-h2   { font-size: var(--r-fs-display-md); font-weight: 500; }
+.r-h3   { font-size: var(--r-fs-display-sm); font-weight: 500; letter-spacing: var(--r-tr-subheading); }
+
+.r-italic-emphasis {
+  font-family: var(--r-font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-variation-settings: var(--r-fraunces-axes);
+}
+
+.r-lead {
+  font-family: var(--r-font-body);
+  font-size: var(--r-fs-body-lg);
+  line-height: var(--r-lh-body);
+  color: var(--r-fg-muted);
+}
+
+.r-body {
+  font-family: var(--r-font-body);
+  font-size: var(--r-fs-body-md);
+  line-height: var(--r-lh-body);
+  color: var(--r-fg);
+}
+
+.r-mono, .r-number {
+  font-family: var(--r-font-mono);
+  font-size: var(--r-fs-mono-md);
+  font-weight: 600;
+  letter-spacing: var(--r-tr-mono);
+}
+
+/* =========================================================================
+   3. PRIMITIVOS DE MARCA
+   ========================================================================= */
+
+/* ----- Eyebrow (amber bullet + mono uppercase tracked) ----- */
+.r-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--r-font-mono);
+  font-size: var(--r-fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--r-tr-eyebrow);
+  text-transform: uppercase;
+  color: var(--r-fg);
+}
+.r-eyebrow::before {
+  content: "";
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--r-amber);
+  flex-shrink: 0;
+}
+
+/* ----- Wordmark (CSS-rendered Rentabiliza.ai) ----- */
+.r-wordmark {
+  font-family: var(--r-font-display);
+  font-variation-settings: var(--r-fraunces-axes);
+  letter-spacing: var(--r-tr-display);
+  line-height: 1;
+  display: inline-flex;
+  align-items: baseline;
+  color: var(--r-fg);
+  white-space: nowrap;
+}
+.r-wordmark .r-name {
+  font-style: italic;
+  font-weight: 600;
+}
+.r-wordmark .r-dot,
+.r-wordmark .r-ai {
+  color: var(--r-amber);
+}
+.r-wordmark .r-dot { font-weight: 600; font-style: normal; }
+.r-wordmark .r-ai {
+  font-weight: 300; font-style: normal;
+  font-size: 0.65em;
+  margin-left: 0.02em;
+}
+
+/* ----- Tag mono (chip com border amber) ----- */
+.r-tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--r-font-mono);
+  font-size: var(--r-fs-mono-md);
+  font-weight: 600;
+  letter-spacing: var(--r-tr-mono);
+  padding: 6px 10px;
+  border-radius: var(--r-radius-md);
+  border: 1px solid var(--r-amber);
+  color: var(--r-amber);
+  background: transparent;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.r-tag--filled {
+  background: var(--r-amber);
+  color: #0D1117;
+}
+.r-tag--mint { border-color: var(--r-mint); color: var(--r-mint); }
+.r-tag--coral { border-color: var(--r-coral); color: var(--r-coral); }
+
+/* ----- Rule (divider 0.5px amber com dot central) ----- */
+.r-rule {
+  position: relative;
+  height: 0.5px;
+  background: var(--r-amber);
+  opacity: 0.9;
+  width: 100%;
+  margin: var(--r-s-12) 0;
+}
+.r-rule::after {
+  content: "";
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--r-amber);
+  transform: translate(-50%, -50%);
+}
+
+/* ----- Arrow-45 (seta ascendente) ----- */
+.r-arrow-45 {
+  display: inline-block;
+  width: 1em; height: 1em;
+  vertical-align: middle;
+  color: var(--r-amber);
+  transition: transform var(--r-transition-base);
+}
+.r-arrow-45 svg { width: 100%; height: 100%; display: block; }
+
+/* ----- Waves (3 círculos de onda) ----- */
+.r-waves {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.r-waves i {
+  display: block;
+  border-radius: 50%;
+  background: var(--r-amber);
+}
+.r-waves i:nth-child(1) { width: 6px;  height: 6px;  opacity: 0.4; }
+.r-waves i:nth-child(2) { width: 10px; height: 10px; opacity: 0.7; }
+.r-waves i:nth-child(3) { width: 14px; height: 14px; opacity: 1; }
+
+/* ----- Delta positivo (↗ + número em mono mint) ----- */
+.r-delta-up {
+  font-family: var(--r-font-mono);
+  font-size: var(--r-fs-mono-md);
+  font-weight: 600;
+  letter-spacing: var(--r-tr-mono);
+  color: var(--r-mint);
+}
+
+/* =========================================================================
+   4. BOTÕES
+   ========================================================================= */
+.r-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--r-font-body);
+  font-size: var(--r-fs-body-md);
+  font-weight: 500;
+  letter-spacing: var(--r-tr-subheading);
+  padding: 12px 18px;
+  border-radius: var(--r-radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    background var(--r-transition-base),
+    border-color var(--r-transition-base),
+    color var(--r-transition-base),
+    transform var(--r-transition-fast);
+}
+.r-btn:active { transform: translateY(1px); }
+
+.r-btn-primary {
+  background: var(--r-amber);
+  color: #0D1117;
+}
+.r-btn-primary:hover { background: var(--r-amber-hover); }
+
+.r-btn-secondary {
+  background: transparent;
+  color: var(--r-fg);
+  border-color: var(--r-border);
+}
+.r-btn-secondary:hover { border-color: var(--r-amber); color: var(--r-amber); }
+
+.r-btn-ghost {
+  background: transparent;
+  color: var(--r-fg);
+}
+.r-btn-ghost:hover { color: var(--r-amber); }
+
+/* =========================================================================
+   5. CARD
+   ========================================================================= */
+.r-card {
+  background: var(--r-bg-elev);
+  border: 1px solid var(--r-border);
+  border-radius: var(--r-radius-lg);
+  padding: var(--r-s-8);
+  transition:
+    border-color var(--r-transition-base),
+    transform var(--r-transition-base),
+    background var(--r-transition-base);
+}
+.r-card:hover {
+  border-color: var(--r-amber-border);
+  transform: translateY(-2px);
+}
+@media (max-width: 640px) {
+  .r-card { padding: var(--r-s-6); }
+}
+
+/* =========================================================================
+   6. LIVE DOT (único efeito "pulse" permitido — dado vivo)
+   ========================================================================= */
+.r-live-dot {
+  position: relative;
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--r-mint);
+}
+.r-live-dot::before {
+  content: "";
+  position: absolute; inset: -6px;
+  border-radius: 50%;
+  background: var(--r-mint);
+  opacity: 0.25;
+  animation: r-pulse 2s ease-out infinite;
+}
+@keyframes r-pulse {
+  0%   { transform: scale(0.6); opacity: 0.5; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* =========================================================================
+   7. LINKS
+   ========================================================================= */
+.r-link {
+  color: var(--r-fg-muted);
+  text-decoration: none;
+  transition: color var(--r-transition-base);
+}
+.r-link:hover { color: var(--r-amber); }
+
+/* =========================================================================
+   8. AMBER BULLET LIST
+   ========================================================================= */
+.r-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--r-s-4) 0;
+}
+.r-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: var(--r-s-3);
+  line-height: var(--r-lh-body);
+}
+.r-list li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.65em;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--r-amber);
+}
+
+/* =========================================================================
+   9. CONTAINER
+   ========================================================================= */
+.r-container {
+  max-width: var(--r-container-max);
+  margin: 0 auto;
+  padding: 0 var(--r-container-pad);
+}
+@media (max-width: 640px) {
+  .r-container { padding: 0 20px; }
+}

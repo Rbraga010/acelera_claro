@@ -3,72 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Claro Acelera · Documento Completo · Rodrigo Braga</title>
-  <meta name="description" content="Business case completo da proposta Claro Acelera — intervenção comercial especializada para rentabilizar 100 mil+ parceiros da Claro.">
+  <title>Rentabiliza.ai · Business Case · para a Claro</title>
+  <meta name="description" content="Rentabiliza.ai — plataforma de gestão, humanização e IA aplicada ao PDV dos parceiros Claro. Business case completo.">
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Claro Acelera · Business Case">
-  <meta property="og:description" content="Business case completo — 13 seções, arquitetura dos 5 pacotes, 3 cenários de escala e plano de go-to-market.">
+  <meta property="og:title" content="Rentabiliza.ai · Business Case para a Claro">
+  <meta property="og:description" content="Business case completo — 13 seções, 5 pacotes, 3 cenários de escala e plano de go-to-market.">
   <meta property="og:image" content="https://claro-acelera.vercel.app/assets/images/og-image.png">
   <meta property="og:url" content="https://claro-acelera.vercel.app/doc.html">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:site_name" content="Claro Acelera">
+  <meta property="og:site_name" content="Rentabiliza.ai">
   <meta property="og:locale" content="pt_BR">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Claro Acelera · Business Case">
+  <meta name="twitter:title" content="Rentabiliza.ai · Business Case para a Claro">
   <meta name="twitter:image" content="https://claro-acelera.vercel.app/assets/images/og-image.png">
 
-  <meta name="theme-color" content="#EC1C24">
+  <meta name="theme-color" content="#0D1117">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="assets/brand/logo-mono-amber.svg">
+
+  <!-- Rentabiliza.ai Design Tokens -->
+  <link rel="stylesheet" href="assets/brand/rentabiliza-tokens.css">
   <style>
     /* ═══════════════════════════════ TOKENS ═══════════════════════════════ */
     :root {
-      /* Paleta Claro oficial */
-      --claro-red: #EC1C24;
-      --claro-red-deep: #B71318;
-      --claro-red-light: #FF4048;
-      --claro-red-glow: rgba(236, 28, 36, 0.35);
-      --claro-red-pale: #FFF0F1;
-      --claro-yellow: #FFCD00;
-      --claro-yellow-soft: #FFE27A;
-      --claro-yellow-pale: #FFF9E0;
+      /* ═══ LEGACY ALIASES → agora mapeiam pra Rentabiliza.ai ═══ */
+      /* "Claro red" e "yellow" viraram AMBER (a cor protagonista de Rentabiliza) */
+      --claro-red: #F4B93E;              /* âmbar — substitui vermelho Claro em CTAs e destaques */
+      --claro-red-deep: #B8881D;         /* âmbar escuro pra hover/press */
+      --claro-red-light: #FFC856;        /* âmbar hover */
+      --claro-red-glow: rgba(244, 185, 62, 0.30);
+      --claro-red-pale: rgba(244, 185, 62, 0.08);
+      --claro-yellow: #F4B93E;           /* mesmo âmbar */
+      --claro-yellow-soft: #FFC856;
+      --claro-yellow-pale: rgba(244, 185, 62, 0.12);
 
-      /* Dark (apenas sidebar e footer) */
-      --ink: #1A1A1A;
-      --charcoal: #262626;
-      --surface: #2D2D2D;
-      --surface-raised: #363636;
+      /* Dark — agora noite profunda Rentabiliza */
+      --ink: #0D1117;                    /* noite profunda */
+      --charcoal: #1A2430;               /* grafite superfície */
+      --surface: #242F3E;
+      --surface-raised: #2D3B4F;
 
-      /* Light (dominante no doc) */
-      --cream: #FAFAF7;
-      --paper: #FFFFFF;
-      --stone: #F2F0EB;
-      --stone-2: #EAE8E2;
+      /* Light — papel Rentabiliza */
+      --cream: #F4F1E8;                  /* papel */
+      --paper: #FAFAF7;                  /* branco-off */
+      --stone: #EAE6D6;
+      --stone-2: #E0DCCA;
 
-      /* Aliases de compatibilidade — mapeiam dourado → amarelo/vermelho */
-      --gold: var(--claro-red);
-      --gold-soft: var(--claro-red);
-      --gold-deep: var(--claro-red-deep);
+      /* Aliases gold */
+      --gold: #F4B93E;
+      --gold-soft: #F4B93E;
+      --gold-deep: #B8881D;
 
-      /* Text */
-      --text-dark: #1A1A1A;
-      --text-mid: #4A4A4A;
-      --text-light: #FAFAF7;
-      --muted: #6B6B6B;
-      --muted-2: #4A4A4A;
-      --muted-dark: #8B8B8B;
+      /* Text — Rentabiliza */
+      --text-dark: #0D1117;
+      --text-mid: #5F5E5A;
+      --text-light: #F4F1E8;
+      --muted: #5F5E5A;
+      --muted-2: #5F5E5A;
+      --muted-dark: #8B8B93;
 
       /* Borders */
       --border-dark: rgba(255, 255, 255, 0.08);
-      --border-light: rgba(10, 10, 10, 0.08);
-      --border-warm: rgba(236, 28, 36, 0.18);
+      --border-light: rgba(13, 17, 23, 0.08);
+      --border-warm: rgba(244, 185, 62, 0.4);
+    }
+
+    /* Typography overrides — todas fontes agora são Rentabiliza (Fraunces + Inter + JetBrains Mono).
+       Aliases mantidos: headings = Fraunces, body = Inter, mono = JetBrains Mono. */
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    h1, h2, h3, h4, h5, h6,
+    .t-hero, .t-section, .t-sub,
+    .sig-name, .card-title, .dim-title, .method-title, .layer-title, .tl-title, .metric-who {
+      font-family: 'Fraunces', 'Times New Roman', serif !important;
+      font-variation-settings: "SOFT" 50, "WONK" 0;
+      font-weight: 500 !important;
+      letter-spacing: -0.02em;
+    }
+    /* Italic emphasis brand signature — Fraunces italic 600 */
+    .t-hero em, .t-section em, .t-sub em, h1 em, h2 em, h3 em, .card-title em, .method-title span, .variant-text em {
+      font-family: 'Fraunces', 'Times New Roman', serif !important;
+      font-style: italic !important;
+      font-weight: 600 !important;
+      color: var(--claro-red) !important;
+      letter-spacing: -0.01em !important;
+    }
+    /* Mono para labels, eyebrows, números, tags */
+    .eyebrow, .sb-version, .sb-num, .hero-meta, .sig-meta, .footer-meta-label,
+    .card-spec-label, .card-spec-value, .metric-label, .dim-num, .layer-num, .tl-duration,
+    .pack-overview-num, .pack-overview-duration, .pack-overview-price,
+    .nav-meta, .nav-meta-right, .meta-item-label, .meta-item-value,
+    .cards-label-small, .section-num {
+      font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+      letter-spacing: 0.08em;
+    }
+    .eyebrow, .cards-label-small, .sb-version {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 600;
     }
 
     /* ═══════════════════════════════ RESET ═══════════════════════════════ */
@@ -146,19 +182,25 @@
       padding: 2rem 1.75rem 1.5rem;
       border-bottom: 1px solid var(--border-dark);
     }
-    .sb-brand { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 1rem; }
-    .sb-brand-logo {
-      height: 30px; width: auto;
-      display: block;
+    .sb-brand { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .sb-wordmark {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "SOFT" 50, "WONK" 0;
+      font-size: 22px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: baseline;
+      letter-spacing: -0.02em;
     }
-    .sb-brand-divider {
-      width: 1px; height: 22px;
-      background: rgba(255,255,255,0.18);
-    }
+    .sb-wordmark .r-name { font-style: italic; font-weight: 600; color: var(--text-light); }
+    .sb-wordmark .r-dot { color: var(--claro-red); font-weight: 600; }
+    .sb-wordmark .r-ai { color: var(--claro-red); font-weight: 300; font-size: 0.65em; margin-left: 0.02em; }
     .sb-brand-text {
-      font-family: 'Outfit', sans-serif; font-weight: 800;
-      font-size: 0.95rem; letter-spacing: -0.01em;
-      color: var(--text-light);
+      font-family: 'JetBrains Mono', monospace; font-weight: 600;
+      font-size: 10px; letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-dark);
+      margin-top: 0.25rem;
     }
     .sb-brand-text span { color: var(--claro-yellow); font-family: 'Outfit', sans-serif; font-weight: 900; }
     .sb-version {
@@ -191,7 +233,7 @@
     .sb-link.active {
       color: #fff;
       border-left-color: var(--claro-yellow);
-      background: rgba(236,28,36,0.15);
+      background: rgba(244,185,62,0.15);
       font-weight: 600;
     }
     .sb-link .sb-num {
@@ -225,62 +267,65 @@
       min-height: 100vh;
     }
 
-    /* DOC HERO — banner vermelho Claro */
+    /* DOC HERO — Rentabiliza (dark ink + âmbar) */
     .doc-hero {
       position: relative;
       padding: 7rem 5rem 6rem;
-      background: linear-gradient(135deg, var(--claro-red) 0%, var(--claro-red-deep) 100%);
-      color: #fff;
+      background: var(--ink);
+      color: var(--text-light);
       overflow: hidden;
+      border-bottom: 1px solid var(--border-dark);
     }
     .doc-hero::before {
       content: ''; position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse 70% 50% at 85% 20%, rgba(255,205,0,0.18), transparent 60%),
-        radial-gradient(ellipse 80% 60% at 10% 100%, rgba(255,255,255,0.1), transparent 60%);
-    }
-    .doc-hero::after {
-      content: ''; position: absolute; inset: 0; pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-      background-size: 56px 56px;
-      -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
-              mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+        radial-gradient(ellipse 60% 40% at 85% 10%, rgba(244,185,62,0.1), transparent 60%),
+        radial-gradient(ellipse 40% 40% at 10% 100%, rgba(244,185,62,0.04), transparent 60%);
+      pointer-events: none;
     }
     .doc-hero-logo {
-      position: absolute; top: 3.5rem; left: 5rem;
-      height: 40px; width: auto;
+      position: absolute; top: 3rem; left: 5rem;
       z-index: 3;
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "SOFT" 50, "WONK" 0;
+      font-size: 28px; line-height: 1;
+      display: inline-flex; align-items: baseline;
+      letter-spacing: -0.02em;
     }
+    .doc-hero-logo .r-name { font-style: italic; font-weight: 600; color: var(--text-light); }
+    .doc-hero-logo .r-dot { color: var(--claro-red); font-weight: 600; }
+    .doc-hero-logo .r-ai { color: var(--claro-red); font-weight: 300; font-size: 0.65em; margin-left: 0.02em; }
+
     .doc-hero-inner { position: relative; z-index: 2; max-width: 900px; padding-top: 2rem; }
     .doc-hero .eyebrow {
       margin-bottom: 2rem;
-      background: rgba(255,255,255,0.15);
-      border-color: rgba(255,255,255,0.3);
-      color: #fff;
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: var(--text-light);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
     }
     .doc-hero .eyebrow-dot {
-      background: var(--claro-yellow);
-      box-shadow: 0 0 12px rgba(255,205,0,0.6);
+      background: var(--claro-red);
+      box-shadow: none;
+      animation: none;
     }
-    .doc-hero .t-hero { color: #fff; margin-bottom: 1.5rem; }
-    .doc-hero .t-hero em {
-      font-family: 'Outfit', sans-serif;
-      font-style: normal;
-      font-weight: 900;
-      color: var(--claro-yellow);
-    }
-    .doc-hero .t-lead { color: rgba(255,255,255,0.9); margin-bottom: 3rem; max-width: 700px; font-weight: 400; }
+    .doc-hero .t-hero { color: var(--text-light); margin-bottom: 1.5rem; }
+    .doc-hero .t-lead { color: var(--muted-dark); margin-bottom: 3rem; max-width: 700px; font-weight: 400; }
     .hero-meta {
       display: flex; flex-wrap: wrap; gap: 2rem;
       padding-top: 2rem;
-      border-top: 1px solid rgba(255,255,255,0.2);
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em;
-      color: #fff;
+      border-top: 1px solid var(--border-dark);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+      color: var(--text-light);
+      text-transform: uppercase;
     }
-    .hero-meta span { color: rgba(255,255,255,0.5); margin: 0 1rem; }
+    .hero-meta span { color: var(--muted-dark); margin: 0 1rem; }
 
     /* ═══════════════════════════════ DOC SECTION ═══════════════════════════════ */
     .doc-section {
@@ -295,7 +340,7 @@
       font-family: 'Outfit', sans-serif;
       font-weight: 900;
       font-size: clamp(3.5rem, 7vw, 7rem); line-height: 1;
-      color: rgba(236,28,36,0.08);
+      color: rgba(244,185,62,0.08);
       pointer-events: none; user-select: none;
       letter-spacing: -0.05em;
     }
@@ -316,12 +361,12 @@
     .sec-light { background: var(--cream); }       /* cream off-white */
 
     /* Seção num decorativo (número grande ao lado do título) — vermelho suave */
-    .section-num { color: rgba(236,28,36,0.08); }
+    .section-num { color: rgba(244,185,62,0.08); }
 
     /* Eyebrow padrão em light */
     .sec-dark .eyebrow, .sec-charcoal .eyebrow, .sec-light .eyebrow {
-      background: rgba(236,28,36,0.06);
-      border-color: rgba(236,28,36,0.2);
+      background: rgba(244,185,62,0.06);
+      border-color: rgba(244,185,62,0.2);
       color: var(--claro-red-deep);
     }
 
@@ -351,7 +396,7 @@
       font-family: 'Outfit', sans-serif;
     }
     .sec-dark .divider-gold, .sec-charcoal .divider-gold, .sec-light .divider-gold {
-      background: linear-gradient(90deg, transparent 0%, rgba(236,28,36,0.25) 50%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(244,185,62,0.25) 50%, transparent 100%);
     }
     .serif-italic { color: var(--claro-red); }
 
@@ -482,7 +527,7 @@
       transform: scaleX(0.35); transform-origin: left;
       transition: transform 0.5s ease;
     }
-    .dim-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(236,28,36,0.1); }
+    .dim-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(244,185,62,0.1); }
     .dim-card:hover::before { transform: scaleX(1); }
     .dim-num {
       font-family: 'Outfit', sans-serif;
@@ -649,7 +694,7 @@
     .pack-overview-row:hover {
       transform: translateX(4px);
       border-left-color: var(--claro-yellow);
-      box-shadow: 0 8px 20px rgba(236,28,36,0.08);
+      box-shadow: 0 8px 20px rgba(244,185,62,0.08);
     }
     .pack-overview-num {
       font-family: 'Outfit', sans-serif;
@@ -795,7 +840,7 @@
       width: 12%;
     }
     .waves-table td:nth-child(2) { color: var(--text-dark); font-weight: 600; width: 20%; }
-    .waves-table tbody tr:hover td { background: rgba(236,28,36,0.03); }
+    .waves-table tbody tr:hover td { background: rgba(244,185,62,0.03); }
 
     /* ═══════════════════════════════ MÉTRICAS 3 COLUNAS ═══════════════════════════════ */
     .metrics-grid {
@@ -883,8 +928,8 @@
       font-weight: 600;
       background: var(--claro-red-pale);
     }
-    .diff-table tr:hover td { background: rgba(236,28,36,0.05); }
-    .diff-table tr:hover td:nth-child(3) { background: rgba(236,28,36,0.1); }
+    .diff-table tr:hover td { background: rgba(244,185,62,0.05); }
+    .diff-table tr:hover td:nth-child(3) { background: rgba(244,185,62,0.1); }
 
     /* ═══════════════════════════════ SELOS ═══════════════════════════════ */
     .selos-row {
@@ -905,8 +950,8 @@
     }
     .selo-badge.top {
       background: linear-gradient(165deg, #FFFBF1 0%, #FFFFFF 100%);
-      border: 1px solid rgba(255,205,0,0.5);
-      box-shadow: 0 12px 36px rgba(255,205,0,0.18);
+      border: 1px solid rgba(244,185,62,0.5);
+      box-shadow: 0 12px 36px rgba(244,185,62,0.18);
     }
     .selo-badge:hover { transform: translateY(-4px); }
     .selo-ring {
@@ -922,7 +967,7 @@
     .selo-badge.top .selo-ring {
       background: linear-gradient(145deg, var(--claro-yellow), #E5B800);
       color: var(--text-dark);
-      box-shadow: 0 8px 24px rgba(255,205,0,0.4);
+      box-shadow: 0 8px 24px rgba(244,185,62,0.4);
     }
     .selo-name {
       font-family: 'Outfit', sans-serif;
@@ -948,7 +993,7 @@
       content: ''; position: absolute;
       left: 23px; top: 0; bottom: 0;
       width: 2px;
-      background: linear-gradient(180deg, var(--claro-red), rgba(236,28,36,0.15));
+      background: linear-gradient(180deg, var(--claro-red), rgba(244,185,62,0.15));
     }
     .tl-item {
       position: relative;
@@ -993,33 +1038,21 @@
     .tl-final {
       margin-top: 2rem;
       padding: 1.75rem 2rem;
-      background: linear-gradient(135deg, var(--claro-red) 0%, var(--claro-red-deep) 100%);
-      border-radius: 14px;
-      font-family: 'Outfit', sans-serif;
-      font-weight: 700;
+      background: var(--claro-red);
+      border-radius: 12px;
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "SOFT" 50, "WONK" 0;
+      font-weight: 500;
       font-size: 1.15rem;
-      color: #fff;
-      box-shadow: 0 8px 24px rgba(236,28,36,0.2);
-      animation: tlFinalPulse 4s ease-in-out infinite;
+      color: var(--text-dark);
+      transition: transform 200ms ease-out;
     }
-    @keyframes tlFinalPulse {
-      0%, 100% {
-        box-shadow: 0 8px 24px rgba(236,28,36,0.2), 0 0 0 rgba(236,28,36,0);
-        transform: translateY(0);
-      }
-      50% {
-        box-shadow: 0 14px 36px rgba(236,28,36,0.35), 0 0 60px rgba(255,205,0,0.2);
-        transform: translateY(-3px);
-      }
-    }
-    /* Big idea pull com gradient shimmer no topo */
-    .big-idea-pull::before {
-      animation: docShimmer 3s linear infinite;
-      background-size: 200% 100%;
-    }
-    @keyframes docShimmer {
-      0% { background-position: 0% 0; }
-      100% { background-position: 200% 0; }
+    .tl-final:hover { transform: translateY(-2px); }
+    .tl-final em {
+      font-family: 'Fraunces', serif !important;
+      font-style: italic !important;
+      font-weight: 600 !important;
+      color: var(--text-dark) !important;
     }
     .tl-final em {
       color: var(--claro-yellow);
@@ -1059,7 +1092,7 @@
       color: var(--claro-red);
       font-weight: 800;
     }
-    .posit-table tbody tr:hover td { background: rgba(236,28,36,0.03); }
+    .posit-table tbody tr:hover td { background: rgba(244,185,62,0.03); }
 
     /* PLACEHOLDER IMG — wrapper para imagens reais (todas jpg) */
     .img-placeholder {
@@ -1083,44 +1116,15 @@
       position: relative;
       overflow: hidden;
     }
-    .footer-logo-wrap {
-      flex-shrink: 0;
-      width: 96px; height: 96px;
-      display: grid; place-items: center;
-      background: #FFFFFF;
-      border-radius: 50%;
-      padding: 1rem;
-      box-shadow:
-        0 0 0 1px rgba(255,205,0,0.2),
-        0 8px 28px rgba(255,205,0,0.22),
-        0 0 60px rgba(236,28,36,0.12);
-      animation: footerLogoBreathe 4.5s ease-in-out infinite;
-    }
-    .footer-logo {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      display: block;
-    }
-    @keyframes footerLogoBreathe {
-      0%, 100% {
-        box-shadow: 0 0 0 1px rgba(255,205,0,0.2), 0 8px 28px rgba(255,205,0,0.22), 0 0 60px rgba(236,28,36,0.12);
-        transform: translateY(0);
-      }
-      50% {
-        box-shadow: 0 0 0 2px rgba(255,205,0,0.35), 0 14px 40px rgba(255,205,0,0.38), 0 0 80px rgba(236,28,36,0.22);
-        transform: translateY(-3px);
-      }
-    }
     .footer-meta-label {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--claro-yellow);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--claro-red);
       margin-bottom: 0.35rem;
     }
     .doc-footer::before {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(236,28,36,0.18), transparent 60%);
+      background: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(244,185,62,0.18), transparent 60%);
     }
     .doc-footer-inner {
       position: relative;
@@ -1173,7 +1177,7 @@
       font-family: 'Outfit', sans-serif;
       font-weight: 700; font-size: 1.1rem;
       border: none;
-      box-shadow: 0 6px 18px rgba(236,28,36,0.4);
+      box-shadow: 0 6px 18px rgba(244,185,62,0.4);
       cursor: pointer;
       align-items: center; justify-content: center;
     }
@@ -1299,13 +1303,10 @@
   <!-- ══════════════════════════════════════════════════════════════════════ -->
   <aside class="doc-sidebar" id="docSidebar">
     <div class="sb-logo">
-      <div class="sb-brand">
-        <img src="assets/images/claro-logo-white.svg" alt="Claro" class="sb-brand-logo">
-        <div class="sb-brand-divider"></div>
-        <div>
-          <div class="sb-brand-text"><span>Acelera</span></div>
-        </div>
-      </div>
+      <a href="index.html" class="sb-brand" aria-label="Rentabiliza.ai — home">
+        <span class="sb-wordmark"><span class="r-name">Rentabiliza</span><span class="r-dot">.</span><span class="r-ai">ai</span></span>
+      </a>
+      <div class="sb-brand-text">para a Claro</div>
       <div class="sb-version">V2.0 · Abril 2026</div>
     </div>
     <nav class="sb-nav">
@@ -1337,7 +1338,7 @@
 
     <!-- HERO -->
     <header class="doc-hero" id="hero">
-      <img src="assets/images/claro-logo-white.svg" alt="Claro" class="doc-hero-logo">
+      <a href="index.html" class="doc-hero-logo" aria-label="Rentabiliza.ai — home"><span class="r-name">Rentabiliza</span><span class="r-dot">.</span><span class="r-ai">ai</span></a>
       <div class="doc-hero-inner">
         <div class="eyebrow">
           <span class="eyebrow-dot"></span>
@@ -1875,7 +1876,7 @@
         <div class="img-placeholder" style="margin: 2rem 0 2.5rem; aspect-ratio: 21/9;"><img src="assets/images/dashboard-celular.jpg" alt="Dashboard operacional no celular" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"></div>
 
         <div class="metrics-grid">
-          <div class="metric-card" style="border: 1px solid rgba(236,28,36,0.3); box-shadow: 0 8px 24px rgba(236,28,36,0.08);">
+          <div class="metric-card" style="border: 1px solid rgba(244,185,62,0.3); box-shadow: 0 8px 24px rgba(244,185,62,0.08);">
             <div class="metric-label">📊 Para a Claro</div>
             <div class="metric-who">Retorno mensurável do contrato</div>
             <ul>
@@ -1967,9 +1968,9 @@
         <div class="eyebrow"><span class="eyebrow-dot"></span><span>Credencial</span></div>
         <h2 class="t-section">Credencial do executor — por que o <em>Rodrigo</em>.</h2>
 
-        <div style="display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: flex-start; margin: 2rem 0 2.5rem;">
-          <div class="img-placeholder" style="width: 180px; aspect-ratio: 4/5; margin: 0; border-radius: 14px;">
-            <img src="assets/images/rodrigo-braga.png" alt="Rodrigo Braga" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+        <div style="display: grid; grid-template-columns: auto 1fr; gap: 2.5rem; align-items: flex-start; margin: 2rem 0 2.5rem;">
+          <div style="width: 180px; aspect-ratio: 1/1; margin: 0; border-radius: 16px; background: var(--ink); border: 1px solid var(--border-warm); display: grid; place-items: center; padding: 1.5rem;">
+            <img src="assets/brand/symbol-3d.png" alt="Rentabiliza.ai" style="max-width:100%;max-height:100%;object-fit:contain;">
           </div>
           <div>
             <h3 class="t-sub" style="margin-top: 0;">Rodrigo Braga</h3>
@@ -2047,14 +2048,16 @@
     <footer class="doc-footer">
       <div class="doc-footer-inner">
         <div class="footer-signature" style="display: flex; gap: 1.5rem; align-items: center;">
-          <div class="footer-logo-wrap">
-            <img src="assets/images/rodrigo-braga.png" alt="PulsarH.ai" class="footer-logo">
+          <div style="flex-shrink: 0;">
+            <span style="font-family: 'Fraunces', serif; font-variation-settings: 'SOFT' 50, 'WONK' 0; font-size: 42px; line-height: 1; display: inline-flex; align-items: baseline; letter-spacing: -0.02em;">
+              <span style="font-style: italic; font-weight: 600; color: var(--text-light);">Rentabiliza</span><span style="color: var(--claro-red); font-weight: 600;">.</span><span style="color: var(--claro-red); font-weight: 300; font-size: 0.65em; margin-left: 0.02em;">ai</span>
+            </span>
           </div>
           <div>
-            <div class="footer-meta-label">Metodologia</div>
-            <div class="sig-name">Rodrigo Braga</div>
-            <div class="sig-role">Especialista em varejo · 21 anos de chão de loja · 7 como Gerente Nacional</div>
-            <div class="sig-meta">R$1 bilhão em operação · 4.500 vendedores liderados · Canal telecom</div>
+            <div class="footer-meta-label">Plataforma</div>
+            <div class="sig-name">Gestão · Humanização · IA no PDV</div>
+            <div class="sig-role">Uma intervenção comercial para parceiros Claro classes C, D, E. Validada em operação real — 21 anos de varejo, R$ 1 bilhão/ano, 4.500 vendedores liderados.</div>
+            <div class="sig-meta">PulsarH.ai × TradeUp</div>
           </div>
         </div>
         <div class="footer-nav-links">
