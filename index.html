@@ -114,17 +114,17 @@
       background-image: url('assets/images/hero-pdv.jpg');
       background-size: cover;
       background-position: center right;
-      opacity: 0.32;
-      filter: saturate(0.8) contrast(1.05);
+      opacity: 0.5;
+      filter: saturate(0.85) contrast(1.04) brightness(1.08);
       pointer-events: none;
     }
     /* Overlay gradient pra garantir leitura — dark à esquerda, esvaziando à direita */
     .hero::after {
       content: ''; position: absolute; inset: 0;
       background:
-        linear-gradient(95deg, rgba(13,17,23,0.96) 0%, rgba(13,17,23,0.85) 40%, rgba(13,17,23,0.55) 75%, rgba(13,17,23,0.35) 100%),
-        radial-gradient(ellipse 70% 50% at 85% 0%, rgba(244,185,62,0.1), transparent 60%),
-        radial-gradient(ellipse 50% 40% at 0% 100%, rgba(244,185,62,0.04), transparent 50%);
+        linear-gradient(95deg, rgba(13,17,23,0.92) 0%, rgba(13,17,23,0.74) 40%, rgba(13,17,23,0.4) 75%, rgba(13,17,23,0.18) 100%),
+        radial-gradient(ellipse 70% 50% at 85% 0%, rgba(244,185,62,0.12), transparent 60%),
+        radial-gradient(ellipse 50% 40% at 0% 100%, rgba(244,185,62,0.05), transparent 50%);
       pointer-events: none;
     }
     .hero-inner {
@@ -768,8 +768,8 @@
       .nav-inner { padding: 14px 20px; }
       .nav-meta-right { display: none; }
       .hero { padding: 88px 20px 64px; min-height: auto; }
-      .hero::before { background-position: 70% center; opacity: 0.18; }
-      .hero::after { background: linear-gradient(180deg, rgba(13,17,23,0.95) 0%, rgba(13,17,23,0.88) 100%); }
+      .hero::before { background-position: 70% center; opacity: 0.32; }
+      .hero::after { background: linear-gradient(180deg, rgba(13,17,23,0.88) 0%, rgba(13,17,23,0.78) 100%); }
       .hero-brand-stack { gap: 20px; margin-bottom: 56px; }
       .hero-brand-stack .hero-symbol { width: clamp(68px, 16vw, 86px); }
       .hero-brand-wordmark { font-size: 24px; }
