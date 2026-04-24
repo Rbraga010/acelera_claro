@@ -71,6 +71,10 @@
       --border-dark: rgba(255, 255, 255, 0.08);
       --border-light: rgba(13, 17, 23, 0.08);
       --border-warm: rgba(244, 185, 62, 0.4);
+
+      /* Acentos funcionais Rentabiliza */
+      --r-mint: #3DDC97;          /* só KPI positivo / dado vivo */
+      --r-coral: #FF6B47;         /* só humanização / gente */
     }
 
     /* Typography overrides — todas fontes agora são Rentabiliza (Fraunces + Inter + JetBrains Mono).
@@ -1578,8 +1582,8 @@
             <div class="dim-title">Sistêmica</div>
             <div class="dim-desc">Decidir por dado, não por feeling. Ler indicador do PDV e agir sobre ele.</div>
           </div>
-          <div class="dim-card">
-            <div class="dim-num">05</div>
+          <div class="dim-card" style="border-color: rgba(255,107,71,0.25);">
+            <div class="dim-num" style="color: var(--r-coral);">05</div>
             <div class="dim-title">Humana</div>
             <div class="dim-desc">Cuidar de gente (cliente e time) enquanto entrega resultado. Sem isso, retenção cai e o time que dá lucro vai embora.</div>
           </div>
@@ -1601,8 +1605,8 @@
           <li><strong>R — Replicar</strong> · formar o time para executar sem depender do dono</li>
         </ul>
 
-        <p class="t-body" style="margin-top: 1.25rem;">
-          <strong>H — Humanização (filtro permanente):</strong> cada decisão do PULSAR passa pelo filtro "estou tratando essa pessoa — cliente ou vendedor — como ser humano?". Sem H, produtividade vira burnout e churn de time. H é o que faz o método sustentável em loja pequena onde relacionamento é ativo.
+        <p class="t-body" style="margin-top: 1.25rem; padding: 1.25rem 1.5rem; background: rgba(255,107,71,0.05); border-left: 3px solid var(--r-coral); border-radius: 0 8px 8px 0;">
+          <strong style="color: var(--r-coral);">H — Humanização (filtro permanente):</strong> cada decisão do PULSAR passa pelo filtro "estou tratando essa pessoa — cliente ou vendedor — como ser humano?". Sem H, produtividade vira burnout e churn de time. H é o que faz o método sustentável em loja pequena onde relacionamento é ativo.
         </p>
 
         <!-- CAMADA 3 — TECNOLOGIA IA -->
@@ -1743,11 +1747,11 @@
               <tr><th>Pacote</th><th>Meta comercial mensurável</th></tr>
             </thead>
             <tbody>
-              <tr><td>Start</td><td>Baseline diagnosticada · 3 oportunidades de serviço mapeadas por PDV</td></tr>
-              <tr><td>Ativador</td><td>+15% penetração de serviço · +1 serviço por venda (30 dias)</td></tr>
-              <tr><td>Operador</td><td>+25% ticket médio · cadência operacional PULSAR instalada (90 dias)</td></tr>
-              <tr><td>Master</td><td>+40% faturamento · dashboard de indicadores ativo · time treinado em ciclo contínuo (120 dias)</td></tr>
-              <tr><td>Embaixador</td><td>Top 10% de penetração regional · NPS final ≥ 70 · indicação orgânica de novos parceiros ao programa (180 dias)</td></tr>
+              <tr><td>Start</td><td>Baseline diagnosticada · <span style="color: var(--r-mint); font-family: 'JetBrains Mono', monospace; font-weight: 600;">3 oportunidades</span> de serviço mapeadas por PDV</td></tr>
+              <tr><td>Ativador</td><td><span style="color: var(--r-mint); font-family: 'JetBrains Mono', monospace; font-weight: 600;">+15% ↗</span> penetração de serviço · <span style="color: var(--r-mint); font-family: 'JetBrains Mono', monospace; font-weight: 600;">+1</span> serviço por venda <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.85em; color: var(--muted);">(30 dias)</span></td></tr>
+              <tr><td>Operador</td><td><span style="color: var(--r-mint); font-family: 'JetBrains Mono', monospace; font-weight: 600;">+25% ↗</span> ticket médio · cadência PULSAR instalada <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.85em; color: var(--muted);">(90 dias)</span></td></tr>
+              <tr><td>Master</td><td><span style="color: var(--r-mint); font-family: 'JetBrains Mono', monospace; font-weight: 600;">+40% ↗</span> faturamento · dashboard ativo · time treinado em ciclo contínuo <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.85em; color: var(--muted);">(120 dias)</span></td></tr>
+              <tr><td>Embaixador</td><td><span style="color: var(--r-mint); font-family: 'JetBrains Mono', monospace; font-weight: 600;">Top 10% ↗</span> penetração regional · <span style="color: var(--r-mint); font-family: 'JetBrains Mono', monospace; font-weight: 600;">NPS ≥ 70</span> · indicação orgânica <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.85em; color: var(--muted);">(180 dias)</span></td></tr>
             </tbody>
           </table>
         </div>
@@ -1970,7 +1974,7 @@
 
         <div style="display: grid; grid-template-columns: auto 1fr; gap: 2.5rem; align-items: flex-start; margin: 2rem 0 2.5rem;">
           <div style="width: 180px; aspect-ratio: 1/1; margin: 0; border-radius: 16px; background: var(--ink); border: 1px solid var(--border-warm); display: grid; place-items: center; padding: 1.5rem;">
-            <img src="assets/brand/symbol-3d.png" alt="Rentabiliza.ai" style="max-width:100%;max-height:100%;object-fit:contain;">
+            <img src="assets/brand/chevron-primary.png" alt="Rentabiliza.ai" style="max-width:100%;max-height:100%;object-fit:contain;">
           </div>
           <div>
             <h3 class="t-sub" style="margin-top: 0;">Rodrigo Braga</h3>

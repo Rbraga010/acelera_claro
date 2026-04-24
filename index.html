@@ -49,51 +49,51 @@
     button { border: none; background: none; cursor: pointer; font: inherit; color: inherit; }
     img { max-width: 100%; display: block; }
 
-    /* ═══════════════════════════════ NAV ═══════════════════════════════ */
-    .nav {
-      position: sticky; top: 0; z-index: 50;
-      background: rgba(13, 17, 23, 0.72);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--r-border);
+    /* ═══════════════════════════════ HERO BRAND BLOCK ═══════════════════════════════ */
+    /* Chevron à esquerda + wordmark/versão à direita — mesma linha */
+    .hero-brand-stack {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 32px;
+      margin-bottom: 88px;
     }
-    .nav-inner {
-      max-width: var(--r-container-max);
-      margin: 0 auto;
-      padding: 16px 32px;
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 24px;
+    .hero-brand-stack .hero-symbol {
+      display: block;
+      width: clamp(92px, 10.5vw, 120px);
+      height: auto;
+      margin: 0;
+      filter: drop-shadow(0 8px 32px rgba(244, 185, 62, 0.18));
+      transition: transform var(--r-transition-slow);
     }
-    .nav-left {
-      display: flex; align-items: center; gap: 16px;
+    .hero-brand-stack .hero-symbol:hover {
+      transform: translateY(-3px);
     }
-    .nav-wordmark {
+    .hero-brand-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: right;
+      gap: 8px;
+    }
+    .hero-brand-wordmark {
       font-family: var(--r-font-display);
-      font-size: 22px;
+      font-variation-settings: var(--r-fraunces-axes);
+      font-size: 36px;
       line-height: 1;
       display: inline-flex;
       align-items: baseline;
       letter-spacing: -0.02em;
-      font-variation-settings: var(--r-fraunces-axes);
     }
-    .nav-wordmark .r-name { font-style: italic; font-weight: 600; color: var(--r-fg); }
-    .nav-wordmark .r-dot { color: var(--r-amber); font-weight: 600; }
-    .nav-wordmark .r-ai { color: var(--r-amber); font-weight: 300; font-size: 0.65em; margin-left: 0.02em; }
-
-    .nav-pipe {
-      width: 1px; height: 18px;
-      background: var(--r-border-dark-hover);
-    }
-    .nav-for {
-      font-family: var(--r-font-mono);
-      font-size: 12px;
-      letter-spacing: var(--r-tr-eyebrow);
-      text-transform: uppercase;
-      color: var(--r-fg-muted);
-    }
-    .nav-meta-right {
+    .hero-brand-wordmark .r-name { font-style: italic; font-weight: 600; color: var(--r-fg); }
+    .hero-brand-wordmark .r-dot { color: var(--r-amber); font-weight: 600; }
+    .hero-brand-wordmark .r-ai { color: var(--r-amber); font-weight: 300; font-size: 0.65em; margin-left: 0.02em; }
+    .hero-brand-version {
       font-family: var(--r-font-mono);
       font-size: 11px;
+      font-weight: 600;
       letter-spacing: var(--r-tr-eyebrow);
       text-transform: uppercase;
       color: var(--r-fg-muted);
@@ -102,35 +102,62 @@
     /* ═══════════════════════════════ HERO ═══════════════════════════════ */
     .hero {
       position: relative;
-      padding: 120px 32px 96px;
+      padding: 140px 32px 120px;
       background: var(--r-bg);
       overflow: hidden;
+      min-height: 92vh;
+      display: flex; align-items: center;
     }
+    /* Imagem de fundo — PDV brasileiro real */
     .hero::before {
       content: ''; position: absolute; inset: 0;
+      background-image: url('assets/images/hero-pdv.jpg');
+      background-size: cover;
+      background-position: center right;
+      opacity: 0.32;
+      filter: saturate(0.8) contrast(1.05);
+      pointer-events: none;
+    }
+    /* Overlay gradient pra garantir leitura — dark à esquerda, esvaziando à direita */
+    .hero::after {
+      content: ''; position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse 70% 50% at 85% 0%, rgba(244,185,62,0.08), transparent 60%),
+        linear-gradient(95deg, rgba(13,17,23,0.96) 0%, rgba(13,17,23,0.85) 40%, rgba(13,17,23,0.55) 75%, rgba(13,17,23,0.35) 100%),
+        radial-gradient(ellipse 70% 50% at 85% 0%, rgba(244,185,62,0.1), transparent 60%),
         radial-gradient(ellipse 50% 40% at 0% 100%, rgba(244,185,62,0.04), transparent 50%);
       pointer-events: none;
     }
     .hero-inner {
       max-width: var(--r-container-max);
       margin: 0 auto;
-      position: relative; z-index: 1;
+      position: relative; z-index: 2;
+      width: 100%;
+    }
+    .hero-symbol {
+      display: block;
+      width: clamp(140px, 18vw, 200px);
+      height: auto;
+      margin: 0 0 80px;
+      filter: drop-shadow(0 8px 32px rgba(244, 185, 62, 0.18));
+      transition: transform var(--r-transition-slow);
+    }
+    .hero-symbol:hover {
+      transform: translateY(-3px);
     }
     .hero .r-eyebrow {
-      margin-bottom: 32px;
+      margin-bottom: 36px;
     }
     .hero-title {
       font-family: var(--r-font-display);
       font-variation-settings: var(--r-fraunces-axes);
+      font-style: italic;
       font-size: var(--r-fs-display-xl);
-      font-weight: 500;
+      font-weight: 600;
       line-height: 1.02;
       letter-spacing: var(--r-tr-display);
       color: var(--r-fg);
-      max-width: 960px;
-      margin-bottom: 32px;
+      max-width: 1040px;
+      margin-bottom: 36px;
     }
     .hero-title em {
       font-style: italic;
@@ -138,43 +165,233 @@
       color: var(--r-amber);
     }
     .hero-sub {
-      font-size: var(--r-fs-body-lg);
-      color: var(--r-fg-muted);
-      max-width: 720px;
-      line-height: var(--r-lh-body);
-      margin-bottom: 64px;
+      font-family: var(--r-font-display);
+      font-variation-settings: var(--r-fraunces-axes);
+      font-style: normal;
+      font-weight: 400;
+      font-size: clamp(20px, 2vw, 26px);
+      line-height: 1.4;
+      color: var(--r-text-on-dark);
+      max-width: 820px;
+      margin-bottom: 56px;
+      opacity: 0.88;
     }
 
-    .meta-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      padding-top: 40px;
-      border-top: 1px solid var(--r-border);
+    /* Tríade de selos mono âmbar */
+    .hero-triad {
+      display: flex; flex-wrap: wrap;
+      align-items: center; gap: 28px;
+      padding-top: 36px;
+      border-top: 0.5px solid rgba(244,185,62,0.4);
+      max-width: 820px;
+      position: relative;
     }
-    .meta-item-label {
+    .hero-triad::before {
+      content: ''; position: absolute;
+      top: -3.5px; left: 50%;
+      width: 3px; height: 3px; border-radius: 50%;
+      background: var(--r-amber);
+      transform: translateX(-50%);
+    }
+    .hero-triad-item {
+      display: inline-flex; align-items: center; gap: 10px;
       font-family: var(--r-font-mono);
-      font-size: var(--r-fs-eyebrow);
+      font-size: 12px;
       font-weight: 600;
       letter-spacing: var(--r-tr-eyebrow);
       text-transform: uppercase;
       color: var(--r-amber);
-      margin-bottom: 10px;
     }
-    .meta-item-value {
-      font-family: var(--r-font-body);
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--r-fg);
-      line-height: 1.4;
+    .hero-triad-item::before {
+      content: "";
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--r-amber);
+    }
+    .hero-triad-sep {
+      width: 1px; height: 14px;
+      background: rgba(244,185,62,0.35);
     }
 
-    /* ═══════════════════════════════ CARDS SECTION ═══════════════════════════════ */
-    .cards-section {
-      padding: 96px 32px;
+    /* ═══════════════════════════════ CARROSSEL FLUTUANTE (O que é o Rentabiliza.ai) ═══════════════════════════════ */
+    .intro-section {
+      padding: 96px 0 80px;
       background: var(--r-bg);
+      position: relative;
       border-top: 1px solid var(--r-border);
     }
+    .intro-head {
+      max-width: var(--r-container-max);
+      margin: 0 auto 56px;
+      padding: 0 32px;
+      text-align: center;
+    }
+    .intro-head .r-eyebrow { margin-bottom: 0; }
+
+    .intro-scroller {
+      overflow: hidden;
+      padding: 8px 0 32px;
+      position: relative;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
+              mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
+    }
+    .intro-track {
+      display: flex;
+      gap: 20px;
+      width: max-content;
+      animation: intro-scroll 28s linear infinite;
+      will-change: transform;
+    }
+    .intro-track:hover {
+      animation-play-state: paused;
+    }
+    @keyframes intro-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(calc(-50% - 10px)); }
+    }
+    .intro-card {
+      flex: 0 0 300px;
+      max-width: 300px;
+      display: flex; flex-direction: column;
+      padding: 28px;
+      min-height: 240px;
+      position: relative;
+      overflow: hidden;
+      /* Liquid glass — translúcido com blur forte e saturação alta */
+      background: rgba(13, 17, 23, 0.32);
+      backdrop-filter: blur(28px) saturate(1.7);
+      -webkit-backdrop-filter: blur(28px) saturate(1.7);
+      /* Borda diferenciada por lado (simula peso do vidro sob luz) */
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-top-color: rgba(255, 255, 255, 0.22);
+      border-left-color: rgba(255, 255, 255, 0.14);
+      border-radius: var(--r-radius-lg);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.15),
+        0 24px 60px -20px rgba(0, 0, 0, 0.55),
+        0 2px 8px rgba(0, 0, 0, 0.25);
+      transition: border-color var(--r-transition-base), transform var(--r-transition-base), background var(--r-transition-base);
+    }
+    /* Sheen diagonal — luz passando pelo vidro */
+    .intro-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.09) 0%,
+        rgba(255, 255, 255, 0.02) 35%,
+        transparent 70%
+      );
+      pointer-events: none;
+      border-radius: inherit;
+    }
+    /* Linha fina de highlight no topo (reflexo especular) */
+    .intro-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 12%; right: 12%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+      pointer-events: none;
+    }
+    .intro-card > * { position: relative; z-index: 1; }
+    .intro-card:hover {
+      border-color: rgba(244, 185, 62, 0.4);
+      border-top-color: rgba(244, 185, 62, 0.45);
+      transform: translateY(-4px);
+      background: rgba(13, 17, 23, 0.42);
+    }
+    /* Glow saturado no fundo da seção pro blur do glass ter cor pra difratar */
+    .intro-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 45% 80% at 15% 50%, rgba(244,185,62,0.14), transparent 60%),
+        radial-gradient(ellipse 40% 70% at 85% 50%, rgba(61,220,151,0.1), transparent 60%),
+        radial-gradient(ellipse 30% 60% at 50% 50%, rgba(255,107,71,0.06), transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .intro-section > * { position: relative; z-index: 1; }
+    .intro-card-icon {
+      width: 32px; height: 32px;
+      color: var(--r-amber);
+      margin-bottom: 20px;
+      stroke-width: 1.5px;
+    }
+    .intro-card-num {
+      font-family: var(--r-font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: var(--r-tr-eyebrow);
+      color: var(--r-fg-muted);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .intro-card-title {
+      font-family: var(--r-font-display);
+      font-variation-settings: var(--r-fraunces-axes);
+      font-style: italic;
+      font-weight: 600;
+      font-size: 26px;
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+      color: var(--r-fg);
+      margin-bottom: 10px;
+    }
+    .intro-card-desc {
+      font-family: var(--r-font-body);
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--r-fg-muted);
+      margin-top: auto;
+    }
+
+    .intro-scroll-cue {
+      display: flex; align-items: center; gap: 16px;
+      max-width: var(--r-container-max);
+      margin: 0 auto;
+      padding: 0 32px;
+      font-family: var(--r-font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: var(--r-tr-eyebrow);
+      text-transform: uppercase;
+      color: var(--r-fg-muted);
+    }
+    .intro-scroll-cue .r-rule {
+      flex: 1; margin: 0;
+      background: var(--r-border);
+      opacity: 0.7;
+    }
+    .intro-scroll-cue .r-rule::after { display: none; }
+    .intro-scroll-cue span strong {
+      color: var(--r-amber);
+      font-weight: 600;
+    }
+
+    /* ═══════════════════════════════ CARDS SECTION (papel — surface-light) ═══════════════════════════════ */
+    .cards-section {
+      padding: 112px 32px;
+      background: var(--r-bg);
+      border-top: 1px solid var(--r-border);
+      border-bottom: 1px solid var(--r-border);
+      position: relative;
+    }
+    /* Divisória âmbar sutil nas extremidades pra marcar a transição dark→light→dark */
+    .cards-section::before,
+    .cards-section::after {
+      content: '';
+      position: absolute; left: 50%;
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: var(--r-amber);
+      transform: translateX(-50%);
+    }
+    .cards-section::before { top: -2px; }
+    .cards-section::after { bottom: -2px; }
     .cards-inner {
       max-width: var(--r-container-max);
       margin: 0 auto;
@@ -198,29 +415,133 @@
       font-weight: 600;
       color: var(--r-amber);
     }
+    .cards-sub {
+      max-width: 820px;
+      margin-top: 24px;
+      font-family: var(--r-font-body);
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--r-fg-muted);
+    }
+    /* 3 colunas: [big1] [big2] [stack small1 + small2] */
     .cards-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      grid-template-columns: 1fr 1fr 0.82fr;
+      grid-template-rows: 1fr 1fr;
+      grid-template-areas:
+        "big1 big2 small1"
+        "big1 big2 small2";
+      gap: 20px;
     }
+    .card-big-1 { grid-area: big1; }
+    .card-big-2 { grid-area: big2; }
+    .card-small-1 { grid-area: small1; }
+    .card-small-2 { grid-area: small2; }
 
     .card {
       position: relative;
       display: flex; flex-direction: column;
-      min-height: 440px;
-      padding: 32px;
+      padding: 28px;
       background: var(--r-bg-elev);
       border: 1px solid var(--r-border);
       border-radius: var(--r-radius-lg);
       transition:
         border-color var(--r-transition-base),
         transform var(--r-transition-base),
-        background var(--r-transition-base);
+        background var(--r-transition-base),
+        box-shadow var(--r-transition-base);
       overflow: hidden;
     }
     .card:hover {
       border-color: var(--r-amber-border);
       transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(13, 17, 23, 0.08);
+    }
+    .card-big {
+      min-height: 420px;
+    }
+    .card-big .card-title {
+      font-size: 34px;
+    }
+    .card-small {
+      padding: 24px 22px;
+      min-height: 200px;
+    }
+    .card-small .card-title {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    .card-small .card-desc {
+      font-size: 13.5px;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+    .card-small .card-specs {
+      padding-top: 16px;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .card-small .card-spec-value {
+      font-size: 11px;
+    }
+    .card-small .card-spec-label {
+      font-size: 9px;
+    }
+    .card-small .card-cta {
+      font-size: 13px;
+    }
+    /* Big cards — fundo branco com foto editorial translúcida + overlay paper-warm */
+    .card-big-1, .card-big-2 {
+      background: var(--r-bg-elev-2, #FFFFFF);
+    }
+    /* Imagem de fundo (camada profunda) */
+    .card-big-1::after, .card-big-2::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.28;
+      filter: saturate(0.85) contrast(1.02);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .card-big-1::after {
+      background-image: url('assets/images/card-doc-bg.jpg');
+    }
+    .card-big-2::after {
+      background-image: url('assets/images/card-pitch-bg.jpg');
+    }
+    /* Overlay cream gradient — garante legibilidade do texto à esquerda, imagem respira à direita */
+    .card-big-1::before, .card-big-2::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(95deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.9) 35%, rgba(255,255,255,0.55) 70%, rgba(255,255,255,0.35) 100%),
+        radial-gradient(ellipse 60% 40% at 85% 0%, rgba(244,185,62,0.12), transparent 60%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    /* Conteúdo textual acima de tudo */
+    .card-big-1 > *, .card-big-2 > * { position: relative; z-index: 2; }
+    /* No hover, imagem fica um pouco mais visível */
+    .card-big-1:hover::after, .card-big-2:hover::after { opacity: 0.38; }
+    .card-big-1:hover::before, .card-big-2:hover::before {
+      background:
+        linear-gradient(95deg, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.82) 35%, rgba(255,255,255,0.45) 70%, rgba(255,255,255,0.25) 100%),
+        radial-gradient(ellipse 60% 40% at 85% 0%, rgba(244,185,62,0.18), transparent 60%);
+    }
+    /* Card restrito (04 · em construção) */
+    .card-restricted {
+      opacity: 0.82;
+      cursor: default;
+    }
+    .card-restricted:hover {
+      transform: none;
+      border-color: var(--r-border);
+      box-shadow: none;
+    }
+    .card-restricted .card-cta {
+      color: var(--r-fg-muted);
     }
 
     .card-num {
@@ -431,17 +752,54 @@
     }
 
     /* ═══════════════════════════════ RESPONSIVE ═══════════════════════════════ */
+    @media (max-width: 1100px) {
+      .cards-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto;
+        grid-template-areas:
+          "big1 big2"
+          "small1 small2"
+          "small1 small2";
+      }
+      .card-big { min-height: 440px; }
+      .card-small { min-height: 200px; }
+    }
     @media (max-width: 900px) {
       .nav-inner { padding: 14px 20px; }
       .nav-meta-right { display: none; }
-      .hero { padding: 72px 20px 64px; }
-      .hero-title { font-size: clamp(40px, 9vw, 64px); }
-      .hero-sub { font-size: 16px; margin-bottom: 48px; }
-      .meta-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .hero { padding: 90px 20px 72px; min-height: auto; }
+      .hero::before { background-position: 75% center; opacity: 0.22; }
+      .hero::after { background: linear-gradient(180deg, rgba(13,17,23,0.92) 0%, rgba(13,17,23,0.88) 100%); }
+      .hero-brand-stack { gap: 20px; margin-bottom: 56px; }
+      .hero-brand-stack .hero-symbol { width: clamp(68px, 16vw, 86px); }
+      .hero-brand-wordmark { font-size: 24px; }
+      .hero-brand-version { font-size: 9px; }
+      .hero-title { font-size: clamp(36px, 10vw, 56px); margin-bottom: 28px; }
+      .hero-sub { font-size: 17px; margin-bottom: 40px; }
+      .hero-triad { flex-direction: column; align-items: flex-start; gap: 14px; padding-top: 28px; }
+      .hero-triad-sep { display: none; }
+      .hero-triad::before { display: none; }
+      .intro-section { padding: 72px 0 64px; }
+      .intro-head { margin-bottom: 32px; padding: 0 20px; }
+      .intro-scroller { padding: 8px 0 24px; }
+      .intro-track { gap: 14px; animation-duration: 24s; }
+      .intro-card { flex: 0 0 260px; max-width: 260px; padding: 24px; min-height: 220px; }
+      .intro-card-title { font-size: 22px; }
+      .intro-scroll-cue { padding: 0 20px; font-size: 10px; gap: 12px; }
       .cards-section, .context-section, .footer { padding-left: 20px; padding-right: 20px; }
       .cards-section { padding-top: 64px; padding-bottom: 64px; }
-      .cards-grid { grid-template-columns: 1fr; }
-      .card { min-height: auto; padding: 28px; }
+      .cards-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+          "big1"
+          "big2"
+          "small1"
+          "small2";
+      }
+      .card { grid-column: span 1; min-height: auto; padding: 28px; }
+      .card-big { min-height: auto; }
+      .card-big .card-title { font-size: 32px; }
       .card-title { font-size: 28px; }
       .context-section { padding-top: 80px; padding-bottom: 80px; }
       .context-body p { font-size: 17px; }
@@ -458,71 +816,206 @@
 </head>
 <body>
 
-  <!-- ══ NAV STICKY ══ -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <div class="nav-left">
-        <a href="/" class="nav-wordmark" aria-label="Rentabiliza.ai">
-          <span class="r-name">Rentabiliza</span><span class="r-dot">.</span><span class="r-ai">ai</span>
-        </a>
-        <div class="nav-pipe"></div>
-        <span class="nav-for">para a Claro</span>
-      </div>
-      <div class="nav-meta-right">V2.0 · Abril 2026</div>
-    </div>
-  </nav>
-
   <!-- ══ HERO ══ -->
   <section class="hero">
     <div class="hero-inner">
-      <div class="r-eyebrow">Proposta Comercial · Rentabilização de Canal · 2026</div>
+      <div class="hero-brand-stack">
+        <img src="assets/brand/chevron-primary.png" alt="Rentabiliza.ai — Impossible Chevron" class="hero-symbol">
+        <div class="hero-brand-text">
+          <div class="hero-brand-wordmark">
+            <span class="r-name">Rentabiliza</span><span class="r-dot">.</span><span class="r-ai">ai</span>
+          </div>
+          <div class="hero-brand-version">V3.0 · Abril 2026</div>
+        </div>
+      </div>
+      <div class="r-eyebrow">Rentabiliza.ai · Carta de Apresentação · Abril 2026</div>
       <h1 class="hero-title">
-        Rentabilizando o parceiro Claro — do balcão ao <em>serviço.</em>
+        Ajudamos pequenas empresas a operar como <em>gigantes.</em>
       </h1>
       <p class="hero-sub">
-        Uma plataforma de intervenção comercial que aumenta penetração de serviço, ticket médio e margem dos parceiros Claro classes C, D e E — com gestão, humanização e IA aplicadas no PDV.
+        Pessoas, processos e IA trabalhando juntos — instalados dentro do negócio para gerar mais venda, mais margem e crescimento que não para.
       </p>
-      <div class="meta-grid">
-        <div>
-          <div class="meta-item-label">Escala</div>
-          <div class="meta-item-value">3 cenários — 300 · 1.000 · 3.000 parceiros</div>
-        </div>
-        <div>
-          <div class="meta-item-label">Método</div>
-          <div class="meta-item-value">Pessoas · Processos · Tecnologia IA</div>
-        </div>
-        <div>
-          <div class="meta-item-label">Canal</div>
-          <div class="meta-item-value">Parceiros Claro classes C, D, E</div>
-        </div>
-        <div>
-          <div class="meta-item-label">Modelo</div>
-          <div class="meta-item-value">Ondas com KPI auditável por onda</div>
-        </div>
+      <div class="hero-triad">
+        <span class="hero-triad-item">Mais lucro</span>
+        <span class="hero-triad-sep"></span>
+        <span class="hero-triad-item">Menos caos</span>
+        <span class="hero-triad-sep"></span>
+        <span class="hero-triad-item">Crescimento que dura</span>
       </div>
     </div>
   </section>
 
-  <!-- ══ 2 CARDS ══ -->
-  <section class="cards-section">
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!-- ══ SEÇÃO 1 · CARROSSEL — O que é o Rentabiliza.ai                    ══ -->
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <section class="intro-section">
+    <div class="intro-head">
+      <div class="r-eyebrow">O que é o Rentabiliza.ai</div>
+    </div>
+
+    <div class="intro-scroller">
+      <div class="intro-track">
+        <!-- CARD 01 · sparkles -->
+        <article class="intro-card">
+          <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+            <path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>
+          </svg>
+          <div class="intro-card-num">01 · Acessível</div>
+          <h3 class="intro-card-title">Alto <em style="font-family:inherit;color:var(--r-mint);">valor</em> que cabe no caixa.</h3>
+          <p class="intro-card-desc">Planos de alto valor que cabem no caixa do parceiro.</p>
+        </article>
+
+        <!-- CARD 02 · layers -->
+        <article class="intro-card">
+          <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/>
+            <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/>
+            <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/>
+          </svg>
+          <div class="intro-card-num">02 · Simples</div>
+          <h3 class="intro-card-title">Instalado dentro do PDV.</h3>
+          <p class="intro-card-desc">Pessoas, processos e IA instalados dentro do PDV.</p>
+        </article>
+
+        <!-- CARD 03 · store -->
+        <article class="intro-card">
+          <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round" aria-hidden="true">
+            <path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/>
+            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+            <path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/>
+            <path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-2.741-2.913a.45.45 0 0 0-.9 0A2.7 2.7 0 0 1 13.62 12a2.7 2.7 0 0 1-2.742-2.913a.45.45 0 0 0-.9 0A2.7 2.7 0 0 1 7.24 12a2.7 2.7 0 0 1-2.79-2.913a.45.45 0 0 0-.9 0A2.7 2.7 0 0 1 2 10V7"/>
+          </svg>
+          <div class="intro-card-num">03 · Multi-canal</div>
+          <h3 class="intro-card-title">MPE, varejos e <em style="font-family:inherit;color:var(--r-coral);">revendedores</em>.</h3>
+          <p class="intro-card-desc">MPE, varejos, revendedores e PME.</p>
+        </article>
+
+        <!-- CARD 04 · trending-up -->
+        <article class="intro-card">
+          <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+            <polyline points="16 7 22 7 22 13"/>
+          </svg>
+          <div class="intro-card-num">04 · Escalável</div>
+          <h3 class="intro-card-title">Ondas <em style="font-family: inherit; color: var(--r-mint);">auditáveis</em>.</h3>
+          <p class="intro-card-desc">300, 1.000, 3.000 parceiros em ondas auditáveis.</p>
+        </article>
+
+        <!-- CARD 05 · target -->
+        <article class="intro-card">
+          <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="12" r="6"/>
+            <circle cx="12" cy="12" r="2"/>
+          </svg>
+          <div class="intro-card-num">05 · Direcionado</div>
+          <h3 class="intro-card-title">Mais venda, mais <em style="font-family:inherit;color:var(--r-mint);">margem</em>.</h3>
+          <p class="intro-card-desc">Mais venda, mais margem, crescimento que dura.</p>
+        </article>
+
+        <!-- CARD 06 · shield-check -->
+        <article class="intro-card">
+          <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+          <div class="intro-card-num">06 · Comprovado</div>
+          <h3 class="intro-card-title">Quem <em style="font-family:inherit;color:var(--r-coral);">viveu</em> o balcão.</h3>
+          <p class="intro-card-desc">Feita por quem viveu o balcão, não por quem leu sobre ele.</p>
+        </article>
+
+        <!-- ═══ CLONES para loop seamless (aria-hidden) ═══ -->
+        <article class="intro-card" aria-hidden="true">
+          <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round">
+            <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+            <path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>
+          </svg>
+          <div class="intro-card-num">01 · Acessível</div>
+          <h3 class="intro-card-title">Alto <em style="font-family:inherit;color:var(--r-mint);">valor</em> que cabe no caixa.</h3>
+          <p class="intro-card-desc">Planos de alto valor que cabem no caixa do parceiro.</p>
+        </article>
+        <article class="intro-card" aria-hidden="true">
+          <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round">
+            <path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/>
+            <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/>
+            <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/>
+          </svg>
+          <div class="intro-card-num">02 · Simples</div>
+          <h3 class="intro-card-title">Instalado dentro do PDV.</h3>
+          <p class="intro-card-desc">Pessoas, processos e IA instalados dentro do PDV.</p>
+        </article>
+        <article class="intro-card" aria-hidden="true">
+          <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round">
+            <path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/>
+            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+            <path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/>
+            <path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-2.741-2.913a.45.45 0 0 0-.9 0A2.7 2.7 0 0 1 13.62 12a2.7 2.7 0 0 1-2.742-2.913a.45.45 0 0 0-.9 0A2.7 2.7 0 0 1 7.24 12a2.7 2.7 0 0 1-2.79-2.913a.45.45 0 0 0-.9 0A2.7 2.7 0 0 1 2 10V7"/>
+          </svg>
+          <div class="intro-card-num">03 · Multi-canal</div>
+          <h3 class="intro-card-title">MPE, varejos e <em style="font-family:inherit;color:var(--r-coral);">revendedores</em>.</h3>
+          <p class="intro-card-desc">MPE, varejos, revendedores e PME.</p>
+        </article>
+        <article class="intro-card" aria-hidden="true">
+          <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round">
+            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+            <polyline points="16 7 22 7 22 13"/>
+          </svg>
+          <div class="intro-card-num">04 · Escalável</div>
+          <h3 class="intro-card-title">Ondas <em style="font-family: inherit; color: var(--r-mint);">auditáveis</em>.</h3>
+          <p class="intro-card-desc">300, 1.000, 3.000 parceiros em ondas auditáveis.</p>
+        </article>
+        <article class="intro-card" aria-hidden="true">
+          <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="12" r="6"/>
+            <circle cx="12" cy="12" r="2"/>
+          </svg>
+          <div class="intro-card-num">05 · Direcionado</div>
+          <h3 class="intro-card-title">Mais venda, mais <em style="font-family:inherit;color:var(--r-mint);">margem</em>.</h3>
+          <p class="intro-card-desc">Mais venda, mais margem, crescimento que dura.</p>
+        </article>
+        <article class="intro-card" aria-hidden="true">
+          <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round">
+            <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+          <div class="intro-card-num">06 · Comprovado</div>
+          <h3 class="intro-card-title">Quem <em style="font-family:inherit;color:var(--r-coral);">viveu</em> o balcão.</h3>
+          <p class="intro-card-desc">Feita por quem viveu o balcão, não por quem leu sobre ele.</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="intro-scroll-cue">
+      <div class="r-rule"></div>
+      <span>Implementação por <strong>PulsarH.ai × TradeUp</strong></span>
+      <div class="r-rule"></div>
+    </div>
+  </section>
+
+  <!-- ══ CARDS (surface-light — papel) ══ -->
+  <section class="cards-section surface-light">
     <div class="cards-inner">
       <div class="cards-head">
-        <div class="r-eyebrow">Dois formatos de leitura</div>
-        <h2>O <em>business case</em> completo ou o pitch executivo.</h2>
+        <div class="r-eyebrow">Detalhamento</div>
+        <h2><em>Humanizamos</em>, <em>estruturamos</em> e <em>aceleramos</em> sua empresa.</h2>
+        <p class="cards-sub">A era da inteligência artificial — e das relações cada vez mais superficiais — exige outro tipo de gestor. Capaz de orquestrar pessoas, processos e IA na mesma operação. Capaz de decidir por dado sem perder a leitura humana. Capaz de crescer sem quebrar a si mesmo nem o time.</p>
       </div>
 
       <div class="cards-grid">
-        <a href="doc.html" class="card">
+        <!-- CAIXA 01 · DOCUMENTO COMPLETO — GRANDE -->
+        <a href="doc.html" class="card card-big card-big-1">
           <span class="card-num">01</span>
-          <span class="card-tag">Business Case</span>
+          <span class="card-tag">Para o Parceiro</span>
           <h3 class="card-title">Documento <em>Completo</em></h3>
           <p class="card-desc">
-            A intervenção em detalhes — leitura do canal, método, arquitetura dos 5 pacotes, três cenários de escala com KPI por onda e plano de go-to-market. Leitura para quem vai levar ao comitê.
+            A apresentação oficial do Rentabiliza.ai para operadoras e parceiros estratégicos. Leitura de canal, método, arquitetura dos pacotes, cenários de escala com KPI auditável e plano de go-to-market. O documento que o diretor leva ao comitê.
           </p>
           <div class="card-specs">
             <div>
               <div class="card-spec-label">Formato</div>
-              <div class="card-spec-value">Business case</div>
+              <div class="card-spec-value">Carta institucional</div>
             </div>
             <div>
               <div class="card-spec-label">Leitura</div>
@@ -539,12 +1032,13 @@
           </span>
         </a>
 
-        <a href="slides.html" class="card">
+        <!-- CAIXA 02 · DECK DE REUNIÃO — GRANDE -->
+        <a href="slides.html" class="card card-big card-big-2">
           <span class="card-num">02</span>
-          <span class="card-tag">Pitch Executivo</span>
-          <h3 class="card-title">Apresentação de <em>Slides</em></h3>
+          <span class="card-tag">Para o Pitch</span>
+          <h3 class="card-title">Deck de <em>Reunião</em></h3>
           <p class="card-desc">
-            O business case condensado para a reunião de diretoria — navegação por teclado, modo tela cheia e linha narrativa enxuta. Direto ao que interessa a quem decide.
+            A versão condensada do Rentabiliza.ai para encontros com diretoria e board. Navegação por teclado, modo tela cheia e linha narrativa enxuta — desenhada para conduzir decisão executiva em 30 minutos.
           </p>
           <div class="card-specs">
             <div>
@@ -565,27 +1059,66 @@
             <span class="card-cta-arrow">↗</span>
           </span>
         </a>
+
+        <!-- CAIXA 03 · MANIFESTO — PEQUENA (topo coluna 3) -->
+        <a href="manifesto.html" class="card card-small card-small-1">
+          <span class="card-num">03</span>
+          <span class="card-tag">Para Uso Interno</span>
+          <h3 class="card-title">Manifesto da <em>Marca</em></h3>
+          <p class="card-desc">
+            O DNA do Rentabiliza.ai — visão, missão, valores, identidade visual e regras de aplicação. Referência do time para conteúdo, branding e comunicação.
+          </p>
+          <div class="card-specs">
+            <div>
+              <div class="card-spec-label">Formato</div>
+              <div class="card-spec-value">Manifesto</div>
+            </div>
+            <div>
+              <div class="card-spec-label">Leitura</div>
+              <div class="card-spec-value">~8 min</div>
+            </div>
+            <div>
+              <div class="card-spec-label">Versão</div>
+              <div class="card-spec-value">v2</div>
+            </div>
+          </div>
+          <span class="card-cta">
+            Ler manifesto
+            <span class="card-cta-arrow">↗</span>
+          </span>
+        </a>
+
+        <!-- CAIXA 04 · ESCOPO DA PARCERIA — PEQUENA (base coluna 3) -->
+        <a href="#escopo" class="card card-small card-small-2 card-restricted" aria-disabled="true">
+          <span class="card-num">04</span>
+          <span class="card-tag">Para Alinhamento Interno</span>
+          <h3 class="card-title">Escopo da <em>Parceria</em></h3>
+          <p class="card-desc">
+            Governança PulsarH.ai × TradeUp — responsabilidades, escopo e arquitetura comercial.
+          </p>
+          <div class="card-specs">
+            <div>
+              <div class="card-spec-label">Formato</div>
+              <div class="card-spec-value">Contrato-base</div>
+            </div>
+            <div>
+              <div class="card-spec-label">Status</div>
+              <div class="card-spec-value" style="color: var(--r-amber);">Em construção</div>
+            </div>
+            <div>
+              <div class="card-spec-label">Acesso</div>
+              <div class="card-spec-value">Restrito</div>
+            </div>
+          </div>
+          <span class="card-cta">
+            Abrir escopo
+            <span class="card-cta-arrow">↗</span>
+          </span>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- ══ CONTEXT ══ -->
-  <section class="context-section">
-    <div class="context-inner">
-      <div class="r-eyebrow">O que é o Rentabiliza.ai</div>
-      <div class="context-body">
-        <p>
-          Rentabiliza.ai é uma plataforma de intervenção comercial desenhada para aumentar a rentabilidade da rede de parceiros Claro — hoje predominantemente focada em produto, com baixa penetração de serviço e margem sob pressão. A plataforma atua em três camadas integradas — <strong>Pessoas, Processos e Tecnologia IA</strong> — aplicadas sobre cinco pilares de mentalidade do lojista.
-        </p>
-        <p>
-          A arquitetura tem 5 pacotes escalonados do gratuito ao premium, três cenários de escala (300, 1.000 e 3.000 parceiros) com KPI auditável por onda, e dois entregáveis que a consultoria genérica não entrega: <strong>especialização em varejo telecom</strong> e método autoral validado em operação real — 21 anos dentro da loja, 7 como Gerente Nacional de rede com 4.500 vendedores e R$ 1 bilhão/ano em faturamento.
-        </p>
-        <p class="context-accent">
-          Não é treinamento. Não é curso. É <em>intervenção comercial com método, tecnologia e acompanhamento de indicador</em> — conduzida por quem viveu do outro lado do balcão.
-        </p>
-      </div>
-    </div>
-  </section>
 
   <!-- ══ FOOTER ══ -->
   <footer class="footer">
@@ -603,6 +1136,7 @@
       </div>
       <div class="footer-nav">
         <div class="footer-nav-label">Navegue</div>
+        <a href="manifesto.html">Manifesto ↗</a>
         <a href="doc.html">Documento completo ↗</a>
         <a href="slides.html">Apresentação ↗</a>
       </div>
