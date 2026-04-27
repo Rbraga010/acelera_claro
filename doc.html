@@ -1165,6 +1165,240 @@
     .spec-label-mint { color: var(--r-mint); }
     .spec-body { margin: 0 !important; }
 
+    /* ═══ Timeline horizontal — 4 marcos com track âmbar conectando ═══ */
+    .h-timeline {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin: 2rem 0 2.25rem;
+      padding-top: 22px;
+    }
+    .h-tl-track {
+      position: absolute;
+      top: 28px;
+      left: 12.5%;
+      right: 12.5%;
+      height: 1px;
+      background: linear-gradient(90deg,
+        rgba(244,185,62,0.5) 0%,
+        rgba(244,185,62,0.5) 70%,
+        var(--r-mint) 100%);
+      z-index: 0;
+    }
+    .h-tl-step {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding-right: 8px;
+    }
+    .h-tl-marker {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--paper);
+      border: 2px solid var(--claro-red);
+      box-shadow: 0 0 0 4px var(--paper);
+      margin-bottom: 18px;
+      flex-shrink: 0;
+    }
+    .h-tl-step-final .h-tl-marker {
+      border-color: var(--r-mint);
+      background: var(--r-mint);
+      box-shadow: 0 0 0 4px var(--paper), 0 0 0 6px rgba(61,220,151,0.25);
+    }
+    .h-tl-label {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--claro-red);
+      margin-bottom: 8px;
+    }
+    .h-tl-step-final .h-tl-label { color: var(--r-mint); }
+    .h-tl-body {
+      font-size: 0.92rem;
+      line-height: 1.5;
+      color: var(--muted-2);
+      margin: 0;
+    }
+    .sec-dark .h-tl-body, .sec-charcoal .h-tl-body { color: var(--muted-2); }
+
+    @media (max-width: 900px) {
+      .h-timeline {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding-top: 0;
+      }
+      .h-tl-track { display: none; }
+      .h-tl-step {
+        flex-direction: row;
+        align-items: baseline;
+        gap: 14px;
+        padding: 14px 0;
+        border-top: 1px solid rgba(13,17,23,0.07);
+      }
+      .h-tl-marker { display: none; }
+      .h-tl-label {
+        flex-shrink: 0;
+        width: 70px;
+        margin-bottom: 0;
+      }
+    }
+
+    /* ═══ Plans Grid — 4 colunas lado a lado ═══ */
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin: 1.75rem 0 2.25rem;
+      align-items: stretch;
+    }
+    .plan-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 26px 22px 24px;
+      background: var(--paper);
+      border: 1px solid rgba(13,17,23,0.08);
+      border-radius: 12px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .plan-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(13,17,23,0.06);
+      border-color: rgba(244,185,62,0.25);
+    }
+    .plan-card-featured {
+      background: linear-gradient(165deg, rgba(244,185,62,0.07), var(--paper) 70%);
+      border-color: rgba(244,185,62,0.32);
+      box-shadow: 0 8px 24px rgba(244,185,62,0.08);
+    }
+    .plan-card-featured:hover {
+      box-shadow: 0 14px 32px rgba(244,185,62,0.14);
+    }
+    .plan-badge {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 5px 11px;
+      background: var(--claro-red);
+      color: var(--ink);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .plan-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .plan-name {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 1.7rem;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--text-dark);
+      margin: 0 0 14px;
+    }
+    .plan-name .plan-name-suffix {
+      color: var(--claro-red);
+      font-weight: 600;
+    }
+    .plan-price-block {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding: 12px 14px;
+      background: rgba(13,17,23,0.04);
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+    .plan-card-featured .plan-price-block {
+      background: rgba(244,185,62,0.12);
+    }
+    .plan-price {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--claro-red);
+      letter-spacing: 0;
+      line-height: 1.1;
+    }
+    .plan-price-unit {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--muted-2);
+    }
+    .plan-price-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0;
+    }
+    .plan-desc {
+      font-size: 0.86rem !important;
+      line-height: 1.55 !important;
+      color: var(--muted-2) !important;
+      margin: 0 0 14px !important;
+      flex-grow: 1;
+    }
+    .plan-desc strong { color: var(--text-dark); font-weight: 600; }
+    .plan-foot {
+      padding-top: 12px;
+      border-top: 1px dashed rgba(13,17,23,0.1);
+    }
+    .plan-cta-text {
+      font-style: italic;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .plan-faz-conta {
+      padding: 11px 13px;
+      background: rgba(244,185,62,0.07);
+      border-left: 2px solid var(--claro-red);
+      border-radius: 0 6px 6px 0;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: var(--text-dark);
+    }
+    .plan-card-featured .plan-faz-conta {
+      background: rgba(244,185,62,0.14);
+    }
+    .plan-faz-label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--claro-red);
+      margin-bottom: 5px;
+    }
+
+    @media (max-width: 1100px) {
+      .plans-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    }
+    @media (max-width: 600px) {
+      .plans-grid { grid-template-columns: 1fr; }
+    }
+
     @media (max-width: 720px) {
       .spec-row { grid-template-columns: 1fr; gap: 8px; }
       .spec-label { padding-top: 0; margin-bottom: 4px; }
@@ -1964,22 +2198,27 @@
 
         <h3 class="t-sub">A linha do tempo, sem rodeio</h3>
 
-        <div class="spec-sheet">
-          <div class="spec-row">
-            <div class="spec-label">Mês 1</div>
-            <div><p class="t-body spec-body">Caixa começa a apertar menos. Time entra no roteiro. Ticket sobe.</p></div>
+        <div class="h-timeline">
+          <div class="h-tl-track" aria-hidden="true"></div>
+          <div class="h-tl-step">
+            <div class="h-tl-marker"></div>
+            <div class="h-tl-label">Mês 1</div>
+            <p class="h-tl-body">Caixa começa a apertar menos. Time entra no roteiro. Ticket sobe.</p>
           </div>
-          <div class="spec-row">
-            <div class="spec-label">Mês 3</div>
-            <div><p class="t-body spec-body">A loja opera sem você em cima. Você passa a planejar — não a apagar incêndio.</p></div>
+          <div class="h-tl-step">
+            <div class="h-tl-marker"></div>
+            <div class="h-tl-label">Mês 3</div>
+            <p class="h-tl-body">A loja opera sem você em cima. Você passa a planejar — não a apagar incêndio.</p>
           </div>
-          <div class="spec-row">
-            <div class="spec-label">Mês 6</div>
-            <div><p class="t-body spec-body">Faturamento cresce de forma consistente. Margem sobe. Cliente recorrente já paga a operação.</p></div>
+          <div class="h-tl-step">
+            <div class="h-tl-marker"></div>
+            <div class="h-tl-label">Mês 6</div>
+            <p class="h-tl-body">Faturamento cresce de forma consistente. Margem sobe. Cliente recorrente já paga a operação.</p>
           </div>
-          <div class="spec-row">
-            <div class="spec-label spec-label-mint">Mês 12</div>
-            <div><p class="t-body spec-body">Você vira referência regional. Outras lojas começam a perguntar o que você fez de diferente.</p></div>
+          <div class="h-tl-step h-tl-step-final">
+            <div class="h-tl-marker"></div>
+            <div class="h-tl-label">Mês 12</div>
+            <p class="h-tl-body">Você vira referência regional. Outras lojas começam a perguntar o que você fez de diferente.</p>
           </div>
         </div>
 
@@ -2002,55 +2241,67 @@
 
         <div class="section-rule"></div>
 
-        <div class="editorial-list">
+        <div class="plans-grid">
 
           <!-- 01 · START -->
-          <div class="editorial-item">
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px;">Plano 01 · Gratuito</div>
-            <h4 class="ed-title" style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;">
-              <span>START</span>
-              <span style="font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-style: normal; font-weight: 600; color: var(--claro-red); letter-spacing: 0;">R$ 0</span>
-              <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-style: normal; font-weight: 500; color: var(--muted); letter-spacing: 0;">sem mínimo</span>
-            </h4>
-            <p class="t-body">Plataforma de Gestão na Era da IA + 1 aula ao vivo por semana sobre venda de serviço com IA + comunidade Rentabiliza com lojistas trocando estratégia em tempo real. Você entra de graça, aprende o método, aplica o que conseguir — e decide se quer subir.</p>
-          </div>
+          <article class="plan-card">
+            <div class="plan-tag">Plano 01 · Gratuito</div>
+            <h4 class="plan-name">Start</h4>
+            <div class="plan-price-block">
+              <span class="plan-price">R$ 0</span>
+              <span class="plan-price-sub">sem mínimo</span>
+            </div>
+            <p class="plan-desc">Plataforma de Gestão na Era da IA + 1 aula ao vivo por semana sobre venda de serviço com IA + comunidade Rentabiliza com lojistas trocando estratégia em tempo real. Você entra de graça, aprende o método, aplica o que conseguir — e decide se quer subir.</p>
+            <div class="plan-foot">
+              <span class="plan-cta-text">Pra quem quer entender o método sem compromisso.</span>
+            </div>
+          </article>
 
           <!-- 02 · MASTER -->
-          <div class="editorial-item">
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px;">Plano 02 · Formação</div>
-            <h4 class="ed-title" style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;">
-              <span>MASTER</span>
-              <span style="font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-style: normal; font-weight: 600; color: var(--claro-red); letter-spacing: 0;">R$ 297/mês</span>
-              <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-style: normal; font-weight: 500; color: var(--muted); letter-spacing: 0;">mín. 3 meses · R$ 891 trim.</span>
-            </h4>
-            <p class="t-body">Tudo do <strong>Start</strong> + formação completa <em>Gestor na Era da IA</em> + <strong>3 mentorias personalizadas com Rodrigo Braga</strong> ao longo do trimestre. Pra quem decidiu sair do improviso e quer método pronto pra implementar.</p>
-            <p class="t-body" style="margin-top: 12px; padding: 12px 16px; background: rgba(244,185,62,0.07); border-left: 2px solid var(--claro-red); border-radius: 0 6px 6px 0;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--claro-red);">Faz a conta</span> &nbsp;·&nbsp; R$ 297 por mês é menos do que uma única jantada de fim de semana. Pra três meses de método aplicado direto na sua loja.</p>
-          </div>
+          <article class="plan-card">
+            <div class="plan-tag">Plano 02 · Formação</div>
+            <h4 class="plan-name">Master</h4>
+            <div class="plan-price-block">
+              <span class="plan-price">R$ 297<span class="plan-price-unit">/mês</span></span>
+              <span class="plan-price-sub">mín. 3 meses · R$ 891 trim.</span>
+            </div>
+            <p class="plan-desc">Tudo do <strong>Start</strong> + formação completa <em>Gestor na Era da IA</em> + <strong>3 mentorias personalizadas com Rodrigo Braga</strong> ao longo do trimestre. Pra quem decidiu sair do improviso e quer método pronto pra implementar.</p>
+            <div class="plan-faz-conta">
+              <span class="plan-faz-label">Faz a conta</span>
+              <span>R$ 297 por mês é menos do que uma única jantada de fim de semana. Pra três meses de método aplicado direto na sua loja.</span>
+            </div>
+          </article>
 
           <!-- 03 · inPULSO.pro (RECOMENDADO) -->
-          <div class="editorial-item" style="position: relative; padding: 28px 28px 24px; background: linear-gradient(165deg, rgba(244,185,62,0.06), transparent 70%); border: 1px solid rgba(244,185,62,0.28); border-radius: 12px;">
-            <div style="position: absolute; top: -11px; right: 22px; padding: 5px 11px; background: var(--claro-red); color: var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; border-radius: 4px;">★ Recomendado</div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px;">Plano 03 · Acompanhamento</div>
-            <h4 class="ed-title" style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;">
-              <span>inPULSO.pro</span>
-              <span style="font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-style: normal; font-weight: 600; color: var(--claro-red); letter-spacing: 0;">R$ 497/mês</span>
-              <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-style: normal; font-weight: 500; color: var(--muted); letter-spacing: 0;">mín. 6 meses · R$ 2.982 sem.</span>
-            </h4>
-            <p class="t-body">Tudo do <strong>Start + Master</strong> + <strong style="color: var(--r-mint);">agente de IA configurado</strong> pra gestão do seu negócio + <strong>6 mentorias com Rodrigo no semestre</strong>, com 1 cadeira extra (sócio, gerente ou supervisor) na comunidade.</p>
-            <p class="t-body" style="margin-top: 12px; padding: 12px 16px; background: rgba(244,185,62,0.07); border-left: 2px solid var(--claro-red); border-radius: 0 6px 6px 0;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--claro-red);">Faz a conta</span> &nbsp;·&nbsp; R$ 497 por mês é uma corrida de aplicativo no fim do mês. Pra ter Rodrigo perto, IA rodando 24h e mais um cabeça da operação alinhado com o método.</p>
-          </div>
+          <article class="plan-card plan-card-featured">
+            <span class="plan-badge">★ Recomendado</span>
+            <div class="plan-tag">Plano 03 · Acompanhamento</div>
+            <h4 class="plan-name">inPULSO<span class="plan-name-suffix">.pro</span></h4>
+            <div class="plan-price-block">
+              <span class="plan-price">R$ 497<span class="plan-price-unit">/mês</span></span>
+              <span class="plan-price-sub">mín. 6 meses · R$ 2.982 sem.</span>
+            </div>
+            <p class="plan-desc">Tudo do <strong>Start + Master</strong> + <strong style="color: var(--r-mint);">agente de IA configurado</strong> pra gestão do seu negócio + <strong>6 mentorias com Rodrigo no semestre</strong>, com 1 cadeira extra (sócio, gerente ou supervisor) na comunidade.</p>
+            <div class="plan-faz-conta">
+              <span class="plan-faz-label">Faz a conta</span>
+              <span>R$ 497 por mês é uma corrida de aplicativo no fim do mês. Pra ter Rodrigo perto, IA rodando 24h e mais um cabeça da operação alinhado com o método.</span>
+            </div>
+          </article>
 
           <!-- 04 · PREMIUM -->
-          <div class="editorial-item">
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px;">Plano 04 · Implementação</div>
-            <h4 class="ed-title" style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;">
-              <span>PREMIUM</span>
-              <span style="font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-style: normal; font-weight: 600; color: var(--claro-red); letter-spacing: 0;">R$ 4.997</span>
-              <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-style: normal; font-weight: 500; color: var(--muted); letter-spacing: 0;">valor único · 6 meses inclusos + benefícios vitalícios</span>
-            </h4>
-            <p class="t-body">Tudo do <strong>Start + Master + Pro</strong> + <strong style="color: var(--claro-red);">implementação completa dentro da sua loja</strong> · site, identidade visual, vídeos, ERP, agentes de IA prontos. <strong>Selo Embaixador da Marca</strong> com benefício vitalício e ganho por indicação.</p>
-            <p class="t-body" style="margin-top: 12px; padding: 12px 16px; background: rgba(244,185,62,0.07); border-left: 2px solid var(--claro-red); border-radius: 0 6px 6px 0;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--claro-red);">Faz a conta</span> &nbsp;·&nbsp; Agência de marca cobra <strong style="font-family: 'JetBrains Mono', monospace;">R$ 8–15 mil</strong>. Consultor sênior, <strong style="font-family: 'JetBrains Mono', monospace;">R$ 12–24 mil</strong>. Dev de IA, <strong style="font-family: 'JetBrains Mono', monospace;">R$ 6–10 mil</strong>. Separado, sai por <strong style="font-family: 'JetBrains Mono', monospace;">R$ 26 mil no mínimo</strong>. A gente entrega tudo junto, instalado, por <strong style="font-family: 'JetBrains Mono', monospace; color: var(--claro-red);">R$ 4.997</strong> — uma única vez.</p>
-          </div>
+          <article class="plan-card">
+            <div class="plan-tag">Plano 04 · Implementação</div>
+            <h4 class="plan-name">Premium</h4>
+            <div class="plan-price-block">
+              <span class="plan-price">R$ 4.997</span>
+              <span class="plan-price-sub">único · 6 meses + vitalício</span>
+            </div>
+            <p class="plan-desc">Tudo do <strong>Start + Master + Pro</strong> + <strong style="color: var(--claro-red);">implementação completa dentro da sua loja</strong> · site, identidade visual, vídeos, ERP, agentes de IA prontos. <strong>Selo Embaixador da Marca</strong> com benefício vitalício e ganho por indicação.</p>
+            <div class="plan-faz-conta">
+              <span class="plan-faz-label">Faz a conta</span>
+              <span>Agência <strong style="font-family: 'JetBrains Mono', monospace;">R$ 8–15k</strong>. Consultor <strong style="font-family: 'JetBrains Mono', monospace;">R$ 12–24k</strong>. Dev IA <strong style="font-family: 'JetBrains Mono', monospace;">R$ 6–10k</strong>. Separado, <strong style="font-family: 'JetBrains Mono', monospace;">R$ 26k mínimo</strong>. A gente entrega tudo junto por <strong style="font-family: 'JetBrains Mono', monospace; color: var(--claro-red);">R$ 4.997</strong>.</span>
+            </div>
+          </article>
 
         </div>
 

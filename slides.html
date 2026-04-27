@@ -171,35 +171,36 @@
     .bg-light { background: var(--cream); color: var(--text-dark); }
 
     /* ═══════════════════════════════ BACKGROUND IMAGE LAYER ═══════════════════════════════ */
-    /* Glass escuro sobre imagem — atmosfera, não protagonismo */
+    /* Imagem atmosférica — visível, mas com overlay assimétrico (denso à
+       esquerda onde tá o texto, esvaziando à direita onde a imagem respira) */
     .s-bg-photo {
       position: absolute; inset: 0; z-index: 0;
       background-size: cover;
       background-position: center;
-      opacity: 0.16;
-      filter: saturate(0.65) contrast(1.05) blur(1px);
+      opacity: 0.55;
+      filter: saturate(0.85) contrast(1.05);
       pointer-events: none;
     }
     .s-bg-photo::after {
       content: ''; position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(20,20,22,0.45) 0%, rgba(20,20,22,0.82) 100%),
-        linear-gradient(135deg, rgba(20,20,22,0.5) 0%, rgba(20,20,22,0.75) 100%);
+        linear-gradient(95deg, rgba(20,20,22,0.88) 0%, rgba(20,20,22,0.7) 35%, rgba(20,20,22,0.35) 70%, rgba(20,20,22,0.2) 100%),
+        radial-gradient(ellipse 50% 40% at 90% 100%, rgba(20,20,22,0.35), transparent 60%);
     }
-    /* Variação para slides charcoal — ainda mais sutil */
-    .bg-charcoal .s-bg-photo { opacity: 0.13; }
+    /* Variação charcoal — mesma lógica, opacity um pouco menor */
+    .bg-charcoal .s-bg-photo { opacity: 0.45; }
 
-    /* Variação para slides light — overlay cream (não dark) pra preservar
-       a paleta papel sem manchar o cream com sobreposição escura */
+    /* Variação light — overlay cream assimétrico (denso à esquerda,
+       respira à direita) preservando a paleta papel */
     .bg-light .s-bg-photo {
-      opacity: 0.22;
-      filter: saturate(0.55) contrast(1.02) blur(0.5px);
+      opacity: 0.42;
+      filter: saturate(0.78) contrast(1.02);
     }
     .bg-light .s-bg-photo::after {
       content: ''; position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(244,241,232,0.55) 0%, rgba(244,241,232,0.88) 100%),
-        linear-gradient(135deg, rgba(244,241,232,0.65) 0%, rgba(244,241,232,0.85) 100%);
+        linear-gradient(95deg, rgba(244,241,232,0.92) 0%, rgba(244,241,232,0.75) 35%, rgba(244,241,232,0.4) 70%, rgba(244,241,232,0.22) 100%),
+        radial-gradient(ellipse 50% 40% at 90% 100%, rgba(244,241,232,0.3), transparent 60%);
     }
 
     /* ═══════════════════════════════ AUTHOR BLOCK — wordmark Rentabiliza ═══════════════════════════════ */
