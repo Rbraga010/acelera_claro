@@ -231,6 +231,55 @@
       background: rgba(244,185,62,0.35);
     }
 
+    /* ═══════════════════════════════ HERO CTA GROUP ═══════════════════════════════ */
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 40px;
+      align-items: center;
+    }
+    .hero-cta-primary {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 14px 28px;
+      background: var(--r-amber);
+      color: var(--r-bg);
+      font-family: var(--r-font-body);
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: 0.01em;
+      border-radius: 999px;
+      box-shadow: 0 4px 18px rgba(244,185,62,0.25);
+      transition: background 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+      will-change: transform;
+    }
+    .hero-cta-primary:hover { background: var(--r-amber-hover); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(244,185,62,0.35); }
+    .hero-cta-primary:active { transform: translateY(0); }
+    .hero-cta-primary svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .hero-cta-secondary {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 8px;
+      min-height: 52px;
+      padding: 14px 24px;
+      background: transparent;
+      color: var(--r-fg);
+      font-family: var(--r-font-body);
+      font-weight: 500;
+      font-size: 15px;
+      border: 1px solid rgba(244,185,62,0.45);
+      border-radius: 999px;
+      transition: background 220ms ease, border-color 220ms ease;
+    }
+    .hero-cta-secondary:hover { background: rgba(244,185,62,0.08); border-color: rgba(244,185,62,0.75); }
+
+    /* Acessibilidade — usuários com prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-video { display: none !important; }
+      *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+    }
+
     /* ═══════════════════════════════ CARROSSEL FLUTUANTE (O que é o Rentabiliza.ai) ═══════════════════════════════ */
     .intro-section {
       padding: 96px 0 80px;
@@ -815,6 +864,14 @@
       .card-big { min-height: 440px; }
       .card-small { min-height: 200px; }
     }
+    /* MOBILE PERFORMANCE — vídeo escondido em telas pequenas pra economizar dados/bateria.
+       Fallback (hero::before) ganha mais opacidade pra preencher o espaço visualmente. */
+    @media (max-width: 768px) {
+      .hero-video { display: none !important; }
+      .hero::before { opacity: 0.55; }
+      .hero { min-height: auto; }
+    }
+
     @media (max-width: 900px) {
       .nav-inner { padding: 14px 20px; }
       .nav-meta-right { display: none; }
@@ -859,31 +916,60 @@
       .footer-bottom { flex-direction: column; gap: 12px; }
     }
     @media (max-width: 480px) {
-      /* Hero — mobile pequeno (iPhone SE até iPhone Pro) */
-      .hero { padding: 68px 18px 56px; }
+      /* Hero — mobile pequeno (iPhone SE até iPhone Pro) — otimização agressiva 27/04/2026 */
+      .hero {
+        padding: 56px 18px 48px;
+        min-height: auto;
+      }
+      .hero::after {
+        background: linear-gradient(180deg, rgba(13,17,23,0.92) 0%, rgba(13,17,23,0.84) 50%, rgba(13,17,23,0.72) 100%),
+                    radial-gradient(ellipse 100% 60% at 100% 0%, rgba(244,185,62,0.16), transparent 60%);
+      }
       .hero-brand-stack {
         gap: 14px;
-        margin-bottom: 44px;
+        margin-bottom: 36px;
       }
       .hero-brand-stack .hero-symbol { width: clamp(56px, 18vw, 72px); }
       .hero-brand-wordmark { font-size: 21px; }
       .hero-brand-version { font-size: 8.5px; }
-      .hero-title {
-        font-size: clamp(32px, 11vw, 44px);
-        line-height: 1.05;
+      .hero .r-eyebrow {
+        font-size: 11px;
         margin-bottom: 22px;
       }
+      .hero-title {
+        font-size: clamp(30px, 9.5vw, 42px);
+        line-height: 1.06;
+        margin-bottom: 20px;
+        text-wrap: balance;
+      }
       .hero-sub {
-        font-size: 15.5px;
-        line-height: 1.55;
-        margin-bottom: 32px;
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 28px;
       }
       .hero-triad {
-        gap: 10px;
-        padding-top: 22px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding-top: 20px;
+        border-top-style: solid;
       }
+      .hero-triad-sep { display: none; }
+      .hero-triad::before { display: none; }
       .hero-triad-item { font-size: 11px; }
-      .hero .r-eyebrow { font-size: 10px; }
+      /* CTA group — full width vertical em mobile */
+      .hero-cta-group {
+        margin-top: 28px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+      .hero-cta-primary, .hero-cta-secondary {
+        width: 100%;
+        font-size: 15.5px;
+        min-height: 52px;
+        padding: 14px 22px;
+      }
 
       /* Carrossel — cards um pouco menores e animação levemente mais rápida */
       .intro-section { padding: 56px 0 48px; }
@@ -921,10 +1007,13 @@
     }
     /* Telas muito pequenas (<360px — iPhone SE 1st gen / Galaxy A) */
     @media (max-width: 360px) {
-      .hero-brand-stack { gap: 10px; }
+      .hero { padding: 48px 14px 40px; }
+      .hero-brand-stack { gap: 10px; margin-bottom: 28px; }
       .hero-brand-stack .hero-symbol { width: 52px; }
       .hero-brand-wordmark { font-size: 18px; }
-      .hero-title { font-size: clamp(28px, 12vw, 36px); }
+      .hero-title { font-size: clamp(26px, 11vw, 34px); margin-bottom: 16px; }
+      .hero-sub { font-size: 15px; margin-bottom: 24px; }
+      .hero-cta-primary, .hero-cta-secondary { font-size: 14.5px; padding: 13px 18px; }
       .intro-card { flex: 0 0 220px; max-width: 220px; }
     }
   </style>
@@ -933,8 +1022,8 @@
 
   <!-- ══ HERO ══ -->
   <section class="hero">
-    <video class="hero-video" autoplay loop muted playsinline preload="auto" aria-hidden="true">
-      <source src="assets/videos/hero-entrepreneur.mp4" type="video/mp4">
+    <video class="hero-video" autoplay loop muted playsinline preload="metadata" poster="assets/images/hero-pdv.jpg" aria-hidden="true">
+      <source src="assets/videos/hero-entrepreneur.mp4" type="video/mp4" media="(min-width: 769px)">
     </video>
     <div class="hero-inner">
       <div class="hero-brand-stack">
@@ -953,12 +1042,19 @@
       <p class="hero-sub">
         Pessoas, processos e IA trabalhando juntos — instalados dentro do negócio para gerar mais venda, mais margem e crescimento que não para.
       </p>
-      <div class="hero-triad">
-        <span class="hero-triad-item">Mais lucro</span>
-        <span class="hero-triad-sep"></span>
-        <span class="hero-triad-item">Menos caos</span>
-        <span class="hero-triad-sep"></span>
-        <span class="hero-triad-item">Crescimento que dura</span>
+      <div class="hero-triad" role="list">
+        <span class="hero-triad-item" role="listitem">Mais lucro</span>
+        <span class="hero-triad-sep" aria-hidden="true"></span>
+        <span class="hero-triad-item" role="listitem">Menos caos</span>
+        <span class="hero-triad-sep" aria-hidden="true"></span>
+        <span class="hero-triad-item" role="listitem">Crescimento que dura</span>
+      </div>
+      <div class="hero-cta-group">
+        <a href="escopo.html" class="hero-cta-primary" aria-label="Ver proposta completa">
+          Ver proposta completa
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#contato" class="hero-cta-secondary" aria-label="Falar com a equipe Rentabiliza.ai">Falar com a gente</a>
       </div>
     </div>
   </section>
@@ -1267,7 +1363,7 @@
 
 
   <!-- ══ FOOTER ══ -->
-  <footer class="footer">
+  <footer class="footer" id="contato">
     <div class="footer-inner">
       <div class="footer-brand">
         <div class="footer-wordmark">
