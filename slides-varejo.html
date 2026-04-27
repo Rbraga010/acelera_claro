@@ -4,142 +4,1460 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rentabiliza.ai · Pitch Varejo e Lojistas</title>
-  <meta name="description" content="Pitch executivo para varejo e lojistas — versão em produção.">
+  <meta name="description" content="Você pode operar como gigante — sem deixar de ser dono. Pitch para o varejista que quer parar de operar no improviso e começar a faturar como rede nacional. 12 slides em 12-15 minutos.">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Rentabiliza.ai · Pitch Executivo">
+  <meta property="og:description" content="12 slides para conduzir decisão executiva em 30 minutos.">
+  <meta property="og:image" content="https://claro-acelera.vercel.app/assets/images/og-image.png">
+  <meta property="og:url" content="https://claro-acelera.vercel.app/slides.html">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="Rentabiliza.ai">
+  <meta property="og:locale" content="pt_BR">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Rentabiliza.ai · Pitch Executivo">
+  <meta name="twitter:image" content="https://claro-acelera.vercel.app/assets/images/og-image.png">
+
   <meta name="theme-color" content="#0D1117">
+
   <link rel="icon" type="image/svg+xml" href="assets/brand/logo-mono-amber.svg">
+
+  <!-- Rentabiliza.ai Design Tokens -->
   <link rel="stylesheet" href="assets/brand/rentabiliza-tokens.css">
   <style>
-    @font-face {
-      font-family: 'Fraunces';
-      src: url('assets/fonts/Fraunces-Variable.ttf') format('truetype-variations');
-      font-weight: 100 900; font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Fraunces';
-      src: url('assets/fonts/Fraunces-Italic-Variable.ttf') format('truetype-variations');
-      font-weight: 100 900; font-style: italic;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Inter';
-      src: url('assets/fonts/Inter-Variable.ttf') format('truetype-variations');
-      font-weight: 100 900; font-style: normal;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'JetBrains Mono';
-      src: url('assets/fonts/JetBrainsMono-Variable.ttf') format('truetype-variations');
-      font-weight: 100 800; font-style: normal;
-      font-display: swap;
+    /* ═══════════════════════════════ TOKENS ═══════════════════════════════ */
+    :root {
+      /* Paleta Rentabiliza.ai (aliases Claro → âmbar) */
+      --claro-red: #F4B93E;              /* âmbar — protagonista */
+      --claro-red-deep: #B8881D;
+      --claro-red-light: #FFC856;
+      --claro-red-glow: rgba(244, 185, 62, 0.35);
+      --claro-red-pale: rgba(244, 185, 62, 0.08);
+      --claro-yellow: #F4B93E;
+      --claro-yellow-soft: #FFC856;
+      --claro-yellow-pale: rgba(244, 185, 62, 0.12);
+
+      /* Dark Rentabiliza — noite profunda */
+      --ink: #0D1117;
+      --charcoal: #1A2430;
+      --surface: #242F3E;
+      --surface-raised: #2D3B4F;
+
+      /* Light */
+      --cream: #F4F1E8;                  /* papel */
+      --paper: #FAFAF7;
+      --stone: #EAE6D6;
+
+      /* Aliases gold → âmbar */
+      --gold: var(--claro-yellow);
+      --gold-soft: var(--claro-yellow);
+      --gold-deep: var(--claro-red-deep);
+
+      /* Text */
+      --text-dark: #1A1A1A;
+      --text-light: #FAFAF7;
+      --muted: #A0A0A8;
+      --muted-2: #6B6B6B;
+      --muted-dark: #58585E;
+
+      /* Borders */
+      --border-dark: rgba(255, 255, 255, 0.1);
+      --border-warm: rgba(244, 185, 62, 0.35);
+
+      /* Acentos funcionais Rentabiliza */
+      --r-mint: #3DDC97;
+      --r-coral: #FF6B47;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: #0D1117;
-      color: #F4F1E8;
-      min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      padding: 4rem 2rem;
-    }
-
-    .stub {
-      max-width: 720px;
-      text-align: center;
-    }
-    .stub-eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem; font-weight: 600;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: #F4B93E;
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 8px 16px;
-      background: rgba(244,185,62,0.06);
-      border: 1px solid rgba(244,185,62,0.2);
-      border-radius: 100px;
-      margin-bottom: 2.5rem;
-    }
-    .stub-eyebrow::before {
-      content: '';
-      width: 5px; height: 5px;
-      background: #F4B93E;
-      border-radius: 50%;
-    }
-    .stub h1 {
-      font-family: 'Fraunces', serif;
-      font-style: italic;
-      font-weight: 600;
-      font-size: clamp(2.5rem, 5vw, 4.2rem);
-      line-height: 1.1;
+    /* Typography overrides — todas fontes agora são Rentabiliza */
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    h1, h2, h3, h4, h5,
+    .s-title, .slide-title {
+      font-family: 'Fraunces', 'Times New Roman', serif !important;
+      font-variation-settings: "SOFT" 50, "WONK" 0;
+      font-weight: 500 !important;
       letter-spacing: -0.02em;
-      margin-bottom: 1.5rem;
     }
-    .stub h1 em {
-      font-style: italic;
-      color: #F4B93E;
+    .s-title em, .slide-title em, h1 em, h2 em, h3 em,
+    em, .s-card-tag, .s-method-title span {
+      font-family: 'Fraunces', 'Times New Roman', serif !important;
+      font-style: italic !important;
+      font-weight: 600 !important;
+      color: var(--claro-red) !important;
+      letter-spacing: -0.01em !important;
+    }
+    .s-eyebrow, .s-num, .s-pack-num, .s-pack-price, .s-pack-dur,
+    .s-card-num, .s-method-sub, .s-metric-label, .s-layer-num, .s-tl-dur,
+    .brand-top-text, .home-link, .fs-btn, .slide-counter,
+    .author-logo-wrap + div > div:first-child {
+      font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+      letter-spacing: 0.08em;
+    }
+    .s-eyebrow, .s-method-sub, .s-metric-label {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
       font-weight: 600;
     }
-    .stub .lead {
-      font-size: 1.15rem;
+
+    /* ═══════════════════════════════ RESET ═══════════════════════════════ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--ink);
+      color: var(--text-light);
       line-height: 1.6;
-      color: rgba(244, 241, 232, 0.78);
-      margin-bottom: 3rem;
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+      height: 100vh;
+      cursor: none;
     }
-    .stub-actions {
-      display: inline-flex; flex-direction: column; gap: 14px;
+    a { color: inherit; text-decoration: none; }
+
+    /* GRAIN */
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; line-height: 1.15; font-weight: 800; }
+    /* Destaques em títulos: Outfit 900 em amarelo Claro (em fundo dark) ou vermelho (em fundo light) */
+    em {
+      font-family: 'Outfit', sans-serif;
+      font-style: normal;
+      font-weight: 900;
+      color: var(--claro-yellow);
+      letter-spacing: -0.03em;
+    }
+    .bg-light em { color: var(--claro-red); }
+
+    /* ═══════════════════════════════ SLIDE ENGINE ═══════════════════════════════ */
+    .deck {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 7rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      overflow: hidden;
+    }
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Backgrounds — dark suave (cinza-grafite), não preto pesado */
+    .bg-dark {
+      background: linear-gradient(140deg, #2A2A2E 0%, #1F1F22 60%, #2A2A2E 100%);
+      color: var(--text-light);
+    }
+    .bg-charcoal {
+      background: linear-gradient(140deg, #323236 0%, #26262A 100%);
+      color: var(--text-light);
+    }
+    .bg-light { background: var(--cream); color: var(--text-dark); }
+
+    /* ═══════════════════════════════ BACKGROUND IMAGE LAYER ═══════════════════════════════ */
+    /* Glass escuro sobre imagem — atmosfera, não protagonismo */
+    .s-bg-photo {
+      position: absolute; inset: 0; z-index: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.16;
+      filter: saturate(0.65) contrast(1.05) blur(1px);
+      pointer-events: none;
+    }
+    .s-bg-photo::after {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(20,20,22,0.45) 0%, rgba(20,20,22,0.82) 100%),
+        linear-gradient(135deg, rgba(20,20,22,0.5) 0%, rgba(20,20,22,0.75) 100%);
+    }
+    /* Variação para slides charcoal — ainda mais sutil */
+    .bg-charcoal .s-bg-photo { opacity: 0.13; }
+
+    /* ═══════════════════════════════ AUTHOR BLOCK — wordmark Rentabiliza ═══════════════════════════════ */
+    .author-block {
+      display: flex;
       align-items: center;
+      gap: 1.25rem;
+      padding: 1.5rem 1.75rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      position: relative; z-index: 1;
+      transition: border-color 200ms ease-out, transform 200ms ease-out;
     }
-    .stub-actions a {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem; font-weight: 600;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: #F4B93E;
-      text-decoration: none;
-      padding: 12px 22px;
-      border: 1px solid rgba(244,185,62,0.4);
-      border-radius: 8px;
+    .author-block:hover {
+      border-color: rgba(244,185,62,0.4);
+      transform: translateY(-2px);
+    }
+    .author-wordmark {
+      flex-shrink: 0;
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "SOFT" 50, "WONK" 0;
+      font-size: 42px; line-height: 1;
+      display: inline-flex; align-items: baseline;
+      letter-spacing: -0.02em;
+    }
+    .author-wordmark .r-name { font-style: italic; font-weight: 600; color: var(--text-light); }
+    .author-wordmark .r-dot { color: var(--claro-red); font-weight: 600; }
+    .author-wordmark .r-ai { color: var(--claro-red); font-weight: 300; font-size: 0.65em; margin-left: 0.02em; }
+
+    /* ═══════════════════════════════ CRONOGRAMA BOX (Rentabiliza: sóbrio) ═══════════════════════════════ */
+    .cronograma-box {
+      padding: 1.5rem 1.75rem;
+      background: rgba(244,185,62,0.08);
+      border: 1px solid rgba(244,185,62,0.35);
+      border-radius: 12px;
+      text-align: center;
+      position: relative; z-index: 1;
+      transition: border-color 200ms ease-out, transform 200ms ease-out;
+    }
+    .cronograma-box:hover {
+      border-color: rgba(244,185,62,0.6);
+      transform: translateY(-2px);
+    }
+
+    .bg-dark em { color: var(--claro-yellow); }
+    .bg-charcoal em { color: var(--claro-yellow); }
+    .bg-light em { color: var(--claro-red); }
+
+    /* Radial glows com acentos Claro (amarelo + vermelho, em vez de dourado) */
+    .slide::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+    }
+    .bg-dark::after {
+      background:
+        radial-gradient(ellipse 60% 40% at 85% 15%, rgba(244,185,62,0.15), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 10% 90%, rgba(244,185,62,0.08), transparent 60%);
+    }
+    .bg-charcoal::after {
+      background:
+        radial-gradient(ellipse 50% 40% at 90% 10%, rgba(244,185,62,0.12), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 5% 85%, rgba(244,185,62,0.06), transparent 55%);
+    }
+
+    /* ═══════════════════════════════ TYPOGRAPHY ═══════════════════════════════ */
+    .s-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      padding: 0.4rem 0.9rem;
+      background: rgba(237, 28, 36, 0.08);
+      border: 1px solid rgba(237, 28, 36, 0.28);
+      border-radius: 999px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: #FF6B70;
+      margin-bottom: 1.75rem;
+      position: relative; z-index: 1;
+    }
+    .bg-light .s-eyebrow { background: rgba(237,28,36,0.06); border-color: rgba(237,28,36,0.2); color: var(--claro-red-deep); }
+    .s-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--claro-red); box-shadow: 0 0 12px var(--claro-red-glow); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    .s-title {
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      line-height: 1.0;
+      margin-bottom: 1.5rem;
+      position: relative; z-index: 1;
+    }
+    .s-subtitle {
+      font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--muted);
+      max-width: 750px;
+      position: relative; z-index: 1;
+    }
+    .bg-light .s-subtitle { color: var(--muted-2); }
+    .s-subtitle strong { color: var(--text-light); font-weight: 600; }
+    .bg-light .s-subtitle strong { color: var(--text-dark); }
+
+    .s-body {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--muted);
+      position: relative; z-index: 1;
+    }
+    .bg-light .s-body { color: var(--muted-2); }
+    .s-body strong { color: var(--text-light); font-weight: 600; }
+    .bg-light .s-body strong { color: var(--text-dark); }
+
+    .s-num {
+      position: absolute; top: 3.5rem; right: 5rem;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: clamp(4rem, 8vw, 8rem); line-height: 1;
+      color: rgba(244,185,62,0.12);
+      pointer-events: none; user-select: none;
+      letter-spacing: -0.05em;
+    }
+    .bg-light .s-num { color: rgba(244,185,62,0.08); }
+
+    /* ═══════════════════════════════ QUOTE ═══════════════════════════════ */
+    .s-quote {
+      margin: 1.5rem 0;
+      padding: 1.75rem 2.25rem;
+      border-left: 4px solid var(--claro-red);
+      background: rgba(244,185,62,0.06);
+      border-radius: 0 12px 12px 0;
+      font-family: 'Inter', sans-serif;
+      font-style: italic;
+      font-size: clamp(1rem, 1.4vw, 1.2rem);
+      line-height: 1.55;
+      color: var(--text-light);
+      font-weight: 400;
+      position: relative; z-index: 1;
+      max-width: 850px;
+    }
+    .bg-light .s-quote {
+      color: var(--text-dark);
+      background: var(--claro-red-pale);
+    }
+
+    /* ═══════════════════════════════ LISTS ═══════════════════════════════ */
+    .s-list {
+      list-style: none; margin: 1.25rem 0; padding: 0;
+      position: relative; z-index: 1;
+    }
+    .s-list li {
+      position: relative;
+      padding-left: 1.75rem;
+      margin-bottom: 0.6rem;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+    .bg-light .s-list li { color: var(--muted-2); }
+    .s-list li::before {
+      content: ''; position: absolute;
+      left: 0; top: 0.65em;
+      width: 0.55rem; height: 1px;
+      background: var(--claro-red);
+    }
+    .s-list li strong { color: var(--text-light); font-weight: 600; }
+    .bg-light .s-list li strong { color: var(--text-dark); }
+
+    /* ═══════════════════════════════ GRIDS ═══════════════════════════════ */
+    .s-grid-5 {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.85rem;
+      margin: 1.5rem 0; position: relative; z-index: 1;
+    }
+    .s-grid-3 {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+      margin: 1.5rem 0; position: relative; z-index: 1;
+    }
+    .s-grid-2 {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+      margin: 1.5rem 0; position: relative; z-index: 1;
+    }
+
+    .s-card {
+      padding: 1.5rem 1.25rem;
+      background: linear-gradient(170deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      backdrop-filter: blur(10px);
+    }
+    .s-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--claro-red), var(--claro-yellow));
+    }
+    .bg-light .s-card {
+      background: #FFFFFF;
+      border: 1px solid rgba(10,10,10,0.08);
+    }
+    .s-card-num {
+      font-family: 'Outfit', sans-serif; font-weight: 900;
+      font-size: 1.5rem; color: var(--claro-yellow); margin-bottom: 0.6rem;
+      letter-spacing: -0.02em;
+    }
+    .bg-light .s-card-num { color: var(--claro-red); }
+    .s-card-title {
+      font-family: 'Outfit', sans-serif; font-weight: 800;
+      font-size: 1rem; color: var(--text-light); margin-bottom: 0.35rem;
+    }
+    .bg-light .s-card-title { color: var(--text-dark); }
+    .s-card-tag {
+      font-family: 'Inter', sans-serif; font-style: italic;
+      font-size: 0.85rem; color: var(--claro-yellow); font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    .bg-light .s-card-tag { color: var(--claro-red); }
+    .s-card-desc {
+      font-size: 0.82rem; line-height: 1.5; color: var(--muted);
+    }
+
+    /* ═══════════════════════════════ TABLE ═══════════════════════════════ */
+    .s-table-wrap { position: relative; z-index: 1; margin: 1.5rem 0; overflow-x: auto; }
+    .s-table {
+      width: 100%; border-collapse: collapse;
+      background: var(--ink); border-radius: 14px;
+      overflow: hidden; border: 1px solid var(--border-dark);
+      font-size: 0.88rem;
+    }
+    .s-table thead th {
+      padding: 0.9rem 1rem;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem; font-weight: 700; text-align: left;
+      background: rgba(237,28,36,0.06);
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--claro-red);
+      border-bottom: 1px solid var(--border-warm);
+    }
+    .s-table tbody td {
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: var(--muted);
+    }
+    .s-table tbody td:first-child { color: var(--gold-soft); font-weight: 700; font-family: 'Outfit', sans-serif; }
+    .s-table tbody td:nth-child(3) { color: var(--text-light); font-weight: 500; }
+
+    /* Pack overview rows */
+    .s-pack-row {
+      display: grid;
+      grid-template-columns: 2.5rem 1fr auto auto;
+      gap: 1rem; align-items: center;
+      padding: 0.9rem 1.25rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border-dark);
+      border-left: 3px solid var(--claro-red);
+      border-radius: 10px;
+      margin-bottom: 0.5rem;
+      position: relative; z-index: 1;
+    }
+    .s-pack-num { font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.3rem; color: var(--claro-yellow); letter-spacing: -0.02em; }
+    .s-pack-name { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 0.95rem; }
+    .s-pack-name small { display: block; font-weight: 500; font-size: 0.75rem; color: var(--muted); }
+    .s-pack-price { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.85rem; color: var(--gold-soft); white-space: nowrap; }
+    .s-pack-dur {
+      font-family: 'Outfit', sans-serif; font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--claro-red);
+      padding: 0.25rem 0.6rem; border: 1px solid rgba(237,28,36,0.3);
+      border-radius: 999px; white-space: nowrap;
+    }
+
+    /* Method blocks */
+    .s-method {
+      padding: 1.5rem 1.5rem;
+      background: #FFFFFF;
+      border: 1px solid rgba(10,10,10,0.08);
+      border-radius: 16px;
+      overflow: hidden; position: relative;
+    }
+    .s-method::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--claro-red), var(--claro-yellow));
+    }
+    .s-method-icon { font-size: 1.4rem; margin-bottom: 0.75rem; }
+    .s-method-sub {
+      font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--claro-red);
+      margin-bottom: 0.35rem;
+    }
+    .s-method-title {
+      font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 800;
+      color: var(--text-dark); margin-bottom: 0.6rem;
+    }
+    .s-method-title span { font-family: 'Outfit', sans-serif; font-style: normal; color: var(--claro-red); font-weight: 900; letter-spacing: -0.02em; }
+    .s-method-body { color: var(--muted-2); font-size: 0.85rem; line-height: 1.55; }
+    .s-method-body ul { list-style: none; margin: 0.5rem 0 0; padding: 0; }
+    .s-method-body ul li { padding-left: 1.2rem; margin-bottom: 0.3rem; position: relative; font-size: 0.82rem; }
+    .s-method-body ul li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 0.45rem; height: 1px; background: var(--claro-red); }
+
+    /* Selos */
+    .s-selos { display: flex; gap: 1.5rem; justify-content: center; margin: 2rem 0; position: relative; z-index: 1; }
+    .s-selo {
+      padding: 1.5rem 1.25rem; text-align: center;
+      background: #FFFFFF; border: 1px solid rgba(10,10,10,0.08);
+      border-radius: 14px; width: 140px;
+    }
+    .s-selo.top {
+      background: linear-gradient(165deg, #FFFBF1 0%, #FFFFFF 100%);
+      border: 1px solid rgba(244,185,62,0.5);
+      box-shadow: 0 8px 28px rgba(244,185,62,0.18);
+    }
+    .s-selo-ring {
+      width: 56px; height: 56px; margin: 0 auto 0.75rem;
+      border-radius: 50%; display: grid; place-items: center;
+      background: linear-gradient(145deg, var(--claro-red), var(--claro-red-deep));
+      color: #fff; font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.3rem;
+      box-shadow: 0 6px 16px rgba(237,28,36,0.3);
+    }
+    .s-selo.top .s-selo-ring {
+      background: linear-gradient(145deg, var(--claro-yellow), #E5B800);
+      color: var(--text-dark); box-shadow: 0 6px 18px rgba(244,185,62,0.4);
+    }
+    .s-selo-name { font-family: 'Outfit', sans-serif; font-size: 0.82rem; font-weight: 800; color: var(--text-dark); line-height: 1.2; }
+
+    /* Metric card */
+    .s-metric {
+      padding: 1.5rem;
+      background: #FFFFFF; border: 1px solid rgba(10,10,10,0.08);
+      border-radius: 14px; overflow: hidden; position: relative;
+    }
+    .s-metric::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--claro-red);
+    }
+    .s-metric-label {
+      font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--claro-red);
+      margin-bottom: 0.35rem;
+    }
+    .s-metric-who {
+      font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 800;
+      color: var(--text-dark); margin-bottom: 0.75rem;
+    }
+    .s-metric ul { list-style: none; margin: 0; padding: 0; }
+    .s-metric ul li {
+      position: relative; padding-left: 1.2rem; margin-bottom: 0.4rem;
+      font-size: 0.82rem; color: var(--muted-2); line-height: 1.45;
+    }
+    .s-metric ul li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 0.45rem; height: 1px; background: var(--claro-red); }
+
+    /* Timeline compact */
+    .s-timeline { position: relative; z-index: 1; margin: 1rem 0; padding-left: 3rem; }
+    .s-timeline::before {
+      content: ''; position: absolute; left: 14px; top: 0; bottom: 0; width: 2px;
+      background: linear-gradient(180deg, var(--claro-red), rgba(237,28,36,0.15));
+    }
+    .s-tl-item { position: relative; padding-bottom: 1.25rem; }
+    .s-tl-item:last-child { padding-bottom: 0; }
+    .s-tl-dot {
+      position: absolute; left: -2.25rem; top: 0;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--ink); border: 2px solid var(--claro-red);
+      display: grid; place-items: center;
+      font-family: 'Outfit', sans-serif; font-size: 0.55rem; font-weight: 800; color: var(--claro-red);
+    }
+    .s-tl-title { font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 800; color: var(--text-light); margin-bottom: 0.15rem; }
+    .s-tl-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.45; }
+    .s-tl-dur {
+      display: inline-block; margin-top: 0.3rem;
+      font-family: 'Outfit', sans-serif; font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold);
+      padding: 0.2rem 0.5rem; background: rgba(197,165,114,0.08);
+      border: 1px solid rgba(197,165,114,0.25); border-radius: 999px;
+    }
+
+    /* Layers */
+    .s-layer {
+      padding: 1.25rem 1.25rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border-dark);
+      border-radius: 14px; overflow: hidden; position: relative;
+    }
+    .s-layer::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      background: linear-gradient(180deg, var(--claro-red), var(--claro-yellow));
+    }
+    .s-layer-num { font-family: 'Outfit', sans-serif; font-weight: 900; color: var(--claro-yellow); font-size: 1.4rem; margin-bottom: 0.4rem; letter-spacing: -0.02em; }
+    .s-layer-title { font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 800; color: var(--text-light); margin-bottom: 0.3rem; }
+    .s-layer-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.45; }
+    .s-layer-scale {
+      display: inline-block; margin-top: 0.5rem;
+      padding: 0.2rem 0.55rem;
+      background: rgba(197,165,114,0.08); border: 1px solid rgba(197,165,114,0.25);
+      border-radius: 999px;
+      font-family: 'Outfit', sans-serif; font-size: 0.58rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold);
+    }
+
+    /* ═══════════════════════════════ CONTROLS ═══════════════════════════════ */
+    .slide-controls {
+      position: fixed; bottom: 2rem; right: 3rem;
+      display: flex; align-items: center; gap: 1rem;
+      z-index: 1000;
+      cursor: auto;
+    }
+    .slide-counter {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+      color: var(--muted-2);
+    }
+    .slide-counter .current { color: var(--gold); font-size: 1rem; }
+    .slide-btn {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border-dark);
+      background: rgba(20,20,24,0.8);
+      backdrop-filter: blur(12px);
+      color: var(--text-light);
+      font-size: 1rem;
+      display: grid; place-items: center;
+      cursor: pointer;
       transition: all 0.25s ease;
     }
-    .stub-actions a:hover {
-      background: rgba(244,185,62,0.08);
-      border-color: #F4B93E;
-      transform: translateY(-1px);
-    }
-    .stub-actions a.secondary {
-      color: rgba(244,241,232,0.7);
-      border-color: rgba(255,255,255,0.15);
-    }
-    .stub-actions a.secondary:hover {
-      color: #F4F1E8;
-      border-color: rgba(255,255,255,0.4);
+    .slide-btn:hover { border-color: var(--claro-red); color: var(--claro-red); }
+
+    .progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px; z-index: 1000;
+      background: linear-gradient(90deg, var(--claro-red), var(--claro-yellow));
+      transition: width 0.4s ease;
     }
 
-    .stub-meta {
-      margin-top: 3.5rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem; font-weight: 600;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: rgba(244,241,232,0.4);
+    /* Brand-top — wordmark Rentabiliza fixo top-left */
+    .brand-top {
+      position: fixed; top: 1.25rem; left: 1.5rem; z-index: 1000;
+      display: flex; align-items: baseline; gap: 0.6rem;
+      padding: 0.4rem 0.85rem;
+      background: rgba(13,17,23,0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-md, 8px);
+    }
+    .brand-top-wordmark {
+      font-family: 'Fraunces', 'Times New Roman', serif;
+      font-variation-settings: "SOFT" 50, "WONK" 0;
+      font-size: 18px; line-height: 1;
+      display: inline-flex; align-items: baseline;
+      letter-spacing: -0.02em;
+    }
+    .brand-top-wordmark .r-name { font-style: italic; font-weight: 600; color: #F4F1E8; }
+    .brand-top-wordmark .r-dot { color: var(--claro-red); font-weight: 600; }
+    .brand-top-wordmark .r-ai { color: var(--claro-red); font-weight: 300; font-size: 0.65em; margin-left: 0.02em; }
+    .brand-top-divider {
+      width: 1px; height: 14px;
+      background: rgba(255,255,255,0.18);
+      align-self: center;
+    }
+    .brand-top-text {
+      font-family: 'JetBrains Mono', monospace !important;
+      font-weight: 600; font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .brand-top-text em { color: var(--claro-red); font-family: inherit; font-style: normal; font-weight: 600; }
+
+    /* Home link agora no top-right (junto do doc-link) */
+    .home-link {
+      position: fixed; top: 2rem; right: 2.5rem; z-index: 1000;
+      font-family: 'Outfit', sans-serif; font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--muted-2); cursor: pointer;
+      transition: color 0.25s ease;
+      padding: 0.4rem 0.85rem;
+      border: 1px solid var(--border-dark);
+      border-radius: 999px;
+      background: rgba(20,20,24,0.4);
+      backdrop-filter: blur(8px);
+    }
+    .home-link:hover { color: var(--claro-red); border-color: rgba(244,185,62,0.4); }
+    .bg-light .home-link { color: var(--muted-2); background: rgba(250,250,247,0.7); border-color: rgba(0,0,0,0.1); }
+
+    /* Fullscreen btn */
+    .fs-btn {
+      position: fixed; bottom: 2rem; left: 2.5rem; z-index: 1000;
+      font-family: 'Outfit', sans-serif; font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted-dark); cursor: pointer;
+      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--border-dark); border-radius: 6px;
+      background: rgba(20,20,24,0.6); backdrop-filter: blur(8px);
+      transition: all 0.25s ease;
+    }
+    .fs-btn:hover { color: var(--gold); border-color: var(--border-warm); }
+
+    /* Big idea special */
+    .s-big-idea {
+      padding: 2.5rem 3rem;
+      background: linear-gradient(135deg, rgba(244,185,62,0.12) 0%, rgba(244,185,62,0.06) 100%);
+      border: 1px solid rgba(244,185,62,0.3);
+      border-radius: 18px;
+      position: relative; overflow: hidden; z-index: 1;
+      margin: 1.5rem 0;
+      backdrop-filter: blur(10px);
+    }
+    .s-big-idea::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--claro-red), var(--claro-yellow));
+    }
+    .s-big-idea p {
+      font-family: 'Outfit', sans-serif; font-style: normal;
+      font-size: clamp(1.15rem, 1.7vw, 1.55rem); line-height: 1.4;
+      color: var(--text-light); margin: 0;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+    }
+    .s-big-idea p em { color: var(--claro-yellow); }
+
+    /* Two column layout */
+    .s-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; position: relative; z-index: 1; }
+    .s-col {}
+
+    /* ═══════════════════════════════ IMAGE PLACEHOLDERS ═══════════════════════════════ */
+    .s-img {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid var(--border-warm);
+    }
+    .s-img .ph-grad {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 80% 20%, rgba(237,28,36,0.22), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 20% 90%, rgba(197,165,114,0.14), transparent 60%),
+        linear-gradient(135deg, #14101C 0%, #0B0B0E 100%);
+    }
+    .bg-light .s-img { border-color: rgba(237,28,36,0.18); }
+    .bg-light .s-img .ph-grad {
+      background:
+        radial-gradient(ellipse 60% 40% at 80% 20%, rgba(237,28,36,0.14), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 20% 90%, rgba(197,165,114,0.22), transparent 60%),
+        linear-gradient(135deg, #FAFAF7 0%, #E8DFCD 100%);
+    }
+    .s-img .ph-grain {
+      position: absolute; inset: 0; opacity: 0.15;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .s-img .ph-label {
+      position: absolute; bottom: 0.75rem; left: 0.75rem;
+      font-family: 'Outfit', sans-serif; font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(197,165,114,0.55); padding: 0.25rem 0.55rem;
+      background: rgba(0,0,0,0.4); border: 1px solid rgba(197,165,114,0.25);
+      border-radius: 4px;
+    }
+    .bg-light .s-img .ph-label {
+      color: rgba(183,19,24,0.75);
+      background: rgba(250,250,247,0.7);
+      border-color: rgba(237,28,36,0.3);
+    }
+
+    /* Slide com imagem lateral — capa hero */
+    .s-hero-split {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative; z-index: 1;
+      height: 100%;
+    }
+    .s-hero-split .s-hero-text {
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .s-hero-split .s-img {
+      aspect-ratio: 4/5;
+      width: 100%;
+      max-height: 70vh;
+    }
+
+    /* Mini-banner image top do slide */
+    .s-img-banner {
+      width: 100%;
+      aspect-ratio: 21/6;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Portrait image for CTA */
+    .s-img-portrait {
+      aspect-ratio: 4/5;
+      width: 100%;
+      max-height: 55vh;
+    }
+
+    /* ═══════════════════════════════ MOBILE RESPONSIVE ═══════════════════════════════ */
+    @media (max-width: 900px) {
+      body { overflow-y: auto; height: auto; }
+      .deck {
+        width: 100%; height: auto;
+        padding: 5rem 0 8rem;
+      }
+      /* No mobile: slides stackam verticalmente em vez de serem absolutos */
+      .slide {
+        position: relative;
+        inset: auto;
+        opacity: 1;
+        pointer-events: auto;
+        padding: 3rem 1.5rem 3.5rem;
+        min-height: 80vh;
+        margin-bottom: 1rem;
+        border-top: 1px solid rgba(255,255,255,0.05);
+      }
+      .slide:first-of-type { border-top: none; }
+
+      /* Brand top — menor, fixo */
+      .brand-top {
+        top: 1rem; left: 1rem;
+        padding: 0.45rem 0.85rem 0.45rem 0.7rem;
+        gap: 0.6rem;
+      }
+      .brand-top-logo { height: 20px; }
+      .brand-top-text { font-size: 0.72rem; }
+
+      /* Home/Doc link — empilha no top-right */
+      .home-link {
+        top: 1rem; right: 1rem;
+        font-size: 0.65rem;
+        padding: 0.35rem 0.7rem;
+      }
+
+      /* Fullscreen btn — ocultar no mobile */
+      .fs-btn { display: none; }
+
+      /* Controles bottom — centralizados e mais compactos */
+      .slide-controls {
+        bottom: 1rem; right: 50%;
+        transform: translateX(50%);
+        gap: 0.6rem;
+        background: rgba(20,20,24,0.85);
+        backdrop-filter: blur(12px);
+        padding: 0.5rem 0.85rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255,255,255,0.1);
+      }
+      .slide-counter { font-size: 0.65rem; }
+      .slide-counter .current { font-size: 0.85rem; }
+      .slide-btn { width: 34px; height: 34px; font-size: 0.9rem; }
+
+      /* Progress bar mais visível */
+      .progress-bar { display: none; }
+
+      /* Typography escalona */
+      .s-title { font-size: clamp(1.6rem, 6vw, 2.4rem) !important; line-height: 1.1; }
+      .s-subtitle { font-size: clamp(0.95rem, 3.5vw, 1.1rem) !important; }
+      .s-num {
+        top: 1rem; right: 1rem;
+        font-size: clamp(2.5rem, 10vw, 4rem);
+      }
+      .s-eyebrow { font-size: 0.6rem; margin-bottom: 1.25rem; padding: 0.3rem 0.75rem; }
+
+      /* GRIDS → 1-2 colunas no mobile */
+      .s-grid-5 { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+      .s-grid-3 { grid-template-columns: 1fr; gap: 0.75rem; }
+      .s-grid-2 { grid-template-columns: 1fr; }
+      .s-cols { grid-template-columns: 1fr; gap: 1.25rem; }
+      .s-hero-split { grid-template-columns: 1fr; gap: 1.25rem; }
+      .s-hero-split .s-img { max-height: 200px; aspect-ratio: 16/10; }
+      .s-img-banner { aspect-ratio: 16/9; margin-bottom: 1rem; }
+
+      /* Cards e blocos */
+      .s-card { padding: 1.25rem 1rem; }
+      .s-card-title { font-size: 0.95rem; }
+      .s-card-tag { font-size: 0.78rem; }
+      .s-card-desc { font-size: 0.78rem; }
+      .s-method { padding: 1.25rem 1.1rem; }
+      .s-method-title { font-size: 1.1rem; }
+      .s-pack-row {
+        grid-template-columns: auto 1fr;
+        gap: 0.7rem;
+        padding: 0.8rem 1rem;
+      }
+      .s-pack-price, .s-pack-dur {
+        grid-column: span 2;
+        justify-self: start;
+      }
+
+      /* Big idea no slide 5 */
+      .s-big-idea { padding: 1.5rem 1.5rem; }
+      .s-big-idea p { font-size: clamp(1rem, 4vw, 1.25rem) !important; }
+
+      /* Author block no slide 12 */
+      .author-block {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.25rem 1rem;
+        gap: 1rem;
+      }
+      .author-logo-wrap { width: 80px; height: 80px; padding: 0.75rem; }
+      .cronograma-box { padding: 1.25rem 1rem; }
+
+      /* Tabelas — horizontal scroll */
+      .s-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .s-table { font-size: 0.78rem; min-width: 480px; }
+      .s-table th, .s-table td { padding: 0.65rem 0.75rem; }
+
+      /* Timeline compacto */
+      .s-timeline { padding-left: 2.25rem; }
+      .s-tl-title { font-size: 0.9rem; }
+      .s-tl-desc { font-size: 0.78rem; }
+      .s-tl-item { padding-bottom: 1rem; }
+      .s-tl-dot { left: -1.9rem; width: 16px; height: 16px; font-size: 0.5rem; }
+
+      /* Layers */
+      .s-layer { padding: 1rem 1rem; }
+      .s-layer-title { font-size: 0.88rem; }
+      .s-layer-desc { font-size: 0.75rem; }
+
+      /* Metrics */
+      .s-metric { padding: 1.25rem 1rem; }
+      .s-metric-who { font-size: 1rem; }
+
+      /* Background photos mais escuros no mobile pra texto legível */
+      .s-bg-photo { opacity: 0.1 !important; }
+      .s-bg-photo::after {
+        background: rgba(20,20,22,0.88) !important;
+      }
+    }
+
+    /* Mobile pequeno */
+    @media (max-width: 480px) {
+      .slide { padding: 2.5rem 1.25rem 3rem; min-height: auto; }
+      .s-grid-5 { grid-template-columns: 1fr; }
+      .s-title { font-size: clamp(1.4rem, 7vw, 2rem) !important; }
+      .brand-top-text { display: none; }
+      .brand-top-divider { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <div class="stub">
-    <span class="stub-eyebrow">Pitch · Varejo e Lojistas</span>
-    <h1>A apresentação <em>chega em breve</em>.</h1>
-    <p class="lead">
-      O deck para varejo e lojistas está em produção. Linguagem direta do balcão, problema real, método que entra na operação e os planos que cabem no caixa do dono.
-    </p>
-    <div class="stub-actions">
-      <a href="slides.html">Ver pitch para Indústria e Parceiros →</a>
-      <a href="index.html" class="secondary">← Voltar à home</a>
-    </div>
-    <div class="stub-meta">
-      Rentabiliza.ai · Abril 2026
-    </div>
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- WORDMARK RENTABILIZA TOP-LEFT -->
+  <div class="brand-top">
+    <a href="index.html" style="display:inline-flex; align-items:baseline; gap:0.6rem;" aria-label="Rentabiliza.ai">
+      <span class="brand-top-wordmark"><span class="r-name">Rentabiliza</span><span class="r-dot">.</span><span class="r-ai">ai</span></span>
+      <span class="brand-top-divider"></span>
+      <span class="brand-top-text">Pitch Varejo e Lojistas · 2026</span>
+    </a>
   </div>
+
+  <a href="doc.html" class="home-link">Documento →</a>
+  <div class="fs-btn" id="fsBtn">Tela cheia</div>
+
+  <div class="deck" id="deck">
+
+    <!-- ════════════ SLIDE 01 — CAPA ════════════ -->
+    <div class="slide bg-dark active" data-slide="1">
+      <div class="s-bg-photo" style="background-image: url('assets/images/varejo-capa-hero.jpg'); background-position: right center; opacity: 0.42;"></div>
+      <div class="s-num">01</div>
+      <div style="position: absolute; top: 32px; right: 80px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); z-index: 2;">Rentabiliza.ai · 2026</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>Para varejistas que querem crescer na era da IA</span></div>
+      <h1 class="s-title" style="font-size: clamp(2.8rem, 6.2vw, 5.8rem); line-height: 1.05; margin-top: 1.5rem; max-width: 1080px;">Você pode operar como <em>gigante</em> — sem deixar de ser <em>dono</em>.</h1>
+      <p class="s-subtitle" style="margin-top: 1.75rem; margin-bottom: 3rem; max-width: 800px; font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(1.1rem, 1.7vw, 1.45rem); line-height: 1.45;">
+        Mais venda, mais lucro, mais tempo livre. IA trabalhando, time fiel, operação rodando — mesmo quando você não está olhando.
+      </p>
+      <div style="display: inline-flex; gap: 2rem; flex-wrap: wrap; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--claro-yellow); position: relative; z-index: 1;">
+        <span style="display: inline-flex; align-items: center; gap: 8px;"><span style="width: 5px; height: 5px; background: var(--claro-yellow); border-radius: 50%;"></span>Mais venda</span>
+        <span style="display: inline-flex; align-items: center; gap: 8px;"><span style="width: 5px; height: 5px; background: var(--claro-yellow); border-radius: 50%;"></span>Menos custo</span>
+        <span style="display: inline-flex; align-items: center; gap: 8px;"><span style="width: 5px; height: 5px; background: var(--claro-yellow); border-radius: 50%;"></span>Mais rentabilidade</span>
+      </div>
+      <div style="position: absolute; bottom: 32px; right: 80px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); z-index: 2;">PulsarH.ai × TradeUp</div>
+    </div>
+
+    <!-- ════════════ SLIDE 02 — O ESPELHO ════════════ -->
+    <div class="slide bg-charcoal" data-slide="2">
+      <div class="s-num">02</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>02 · Deixa eu te perguntar uma coisa</span></div>
+      <h2 class="s-title">A sua semana é <em>exatamente</em> essa, ou tô errado?</h2>
+      <div style="display: grid; grid-template-columns: 1fr 280px; gap: 2.5rem; align-items: start; margin-top: 1.25rem;">
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.65rem;">
+          <li style="font-family: 'Fraunces', serif; font-weight: 400; font-size: 1.1rem; line-height: 1.4; color: var(--text-light); padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: var(--claro-yellow); font-weight: 600;">→</span> Você chega antes do time.</li>
+          <li style="font-family: 'Fraunces', serif; font-weight: 400; font-size: 1.1rem; line-height: 1.4; color: var(--text-light); padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: var(--claro-yellow); font-weight: 600;">→</span> Resolve a primeira urgência antes do café.</li>
+          <li style="font-family: 'Fraunces', serif; font-weight: 400; font-size: 1.1rem; line-height: 1.4; color: var(--text-light); padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: var(--claro-yellow); font-weight: 600;">→</span> Vende, atende, cobra, briga com fornecedor, treina vendedor novo, ajeita vitrine.</li>
+          <li style="font-family: 'Fraunces', serif; font-weight: 400; font-size: 1.1rem; line-height: 1.4; color: var(--text-light); padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: var(--claro-yellow); font-weight: 600;">→</span> Fecha caixa, paga conta.</li>
+          <li style="font-family: 'Fraunces', serif; font-weight: 400; font-size: 1.1rem; line-height: 1.4; color: var(--text-light); padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: var(--claro-yellow); font-weight: 600;">→</span> Volta pra casa exausto.</li>
+          <li style="font-family: 'Fraunces', serif; font-weight: 400; font-size: 1.1rem; line-height: 1.4; color: var(--text-light); padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: var(--claro-yellow); font-weight: 600;">→</span> Dorme pensando no que precisa fazer amanhã.</li>
+          <li style="font-family: 'Fraunces', serif; font-weight: 400; font-size: 1.1rem; line-height: 1.4; color: var(--text-light); padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: var(--claro-yellow); font-weight: 600;">→</span> Acorda fazendo a mesma coisa.</li>
+        </ul>
+        <div style="border-radius: 12px; overflow: hidden; aspect-ratio: 4/5; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);">
+          <img src="assets/images/varejo-espelho.jpg" alt="Lojista exausto fechando caixa" style="width:100%;height:100%;object-fit:cover;opacity:0.85;">
+        </div>
+      </div>
+      <div style="margin-top: 1.75rem; padding: 1.5rem 1.85rem; background: rgba(13,17,23,0.55); border: 1px solid rgba(244,185,62,0.25); border-left: 4px solid var(--claro-yellow); border-radius: 0 12px 12px 0;">
+        <p style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.65rem; line-height: 1.3; color: var(--text-light); letter-spacing: -0.01em;">A loja fatura. Você não cresce.</p>
+      </div>
+      <p style="margin-top: 1.25rem; font-size: 1rem; line-height: 1.5; color: var(--muted);">Não é falta de cliente. Não é falta de produto. Não é falta de coragem.</p>
+      <p style="margin-top: 1rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; line-height: 1.35; color: var(--claro-yellow); letter-spacing: -0.01em;">É falta de operar como gigante — com IA, time fiel e processo no piloto automático.</p>
+    </div>
+
+    <!-- ════════════ SLIDE 03 — O DINHEIRO QUE TÁ FICANDO NA MESA ════════════ -->
+    <div class="slide bg-light" data-slide="3">
+      <div class="s-num">03</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>03 · A indústria quer te pagar</span></div>
+      <h2 class="s-title">Operadoras e indústria estão <em>loucas</em> pra investir em você. Você não tá vendo.</h2>
+      <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 2.5rem; align-items: start; margin-top: 1rem;">
+        <div>
+          <p class="s-subtitle" style="margin-bottom: 1.5rem;">Cada celular que você vende sem fechar plano, sem fechar seguro, sem fechar garantia — é comissão da operadora deixada na mesa. Comissão recorrente que entraria todo mês. Por anos.</p>
+          <div style="padding: 1.5rem 1.75rem; background: rgba(13,17,23,0.06); border: 1px solid rgba(13,17,23,0.1); border-radius: 12px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.75rem;">Faz a conta</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; line-height: 1.7; color: var(--text-dark);">
+              <strong style="color: var(--claro-red);">20</strong> vendas por dia<br>
+              <span style="color: var(--muted-2);">×</span> <strong style="color: var(--claro-red);">26</strong> dias por mês<br>
+              <span style="color: var(--muted-2);">×</span> <strong style="color: var(--claro-red);">12</strong> meses<br>
+              <span style="display: block; height: 1px; background: rgba(13,17,23,0.15); margin: 0.6rem 0;"></span>
+              <strong style="color: var(--claro-red); font-size: 1.4rem;">= 6.240 oportunidades por ano</strong>
+            </div>
+            <p style="margin: 1.25rem 0 0; font-family: 'Inter', sans-serif; font-size: 0.95rem; line-height: 1.55; color: var(--muted-2);">
+              Em <strong style="color: var(--text-dark);">cada uma</strong> você poderia ter triplicado o ticket.<br>
+              Em <strong style="color: var(--claro-red);">nenhuma</strong> triplicou.
+            </p>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <div style="border-radius: 12px; overflow: hidden; aspect-ratio: 4/3; background: rgba(13,17,23,0.05); border: 1px solid rgba(13,17,23,0.08);">
+            <img src="assets/images/varejo-dinheiro-mesa.jpg" alt="Cliente saindo da loja com sacola" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <p style="margin: 0; font-size: 0.9rem; line-height: 1.5; color: var(--muted-2);">A indústria já entendeu que o lojista que vende serviço vale <strong style="color: var(--text-dark);">4× mais</strong>. Por isso ela paga comissão recorrente, oferece bônus, abre parceria.</p>
+        </div>
+      </div>
+      <p style="margin-top: 1.5rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; line-height: 1.35; color: var(--claro-red); letter-spacing: -0.01em;">O dinheiro tá aí. A indústria quer te pagar. Falta você abrir os olhos.</p>
+    </div>
+
+    <!-- ════════════ SLIDE 04 — A SAÍDA ════════════ -->
+    <div class="slide bg-dark" data-slide="4">
+      <div class="s-num">04</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>04 · A gente coloca a mão na massa</span></div>
+      <h2 class="s-title">A gente não é coach. Não é consultoria que entrega slide. <em>A gente entra junto</em>.</h2>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; margin-top: 1.25rem;">
+        <div>
+          <p class="s-subtitle" style="margin-bottom: 1.25rem;">Você já comprou curso. Já assistiu palestra. Já contratou consultor de terno que entregou apresentação bonita e sumiu.</p>
+          <p style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.6rem; line-height: 1.35; color: var(--claro-yellow); letter-spacing: -0.01em; margin: 0;">Mudou alguma coisa?</p>
+        </div>
+        <div style="border-radius: 14px; overflow: hidden; aspect-ratio: 4/3; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+          <img src="assets/images/varejo-mao-na-massa.jpg" alt="Equipe Rentabiliza dentro da operação real" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+      </div>
+      <div style="margin-top: 1.75rem; padding: 2rem 2.25rem; background: linear-gradient(135deg, var(--claro-yellow), #E0A52A); border-radius: 16px; color: var(--ink);">
+        <p style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 700; font-size: clamp(1.4rem, 2.4vw, 2rem); line-height: 1.25; letter-spacing: -0.02em;">
+          Conteúdo você assiste sozinho.<br>
+          <strong>A gente coloca a mão na massa com você.</strong>
+        </p>
+      </div>
+      <p style="margin-top: 1.5rem; font-size: 1rem; line-height: 1.55; color: var(--muted);">A equipe Rentabiliza entra dentro da sua operação real. Treina o seu time. Configura a IA pra sua loja. Monta o seu site. Instala o ritual de gestão. Acompanha o resultado.</p>
+      <p style="margin-top: 1rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; line-height: 1.3; color: var(--claro-yellow);">Não é discurso. É implementação.</p>
+    </div>
+
+    <!-- ════════════ SLIDE 05 — O RENTABILIZA.AI ════════════ -->
+    <div class="slide bg-light" data-slide="5">
+      <div class="s-num">05</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>05 · Quem a gente é</span></div>
+      <h2 class="s-title">Plataforma que <em>instala</em> dentro da sua loja o que rede grande tem.</h2>
+      <p class="s-subtitle" style="margin-bottom: 1.5rem;">O Rentabiliza.ai é uma plataforma de implementação executiva pra varejistas que querem parar de operar no improviso e começar a operar como rede nacional.</p>
+      <div style="margin: 1.25rem 0 1.5rem; padding: 1.5rem 1.75rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-radius: 14px; text-align: center;">
+        <p style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: clamp(1.1rem, 1.9vw, 1.6rem); line-height: 1.3; color: var(--text-dark); letter-spacing: -0.01em;">
+          <span style="color: var(--claro-red);">Gente</span> + <span style="color: var(--claro-red);">Processo</span> + <span style="color: var(--claro-red);">IA aplicada</span> = Loja que opera como <span style="color: var(--claro-red);">gigante</span>
+        </p>
+      </div>
+      <div class="s-grid-3" style="margin-top: 0.75rem;">
+        <div style="padding: 1.25rem 1.4rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-top: 3px solid var(--claro-red); border-radius: 4px 4px 12px 12px; display: flex; flex-direction: column; gap: 0.6rem;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.4rem;">🧠</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red);">Gente</span>
+          </div>
+          <p style="margin: 0; font-size: 0.92rem; line-height: 1.55; color: var(--muted-2);">Time treinado pra vender mais e ficar mais. Vendedor consultivo. Líder com método. Cultura que retém talento bom e descarta o ruim.</p>
+        </div>
+        <div style="padding: 1.25rem 1.4rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-top: 3px solid var(--claro-red); border-radius: 4px 4px 12px 12px; display: flex; flex-direction: column; gap: 0.6rem;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.4rem;">🔁</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red);">Processo</span>
+          </div>
+          <p style="margin: 0; font-size: 0.92rem; line-height: 1.55; color: var(--muted-2);">Ritual de gestão semanal. Indicador no celular. Operação que roda no piloto automático — mesmo quando você sai.</p>
+        </div>
+        <div style="padding: 1.25rem 1.4rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-top: 3px solid var(--claro-red); border-radius: 4px 4px 12px 12px; display: flex; flex-direction: column; gap: 0.6rem;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.4rem;">⚡</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red);">IA Aplicada</span>
+          </div>
+          <p style="margin: 0; font-size: 0.92rem; line-height: 1.55; color: var(--muted-2);">Atendimento automático. Recuperação de cliente. Análise preditiva. Tudo configurado pela gente em português.</p>
+        </div>
+      </div>
+      <p style="margin-top: 1.75rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.3rem; line-height: 1.35; color: var(--text-dark);">As três camadas, instaladas <span style="color: var(--claro-red); font-weight: 600;">juntas</span>, dentro da sua operação real.</p>
+    </div>
+
+    <!-- ════════════ SLIDE 06 — A TRANSFORMAÇÃO ════════════ -->
+    <div class="slide bg-charcoal" data-slide="6">
+      <div class="s-num">06</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>06 · A transformação</span></div>
+      <h2 class="s-title">A gente entra na sua loja e <em>muda</em> quatro coisas. Ao mesmo tempo.</h2>
+      <div class="s-grid-3" style="grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem;">
+        <div style="padding: 1.5rem 1.6rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-left: 3px solid var(--claro-yellow); border-radius: 0 12px 12px 0; display: grid; grid-template-columns: 88px 1fr; gap: 1.25rem; align-items: start;">
+          <div style="border-radius: 10px; overflow: hidden; aspect-ratio: 1/1; background: rgba(244,185,62,0.08);">
+            <img src="assets/images/varejo-time-vende.jpg" alt="Vendedor consultivo no PDV" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.4rem;">01 · Time que vende mais</div>
+            <p style="margin: 0; font-size: 0.88rem; line-height: 1.55; color: var(--text-light);">Cliente que entrava gastando R$ 80 sai com R$ 280. Não é mágica — é gestão. Vendedor treinado fecha serviço junto: seguro, garantia, plano, comissão recorrente. <strong style="color: var(--claro-yellow);">Ticket triplica. Margem dobra.</strong></p>
+          </div>
+        </div>
+        <div style="padding: 1.5rem 1.6rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-left: 3px solid var(--claro-yellow); border-radius: 0 12px 12px 0; display: grid; grid-template-columns: 88px 1fr; gap: 1.25rem; align-items: start;">
+          <div style="border-radius: 10px; overflow: hidden; aspect-ratio: 1/1; background: rgba(244,185,62,0.08);">
+            <img src="assets/images/varejo-processo-roda.jpg" alt="Daily de 15 minutos com a equipe" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.4rem;">02 · Processo que roda sem você</div>
+            <p style="margin: 0; font-size: 0.88rem; line-height: 1.55; color: var(--text-light);">Daily de 15 minutos. 1:1 com vendedor que não vira briga. Indicador na tela do celular. <strong style="color: var(--claro-yellow);">Sua loja para de parar quando você sai.</strong></p>
+          </div>
+        </div>
+        <div style="padding: 1.5rem 1.6rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-left: 3px solid var(--claro-yellow); border-radius: 0 12px 12px 0; display: grid; grid-template-columns: 88px 1fr; gap: 1.25rem; align-items: start;">
+          <div style="border-radius: 10px; overflow: hidden; aspect-ratio: 1/1; background: rgba(244,185,62,0.08);">
+            <img src="assets/images/varejo-ia-24h.jpg" alt="Atendimento automático WhatsApp" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.4rem;">03 · IA trabalhando 24 horas</div>
+            <p style="margin: 0; font-size: 0.88rem; line-height: 1.55; color: var(--text-light);">Atendimento automático no WhatsApp. Recuperação de cliente dormente. Dashboard pronto. Agente configurado em português. <strong style="color: var(--claro-yellow);">Você economiza vendedor sem perder venda.</strong></p>
+          </div>
+        </div>
+        <div style="padding: 1.5rem 1.6rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-left: 3px solid var(--claro-yellow); border-radius: 0 12px 12px 0; display: grid; grid-template-columns: 88px 1fr; gap: 1.25rem; align-items: start;">
+          <div style="border-radius: 10px; overflow: hidden; aspect-ratio: 1/1; background: rgba(244,185,62,0.08);">
+            <img src="assets/images/varejo-marca-grande.jpg" alt="Site profissional e identidade visual" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.4rem;">04 · Marca com cara de gente grande</div>
+            <p style="margin: 0; font-size: 0.88rem; line-height: 1.55; color: var(--text-light);">Site profissional, vídeo curto pra Instagram, imagem de campanha, identidade visual no PDV. <strong style="color: var(--claro-yellow);">Sua loja entra no nível das grandes — sem agência cobrando R$ 8 mil.</strong></p>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 1.5rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.25rem; line-height: 1.35; color: var(--text-light);">Quatro frentes trabalhando <span style="color: var(--claro-yellow); font-weight: 600;">juntas</span> dentro do seu negócio. Sem você fazer sozinho.</p>
+    </div>
+
+    <!-- ════════════ SLIDE 07 — COMO FUNCIONA ════════════ -->
+    <div class="slide bg-dark" data-slide="7">
+      <div class="s-num">07</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>07 · Pessoas · Processos · IA</span></div>
+      <h2 class="s-title">A gente trabalha em <em>três</em> camadas. Tirou uma, o sistema cai.</h2>
+      <div class="s-grid-3" style="margin-top: 1.25rem;">
+        <div style="padding: 1.5rem 1.5rem; background: rgba(255,107,71,0.06); border: 1px solid rgba(255,107,71,0.3); border-radius: 14px; display: flex; flex-direction: column; gap: 0.6rem;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.5rem;">🧠</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--r-coral);">Pessoas · O Filtro H</span>
+          </div>
+          <p style="margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--text-light);">A gente desenvolve em você e no seu time o que separa loja boa de loja grande: o <strong style="color: var(--r-coral);">filtro H — humanização</strong>. Cuidar de gente, dar feedback que cresce, criar cultura que retém talento. <strong style="color: var(--text-light);">Sem isso, processo e IA viram planilha bonita.</strong></p>
+        </div>
+        <div style="padding: 1.5rem 1.5rem; background: rgba(244,185,62,0.06); border: 1px solid rgba(244,185,62,0.3); border-radius: 14px; display: flex; flex-direction: column; gap: 0.6rem;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.5rem;">🔁</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow);">Processos · PULSAR</span>
+          </div>
+          <p style="margin: 0; font-size: 0.88rem; line-height: 1.55; color: var(--text-light);">Seis rituais semanais que viram piloto automático:</p>
+          <ul style="list-style: none; padding: 0; margin: 0.25rem 0 0; display: flex; flex-direction: column; gap: 0.25rem;">
+            <li style="font-size: 0.85rem; color: var(--text-light);"><strong style="color: var(--claro-yellow); font-family: 'JetBrains Mono', monospace; font-size: 0.95rem;">P</strong>lanejar a semana com clareza.</li>
+            <li style="font-size: 0.85rem; color: var(--text-light);"><strong style="color: var(--claro-yellow); font-family: 'JetBrains Mono', monospace; font-size: 0.95rem;">U</strong>sar o ritual diário de 15 min.</li>
+            <li style="font-size: 0.85rem; color: var(--text-light);"><strong style="color: var(--claro-yellow); font-family: 'JetBrains Mono', monospace; font-size: 0.95rem;">L</strong>apidar erro antes de virar crise.</li>
+            <li style="font-size: 0.85rem; color: var(--text-light);"><strong style="color: var(--claro-yellow); font-family: 'JetBrains Mono', monospace; font-size: 0.95rem;">S</strong>ustentar o que tá funcionando.</li>
+            <li style="font-size: 0.85rem; color: var(--text-light);"><strong style="color: var(--claro-yellow); font-family: 'JetBrains Mono', monospace; font-size: 0.95rem;">A</strong>lavancar o que dá resultado.</li>
+            <li style="font-size: 0.85rem; color: var(--text-light);"><strong style="color: var(--claro-yellow); font-family: 'JetBrains Mono', monospace; font-size: 0.95rem;">R</strong>eplicar pra todo o time.</li>
+          </ul>
+          <p style="margin: 0.4rem 0 0; font-size: 0.85rem; font-style: italic; color: var(--claro-yellow); font-weight: 600;">A loja roda sozinha.</p>
+        </div>
+        <div style="padding: 1.5rem 1.5rem; background: rgba(61,220,151,0.06); border: 1px solid rgba(61,220,151,0.3); border-radius: 14px; display: flex; flex-direction: column; gap: 0.6rem;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.5rem;">⚡</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--r-mint);">Tecnologia · IA Aplicada</span>
+          </div>
+          <p style="margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--text-light);">IA aplicada onde gera dinheiro: análise de venda, treino do time em ciclo curto, identificação de cliente pronto pra fechar, automação do trabalho de máquina. <strong style="color: var(--r-mint);">Tudo configurado pela gente — você não programa nada.</strong></p>
+        </div>
+      </div>
+      <p style="margin-top: 1.75rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.3rem; line-height: 1.35; color: var(--text-light); text-align: center;">Pessoas humanizadas + processos com PULSAR + IA aplicada. <span style="color: var(--claro-yellow); font-weight: 600;">Esse é o pulo do gato.</span></p>
+    </div>
+
+    <!-- ════════════ SLIDE 08 — A ESCADA ════════════ -->
+    <div class="slide bg-light" data-slide="8">
+      <div class="s-num">08</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>08 · Onde você entra</span></div>
+      <h2 class="s-title">Quatro níveis. Você entra <em>de graça</em> — porque a indústria paga.</h2>
+      <div style="display: grid; grid-template-columns: 1fr 220px; gap: 2.5rem; align-items: start; margin-top: 1rem;">
+        <p class="s-subtitle" style="margin-bottom: 0;">A gente desenhou uma escada que começa com você sem tirar nada do bolso. A entrada é subsidiada pela indústria — operadoras e marcas parceiras pagam pelo seu primeiro passo. Você prova o método. Tira resultado. E quanto mais resultado você der, <strong>mais subsídio e incentivo a indústria libera pra você crescer</strong>.</p>
+        <div style="border-radius: 12px; overflow: hidden; aspect-ratio: 4/5; background: rgba(13,17,23,0.05); border: 1px solid rgba(13,17,23,0.08);">
+          <img src="assets/images/varejo-escada.jpg" alt="Escada de progressão do lojista" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+      </div>
+      <div class="s-grid-3" style="grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 1.5rem;">
+        <div style="padding: 1.25rem 1.1rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-radius: 12px; display: flex; flex-direction: column; gap: 0.6rem;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red);">Entrada gratuita</div>
+          <div style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.3rem; color: var(--text-dark); letter-spacing: -0.01em;">Start</div>
+          <div style="font-size: 0.78rem; line-height: 1.5; color: var(--muted-2);">Indústria banca sua entrada. Você prova o método e extrai resultado.</div>
+        </div>
+        <div style="padding: 1.25rem 1.1rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-radius: 12px; display: flex; flex-direction: column; gap: 0.6rem;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red);">A formação</div>
+          <div style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.3rem; color: var(--text-dark); letter-spacing: -0.01em;">Master</div>
+          <div style="font-size: 0.78rem; line-height: 1.5; color: var(--muted-2);">Indústria continua junto. Você estrutura a loja com método e mentoria.</div>
+        </div>
+        <div style="padding: 1.25rem 1.1rem; background: rgba(244,185,62,0.08); border: 1px solid rgba(244,185,62,0.3); border-radius: 12px; display: flex; flex-direction: column; gap: 0.6rem; box-shadow: 0 8px 20px rgba(244,185,62,0.1);">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red);">O acompanhamento</div>
+          <div style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.3rem; color: var(--text-dark); letter-spacing: -0.01em;">inPULSO.pro</div>
+          <div style="font-size: 0.78rem; line-height: 1.5; color: var(--muted-2);">Indústria amplia o subsídio conforme você performa. IA configurada e Rodrigo perto.</div>
+        </div>
+        <div style="padding: 1.25rem 1.1rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-radius: 12px; display: flex; flex-direction: column; gap: 0.6rem;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red);">A implementação</div>
+          <div style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.3rem; color: var(--text-dark); letter-spacing: -0.01em;">Premium</div>
+          <div style="font-size: 0.78rem; line-height: 1.5; color: var(--muted-2);">A gente dentro da operação, instalando tudo do zero. Indústria reconhece embaixador.</div>
+        </div>
+      </div>
+      <p style="margin-top: 1.5rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; line-height: 1.3; color: var(--claro-red); letter-spacing: -0.01em;">Quanto mais resultado você entrega, mais a indústria investe em você.</p>
+    </div>
+
+    <!-- ════════════ SLIDE 09 — QUEM TÁ POR TRÁS ════════════ -->
+    <div class="slide bg-charcoal" data-slide="9">
+      <div class="s-num">09</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>09 · A gente não tá aqui de paraquedas</span></div>
+      <h2 class="s-title">Quem tá te falando isso já viveu o que você vive — <em>em escala bilionária</em>.</h2>
+      <div class="s-cols" style="margin-top: 1.25rem; gap: 1.5rem;">
+        <div style="display: grid; grid-template-columns: 130px 1fr; gap: 1.25rem; padding: 1.75rem 1.5rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid var(--claro-yellow); border-radius: 0 12px 12px 0; align-items: start;">
+          <div style="border-radius: 10px; overflow: hidden; aspect-ratio: 4/5; background: rgba(244,185,62,0.08);">
+            <img src="assets/images/varejo-rodrigo.jpg" alt="Rodrigo Braga, fundador PulsarH.ai" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.6rem;">O método · PulsarH.ai</div>
+            <h3 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; color: var(--text-light); letter-spacing: -0.01em; margin-bottom: 0.85rem; line-height: 1.2;">21 anos de chão de loja.</h3>
+            <p style="margin: 0; font-size: 0.92rem; line-height: 1.55; color: var(--text-light);">Sete como Gerente Nacional em rede com <strong style="color: var(--claro-yellow);">4.500 vendedores</strong> e <strong style="color: var(--claro-yellow);">R$ 1 bilhão por ano</strong> sob gestão. Rodrigo Braga. O método que entra na sua loja foi escrito <strong>dentro</strong> de loja de verdade — não em sala de aula.</p>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 130px 1fr; gap: 1.25rem; padding: 1.75rem 1.5rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid var(--claro-yellow); border-radius: 0 12px 12px 0; align-items: start;">
+          <div style="border-radius: 10px; overflow: hidden; aspect-ratio: 4/5; background: rgba(244,185,62,0.08);">
+            <img src="assets/images/varejo-tradeup.jpg" alt="TradeUp PDV em escala" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.6rem;">A infraestrutura · TradeUp</div>
+            <h3 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; color: var(--text-light); letter-spacing: -0.01em; margin-bottom: 0.85rem; line-height: 1.2;">Maior integrador de telecom no varejo.</h3>
+            <p style="margin: 0; font-size: 0.92rem; line-height: 1.55; color: var(--text-light);">Plataforma TradeAppOne com mais de <strong style="color: var(--claro-yellow);">200 mil usuários</strong>. Opera com <strong>Claro, Nextel, Oi, Vivo, TIM</strong> desde sempre. Quando a gente fala em "rede grande" — é dela que estamos falando.</p>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 1.75rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.25rem; line-height: 1.35; color: var(--text-light);">Você não tá contratando coach. Tá contratando <span style="color: var(--claro-yellow); font-weight: 600;">experiência destilada</span> de quem operou em escala bilionária — agora dentro da sua porta.</p>
+    </div>
+
+    <!-- ════════════ SLIDE 10 — OS PLANOS ════════════ -->
+    <div class="slide bg-dark" data-slide="10">
+      <div class="s-num">10</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>10 · Quanto custa — e quanto retorna</span></div>
+      <h2 class="s-title">Faz a <em>conta</em> com a gente.</h2>
+      <div class="s-grid-3" style="grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.25rem;">
+        <div style="padding: 1.4rem 1.4rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; display: flex; flex-direction: column; gap: 0.5rem;">
+          <div style="display: flex; align-items: baseline; gap: 0.85rem; flex-wrap: wrap;">
+            <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; color: var(--text-light); letter-spacing: -0.01em;">Start</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; font-weight: 700; color: var(--claro-yellow);">R$ 297 único</span>
+          </div>
+          <div style="font-size: 0.78rem; color: var(--muted); font-style: italic;">entrada gratuita pro lojista · indústria banca 100%</div>
+          <p style="margin: 0.4rem 0 0; font-size: 0.86rem; line-height: 1.55; color: var(--muted);">Plataforma + 1 aula ao vivo por semana + comunidade Rentabiliza.</p>
+          <div style="margin-top: 0.6rem; padding: 0.85rem 1rem; background: rgba(244,185,62,0.08); border-left: 2px solid var(--claro-yellow); border-radius: 0 6px 6px 0;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow);">Faz a conta</span>
+            <p style="margin: 4px 0 0; font-size: 0.82rem; line-height: 1.5; color: var(--text-light);">Pra você, <strong style="color: var(--claro-yellow);">R$ 0</strong>. Pra indústria, R$ 297 investidos no seu onboarding. Você prova o método sem tirar nada do bolso.</p>
+          </div>
+        </div>
+        <div style="padding: 1.4rem 1.4rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; display: flex; flex-direction: column; gap: 0.5rem;">
+          <div style="display: flex; align-items: baseline; gap: 0.85rem; flex-wrap: wrap;">
+            <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; color: var(--text-light); letter-spacing: -0.01em;">Master</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; font-weight: 700; color: var(--claro-yellow);">R$ 297/mês · 3 meses</span>
+          </div>
+          <div style="font-size: 0.78rem; color: var(--muted); font-style: italic;">trimestre R$ 891 · pode ser subsidiado</div>
+          <p style="margin: 0.4rem 0 0; font-size: 0.86rem; line-height: 1.55; color: var(--muted);">Tudo do Start + formação Gestor na Era da IA + 3 mentorias com Rodrigo.</p>
+          <div style="margin-top: 0.6rem; padding: 0.85rem 1rem; background: rgba(244,185,62,0.08); border-left: 2px solid var(--claro-yellow); border-radius: 0 6px 6px 0;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow);">Faz a conta</span>
+            <p style="margin: 4px 0 0; font-size: 0.82rem; line-height: 1.5; color: var(--text-light);">R$ 297/mês é menos que uma corrida de aplicativo de ida e volta. E pode cair pra menos — operadoras parceiras subsidiam parte do plano.</p>
+          </div>
+        </div>
+        <div style="padding: 1.4rem 1.4rem; background: rgba(244,185,62,0.06); border: 1px solid rgba(244,185,62,0.3); border-radius: 12px; display: flex; flex-direction: column; gap: 0.5rem; box-shadow: 0 8px 24px rgba(244,185,62,0.08); position: relative;">
+          <div style="position: absolute; top: -10px; right: 16px; padding: 4px 10px; background: var(--claro-yellow); color: var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; border-radius: 4px;">★ Recomendado</div>
+          <div style="display: flex; align-items: baseline; gap: 0.85rem; flex-wrap: wrap;">
+            <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; color: var(--text-light); letter-spacing: -0.01em;">inPULSO.pro</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; font-weight: 700; color: var(--claro-yellow);">R$ 497/mês · 6 meses</span>
+          </div>
+          <div style="font-size: 0.78rem; color: var(--muted); font-style: italic;">semestre R$ 2.982 · pode ser subsidiado</div>
+          <p style="margin: 0.4rem 0 0; font-size: 0.86rem; line-height: 1.55; color: var(--muted);">Tudo do Master + agente de IA + 6 mentorias com Rodrigo + cadeira pra sócio/gerente.</p>
+          <div style="margin-top: 0.6rem; padding: 0.85rem 1rem; background: rgba(244,185,62,0.12); border-left: 2px solid var(--claro-yellow); border-radius: 0 6px 6px 0;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow);">Faz a conta</span>
+            <p style="margin: 4px 0 0; font-size: 0.82rem; line-height: 1.5; color: var(--text-light);">R$ 497/mês é o preço de uma comissão de plano de telefonia recorrente. A IA recupera <strong>um</strong> cliente dormente — você paga o plano. Resto vira lucro.</p>
+          </div>
+        </div>
+        <div style="padding: 1.4rem 1.4rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; display: flex; flex-direction: column; gap: 0.5rem;">
+          <div style="display: flex; align-items: baseline; gap: 0.85rem; flex-wrap: wrap;">
+            <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; color: var(--text-light); letter-spacing: -0.01em;">Premium</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; font-weight: 700; color: var(--claro-yellow);">R$ 4.997 único</span>
+          </div>
+          <div style="font-size: 0.78rem; color: var(--muted); font-style: italic;">pagamento único · 6 meses inclusos · vitalício</div>
+          <p style="margin: 0.4rem 0 0; font-size: 0.86rem; line-height: 1.55; color: var(--muted);">Tudo + implementação na sua loja: site, vídeos, ERP, IA pronta. Selo Embaixador vitalício.</p>
+          <div style="margin-top: 0.6rem; padding: 0.85rem 1rem; background: rgba(244,185,62,0.08); border-left: 2px solid var(--claro-yellow); border-radius: 0 6px 6px 0;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow);">Faz a conta</span>
+            <p style="margin: 4px 0 0; font-size: 0.82rem; line-height: 1.5; color: var(--text-light);">Agência <strong style="font-family: 'JetBrains Mono', monospace;">R$ 8-15k</strong> + consultor <strong style="font-family: 'JetBrains Mono', monospace;">R$ 12-24k</strong> + dev IA <strong style="font-family: 'JetBrains Mono', monospace;">R$ 6-10k</strong>. Mínimo separado: <strong style="color: var(--claro-yellow); font-family: 'JetBrains Mono', monospace;">R$ 26 mil</strong>. A gente entrega tudo junto por <strong style="color: var(--claro-yellow); font-family: 'JetBrains Mono', monospace;">R$ 4.997</strong>.</p>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 1.25rem; padding: 1rem 1.5rem; background: linear-gradient(135deg, var(--claro-yellow), #E0A52A); border-radius: 12px; color: var(--ink);">
+        <p style="margin: 0; font-size: 0.95rem; line-height: 1.5; font-weight: 600;">Cada plano pode ter parte ou totalidade subsidiada pela indústria — operadoras, marcas e parceiros — conforme seu desempenho e ambição. <strong>Quanto mais você cresce, mais a indústria investe em você.</strong></p>
+      </div>
+    </div>
+
+    <!-- ════════════ SLIDE 11 — O RESULTADO ════════════ -->
+    <div class="slide bg-light" data-slide="11">
+      <div class="s-num">11</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>11 · O que muda na sua vida</span></div>
+      <h2 class="s-title">Você se torna um <em>gestor na era da IA</em>.</h2>
+      <div style="display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; margin-top: 1rem;">
+        <div>
+          <p class="s-subtitle" style="margin-bottom: 0.85rem;">Não é frase de efeito. É consequência prática de operar com humanização nas pessoas, processos no piloto automático e tecnologia de ponta trabalhando 24 horas por você.</p>
+          <p style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.25rem; color: var(--claro-red); letter-spacing: -0.01em;">E o que isso significa pro seu bolso:</p>
+        </div>
+        <div style="border-radius: 12px; overflow: hidden; aspect-ratio: 4/5; background: rgba(13,17,23,0.05); border: 1px solid rgba(13,17,23,0.08);">
+          <img src="assets/images/varejo-gestor-ia.jpg" alt="Lojista como gestor moderno" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+      </div>
+      <div class="s-grid-3" style="margin-top: 1.25rem;">
+        <div style="padding: 1.4rem 1.5rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-top: 3px solid var(--claro-red); border-radius: 4px 4px 12px 12px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.5rem;">Mais venda</div>
+          <p style="margin: 0; font-size: 0.88rem; line-height: 1.55; color: var(--muted-2);">Time treinado fecha serviço junto do produto. Ticket triplica. Cliente fica mais tempo. Comissão recorrente entra todo mês.</p>
+        </div>
+        <div style="padding: 1.4rem 1.5rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-top: 3px solid var(--claro-red); border-radius: 4px 4px 12px 12px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.5rem;">Menos custo</div>
+          <p style="margin: 0; font-size: 0.88rem; line-height: 1.55; color: var(--muted-2);">IA assume trabalho de máquina. Você economiza vendedor sem perder venda. Processo automatizado corta desperdício invisível.</p>
+        </div>
+        <div style="padding: 1.4rem 1.5rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-top: 3px solid var(--claro-red); border-radius: 4px 4px 12px 12px;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.5rem;">Mais rentabilidade</div>
+          <p style="margin: 0; font-size: 0.88rem; line-height: 1.55; color: var(--muted-2);">Margem dobra. Marca ganha cara de grande. Indústria reconhece e investe. Loja vira ativo — não emprego.</p>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 1.5rem;">
+        <div style="padding: 1rem 1rem; text-align: center; border-right: 1px solid rgba(13,17,23,0.08);">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.4rem;">Mês 1</div>
+          <div style="font-size: 0.85rem; line-height: 1.4; color: var(--text-dark); font-weight: 500;">Você sente diferença no caixa.</div>
+        </div>
+        <div style="padding: 1rem 1rem; text-align: center; border-right: 1px solid rgba(13,17,23,0.08);">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.4rem;">Mês 3</div>
+          <div style="font-size: 0.85rem; line-height: 1.4; color: var(--text-dark); font-weight: 500;">A operação roda quando você sai.</div>
+        </div>
+        <div style="padding: 1rem 1rem; text-align: center; border-right: 1px solid rgba(13,17,23,0.08);">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.4rem;">Mês 6</div>
+          <div style="font-size: 0.85rem; line-height: 1.4; color: var(--text-dark); font-weight: 500;">Você fatura mais trabalhando menos.</div>
+        </div>
+        <div style="padding: 1rem 1rem; text-align: center;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--r-mint); margin-bottom: 0.4rem;">Mês 12</div>
+          <div style="font-size: 0.85rem; line-height: 1.4; color: var(--text-dark); font-weight: 500;">Loja virou ativo, não emprego.</div>
+        </div>
+      </div>
+      <div style="margin-top: 1.25rem; padding: 1.25rem 1.75rem; background: linear-gradient(135deg, var(--claro-yellow), #E0A52A); border-radius: 12px; color: var(--ink);">
+        <p style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; line-height: 1.3; letter-spacing: -0.01em;">Não é projeção otimista. <strong>É consequência de virar gestor na era da IA.</strong></p>
+      </div>
+    </div>
+
+    <!-- ════════════ SLIDE 12 — ENCERRAMENTO ════════════ -->
+    <div class="slide bg-dark" data-slide="12">
+      <div class="s-bg-photo" style="background-image: url('assets/images/varejo-rede.jpg'); background-position: center center; opacity: 0.32;"></div>
+      <div class="s-num">12</div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>12 · A escolha</span></div>
+      <h2 class="s-title" style="font-size: clamp(2.4rem, 5vw, 4.5rem); line-height: 1.05; margin-top: 1.5rem; margin-bottom: 1.5rem;">Você não tá sozinho nessa.<br>Você faz parte de uma <em>rede</em> que tá crescendo.</h2>
+      <p class="s-subtitle" style="margin-bottom: 2rem; font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(1.05rem, 1.5vw, 1.35rem); line-height: 1.5; max-width: 880px;">
+        Lojistas como você. Operando em todo o Brasil. Trocando estratégia. Indicando cliente. Fechando parceria. Crescendo juntos — porque entenderam que ninguém cresce sozinho na era da IA.
+      </p>
+      <div style="margin-top: 1rem; padding: 2.25rem 2.5rem; background: linear-gradient(135deg, var(--claro-yellow), #E0A52A); border-radius: 16px; color: var(--ink); position: relative; z-index: 1;">
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.65rem;">
+          <li style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: clamp(1.4rem, 2.4vw, 1.95rem); line-height: 1.25; letter-spacing: -0.01em;">O <strong>método</strong> existe.</li>
+          <li style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: clamp(1.4rem, 2.4vw, 1.95rem); line-height: 1.25; letter-spacing: -0.01em;">A <strong>rede</strong> já tá rodando.</li>
+          <li style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 700; font-size: clamp(1.6rem, 2.8vw, 2.3rem); line-height: 1.25; letter-spacing: -0.02em;">A <strong>escolha</strong> é sua.</li>
+        </ul>
+      </div>
+      <div style="position: absolute; bottom: 32px; left: 80px; right: 80px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); z-index: 2;">
+        Rentabiliza.ai · PulsarH.ai × TradeUp · 2026
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="slide-controls">
+    <div class="slide-counter"><span class="current" id="currentSlide">01</span> / 12</div>
+    <button class="slide-btn" id="prevBtn">←</button>
+    <button class="slide-btn" id="nextBtn">→</button>
+  </div>
+
+  <script>
+    // ═══════════════════════════════ SLIDE ENGINE ═══════════════════════════════
+    const slides = document.querySelectorAll('.slide');
+    const total = slides.length;
+    let current = 0;
+
+    const counterEl = document.getElementById('currentSlide');
+    const progressEl = document.getElementById('progressBar');
+
+    function goTo(n) {
+      if (n < 0 || n >= total) return;
+      slides[current].classList.remove('active');
+      current = n;
+      slides[current].classList.add('active');
+      counterEl.textContent = String(current + 1).padStart(2, '0');
+      progressEl.style.width = ((current + 1) / total * 100) + '%';
+      // Mobile: scroll suave para o slide
+      if (window.innerWidth <= 900) {
+        slides[current].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // Mobile: atualizar counter conforme usuário scrolla
+    if (window.innerWidth <= 900) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const idx = Array.from(slides).indexOf(e.target);
+            if (idx >= 0 && idx !== current) {
+              current = idx;
+              counterEl.textContent = String(current + 1).padStart(2, '0');
+              progressEl.style.width = ((current + 1) / total * 100) + '%';
+            }
+          }
+        });
+      }, { threshold: 0.4 });
+      slides.forEach(s => io.observe(s));
+    }
+
+    function next() { goTo(current + 1); }
+    function prev() { goTo(current - 1); }
+
+    document.getElementById('nextBtn').addEventListener('click', next);
+    document.getElementById('prevBtn').addEventListener('click', prev);
+
+    // Keyboard
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') { e.preventDefault(); next(); }
+      if (e.key === 'ArrowLeft' || e.key === 'Backspace') { e.preventDefault(); prev(); }
+      if (e.key === 'Home') { e.preventDefault(); goTo(0); }
+      if (e.key === 'End') { e.preventDefault(); goTo(total - 1); }
+      if (e.key === 'f' || e.key === 'F') { toggleFS(); }
+      if (e.key === 'Escape' && document.fullscreenElement) { document.exitFullscreen(); }
+    });
+
+    // Click on slide to advance
+    document.getElementById('deck').addEventListener('click', (e) => {
+      if (e.target.closest('.slide-controls') || e.target.closest('.home-link') || e.target.closest('.fs-btn')) return;
+      const x = e.clientX / window.innerWidth;
+      if (x < 0.3) prev(); else next();
+    });
+
+    // Fullscreen
+    function toggleFS() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen();
+      }
+    }
+    document.getElementById('fsBtn').addEventListener('click', toggleFS);
+
+    // Init progress
+    progressEl.style.width = (1 / total * 100) + '%';
+
+    // Show cursor on controls
+    document.querySelector('.slide-controls').style.cursor = 'auto';
+    document.querySelector('.home-link').style.cursor = 'pointer';
+    document.querySelector('.fs-btn').style.cursor = 'pointer';
+
+    // Custom cursor — show on move, hide after idle
+    let cursorTimeout;
+    document.addEventListener('mousemove', () => {
+      document.body.style.cursor = 'default';
+      clearTimeout(cursorTimeout);
+      cursorTimeout = setTimeout(() => { document.body.style.cursor = 'none'; }, 2000);
+    });
+  </script>
 
 </body>
 </html>
