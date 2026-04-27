@@ -441,12 +441,13 @@
       grid-template-columns: 1fr 1fr 0.82fr;
       grid-template-rows: 1fr 1fr;
       grid-template-areas:
-        "big1 big2 small1"
-        "big1 big2 small2";
+        "big1 big2a small1"
+        "big1 big2b small2";
       gap: 20px;
     }
     .card-big-1 { grid-area: big1; }
-    .card-big-2 { grid-area: big2; }
+    .card-big-2a { grid-area: big2a; }
+    .card-big-2b { grid-area: big2b; }
     .card-small-1 { grid-area: small1; }
     .card-small-2 { grid-area: small2; }
 
@@ -503,11 +504,38 @@
       font-size: 13px;
     }
     /* Big cards — fundo branco com foto editorial translúcida + overlay paper-warm */
-    .card-big-1, .card-big-2 {
+    .card-big-1, .card-big-2a, .card-big-2b {
       background: var(--r-bg-elev-2, #FFFFFF);
     }
+    /* big2a e big2b são metade da altura — herdam look big mas com min-height menor */
+    .card-big-2a, .card-big-2b {
+      min-height: 200px;
+    }
+    .card-big-2a .card-title, .card-big-2b .card-title {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+    .card-big-2a .card-desc, .card-big-2b .card-desc {
+      font-size: 14px;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+    .card-big-2a .card-specs, .card-big-2b .card-specs {
+      padding-top: 16px;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .card-big-2a .card-spec-value, .card-big-2b .card-spec-value {
+      font-size: 11px;
+    }
+    .card-big-2a .card-spec-label, .card-big-2b .card-spec-label {
+      font-size: 9px;
+    }
+    .card-big-2a .card-cta, .card-big-2b .card-cta {
+      font-size: 13px;
+    }
     /* Imagem de fundo (camada profunda) */
-    .card-big-1::after, .card-big-2::after {
+    .card-big-1::after, .card-big-2a::after, .card-big-2b::after {
       content: '';
       position: absolute; inset: 0;
       background-size: cover;
@@ -520,11 +548,15 @@
     .card-big-1::after {
       background-image: url('assets/images/card-doc-bg.jpg');
     }
-    .card-big-2::after {
+    .card-big-2a::after {
       background-image: url('assets/images/card-pitch-bg.jpg');
     }
+    .card-big-2b::after {
+      background-image: url('assets/images/card-pitch-bg.jpg');
+      filter: saturate(0.85) contrast(1.02) hue-rotate(-15deg);
+    }
     /* Overlay cream gradient — garante legibilidade do texto à esquerda, imagem respira à direita */
-    .card-big-1::before, .card-big-2::before {
+    .card-big-1::before, .card-big-2a::before, .card-big-2b::before {
       content: '';
       position: absolute; inset: 0;
       background:
@@ -534,10 +566,10 @@
       z-index: 1;
     }
     /* Conteúdo textual acima de tudo */
-    .card-big-1 > *, .card-big-2 > * { position: relative; z-index: 2; }
+    .card-big-1 > *, .card-big-2a > *, .card-big-2b > * { position: relative; z-index: 2; }
     /* No hover, imagem fica um pouco mais visível */
-    .card-big-1:hover::after, .card-big-2:hover::after { opacity: 0.38; }
-    .card-big-1:hover::before, .card-big-2:hover::before {
+    .card-big-1:hover::after, .card-big-2a:hover::after, .card-big-2b:hover::after { opacity: 0.38; }
+    .card-big-1:hover::before, .card-big-2a:hover::before, .card-big-2b:hover::before {
       background:
         linear-gradient(95deg, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.82) 35%, rgba(255,255,255,0.45) 70%, rgba(255,255,255,0.25) 100%),
         radial-gradient(ellipse 60% 40% at 85% 0%, rgba(244,185,62,0.18), transparent 60%);
@@ -1111,13 +1143,13 @@
           </span>
         </a>
 
-        <!-- CAIXA 02 · DECK DE REUNIÃO — GRANDE -->
-        <a href="slides.html" class="card card-big card-big-2">
+        <!-- CAIXA 02A · PITCH INDÚSTRIA E PARCEIROS — MEDIANA (topo coluna 2) -->
+        <a href="slides.html" class="card card-big card-big-2a">
           <span class="card-num">02</span>
-          <span class="card-tag">Para o Pitch</span>
-          <h3 class="card-title">Deck de <em>Reunião</em></h3>
+          <span class="card-tag">Para Indústria e Parceiros</span>
+          <h3 class="card-title">Pitch · <em>Indústria e Parceiros</em></h3>
           <p class="card-desc">
-            A versão condensada do Rentabiliza.ai para encontros com diretoria e board. Navegação por teclado, modo tela cheia e linha narrativa enxuta — desenhada para conduzir decisão executiva em 30 minutos.
+            Apresentação executiva para operadora e parceiros estratégicos — leitura de canal, modelo de financiamento partilhado e cenários de escala com KPI auditável.
           </p>
           <div class="card-specs">
             <div>
@@ -1129,12 +1161,40 @@
               <div class="card-spec-value">30 min</div>
             </div>
             <div>
-              <div class="card-spec-label">Modo</div>
-              <div class="card-spec-value">Pitch</div>
+              <div class="card-spec-label">Audiência</div>
+              <div class="card-spec-value">Diretoria · Board</div>
             </div>
           </div>
           <span class="card-cta">
-            Iniciar apresentação
+            Abrir pitch
+            <span class="card-cta-arrow">↗</span>
+          </span>
+        </a>
+
+        <!-- CAIXA 02B · PITCH VAREJO E LOJISTAS — MEDIANA (base coluna 2) -->
+        <a href="slides-varejo.html" class="card card-big card-big-2b">
+          <span class="card-num">02</span>
+          <span class="card-tag">Para Varejo e Lojistas</span>
+          <h3 class="card-title">Pitch · <em>Varejo e Lojistas</em></h3>
+          <p class="card-desc">
+            Apresentação direta ao lojista — o problema real da loja, o método que muda o jogo e os planos que cabem no caixa. Linguagem do balcão, decisão em 25 minutos.
+          </p>
+          <div class="card-specs">
+            <div>
+              <div class="card-spec-label">Formato</div>
+              <div class="card-spec-value">Em produção</div>
+            </div>
+            <div>
+              <div class="card-spec-label">Duração</div>
+              <div class="card-spec-value">25 min</div>
+            </div>
+            <div>
+              <div class="card-spec-label">Audiência</div>
+              <div class="card-spec-value">Lojista · Sócio</div>
+            </div>
+          </div>
+          <span class="card-cta">
+            Abrir pitch
             <span class="card-cta-arrow">↗</span>
           </span>
         </a>
