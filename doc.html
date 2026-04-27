@@ -1098,6 +1098,90 @@
     }
     .posit-table tbody tr:hover td { background: rgba(244,185,62,0.03); }
 
+    /* ═══════════════════════════════ SECTION RULE ═══════════════════════════════ */
+    /* Divisória editorial — linha âmbar com ponto central */
+    .section-rule {
+      position: relative;
+      height: 0.5px;
+      margin: 3rem 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(244,185,62,0.45) 30%, rgba(244,185,62,0.45) 70%, transparent 100%);
+    }
+    .section-rule::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--claro-red);
+      transform: translate(-50%, -50%);
+    }
+
+    /* ═══════════════════════════════ SPEC SHEET (perfil) ═══════════════════════════════ */
+    .spec-sheet {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 1.5rem 0;
+    }
+    .spec-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 40px;
+      padding: 22px 0;
+      border-top: 1px solid rgba(13,17,23,0.07);
+      align-items: start;
+    }
+    .spec-row:last-child { border-bottom: 1px solid rgba(13,17,23,0.07); }
+    .spec-label {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--claro-red);
+      padding-top: 4px;
+    }
+    .spec-label-muted { color: var(--muted); }
+    .spec-label-mint { color: var(--r-mint); }
+    .spec-body { margin: 0 !important; }
+
+    @media (max-width: 720px) {
+      .spec-row { grid-template-columns: 1fr; gap: 8px; }
+      .spec-label { padding-top: 0; margin-bottom: 4px; }
+    }
+
+    /* ═══════════════════════════════ EDITORIAL LIST ═══════════════════════════════ */
+    /* Lista editorial limpa — sem caixas, sem grids, fluxo natural */
+    .editorial-list {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      margin: 1.75rem 0 2rem;
+    }
+    .editorial-item .ed-title {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 1.35rem;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: var(--text-dark);
+      margin: 0 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sec-dark .editorial-item .ed-title { color: var(--text-light); }
+    .ed-icon {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      color: var(--claro-red);
+      stroke-width: 1.5;
+    }
+    .editorial-item .t-body { margin: 0; }
+
     /* PLACEHOLDER IMG — wrapper para imagens reais (todas jpg) */
     .img-placeholder {
       position: relative;
@@ -1377,43 +1461,37 @@
         <div class="eyebrow"><span class="eyebrow-dot"></span><span>O que você tem em mãos</span></div>
         <h2 class="t-section">Você tá deixando dinheiro <em>na mesa</em>. Todo dia.</h2>
 
-        <p class="t-lead">Cliente entra, compra o produto, sai. Você não fechou seguro. Não fechou plano. Não fechou garantia. Não fechou comissão recorrente. <strong>O ticket era 3× maior — você levou um terço.</strong></p>
+        <p class="t-lead">Cliente entra, compra o produto, sai. Você não fechou seguro. Não fechou plano. Não fechou garantia. Não fechou comissão recorrente. O ticket era 3× maior — você levou um terço.</p>
 
-        <div style="margin: 2.5rem 0; padding: 1.75rem 2rem; background: rgba(244,185,62,0.04); border: 1px solid rgba(244,185,62,0.18); border-radius: 12px;">
-          <div style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.15rem; color: var(--muted-dark); margin-bottom: 1rem;">Multiplica isso por:</div>
-          <div style="font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 600; font-size: clamp(1rem, 2vw, 1.4rem); color: var(--r-mint); letter-spacing: 0.04em; margin-bottom: 1rem;">20 vendas/dia × 26 dias × 12 meses</div>
-          <div style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; color: var(--claro-yellow); line-height: 1.2;">Já viu o tamanho do buraco?</div>
-        </div>
+        <p class="t-body">Multiplica isso por 20 vendas por dia, 26 dias por mês, 12 meses. Já viu o tamanho do buraco?</p>
 
-        <div class="big-idea-pull">
-          <p>O <em>Rentabiliza.ai</em> existe pra fechar esse buraco.</p>
-        </div>
+        <div class="section-rule"></div>
 
-        <h3 class="t-sub" style="margin-top: 3rem;">A gente entra na sua loja e instala três coisas:</h3>
+        <p class="t-body" style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; line-height: 1.35; color: var(--text-light);">
+          O <span style="color: var(--claro-red);">Rentabiliza.ai</span> existe pra fechar esse buraco.
+        </p>
+
+        <p class="t-body" style="margin-top: 1.5rem;">A gente entra na sua loja e instala três coisas:</p>
 
         <ul>
           <li><strong>Gente</strong> que vende serviço — não só produto.</li>
           <li><strong>Processo</strong> que roda sem você em cima.</li>
-          <li><strong>IA</strong> que trabalha por você <span style="color: var(--r-mint); font-family: 'JetBrains Mono', monospace; font-weight: 600;">24h/dia</span>.</li>
+          <li><strong>IA</strong> que trabalha por você 24 horas por dia.</li>
         </ul>
 
-        <p class="t-body" style="margin-top: 1.75rem; padding: 1.25rem 1.5rem; background: rgba(244,185,62,0.08); border-left: 3px solid var(--claro-red); border-radius: 0 8px 8px 0;">
-          <strong style="color: var(--claro-red); font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; display: block; margin-bottom: 0.5rem;">Resultado</strong>
-          Mais venda, mais margem, mais cliente recorrente, mais tempo livre.
+        <p class="t-body">Resultado: mais venda, mais margem, mais cliente recorrente, mais tempo livre.</p>
+
+        <p class="t-body" style="margin-top: 1.5rem;">
+          Quem assina: <strong>PulsarH.ai</strong> (<span style="font-family: 'JetBrains Mono', monospace; color: var(--claro-yellow);">21 anos</span> de chão de loja) e <strong>TradeUp</strong> (<span style="font-family: 'JetBrains Mono', monospace; color: var(--claro-yellow);">25 mil PDVs</span>, opera Claro e TIM).
         </p>
 
-        <h3 class="t-sub" style="margin-top: 3rem;">Quem assina</h3>
-        <p class="t-body">
-          <strong>PulsarH.ai</strong> · 21 anos de chão de loja
-          <span style="color: var(--muted-dark); margin: 0 10px;">+</span>
-          <strong>TradeUp</strong> · 25 mil PDVs, opera Claro e TIM.
+        <div class="section-rule"></div>
+
+        <p class="t-body" style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.6rem; line-height: 1.3; color: var(--text-light);">
+          Não é curso. Não é palestra. É <span style="color: var(--claro-red);">implementação</span>.
         </p>
 
-        <div class="big-idea-pull" style="margin-top: 2.5rem;">
-          <p>Não é curso. Não é palestra. É <em>implementação</em>.</p>
-        </div>
-
-        <p class="t-body" style="margin-top: 2.5rem; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted-dark);">
+        <p class="t-body" style="margin-top: 1.5rem; color: var(--muted-dark);">
           Esse documento te mostra como funciona. Boa leitura.
         </p>
       </div>
@@ -1426,78 +1504,100 @@
         <div class="eyebrow"><span class="eyebrow-dot"></span><span>Por que existimos</span></div>
         <h2 class="t-section">Cansamos de ver varejista bom virando <em>refém</em> da própria loja.</h2>
 
-        <p class="t-lead">Sempre teve dois caminhos. Ou você virava <strong>operador escravo</strong> — abrindo cedo, fechando tarde, fazendo tudo sozinho. Ou contratava <strong>consultoria cara</strong> que entregava slide bonito e sumia.</p>
+        <p class="t-lead">Sempre teve dois caminhos. Ou você virava operador escravo — abrindo cedo, fechando tarde, fazendo tudo sozinho. Ou contratava consultoria cara que entregava slide bonito e sumia.</p>
 
-        <div class="big-idea-pull">
-          <p>A gente acredita que tem um <em>terceiro caminho</em>. E é por isso que o Rentabiliza.ai está aqui.</p>
+        <p class="t-body" style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.4rem; line-height: 1.4; color: var(--text-dark); margin: 1.75rem 0;">
+          A gente acredita que tem um <span style="color: var(--claro-red);">terceiro caminho</span>.
+        </p>
+
+        <p class="t-body">É por isso que o Rentabiliza.ai está aqui. Vamos conduzir você nessa virada — implementando IA, cuidando do seu time e aumentando a rentabilidade do seu negócio desde a primeira semana.</p>
+
+        <div class="section-rule"></div>
+
+        <h3 class="t-sub">Colocamos na sua mão o que só rede grande tinha</h3>
+
+        <div class="editorial-list">
+          <div class="editorial-item">
+            <h4 class="ed-title">
+              <svg class="ed-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" aria-hidden="true">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+              Time que vende.
+            </h4>
+            <p class="t-body">Cliente entrava gastando R$ 80 e saía com R$ 80. Com a gente, sai com R$ 280. Não é milagre, é método. Vendedor treinado fecha serviço junto do produto: seguro, garantia, plano, comissão recorrente. <strong>Ticket triplica. Margem dobra.</strong></p>
+          </div>
+
+          <div class="editorial-item">
+            <h4 class="ed-title">
+              <svg class="ed-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" aria-hidden="true">
+                <rect x="4" y="4" width="16" height="16" rx="2"/>
+                <rect x="9" y="9" width="6" height="6"/>
+                <path d="M15 2v2"/><path d="M15 20v2"/>
+                <path d="M2 15h2"/><path d="M2 9h2"/>
+                <path d="M20 15h2"/><path d="M20 9h2"/>
+                <path d="M9 2v2"/><path d="M9 20v2"/>
+              </svg>
+              IA trabalhando 24 horas por dia.
+            </h4>
+            <p class="t-body">Atendimento automático, recuperação de cliente, dashboard pronto, site, sistema, automação — tudo configurado por nós. Seu time para de fazer trabalho de máquina e foca no que dá dinheiro: vender e cuidar de cliente.</p>
+          </div>
+
+          <div class="editorial-item">
+            <h4 class="ed-title">
+              <svg class="ed-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" aria-hidden="true">
+                <rect width="18" height="18" x="3" y="3" rx="2"/>
+                <path d="M3 9h18"/>
+                <path d="M9 21V9"/>
+              </svg>
+              Site, vídeo e imagem prontos.
+            </h4>
+            <p class="t-body">Sua loja ganha cara de marca grande. Sem agência cobrando R$ 8 mil. Sem Photoshop. Sem fim de semana perdido. Entregamos tudo pronto, do jeito que você precisa.</p>
+          </div>
+
+          <div class="editorial-item">
+            <h4 class="ed-title">
+              <svg class="ed-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" aria-hidden="true" style="color: var(--r-coral);">
+                <path d="M18 8a6 6 0 0 0-9.33-5"/>
+                <path d="m10.67 21.33-2-2.83a4 4 0 0 1 0-3l4-5"/>
+                <path d="M3 11.13c-.39 1.13-.39 2.39 0 3.74"/>
+                <circle cx="12" cy="12" r="3"/>
+                <path d="m21 21-3-3"/>
+              </svg>
+              Comunidade que fatura.
+            </h4>
+            <p class="t-body">A gente conecta você com uma rede de lojista crescendo agora. Troca estratégia, abre parceria, fecha negócio. Quem entra, sai com cliente novo na semana seguinte.</p>
+          </div>
+
+          <div class="editorial-item">
+            <h4 class="ed-title">
+              <svg class="ed-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" aria-hidden="true">
+                <path d="M2 12h6"/><path d="M22 12h-6"/>
+                <path d="M12 2v2"/><path d="M12 8v2"/>
+                <path d="M12 14v2"/><path d="M12 20v2"/>
+                <path d="m19 5-3 3"/><path d="m8 16-3 3"/>
+                <path d="m5 5 3 3"/><path d="m16 16 3 3"/>
+              </svg>
+              Você na cadeira certa.
+            </h4>
+            <p class="t-body">Tiramos você da operação e colocamos na gestão. Você decide por dado, treina time com método, dorme tranquilo porque a loja roda sem você em cima.</p>
+          </div>
         </div>
 
-        <p class="t-body">Vamos conduzir você nessa virada — implementando IA, cuidando do seu time e aumentando a rentabilidade do seu negócio <strong>desde a primeira semana</strong>.</p>
+        <div class="section-rule"></div>
 
-        <h3 class="t-sub" style="margin-top: 3rem;">Colocamos na sua mão o que só rede grande tinha:</h3>
-
-        <!-- 5 entregas em formato editorial -->
-        <div style="display: flex; flex-direction: column; gap: 0; margin-top: 2rem;">
-
-          <!-- 01 · Time que vende -->
-          <div style="display: grid; grid-template-columns: 64px 1fr; gap: 24px; padding: 28px 0; border-top: 1px solid rgba(13,17,23,0.08);">
-            <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--claro-red); padding-top: 8px;">01</div>
-            <div>
-              <h4 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; color: var(--text-dark); margin: 0 0 12px;">Time que vende.</h4>
-              <p class="t-body" style="margin: 0;">Cliente entrava gastando <span style="font-family: 'JetBrains Mono', monospace; color: var(--muted-2);">R$ 80</span> e saía com <span style="font-family: 'JetBrains Mono', monospace; color: var(--muted-2);">R$ 80</span>. Com a gente, sai com <span style="font-family: 'JetBrains Mono', monospace; color: var(--r-mint); font-weight: 600;">R$ 280 ↗</span>. Não é milagre — é método. Vendedor treinado fecha serviço junto do produto: seguro, garantia, plano, comissão recorrente. <strong>Ticket triplica. Margem dobra.</strong></p>
-            </div>
-          </div>
-
-          <!-- 02 · IA 24/7 -->
-          <div style="display: grid; grid-template-columns: 64px 1fr; gap: 24px; padding: 28px 0; border-top: 1px solid rgba(13,17,23,0.08);">
-            <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--claro-red); padding-top: 8px;">02</div>
-            <div>
-              <h4 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; color: var(--text-dark); margin: 0 0 12px;">IA trabalhando <span style="font-family: 'JetBrains Mono', monospace; font-style: normal; color: var(--r-mint); font-weight: 600;">24h/dia</span>.</h4>
-              <p class="t-body" style="margin: 0;">Atendimento automático, recuperação de cliente, dashboard pronto, site, sistema, automação. <strong>Tudo configurado por nós.</strong> Seu time para de fazer trabalho de máquina e foca no que dá dinheiro: <em>vender e cuidar de cliente</em>.</p>
-            </div>
-          </div>
-
-          <!-- 03 · Site, vídeo, imagem -->
-          <div style="display: grid; grid-template-columns: 64px 1fr; gap: 24px; padding: 28px 0; border-top: 1px solid rgba(13,17,23,0.08);">
-            <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--claro-red); padding-top: 8px;">03</div>
-            <div>
-              <h4 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; color: var(--text-dark); margin: 0 0 12px;">Site, vídeo e imagem prontos.</h4>
-              <p class="t-body" style="margin: 0;">Sua loja ganha cara de <strong>marca grande</strong>. Sem agência cobrando <span style="font-family: 'JetBrains Mono', monospace; color: var(--muted-2);">R$ 8 mil</span>. Sem Photoshop. Sem fim de semana perdido. Entregamos tudo pronto, do jeito que você precisa.</p>
-            </div>
-          </div>
-
-          <!-- 04 · Comunidade · COR CORAL (gente) -->
-          <div style="display: grid; grid-template-columns: 64px 1fr; gap: 24px; padding: 28px 0; border-top: 1px solid rgba(13,17,23,0.08);">
-            <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--r-coral); padding-top: 8px;">04</div>
-            <div>
-              <h4 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; color: var(--text-dark); margin: 0 0 12px;">Comunidade que <span style="color: var(--r-coral);">fatura</span>.</h4>
-              <p class="t-body" style="margin: 0;">A gente conecta você com uma <strong>rede de lojista crescendo agora</strong>. Troca estratégia, abre parceria, fecha negócio. Quem entra, sai com cliente novo na semana seguinte.</p>
-            </div>
-          </div>
-
-          <!-- 05 · Você na cadeira certa -->
-          <div style="display: grid; grid-template-columns: 64px 1fr; gap: 24px; padding: 28px 0; border-top: 1px solid rgba(13,17,23,0.08); border-bottom: 1px solid rgba(13,17,23,0.08);">
-            <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--claro-red); padding-top: 8px;">05</div>
-            <div>
-              <h4 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; color: var(--text-dark); margin: 0 0 12px;">Você na cadeira certa.</h4>
-              <p class="t-body" style="margin: 0;">Tiramos você da operação e colocamos na <strong>gestão</strong>. Você decide por dado, treina time com método, dorme tranquilo porque a loja roda sem você em cima.</p>
-            </div>
-          </div>
-
-        </div>
-
-        <p class="t-body" style="margin-top: 3rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.25rem; color: var(--text-dark); line-height: 1.5;">
+        <p class="t-body" style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.3rem; line-height: 1.5; color: var(--text-dark);">
           Acreditamos numa coisa só: <strong>lojista brasileiro merece operar com a mesma estrutura que a multinacional opera</strong>. E é isso que entregamos.
         </p>
 
-        <h3 class="t-sub" style="margin-top: 3rem;">A nossa promessa é única:</h3>
+        <p class="t-body" style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.7rem; line-height: 1.25; color: var(--claro-red); margin-top: 2rem;">
+          Você vende mais. Gasta menos. Ganha mais.
+        </p>
 
-        <div class="big-idea-pull" style="margin-top: 1rem;">
-          <p>Você <em>vende mais</em>. Gasta <em>menos</em>. Ganha <em>mais</em>.</p>
-        </div>
-
-        <p class="t-body" style="margin-top: 2.5rem; text-align: center; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.2rem; color: var(--text-dark); line-height: 1.5;">
-          Somos a sua <strong style="color: var(--claro-red);">melhor decisão</strong> pra parar de operar como pequeno e começar a faturar como gigante.
+        <p class="t-body" style="margin-top: 1.5rem; color: var(--muted-2);">
+          Somos a sua melhor decisão pra parar de operar como pequeno e começar a faturar como gigante.
         </p>
       </div>
     </section>
@@ -1509,115 +1609,68 @@
         <div class="eyebrow"><span class="eyebrow-dot"></span><span>O espelho</span></div>
         <h2 class="t-section">Vamos parar de <em>fingir</em>.</h2>
 
-        <p class="t-lead">Você abriu a loja porque viu oportunidade, tinha relacionamento, sabia vender e teve coragem. <strong>Foi suficiente pra começar.</strong></p>
+        <p class="t-lead">Você abriu a loja porque viu oportunidade, tinha relacionamento, sabia vender e teve coragem. Foi suficiente pra começar. Não tá sendo suficiente pra crescer.</p>
 
-        <p class="t-body" style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; color: var(--claro-red); margin: 1.5rem 0 2.5rem;">
-          Não tá sendo suficiente pra crescer.
+        <p class="t-body">A sua semana é mais ou menos assim: chega antes do time, resolve a primeira urgência antes do café, vende, atende, cobra, briga com fornecedor, treina vendedor novo, ajeita vitrine, fecha caixa, paga conta. Volta pra casa exausto. Dorme pensando no que precisa fazer amanhã. Acorda fazendo a mesma coisa.</p>
+
+        <p class="t-body" style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; line-height: 1.3; color: var(--text-dark); margin: 2rem 0;">
+          A loja fatura. <span style="color: var(--claro-red);">Você não cresce.</span>
         </p>
 
-        <h3 class="t-sub">A sua semana é mais ou menos assim:</h3>
-        <p class="t-body">
-          Chega antes do time. Resolve a primeira urgência antes do café. Vende, atende, cobra, briga com fornecedor, treina vendedor novo, ajeita vitrine, fecha caixa, paga conta. Volta pra casa exausto. Dorme pensando no que precisa fazer amanhã.
-        </p>
-        <p class="t-body" style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.2rem; color: var(--text-dark); margin-top: 1rem;">
-          Acorda fazendo a mesma coisa.
-        </p>
+        <p class="t-body">E você sente — mesmo sem admitir pra ninguém — que tem coisa errada. Não é falta de cliente, não é falta de produto, não é falta de coragem. <strong>É falta de método.</strong></p>
 
-        <div style="margin: 2.5rem 0; padding: 1.75rem 2rem; background: rgba(244,185,62,0.04); border-left: 3px solid var(--claro-red); border-radius: 0 12px 12px 0;">
-          <div style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; color: var(--text-dark); line-height: 1.3;">
-            A loja fatura. <span style="color: var(--claro-red);">Você não cresce.</span>
+        <div class="section-rule"></div>
+
+        <h3 class="t-sub">Olha o que tá acontecendo na sua operação hoje</h3>
+
+        <div class="editorial-list">
+          <div class="editorial-item">
+            <h4 class="ed-title">Você vende o que o cliente pede — não o que ele precisa.</h4>
+            <p class="t-body">Cliente entra pedindo um celular. Sai com um celular. Você perdeu seguro, garantia, plano, acessório. Ticket de R$ 80 quando podia ser R$ 280.</p>
+          </div>
+
+          <div class="editorial-item">
+            <h4 class="ed-title">Você decide por feeling — porque não tem dado na mão.</h4>
+            <p class="t-body">Promoção entra porque o concorrente entrou. Sai porque o caixa pediu socorro. Mix muda no chute. Comissão é igual pra produto bom e produto ruim.</p>
+          </div>
+
+          <div class="editorial-item">
+            <h4 class="ed-title">Você é o melhor vendedor da loja — e isso é o seu problema.</h4>
+            <p class="t-body">Quando você atende, fatura. Quando você sai, cai 40%. Sua loja não é uma empresa. É você com CNPJ.</p>
+          </div>
+
+          <div class="editorial-item">
+            <h4 class="ed-title">Você comissiona errado.</h4>
+            <p class="t-body">Vendedor recebe igual por venda boa e venda ruim. Resultado: ele empurra o que sai mais rápido — e você perde margem em todas as vendas.</p>
+          </div>
+
+          <div class="editorial-item">
+            <h4 class="ed-title">Você ouve falar de IA todo dia — não sabe por onde começar.</h4>
+            <p class="t-body">Sabe que vai mudar o jogo. Sabe que concorrente que aprender primeiro sai na frente. Mas trava na hora de fazer.</p>
+          </div>
+
+          <div class="editorial-item">
+            <h4 class="ed-title">Você tem cliente fiel — não tem como trazer ele de volta.</h4>
+            <p class="t-body">Cliente comprou em 2024. Voltou em 2025? Você não sabe. Não tem CRM, não tem disparo, não tem nada.</p>
+          </div>
+
+          <div class="editorial-item">
+            <h4 class="ed-title">A sua loja para quando você sai.</h4>
+            <p class="t-body">Tira uma semana de férias e o faturamento despenca. Tira duas, vira crise. Você não tem negócio. Tem um emprego que paga aluguel.</p>
           </div>
         </div>
 
-        <p class="t-body">E você sente — mesmo sem admitir pra ninguém — que tem coisa errada. Não é falta de cliente. Não é falta de produto. Não é falta de coragem.</p>
+        <div class="section-rule"></div>
 
-        <div class="big-idea-pull">
-          <p>É falta de <em>método</em>.</p>
-        </div>
-
-        <h3 class="t-sub" style="margin-top: 3rem;">Olha o que tá acontecendo na sua operação hoje:</h3>
-
-        <!-- 7 problemas em formato editorial numerado -->
-        <div style="display: flex; flex-direction: column; gap: 0; margin-top: 1.5rem;">
-
-          <!-- 01 -->
-          <div style="display: grid; grid-template-columns: 64px 1fr; gap: 24px; padding: 28px 0; border-top: 1px solid rgba(13,17,23,0.08);">
-            <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--claro-red); padding-top: 8px;">01</div>
-            <div>
-              <h4 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; color: var(--text-dark); margin: 0 0 12px;">Você vende o que o cliente <strong>pede</strong> — não o que ele precisa.</h4>
-              <p class="t-body" style="margin: 0;">Cliente entra pedindo um celular. Sai com um celular. Você perdeu seguro, garantia, plano, acessório. Ticket de <span style="font-family: 'JetBrains Mono', monospace; color: var(--muted-2);">R$ 80</span> quando podia ser <span style="font-family: 'JetBrains Mono', monospace; color: var(--r-mint); font-weight: 600;">R$ 280 ↗</span>.</p>
-            </div>
-          </div>
-
-          <!-- 02 -->
-          <div style="display: grid; grid-template-columns: 64px 1fr; gap: 24px; padding: 28px 0; border-top: 1px solid rgba(13,17,23,0.08);">
-            <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--claro-red); padding-top: 8px;">02</div>
-            <div>
-              <h4 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; color: var(--text-dark); margin: 0 0 12px;">Você decide por <strong>feeling</strong> — porque não tem dado na mão.</h4>
-              <p class="t-body" style="margin: 0;">Promoção entra porque o concorrente entrou. Sai porque o caixa pediu socorro. Mix muda no chute. Comissão é igual pra produto bom e produto ruim.</p>
-            </div>
-          </div>
-
-          <!-- 03 -->
-          <div style="display: grid; grid-template-columns: 64px 1fr; gap: 24px; padding: 28px 0; border-top: 1px solid rgba(13,17,23,0.08);">
-            <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--claro-red); padding-top: 8px;">03</div>
-            <div>
-              <h4 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; color: var(--text-dark); margin: 0 0 12px;">Você é o melhor vendedor da loja — e isso é o seu problema.</h4>
-              <p class="t-body" style="margin: 0;">Quando você atende, fatura. Quando você sai, <span style="font-family: 'JetBrains Mono', monospace; color: var(--claro-red); font-weight: 600;">cai 40%</span>. Sua loja não é uma empresa. É você com CNPJ.</p>
-            </div>
-          </div>
-
-          <!-- 04 -->
-          <div style="display: grid; grid-template-columns: 64px 1fr; gap: 24px; padding: 28px 0; border-top: 1px solid rgba(13,17,23,0.08);">
-            <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--claro-red); padding-top: 8px;">04</div>
-            <div>
-              <h4 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; color: var(--text-dark); margin: 0 0 12px;">Você comissiona errado.</h4>
-              <p class="t-body" style="margin: 0;">Vendedor recebe igual por venda boa e venda ruim. Resultado: ele empurra o que sai mais rápido — e <strong>você perde margem em todas as vendas</strong>.</p>
-            </div>
-          </div>
-
-          <!-- 05 -->
-          <div style="display: grid; grid-template-columns: 64px 1fr; gap: 24px; padding: 28px 0; border-top: 1px solid rgba(13,17,23,0.08);">
-            <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--claro-red); padding-top: 8px;">05</div>
-            <div>
-              <h4 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; color: var(--text-dark); margin: 0 0 12px;">Você ouve falar de IA todo dia — não sabe por onde começar.</h4>
-              <p class="t-body" style="margin: 0;">Sabe que vai mudar o jogo. Sabe que <strong>concorrente que aprender primeiro sai na frente</strong>. Mas trava na hora de fazer.</p>
-            </div>
-          </div>
-
-          <!-- 06 -->
-          <div style="display: grid; grid-template-columns: 64px 1fr; gap: 24px; padding: 28px 0; border-top: 1px solid rgba(13,17,23,0.08);">
-            <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--claro-red); padding-top: 8px;">06</div>
-            <div>
-              <h4 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; color: var(--text-dark); margin: 0 0 12px;">Você tem cliente fiel — não tem como trazer ele de volta.</h4>
-              <p class="t-body" style="margin: 0;">Cliente comprou em <span style="font-family: 'JetBrains Mono', monospace; color: var(--muted-2);">2024</span>. Voltou em <span style="font-family: 'JetBrains Mono', monospace; color: var(--muted-2);">2025</span>? Você não sabe. Não tem CRM. Não tem disparo. Não tem nada.</p>
-            </div>
-          </div>
-
-          <!-- 07 -->
-          <div style="display: grid; grid-template-columns: 64px 1fr; gap: 24px; padding: 28px 0; border-top: 1px solid rgba(13,17,23,0.08); border-bottom: 1px solid rgba(13,17,23,0.08);">
-            <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--claro-red); padding-top: 8px;">07</div>
-            <div>
-              <h4 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; color: var(--text-dark); margin: 0 0 12px;">A sua loja para quando você sai.</h4>
-              <p class="t-body" style="margin: 0;">Tira uma semana de férias e o faturamento despenca. Tira duas, vira crise. <strong>Você não tem negócio. Tem um emprego que paga aluguel.</strong></p>
-            </div>
-          </div>
-
-        </div>
-
-        <p class="t-body" style="margin-top: 3rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.3rem; line-height: 1.45; color: var(--text-dark);">
-          Nada disso é culpa sua. Ninguém te ensinou.
+        <p class="t-body" style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.3rem; line-height: 1.5; color: var(--text-dark);">
+          Nada disso é culpa sua. Ninguém te ensinou. Mas tudo isso tem solução — e a solução não é mais um curso, não é mais um livro, não é mais uma palestra.
         </p>
 
-        <p class="t-body" style="margin-top: 1rem;">
-          Mas tudo isso tem solução. E a solução não é mais um curso. Não é mais um livro. Não é mais uma palestra.
+        <p class="t-body" style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.6rem; line-height: 1.3; color: var(--claro-red); margin-top: 1.75rem;">
+          É alguém entrar dentro da sua loja com método pronto e instalar do seu lado.
         </p>
 
-        <div class="big-idea-pull" style="margin-top: 2.5rem;">
-          <p>É alguém entrar <em>dentro da sua loja</em> com método pronto e instalar do seu lado.</p>
-        </div>
-
-        <p class="t-body" style="margin-top: 2rem; text-align: center; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; color: var(--claro-red);">
+        <p class="t-body" style="margin-top: 1rem; color: var(--muted-2);">
           É exatamente isso que a gente faz.
         </p>
       </div>
@@ -1630,69 +1683,47 @@
         <div class="eyebrow"><span class="eyebrow-dot"></span><span>A gente te conhece</span></div>
         <h2 class="t-section">A gente sabe quem você é <em>antes de você falar</em>.</h2>
 
-        <p class="t-lead">
-          <span style="font-family: 'JetBrains Mono', monospace; color: var(--claro-red); font-weight: 600; letter-spacing: 0.04em;">21 anos</span> vivendo varejo. Mais de <span style="font-family: 'JetBrains Mono', monospace; color: var(--claro-red); font-weight: 600; letter-spacing: 0.04em;">25.000 PDVs</span> atendidos. Isso nos fez ser previsíveis.
-        </p>
+        <p class="t-lead">Vinte e um anos vivendo varejo. Mais de 25 mil PDVs atendidos. Isso nos fez ser previsíveis.</p>
 
-        <!-- 5 perfil blocks com label mono + body -->
-        <div style="display: flex; flex-direction: column; gap: 0; margin-top: 3rem;">
+        <div class="section-rule"></div>
 
-          <!-- OPERAÇÃO -->
-          <div style="display: grid; grid-template-columns: 180px 1fr; gap: 32px; padding: 28px 0; border-top: 1px solid rgba(13,17,23,0.08); align-items: start;">
-            <div>
-              <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.7rem; letter-spacing: 0.18em; color: var(--claro-red); text-transform: uppercase; margin-bottom: 6px;">Operação</div>
-              <div style="width: 32px; height: 1px; background: var(--claro-red); opacity: 0.4;"></div>
-            </div>
-            <p class="t-body" style="margin: 0;">Loja física, revenda, agência ou ponto de serviço. Time de <strong>1 a 15</strong>. Faturamento entre <span style="font-family: 'JetBrains Mono', monospace; color: var(--muted-2);">R$ 20 mil</span> e <span style="font-family: 'JetBrains Mono', monospace; color: var(--muted-2);">R$ 500 mil/mês</span>. Você vende produto — mas ali do lado tem serviço com <strong style="color: var(--r-mint); font-family: 'JetBrains Mono', monospace;">4× mais margem ↗</strong> que você não fecha: telefonia, seguro, garantia, plano, financiamento.</p>
+        <!-- Spec sheet — labels mono à esquerda, body fluído -->
+        <div class="spec-sheet">
+          <div class="spec-row">
+            <div class="spec-label">Operação</div>
+            <p class="t-body spec-body">Loja física, revenda, agência ou ponto de serviço. Time de 1 a 15. Faturamento entre R$ 20 mil e R$ 500 mil por mês. Você vende produto — mas ali do lado tem serviço com <strong>4× mais margem</strong> que você não fecha: telefonia, seguro, garantia, plano, financiamento.</p>
           </div>
 
-          <!-- COMPORTAMENTO -->
-          <div style="display: grid; grid-template-columns: 180px 1fr; gap: 32px; padding: 28px 0; border-top: 1px solid rgba(13,17,23,0.08); align-items: start;">
-            <div>
-              <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.7rem; letter-spacing: 0.18em; color: var(--claro-red); text-transform: uppercase; margin-bottom: 6px;">Comportamento</div>
-              <div style="width: 32px; height: 1px; background: var(--claro-red); opacity: 0.4;"></div>
-            </div>
-            <p class="t-body" style="margin: 0;">Decide no instinto. Sem dashboard. Sem ritual semanal de gestão. Sem playbook de venda. Treina equipe quando dá tempo — quase nunca dá. Comissiona por venda bruta, então o time empurra produto barato e <strong>mata a sua margem</strong>. Entra em promoção quando o concorrente entra. Sai quando o caixa pede socorro.</p>
+          <div class="spec-row">
+            <div class="spec-label">Comportamento</div>
+            <p class="t-body spec-body">Decide no instinto. Sem dashboard, sem ritual semanal de gestão, sem playbook de venda. Treina equipe quando dá tempo — quase nunca dá. Comissiona por venda bruta, então o time empurra produto barato e mata a sua margem. Entra em promoção quando o concorrente entra. Sai quando o caixa pede socorro.</p>
           </div>
 
-          <!-- INVESTIMENTO -->
-          <div style="display: grid; grid-template-columns: 180px 1fr; gap: 32px; padding: 28px 0; border-top: 1px solid rgba(13,17,23,0.08); align-items: start;">
-            <div>
-              <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.7rem; letter-spacing: 0.18em; color: var(--claro-red); text-transform: uppercase; margin-bottom: 6px;">Investimento</div>
-              <div style="width: 32px; height: 1px; background: var(--claro-red); opacity: 0.4;"></div>
-            </div>
-            <p class="t-body" style="margin: 0;">Em desenvolvimento, nos últimos 24 meses: <strong style="color: var(--claro-red); font-family: 'JetBrains Mono', monospace;">zero</strong>. Ou perto disso. Quando investiu, foi em curso gravado que ninguém terminou.</p>
+          <div class="spec-row">
+            <div class="spec-label">Investimento</div>
+            <p class="t-body spec-body">Em desenvolvimento, nos últimos 24 meses: <strong>zero</strong>. Ou perto disso. Quando investiu, foi em curso gravado que ninguém terminou.</p>
           </div>
 
-          <!-- VOCÊ DETESTA -->
-          <div style="display: grid; grid-template-columns: 180px 1fr; gap: 32px; padding: 28px 0; border-top: 1px solid rgba(13,17,23,0.08); align-items: start;">
-            <div>
-              <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.7rem; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; margin-bottom: 6px;">Você detesta</div>
-              <div style="width: 32px; height: 1px; background: var(--muted); opacity: 0.4;"></div>
-            </div>
-            <p class="t-body" style="margin: 0;">Curso de 40 horas. Consultor de terno falando de "transformação digital". Promessa genérica de "crescimento". Material com cheiro de quem nunca pisou em loja.</p>
+          <div class="spec-row">
+            <div class="spec-label spec-label-muted">Você detesta</div>
+            <p class="t-body spec-body">Curso de 40 horas. Consultor de terno falando de "transformação digital". Promessa genérica de "crescimento". Material com cheiro de quem nunca pisou em loja.</p>
           </div>
 
-          <!-- VOCÊ PRECISA -->
-          <div style="display: grid; grid-template-columns: 180px 1fr; gap: 32px; padding: 28px 0; border-top: 1px solid rgba(13,17,23,0.08); border-bottom: 1px solid rgba(13,17,23,0.08); align-items: start;">
-            <div>
-              <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 0.7rem; letter-spacing: 0.18em; color: var(--r-mint); text-transform: uppercase; margin-bottom: 6px;">Você precisa</div>
-              <div style="width: 32px; height: 1px; background: var(--r-mint); opacity: 0.5;"></div>
-            </div>
-            <p class="t-body" style="margin: 0;">Método pronto pra aplicar na segunda-feira de manhã. Ferramenta funcionando antes de pagar. Autor que viveu o que você vive. <strong>Resultado em real, não em engajamento.</strong></p>
+          <div class="spec-row">
+            <div class="spec-label spec-label-mint">Você precisa</div>
+            <p class="t-body spec-body">Método pronto pra aplicar na segunda-feira de manhã. Ferramenta funcionando antes de pagar. Autor que viveu o que você vive. <strong>Resultado em real, não em engajamento.</strong></p>
           </div>
-
         </div>
 
-        <p class="t-body" style="margin-top: 3rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; line-height: 1.4; color: var(--text-dark);">
-          A gente te conhece porque <strong style="color: var(--claro-red);">já fomos você</strong>.
+        <div class="section-rule"></div>
+
+        <p class="t-body" style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; line-height: 1.4; color: var(--text-dark);">
+          A gente te conhece porque <span style="color: var(--claro-red);">já fomos você</span>.
         </p>
 
-        <div class="big-idea-pull" style="margin-top: 1.5rem;">
-          <p>Por isso o Rentabiliza.ai é diferente: feito de <em>dentro pra fora</em>, não de fora pra dentro.</p>
-        </div>
+        <p class="t-body" style="margin-top: 1.25rem;">Por isso o Rentabiliza.ai é diferente: feito de dentro pra fora, não de fora pra dentro.</p>
 
-        <p class="t-body" style="margin-top: 2.5rem; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted-dark);">
+        <p class="t-body" style="margin-top: 1.5rem; color: var(--muted-2);">
           Se você se identificou, continua aqui com a gente.
         </p>
       </div>
@@ -1705,19 +1736,17 @@
         <div class="eyebrow"><span class="eyebrow-dot"></span><span>Por que a gente é diferente</span></div>
         <h2 class="t-section">A gente tá do lado <em>direito</em> da tabela.</h2>
 
-        <p class="t-lead">Você já viu de tudo no mercado de "ajuda pra pequena empresa".</p>
+        <p class="t-lead">Você já viu de tudo no mercado de "ajuda pra pequena empresa". Curso de empreendedorismo gravado que ninguém termina. Consultoria que cobra hora e entrega slide. Programa de governo que ensina o básico e some. Mentoria coletiva que junta 200 pessoas no Zoom e ninguém aprende.</p>
 
-        <p class="t-body">Curso de empreendedorismo gravado que ninguém termina. Consultoria que cobra hora e entrega slide. Programa de governo que ensina o básico e some. Mentoria coletiva que junta <span style="font-family: 'JetBrains Mono', monospace; color: var(--muted-2);">200 pessoas no Zoom</span> e ninguém aprende.</p>
+        <p class="t-body">Tudo respeitável dentro do escopo. Tudo errado pro seu problema.</p>
 
-        <p class="t-body" style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; color: var(--claro-red); margin: 2rem 0;">
-          Tudo respeitável dentro do escopo. Tudo errado pro seu problema.
+        <p class="t-body" style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.4rem; line-height: 1.4; color: var(--text-light); margin: 2rem 0;">
+          O seu problema não é "falta de empreendedorismo". É falta de <span style="color: var(--claro-red);">método comercial instalado</span> dentro da loja.
         </p>
 
-        <div class="big-idea-pull">
-          <p>O seu problema não é <em>"falta de empreendedorismo"</em>. É falta de <em>método comercial instalado</em> dentro da loja.</p>
-        </div>
+        <div class="section-rule"></div>
 
-        <h3 class="t-sub" style="margin-top: 3rem;">Diferença grande:</h3>
+        <h3 class="t-sub">A diferença, lado a lado</h3>
 
         <table class="diff-table">
           <thead>
@@ -1734,11 +1763,13 @@
           </tbody>
         </table>
 
-        <p class="t-body" style="margin-top: 2.5rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.3rem; line-height: 1.5; color: var(--text-light);">
-          Não foi por acaso. Foi desenhado por quem viveu <strong style="color: var(--claro-red);">vinte e um anos do lado de quem trabalha</strong> — não por quem trabalha do lado de quem ensina.
+        <div class="section-rule"></div>
+
+        <p class="t-body" style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.3rem; line-height: 1.5; color: var(--text-light);">
+          Não foi por acaso. Foi desenhado por quem viveu vinte e um anos do lado de quem trabalha — não por quem trabalha do lado de quem ensina.
         </p>
 
-        <p class="t-body" style="margin-top: 2.5rem; text-align: center; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; color: var(--claro-red);">
+        <p class="t-body" style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.6rem; color: var(--claro-red); margin-top: 1.75rem;">
           Esse é o ponto.
         </p>
       </div>
