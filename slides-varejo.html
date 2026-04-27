@@ -148,11 +148,22 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 5rem 7rem;
+      padding: 4rem 5.5rem;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.5s ease;
       overflow: hidden;
+    }
+    /* Em modo apresentação fullscreen, garante que conteúdo respira sem cortar.
+       Slides densos (06, 10, 11) recebem padding um pouco menor pra caber. */
+    .slide[data-slide="6"], .slide[data-slide="10"], .slide[data-slide="11"] {
+      padding: 3.25rem 5.5rem;
+      justify-content: flex-start;
+      padding-top: 3rem;
+    }
+    .slide[data-slide="2"], .slide[data-slide="9"] {
+      justify-content: flex-start;
+      padding-top: 3.5rem;
     }
     .slide.active {
       opacity: 1;
@@ -171,23 +182,255 @@
     .bg-light { background: var(--cream); color: var(--text-dark); }
 
     /* ═══════════════════════════════ BACKGROUND IMAGE LAYER ═══════════════════════════════ */
-    /* Glass escuro sobre imagem — atmosfera, não protagonismo */
+    /* Imagem atmosférica — overlay assimétrico (denso à esquerda onde tá o texto, esvaziando à direita) */
     .s-bg-photo {
       position: absolute; inset: 0; z-index: 0;
       background-size: cover;
       background-position: center;
-      opacity: 0.16;
-      filter: saturate(0.65) contrast(1.05) blur(1px);
+      opacity: 0.55;
+      filter: saturate(0.85) contrast(1.05);
       pointer-events: none;
     }
     .s-bg-photo::after {
       content: ''; position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(20,20,22,0.45) 0%, rgba(20,20,22,0.82) 100%),
-        linear-gradient(135deg, rgba(20,20,22,0.5) 0%, rgba(20,20,22,0.75) 100%);
+        linear-gradient(95deg, rgba(20,20,22,0.88) 0%, rgba(20,20,22,0.7) 35%, rgba(20,20,22,0.35) 70%, rgba(20,20,22,0.2) 100%),
+        radial-gradient(ellipse 50% 40% at 90% 100%, rgba(20,20,22,0.35), transparent 60%);
     }
-    /* Variação para slides charcoal — ainda mais sutil */
-    .bg-charcoal .s-bg-photo { opacity: 0.13; }
+    .bg-charcoal .s-bg-photo { opacity: 0.45; }
+    .bg-light .s-bg-photo {
+      opacity: 0.42;
+      filter: saturate(0.78) contrast(1.02);
+    }
+    .bg-light .s-bg-photo::after {
+      content: ''; position: absolute; inset: 0;
+      background:
+        linear-gradient(95deg, rgba(244,241,232,0.92) 0%, rgba(244,241,232,0.75) 35%, rgba(244,241,232,0.4) 70%, rgba(244,241,232,0.22) 100%),
+        radial-gradient(ellipse 50% 40% at 90% 100%, rgba(244,241,232,0.3), transparent 60%);
+    }
+
+    /* ═══════════════════════════════ VAREJO COMPONENTES ═══════════════════════════════ */
+
+    /* Rotina (slide 02 — lista de 6 itens em 2 colunas, compacto) */
+    .varejo-rotina {
+      position: relative;
+      padding-left: 22px;
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.35;
+      color: var(--text-light);
+    }
+    .varejo-rotina-arrow {
+      position: absolute; left: 0; top: 0;
+      color: var(--claro-yellow);
+      font-weight: 600;
+    }
+
+    /* Transformação cards (slide 06 — 4 cards 2x2 com micro-imagem) */
+    .varejo-transform-card {
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      gap: 14px;
+      padding: 1rem 1.1rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-left: 3px solid var(--claro-yellow);
+      border-radius: 0 12px 12px 0;
+      align-items: center;
+    }
+    .varejo-transform-img {
+      width: 76px; height: 76px;
+      object-fit: cover;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+    .varejo-transform-content {
+      min-width: 0;
+    }
+    .varejo-transform-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--claro-yellow);
+      margin-bottom: 0.3rem;
+    }
+    .varejo-transform-body {
+      margin: 0;
+      font-size: 0.84rem;
+      line-height: 1.45;
+      color: var(--text-light);
+    }
+
+    /* Escada cards (slide 08 — 4 cards horizontais compactos) */
+    .varejo-escada-card {
+      padding: 1.15rem 1rem;
+      background: rgba(13,17,23,0.04);
+      border: 1px solid rgba(13,17,23,0.08);
+      border-radius: 12px;
+      display: flex; flex-direction: column;
+      gap: 0.5rem;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .varejo-escada-card:hover {
+      border-color: rgba(244,185,62,0.32);
+      transform: translateY(-2px);
+    }
+    .varejo-escada-featured {
+      background: linear-gradient(165deg, rgba(244,185,62,0.08), rgba(244,185,62,0.02));
+      border-color: rgba(244,185,62,0.32);
+      box-shadow: 0 8px 20px rgba(244,185,62,0.08);
+    }
+    .varejo-escada-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--claro-red);
+    }
+    .varejo-escada-name {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 1.35rem;
+      letter-spacing: -0.01em;
+      color: var(--text-dark);
+    }
+    .varejo-escada-desc {
+      font-size: 0.78rem;
+      line-height: 1.45;
+      color: var(--muted-2);
+      margin-top: auto;
+    }
+
+    /* Autoridade cards (slide 09 — 2 cards com foto-portrait) */
+    .varejo-autoridade-card {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 1.25rem;
+      padding: 1.5rem 1.4rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-left: 4px solid var(--claro-yellow);
+      border-radius: 0 12px 12px 0;
+      align-items: start;
+    }
+    .varejo-autoridade-img {
+      border-radius: 10px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      background: rgba(244,185,62,0.08);
+    }
+    .varejo-autoridade-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .varejo-autoridade-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--claro-yellow);
+      margin-bottom: 0.55rem;
+    }
+    .varejo-autoridade-title {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 1.3rem;
+      letter-spacing: -0.01em;
+      color: var(--text-light);
+      margin: 0 0 0.7rem;
+      line-height: 1.2;
+    }
+    .varejo-autoridade-desc {
+      margin: 0;
+      font-size: 0.86rem;
+      line-height: 1.5;
+      color: var(--text-light);
+    }
+
+    /* Plano cards (slide 10 — 4 cards 2x2 com Faz a conta) */
+    .varejo-plano-card {
+      position: relative;
+      padding: 1.1rem 1.25rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      display: flex; flex-direction: column;
+      gap: 0.45rem;
+    }
+    .varejo-plano-featured {
+      background: rgba(244,185,62,0.06);
+      border-color: rgba(244,185,62,0.32);
+      box-shadow: 0 8px 20px rgba(244,185,62,0.1);
+    }
+    .varejo-plano-badge {
+      position: absolute;
+      top: -10px;
+      right: 16px;
+      padding: 4px 10px;
+      background: var(--claro-yellow);
+      color: var(--ink);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border-radius: 4px;
+    }
+    .varejo-plano-name {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 1.35rem;
+      letter-spacing: -0.01em;
+      color: var(--text-light);
+    }
+    .varejo-plano-price {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--claro-yellow);
+    }
+    .varejo-plano-sub {
+      font-size: 0.74rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+    .varejo-plano-desc {
+      margin: 0.35rem 0 0;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+    .varejo-plano-conta {
+      margin-top: 0.55rem;
+      padding: 0.7rem 0.9rem;
+      background: rgba(244,185,62,0.08);
+      border-left: 2px solid var(--claro-yellow);
+      border-radius: 0 6px 6px 0;
+      font-size: 0.76rem;
+      line-height: 1.45;
+      color: var(--text-light);
+    }
+    .varejo-plano-featured .varejo-plano-conta {
+      background: rgba(244,185,62,0.14);
+    }
+    .varejo-plano-conta-label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--claro-yellow);
+      margin-bottom: 4px;
+    }
 
     /* ═══════════════════════════════ AUTHOR BLOCK — wordmark Rentabiliza ═══════════════════════════════ */
     .author-block {
@@ -940,103 +1183,86 @@
 
     <!-- ════════════ SLIDE 01 — CAPA ════════════ -->
     <div class="slide bg-dark active" data-slide="1">
-      <div class="s-bg-photo" style="background-image: url('assets/images/varejo-capa-hero.jpg'), url('assets/images/hero-main.jpg'); background-position: right center; opacity: 0.42;"></div>
+      <div class="s-bg-photo" style="background-image: url('assets/images/varejo-capa-hero.jpg'), url('assets/images/hero-main.jpg');"></div>
       <div class="s-num">01</div>
-      <div style="position: absolute; top: 32px; right: 80px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); z-index: 2;">Rentabiliza.ai · 2026</div>
+      <div style="position: absolute; top: 32px; right: 80px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); z-index: 2;">Para o Lojista · 2026</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>Para varejistas que querem crescer na era da IA</span></div>
-      <h1 class="s-title" style="font-size: clamp(2.8rem, 6.2vw, 5.8rem); line-height: 1.05; margin-top: 1.5rem; max-width: 1080px;">Você pode operar como <em>gigante</em> — sem deixar de ser <em>dono</em>.</h1>
-      <p class="s-subtitle" style="margin-top: 1.75rem; margin-bottom: 3rem; max-width: 800px; font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(1.1rem, 1.7vw, 1.45rem); line-height: 1.45;">
+      <h1 class="s-title" style="font-size: clamp(2.6rem, 5.8vw, 5.4rem); line-height: 1.05; margin-top: 1.5rem; max-width: 1080px;">Você pode operar como <em>gigante</em> — sem deixar de ser <em>dono</em>.</h1>
+      <p class="s-subtitle" style="margin-top: 1.5rem; margin-bottom: 2.5rem; max-width: 800px; font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(1.05rem, 1.55vw, 1.4rem); line-height: 1.45;">
         Mais venda, mais lucro, mais tempo livre. IA trabalhando, time fiel, operação rodando — mesmo quando você não está olhando.
       </p>
-      <div style="display: inline-flex; gap: 2rem; flex-wrap: wrap; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--claro-yellow); position: relative; z-index: 1;">
+      <div style="display: inline-flex; gap: 1.75rem; flex-wrap: wrap; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--claro-yellow); position: relative; z-index: 1;">
         <span style="display: inline-flex; align-items: center; gap: 8px;"><span style="width: 5px; height: 5px; background: var(--claro-yellow); border-radius: 50%;"></span>Mais venda</span>
         <span style="display: inline-flex; align-items: center; gap: 8px;"><span style="width: 5px; height: 5px; background: var(--claro-yellow); border-radius: 50%;"></span>Menos custo</span>
         <span style="display: inline-flex; align-items: center; gap: 8px;"><span style="width: 5px; height: 5px; background: var(--claro-yellow); border-radius: 50%;"></span>Mais rentabilidade</span>
       </div>
-      <div style="position: absolute; bottom: 32px; right: 80px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); z-index: 2;">PulsarH.ai × TradeUp</div>
+      <div style="position: absolute; bottom: 32px; right: 80px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); z-index: 2;">Rentabiliza.ai · TradeUp × PulsarH.ai</div>
     </div>
 
     <!-- ════════════ SLIDE 02 — O ESPELHO ════════════ -->
     <div class="slide bg-charcoal" data-slide="2">
+      <div class="s-bg-photo" style="background-image: url('assets/images/varejo-espelho.jpg'), url('assets/images/avatar-parceiro.jpg');"></div>
       <div class="s-num">02</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>02 · Deixa eu te perguntar uma coisa</span></div>
       <h2 class="s-title">A sua semana é <em>exatamente</em> essa, ou tô errado?</h2>
-      <div style="display: grid; grid-template-columns: 1fr 280px; gap: 2.5rem; align-items: start; margin-top: 1.25rem;">
-        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.65rem;">
-          <li style="font-family: 'Fraunces', serif; font-weight: 400; font-size: 1.1rem; line-height: 1.4; color: var(--text-light); padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: var(--claro-yellow); font-weight: 600;">→</span> Você chega antes do time.</li>
-          <li style="font-family: 'Fraunces', serif; font-weight: 400; font-size: 1.1rem; line-height: 1.4; color: var(--text-light); padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: var(--claro-yellow); font-weight: 600;">→</span> Resolve a primeira urgência antes do café.</li>
-          <li style="font-family: 'Fraunces', serif; font-weight: 400; font-size: 1.1rem; line-height: 1.4; color: var(--text-light); padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: var(--claro-yellow); font-weight: 600;">→</span> Vende, atende, cobra, briga com fornecedor, treina vendedor novo, ajeita vitrine.</li>
-          <li style="font-family: 'Fraunces', serif; font-weight: 400; font-size: 1.1rem; line-height: 1.4; color: var(--text-light); padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: var(--claro-yellow); font-weight: 600;">→</span> Fecha caixa, paga conta.</li>
-          <li style="font-family: 'Fraunces', serif; font-weight: 400; font-size: 1.1rem; line-height: 1.4; color: var(--text-light); padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: var(--claro-yellow); font-weight: 600;">→</span> Volta pra casa exausto.</li>
-          <li style="font-family: 'Fraunces', serif; font-weight: 400; font-size: 1.1rem; line-height: 1.4; color: var(--text-light); padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: var(--claro-yellow); font-weight: 600;">→</span> Dorme pensando no que precisa fazer amanhã.</li>
-          <li style="font-family: 'Fraunces', serif; font-weight: 400; font-size: 1.1rem; line-height: 1.4; color: var(--text-light); padding-left: 22px; position: relative;"><span style="position: absolute; left: 0; color: var(--claro-yellow); font-weight: 600;">→</span> Acorda fazendo a mesma coisa.</li>
-        </ul>
-        <div style="border-radius: 12px; overflow: hidden; aspect-ratio: 4/5; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);">
-          <img src="assets/images/varejo-espelho.jpg" onerror="this.onerror=null;this.src='assets/images/avatar-parceiro.jpg';" alt="Lojista exausto fechando caixa" style="width:100%;height:100%;object-fit:cover;opacity:0.85;">
-        </div>
+      <div class="s-grid-3" style="grid-template-columns: repeat(2, 1fr); gap: 0.85rem 1.5rem; margin-top: 1.25rem;">
+        <div class="varejo-rotina"><span class="varejo-rotina-arrow">→</span>Você chega antes do time.</div>
+        <div class="varejo-rotina"><span class="varejo-rotina-arrow">→</span>Resolve a primeira urgência antes do café.</div>
+        <div class="varejo-rotina"><span class="varejo-rotina-arrow">→</span>Vende, atende, cobra, briga com fornecedor.</div>
+        <div class="varejo-rotina"><span class="varejo-rotina-arrow">→</span>Treina vendedor novo, ajeita vitrine.</div>
+        <div class="varejo-rotina"><span class="varejo-rotina-arrow">→</span>Fecha caixa, paga conta, volta exausto.</div>
+        <div class="varejo-rotina"><span class="varejo-rotina-arrow">→</span>Dorme pensando no que precisa fazer amanhã.</div>
       </div>
-      <div style="margin-top: 1.75rem; padding: 1.5rem 1.85rem; background: rgba(13,17,23,0.55); border: 1px solid rgba(244,185,62,0.25); border-left: 4px solid var(--claro-yellow); border-radius: 0 12px 12px 0;">
-        <p style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.65rem; line-height: 1.3; color: var(--text-light); letter-spacing: -0.01em;">A loja fatura. Você não cresce.</p>
+      <div style="margin-top: 1.5rem; padding: 1.25rem 1.75rem; background: rgba(13,17,23,0.55); border: 1px solid rgba(244,185,62,0.28); border-left: 4px solid var(--claro-yellow); border-radius: 0 12px 12px 0; backdrop-filter: blur(8px);">
+        <p style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.55rem; line-height: 1.25; color: var(--text-light); letter-spacing: -0.01em;">A loja fatura. Você não cresce.</p>
       </div>
-      <p style="margin-top: 1.25rem; font-size: 1rem; line-height: 1.5; color: var(--muted);">Não é falta de cliente. Não é falta de produto. Não é falta de coragem.</p>
-      <p style="margin-top: 1rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; line-height: 1.35; color: var(--claro-yellow); letter-spacing: -0.01em;">É falta de operar como gigante — com IA, time fiel e processo no piloto automático.</p>
+      <p style="margin-top: 1.25rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.25rem; line-height: 1.4; color: var(--text-light);">Não é falta de cliente. Não é falta de produto. <span style="color: var(--claro-yellow); font-weight: 600;">É falta de método instalado.</span></p>
     </div>
 
-    <!-- ════════════ SLIDE 03 — O DINHEIRO QUE TÁ FICANDO NA MESA ════════════ -->
+    <!-- ════════════ SLIDE 03 — O DINHEIRO NA MESA ════════════ -->
     <div class="slide bg-light" data-slide="3">
       <div class="s-num">03</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>03 · A indústria quer te pagar</span></div>
-      <h2 class="s-title">Operadoras e indústria estão <em>loucas</em> pra investir em você. Você não tá vendo.</h2>
-      <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 2.5rem; align-items: start; margin-top: 1rem;">
-        <div>
-          <p class="s-subtitle" style="margin-bottom: 1.5rem;">Cada celular que você vende sem fechar plano, sem fechar seguro, sem fechar garantia — é comissão da operadora deixada na mesa. Comissão recorrente que entraria todo mês. Por anos.</p>
-          <div style="padding: 1.5rem 1.75rem; background: rgba(13,17,23,0.06); border: 1px solid rgba(13,17,23,0.1); border-radius: 12px;">
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.75rem;">Faz a conta</div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; line-height: 1.7; color: var(--text-dark);">
-              <strong style="color: var(--claro-red);">20</strong> vendas por dia<br>
-              <span style="color: var(--muted-2);">×</span> <strong style="color: var(--claro-red);">26</strong> dias por mês<br>
-              <span style="color: var(--muted-2);">×</span> <strong style="color: var(--claro-red);">12</strong> meses<br>
-              <span style="display: block; height: 1px; background: rgba(13,17,23,0.15); margin: 0.6rem 0;"></span>
-              <strong style="color: var(--claro-red); font-size: 1.4rem;">= 6.240 oportunidades por ano</strong>
-            </div>
-            <p style="margin: 1.25rem 0 0; font-family: 'Inter', sans-serif; font-size: 0.95rem; line-height: 1.55; color: var(--muted-2);">
-              Em <strong style="color: var(--text-dark);">cada uma</strong> você poderia ter triplicado o ticket.<br>
-              Em <strong style="color: var(--claro-red);">nenhuma</strong> triplicou.
-            </p>
+      <h2 class="s-title">A indústria está <em>louca</em> pra investir em você. Você não tá vendo.</h2>
+      <p class="s-subtitle" style="margin-bottom: 1.25rem;">Cada celular vendido sem fechar plano, sem fechar seguro, sem fechar garantia — é comissão da indústria deixada na mesa. Comissão recorrente, todo mês, por anos.</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 0.5rem; align-items: stretch;">
+        <div style="padding: 1.5rem 1.75rem; background: rgba(13,17,23,0.05); border: 1px solid rgba(13,17,23,0.1); border-radius: 12px; display: flex; flex-direction: column;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.85rem;">Faz a conta</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.98rem; line-height: 1.7; color: var(--text-dark);">
+            <strong style="color: var(--claro-red);">20</strong> vendas/dia &nbsp;·&nbsp;
+            <strong style="color: var(--claro-red);">26</strong> dias/mês &nbsp;·&nbsp;
+            <strong style="color: var(--claro-red);">12</strong> meses
+            <span style="display: block; height: 1px; background: rgba(13,17,23,0.15); margin: 0.65rem 0;"></span>
+            <strong style="color: var(--claro-red); font-size: 1.5rem;">= 6.240 oportunidades/ano</strong>
           </div>
+          <p style="margin: 1rem 0 0; font-family: 'Inter', sans-serif; font-size: 0.92rem; line-height: 1.5; color: var(--muted-2);">
+            Em <strong style="color: var(--text-dark);">cada uma</strong>, dava pra triplicar o ticket.
+            Em <strong style="color: var(--claro-red);">nenhuma</strong>, triplicou.
+          </p>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
-          <div style="border-radius: 12px; overflow: hidden; aspect-ratio: 4/3; background: rgba(13,17,23,0.05); border: 1px solid rgba(13,17,23,0.08);">
-            <img src="assets/images/varejo-dinheiro-mesa.jpg" onerror="this.onerror=null;this.src='assets/images/workshop-regional.jpg';" alt="Cliente saindo da loja com sacola" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <p style="margin: 0; font-size: 0.9rem; line-height: 1.5; color: var(--muted-2);">A indústria já entendeu que o lojista que vende serviço vale <strong style="color: var(--text-dark);">4× mais</strong>. Por isso ela paga comissão recorrente, oferece bônus, abre parceria.</p>
+        <div style="padding: 1.5rem 1.75rem; background: linear-gradient(135deg, rgba(244,185,62,0.08), rgba(244,185,62,0.02)); border: 1px solid rgba(244,185,62,0.25); border-radius: 12px; display: flex; flex-direction: column; justify-content: center;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.85rem;">Por que ela paga</div>
+          <p style="margin: 0; font-size: 0.95rem; line-height: 1.55; color: var(--muted-2);">A indústria já entendeu que o lojista que vende serviço vale <strong style="color: var(--text-dark); font-family: 'JetBrains Mono', monospace;">4× mais</strong>. Por isso ela paga comissão recorrente, oferece bônus, abre parceria.</p>
         </div>
       </div>
-      <p style="margin-top: 1.5rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; line-height: 1.35; color: var(--claro-red); letter-spacing: -0.01em;">O dinheiro tá aí. A indústria quer te pagar. Falta você abrir os olhos.</p>
+      <p style="margin-top: 1.5rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.45rem; line-height: 1.3; color: var(--claro-red); letter-spacing: -0.01em;">O dinheiro tá aí. A indústria quer te pagar. Falta você abrir os olhos.</p>
     </div>
 
     <!-- ════════════ SLIDE 04 — A SAÍDA ════════════ -->
     <div class="slide bg-dark" data-slide="4">
+      <div class="s-bg-photo" style="background-image: url('assets/images/varejo-mao-na-massa.jpg'), url('assets/images/time-loja.jpg');"></div>
       <div class="s-num">04</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>04 · A gente coloca a mão na massa</span></div>
-      <h2 class="s-title">A gente não é coach. Não é consultoria que entrega slide. <em>A gente entra junto</em>.</h2>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; margin-top: 1.25rem;">
-        <div>
-          <p class="s-subtitle" style="margin-bottom: 1.25rem;">Você já comprou curso. Já assistiu palestra. Já contratou consultor de terno que entregou apresentação bonita e sumiu.</p>
-          <p style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.6rem; line-height: 1.35; color: var(--claro-yellow); letter-spacing: -0.01em; margin: 0;">Mudou alguma coisa?</p>
-        </div>
-        <div style="border-radius: 14px; overflow: hidden; aspect-ratio: 4/3; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
-          <img src="assets/images/varejo-mao-na-massa.jpg" onerror="this.onerror=null;this.src='assets/images/time-loja.jpg';" alt="Equipe Rentabiliza dentro da operação real" style="width:100%;height:100%;object-fit:cover;">
-        </div>
-      </div>
-      <div style="margin-top: 1.75rem; padding: 2rem 2.25rem; background: linear-gradient(135deg, var(--claro-yellow), #E0A52A); border-radius: 16px; color: var(--ink);">
-        <p style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 700; font-size: clamp(1.4rem, 2.4vw, 2rem); line-height: 1.25; letter-spacing: -0.02em;">
+      <h2 class="s-title">A gente não é coach. <em>A gente entra junto</em>.</h2>
+      <p class="s-subtitle" style="margin-bottom: 1.25rem; max-width: 880px;">Você já comprou curso. Já assistiu palestra. Já contratou consultor de terno que entregou apresentação bonita e sumiu. <strong style="color: var(--claro-yellow);">Mudou alguma coisa?</strong></p>
+      <div style="margin-top: 1.25rem; padding: 1.75rem 2rem; background: linear-gradient(135deg, var(--claro-yellow), #E0A52A); border-radius: 14px; color: var(--ink);">
+        <p style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 700; font-size: clamp(1.3rem, 2.2vw, 1.85rem); line-height: 1.25; letter-spacing: -0.02em;">
           Conteúdo você assiste sozinho.<br>
-          <strong>A gente coloca a mão na massa com você.</strong>
+          A gente <strong>coloca a mão na massa</strong> com você.
         </p>
       </div>
-      <p style="margin-top: 1.5rem; font-size: 1rem; line-height: 1.55; color: var(--muted);">A equipe Rentabiliza entra dentro da sua operação real. Treina o seu time. Configura a IA pra sua loja. Monta o seu site. Instala o ritual de gestão. Acompanha o resultado.</p>
-      <p style="margin-top: 1rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; line-height: 1.3; color: var(--claro-yellow);">Não é discurso. É implementação.</p>
+      <p style="margin-top: 1.25rem; font-size: 0.98rem; line-height: 1.55; color: var(--muted); max-width: 920px;">A equipe Rentabiliza entra dentro da sua operação real: treina o time, configura a IA, monta o site, instala o ritual de gestão e acompanha o resultado.</p>
+      <p style="margin-top: 1rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; line-height: 1.3; color: var(--claro-yellow); letter-spacing: -0.01em;">Não é discurso. É implementação.</p>
     </div>
 
     <!-- ════════════ SLIDE 05 — O RENTABILIZA.AI ════════════ -->
@@ -1044,82 +1270,77 @@
       <div class="s-num">05</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>05 · Quem a gente é</span></div>
       <h2 class="s-title">Plataforma que <em>instala</em> dentro da sua loja o que rede grande tem.</h2>
-      <p class="s-subtitle" style="margin-bottom: 1.5rem;">O Rentabiliza.ai é uma plataforma de implementação executiva pra varejistas que querem parar de operar no improviso e começar a operar como rede nacional.</p>
-      <div style="margin: 1.25rem 0 1.5rem; padding: 1.5rem 1.75rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-radius: 14px; text-align: center;">
-        <p style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: clamp(1.1rem, 1.9vw, 1.6rem); line-height: 1.3; color: var(--text-dark); letter-spacing: -0.01em;">
-          <span style="color: var(--claro-red);">Gente</span> + <span style="color: var(--claro-red);">Processo</span> + <span style="color: var(--claro-red);">IA aplicada</span> = Loja que opera como <span style="color: var(--claro-red);">gigante</span>
+      <p class="s-subtitle" style="margin-bottom: 1.25rem;">O Rentabiliza.ai é uma plataforma de implementação executiva pra varejistas que querem parar de operar no improviso e começar a operar como rede nacional.</p>
+      <div style="margin: 1rem 0 1.25rem; padding: 1.25rem 1.5rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-radius: 12px; text-align: center;">
+        <p style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: clamp(1.15rem, 2vw, 1.7rem); line-height: 1.25; color: var(--text-dark); letter-spacing: -0.01em;">
+          <span style="color: var(--claro-red);">Gente</span> + <span style="color: var(--claro-red);">Processo</span> + <span style="color: var(--claro-red);">IA</span> = Loja que opera como <span style="color: var(--claro-red);">gigante</span>
         </p>
       </div>
-      <div class="s-grid-3" style="margin-top: 0.75rem;">
-        <div style="padding: 1.25rem 1.4rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-top: 3px solid var(--claro-red); border-radius: 4px 4px 12px 12px; display: flex; flex-direction: column; gap: 0.6rem;">
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.4rem;">🧠</span>
-            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red);">Gente</span>
+      <div class="s-grid-3" style="margin-top: 0.5rem;">
+        <div class="s-method">
+          <div class="s-method-icon">🧠</div>
+          <div class="s-method-sub">Camada 1 · Gente</div>
+          <div class="s-method-title">Time que <span>vende</span></div>
+          <div class="s-method-body" style="font-size: 0.9rem; line-height: 1.55;">
+            Vendedor consultivo. Líder com método. Cultura que retém talento bom e descarta o ruim.
           </div>
-          <p style="margin: 0; font-size: 0.92rem; line-height: 1.55; color: var(--muted-2);">Time treinado pra vender mais e ficar mais. Vendedor consultivo. Líder com método. Cultura que retém talento bom e descarta o ruim.</p>
         </div>
-        <div style="padding: 1.25rem 1.4rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-top: 3px solid var(--claro-red); border-radius: 4px 4px 12px 12px; display: flex; flex-direction: column; gap: 0.6rem;">
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.4rem;">🔁</span>
-            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red);">Processo</span>
+        <div class="s-method">
+          <div class="s-method-icon">🔁</div>
+          <div class="s-method-sub">Camada 2 · Processo</div>
+          <div class="s-method-title">Ritual <span>semanal</span></div>
+          <div class="s-method-body" style="font-size: 0.9rem; line-height: 1.55;">
+            Indicador no celular. Operação que roda no piloto automático — mesmo quando você sai.
           </div>
-          <p style="margin: 0; font-size: 0.92rem; line-height: 1.55; color: var(--muted-2);">Ritual de gestão semanal. Indicador no celular. Operação que roda no piloto automático — mesmo quando você sai.</p>
         </div>
-        <div style="padding: 1.25rem 1.4rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-top: 3px solid var(--claro-red); border-radius: 4px 4px 12px 12px; display: flex; flex-direction: column; gap: 0.6rem;">
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.4rem;">⚡</span>
-            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red);">IA Aplicada</span>
+        <div class="s-method">
+          <div class="s-method-icon">⚡</div>
+          <div class="s-method-sub">Camada 3 · IA Aplicada</div>
+          <div class="s-method-title">IA <span>configurada</span></div>
+          <div class="s-method-body" style="font-size: 0.9rem; line-height: 1.55;">
+            Atendimento automático. Recuperação de cliente. Dashboard pronto. Tudo em português.
           </div>
-          <p style="margin: 0; font-size: 0.92rem; line-height: 1.55; color: var(--muted-2);">Atendimento automático. Recuperação de cliente. Análise preditiva. Tudo configurado pela gente em português.</p>
         </div>
       </div>
-      <p style="margin-top: 1.75rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.3rem; line-height: 1.35; color: var(--text-dark);">As três camadas, instaladas <span style="color: var(--claro-red); font-weight: 600;">juntas</span>, dentro da sua operação real.</p>
+      <p style="margin-top: 1.25rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.25rem; line-height: 1.35; color: var(--text-dark);">As três camadas, instaladas <span style="color: var(--claro-red); font-weight: 600;">juntas</span>, dentro da sua operação real.</p>
     </div>
 
-    <!-- ════════════ SLIDE 06 — A TRANSFORMAÇÃO ════════════ -->
+    <!-- ════════════ SLIDE 06 — TRANSFORMAÇÃO ════════════ -->
     <div class="slide bg-charcoal" data-slide="6">
       <div class="s-num">06</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>06 · A transformação</span></div>
       <h2 class="s-title">A gente entra na sua loja e <em>muda</em> quatro coisas. Ao mesmo tempo.</h2>
-      <div class="s-grid-3" style="grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem;">
-        <div style="padding: 1.5rem 1.6rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-left: 3px solid var(--claro-yellow); border-radius: 0 12px 12px 0; display: grid; grid-template-columns: 88px 1fr; gap: 1.25rem; align-items: start;">
-          <div style="border-radius: 10px; overflow: hidden; aspect-ratio: 1/1; background: rgba(244,185,62,0.08);">
-            <img src="assets/images/varejo-time-vende.jpg" onerror="this.onerror=null;this.src='assets/images/avatar-parceiro.jpg';" alt="Vendedor consultivo no PDV" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.4rem;">01 · Time que vende mais</div>
-            <p style="margin: 0; font-size: 0.88rem; line-height: 1.55; color: var(--text-light);">Cliente que entrava gastando R$ 80 sai com R$ 280. Não é mágica — é gestão. Vendedor treinado fecha serviço junto: seguro, garantia, plano, comissão recorrente. <strong style="color: var(--claro-yellow);">Ticket triplica. Margem dobra.</strong></p>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem; margin-top: 1rem;">
+        <div class="varejo-transform-card">
+          <img src="assets/images/varejo-time-vende.jpg" onerror="this.onerror=null;this.src='assets/images/avatar-parceiro.jpg';" alt="Vendedor consultivo no PDV" class="varejo-transform-img">
+          <div class="varejo-transform-content">
+            <div class="varejo-transform-eyebrow">01 · Time que vende mais</div>
+            <p class="varejo-transform-body">Cliente entrava com R$ 80, sai com R$ 280. <strong style="color: var(--claro-yellow);">Ticket triplica. Margem dobra.</strong></p>
           </div>
         </div>
-        <div style="padding: 1.5rem 1.6rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-left: 3px solid var(--claro-yellow); border-radius: 0 12px 12px 0; display: grid; grid-template-columns: 88px 1fr; gap: 1.25rem; align-items: start;">
-          <div style="border-radius: 10px; overflow: hidden; aspect-ratio: 1/1; background: rgba(244,185,62,0.08);">
-            <img src="assets/images/varejo-processo-roda.jpg" onerror="this.onerror=null;this.src='assets/images/time-loja.jpg';" alt="Daily de 15 minutos com a equipe" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.4rem;">02 · Processo que roda sem você</div>
-            <p style="margin: 0; font-size: 0.88rem; line-height: 1.55; color: var(--text-light);">Daily de 15 minutos. 1:1 com vendedor que não vira briga. Indicador na tela do celular. <strong style="color: var(--claro-yellow);">Sua loja para de parar quando você sai.</strong></p>
+        <div class="varejo-transform-card">
+          <img src="assets/images/varejo-processo-roda.jpg" onerror="this.onerror=null;this.src='assets/images/time-loja.jpg';" alt="Daily de 15 minutos" class="varejo-transform-img">
+          <div class="varejo-transform-content">
+            <div class="varejo-transform-eyebrow">02 · Processo que roda sem você</div>
+            <p class="varejo-transform-body">Daily de 15min. 1:1 sem briga. Indicador no celular. <strong style="color: var(--claro-yellow);">A loja para de parar quando você sai.</strong></p>
           </div>
         </div>
-        <div style="padding: 1.5rem 1.6rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-left: 3px solid var(--claro-yellow); border-radius: 0 12px 12px 0; display: grid; grid-template-columns: 88px 1fr; gap: 1.25rem; align-items: start;">
-          <div style="border-radius: 10px; overflow: hidden; aspect-ratio: 1/1; background: rgba(244,185,62,0.08);">
-            <img src="assets/images/varejo-ia-24h.jpg" onerror="this.onerror=null;this.src='assets/images/ia-gentes-whatsapp.jpg';" alt="Atendimento automático WhatsApp" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.4rem;">03 · IA trabalhando 24 horas</div>
-            <p style="margin: 0; font-size: 0.88rem; line-height: 1.55; color: var(--text-light);">Atendimento automático no WhatsApp. Recuperação de cliente dormente. Dashboard pronto. Agente configurado em português. <strong style="color: var(--claro-yellow);">Você economiza vendedor sem perder venda.</strong></p>
+        <div class="varejo-transform-card">
+          <img src="assets/images/varejo-ia-24h.jpg" onerror="this.onerror=null;this.src='assets/images/ia-gentes-whatsapp.jpg';" alt="Atendimento automático WhatsApp" class="varejo-transform-img">
+          <div class="varejo-transform-content">
+            <div class="varejo-transform-eyebrow">03 · IA trabalhando 24h</div>
+            <p class="varejo-transform-body">WhatsApp automático, cliente recuperado, dashboard pronto. <strong style="color: var(--claro-yellow);">Economiza vendedor sem perder venda.</strong></p>
           </div>
         </div>
-        <div style="padding: 1.5rem 1.6rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-left: 3px solid var(--claro-yellow); border-radius: 0 12px 12px 0; display: grid; grid-template-columns: 88px 1fr; gap: 1.25rem; align-items: start;">
-          <div style="border-radius: 10px; overflow: hidden; aspect-ratio: 1/1; background: rgba(244,185,62,0.08);">
-            <img src="assets/images/varejo-marca-grande.jpg" onerror="this.onerror=null;this.src='assets/images/embaixador-selo.jpg';" alt="Site profissional e identidade visual" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.4rem;">04 · Marca com cara de gente grande</div>
-            <p style="margin: 0; font-size: 0.88rem; line-height: 1.55; color: var(--text-light);">Site profissional, vídeo curto pra Instagram, imagem de campanha, identidade visual no PDV. <strong style="color: var(--claro-yellow);">Sua loja entra no nível das grandes — sem agência cobrando R$ 8 mil.</strong></p>
+        <div class="varejo-transform-card">
+          <img src="assets/images/varejo-marca-grande.jpg" onerror="this.onerror=null;this.src='assets/images/embaixador-selo.jpg';" alt="Marca com cara de gente grande" class="varejo-transform-img">
+          <div class="varejo-transform-content">
+            <div class="varejo-transform-eyebrow">04 · Marca com cara de gente grande</div>
+            <p class="varejo-transform-body">Site, vídeo, identidade visual. <strong style="color: var(--claro-yellow);">Sua loja entra no nível das grandes — sem agência cobrando R$ 8k.</strong></p>
           </div>
         </div>
       </div>
-      <p style="margin-top: 1.5rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.25rem; line-height: 1.35; color: var(--text-light);">Quatro frentes trabalhando <span style="color: var(--claro-yellow); font-weight: 600;">juntas</span> dentro do seu negócio. Sem você fazer sozinho.</p>
+      <p style="margin-top: 1.25rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.2rem; line-height: 1.35; color: var(--text-light);">Quatro frentes trabalhando <span style="color: var(--claro-yellow); font-weight: 600;">juntas</span>. Sem você fazer sozinho.</p>
     </div>
 
     <!-- ════════════ SLIDE 07 — COMO FUNCIONA ════════════ -->
@@ -1127,105 +1348,96 @@
       <div class="s-num">07</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>07 · Pessoas · Processos · IA</span></div>
       <h2 class="s-title">A gente trabalha em <em>três</em> camadas. Tirou uma, o sistema cai.</h2>
-      <div class="s-grid-3" style="margin-top: 1.25rem;">
-        <div style="padding: 1.5rem 1.5rem; background: rgba(255,107,71,0.06); border: 1px solid rgba(255,107,71,0.3); border-radius: 14px; display: flex; flex-direction: column; gap: 0.6rem;">
+      <div class="s-grid-3" style="margin-top: 1rem;">
+        <div style="padding: 1.4rem 1.5rem; background: rgba(255,107,71,0.06); border: 1px solid rgba(255,107,71,0.3); border-radius: 14px; display: flex; flex-direction: column; gap: 0.6rem;">
           <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.5rem;">🧠</span>
-            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--r-coral);">Pessoas · O Filtro H</span>
+            <span style="font-size: 1.4rem;">🧠</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--r-coral);">Pessoas · Filtro H</span>
           </div>
-          <p style="margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--text-light);">A gente desenvolve em você e no seu time o que separa loja boa de loja grande: o <strong style="color: var(--r-coral);">filtro H — humanização</strong>. Cuidar de gente, dar feedback que cresce, criar cultura que retém talento. <strong style="color: var(--text-light);">Sem isso, processo e IA viram planilha bonita.</strong></p>
+          <p style="margin: 0; font-size: 0.88rem; line-height: 1.5; color: var(--text-light);">A gente desenvolve em você e no time o <strong style="color: var(--r-coral);">filtro H — humanização</strong>. Cuidar de gente, dar feedback que cresce, criar cultura que retém. <strong>Sem isso, processo e IA viram planilha bonita.</strong></p>
         </div>
-        <div style="padding: 1.5rem 1.5rem; background: rgba(244,185,62,0.06); border: 1px solid rgba(244,185,62,0.3); border-radius: 14px; display: flex; flex-direction: column; gap: 0.6rem;">
+        <div style="padding: 1.4rem 1.5rem; background: rgba(244,185,62,0.06); border: 1px solid rgba(244,185,62,0.3); border-radius: 14px; display: flex; flex-direction: column; gap: 0.6rem;">
           <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.5rem;">🔁</span>
-            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow);">Processos · PULSAR</span>
+            <span style="font-size: 1.4rem;">🔁</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow);">Processo · PULSAR</span>
           </div>
-          <p style="margin: 0; font-size: 0.88rem; line-height: 1.55; color: var(--text-light);">Seis rituais semanais que viram piloto automático:</p>
-          <ul style="list-style: none; padding: 0; margin: 0.25rem 0 0; display: flex; flex-direction: column; gap: 0.25rem;">
-            <li style="font-size: 0.85rem; color: var(--text-light);"><strong style="color: var(--claro-yellow); font-family: 'JetBrains Mono', monospace; font-size: 0.95rem;">P</strong>lanejar a semana com clareza.</li>
-            <li style="font-size: 0.85rem; color: var(--text-light);"><strong style="color: var(--claro-yellow); font-family: 'JetBrains Mono', monospace; font-size: 0.95rem;">U</strong>sar o ritual diário de 15 min.</li>
-            <li style="font-size: 0.85rem; color: var(--text-light);"><strong style="color: var(--claro-yellow); font-family: 'JetBrains Mono', monospace; font-size: 0.95rem;">L</strong>apidar erro antes de virar crise.</li>
-            <li style="font-size: 0.85rem; color: var(--text-light);"><strong style="color: var(--claro-yellow); font-family: 'JetBrains Mono', monospace; font-size: 0.95rem;">S</strong>ustentar o que tá funcionando.</li>
-            <li style="font-size: 0.85rem; color: var(--text-light);"><strong style="color: var(--claro-yellow); font-family: 'JetBrains Mono', monospace; font-size: 0.95rem;">A</strong>lavancar o que dá resultado.</li>
-            <li style="font-size: 0.85rem; color: var(--text-light);"><strong style="color: var(--claro-yellow); font-family: 'JetBrains Mono', monospace; font-size: 0.95rem;">R</strong>eplicar pra todo o time.</li>
-          </ul>
-          <p style="margin: 0.4rem 0 0; font-size: 0.85rem; font-style: italic; color: var(--claro-yellow); font-weight: 600;">A loja roda sozinha.</p>
+          <p style="margin: 0 0 0.4rem; font-size: 0.86rem; line-height: 1.5; color: var(--text-light);">Seis rituais semanais que viram piloto automático:</p>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.65; color: var(--text-light);">
+            <strong style="color: var(--claro-yellow);">P</strong>lanejar &middot; <strong style="color: var(--claro-yellow);">U</strong>sar &middot; <strong style="color: var(--claro-yellow);">L</strong>apidar &middot; <strong style="color: var(--claro-yellow);">S</strong>ustentar &middot; <strong style="color: var(--claro-yellow);">A</strong>lavancar &middot; <strong style="color: var(--claro-yellow);">R</strong>eplicar
+          </div>
+          <p style="margin: 0.3rem 0 0; font-size: 0.86rem; font-style: italic; color: var(--claro-yellow); font-weight: 600;">A loja roda sozinha.</p>
         </div>
-        <div style="padding: 1.5rem 1.5rem; background: rgba(61,220,151,0.06); border: 1px solid rgba(61,220,151,0.3); border-radius: 14px; display: flex; flex-direction: column; gap: 0.6rem;">
+        <div style="padding: 1.4rem 1.5rem; background: rgba(61,220,151,0.06); border: 1px solid rgba(61,220,151,0.3); border-radius: 14px; display: flex; flex-direction: column; gap: 0.6rem;">
           <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 1.5rem;">⚡</span>
-            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--r-mint);">Tecnologia · IA Aplicada</span>
+            <span style="font-size: 1.4rem;">⚡</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--r-mint);">Tecnologia · IA Aplicada</span>
           </div>
-          <p style="margin: 0; font-size: 0.9rem; line-height: 1.55; color: var(--text-light);">IA aplicada onde gera dinheiro: análise de venda, treino do time em ciclo curto, identificação de cliente pronto pra fechar, automação do trabalho de máquina. <strong style="color: var(--r-mint);">Tudo configurado pela gente — você não programa nada.</strong></p>
+          <p style="margin: 0; font-size: 0.88rem; line-height: 1.5; color: var(--text-light);">IA aplicada onde gera dinheiro: análise de venda, treino do time, identificação de cliente pronto, automação. <strong style="color: var(--r-mint);">Tudo configurado pela gente — você não programa nada.</strong></p>
         </div>
       </div>
-      <p style="margin-top: 1.75rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.3rem; line-height: 1.35; color: var(--text-light); text-align: center;">Pessoas humanizadas + processos com PULSAR + IA aplicada. <span style="color: var(--claro-yellow); font-weight: 600;">Esse é o pulo do gato.</span></p>
+      <p style="margin-top: 1.25rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.25rem; line-height: 1.3; color: var(--text-light); text-align: center;">Pessoas humanizadas + processo PULSAR + IA aplicada. <span style="color: var(--claro-yellow); font-weight: 600;">Esse é o pulo do gato.</span></p>
     </div>
 
     <!-- ════════════ SLIDE 08 — A ESCADA ════════════ -->
     <div class="slide bg-light" data-slide="8">
+      <div class="s-bg-photo" style="background-image: url('assets/images/varejo-escada.jpg'), url('assets/images/workshop-regional.jpg');"></div>
       <div class="s-num">08</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>08 · Onde você entra</span></div>
       <h2 class="s-title">Quatro níveis. Você entra <em>de graça</em> — porque a indústria paga.</h2>
-      <div style="display: grid; grid-template-columns: 1fr 220px; gap: 2.5rem; align-items: start; margin-top: 1rem;">
-        <p class="s-subtitle" style="margin-bottom: 0;">A gente desenhou uma escada que começa com você sem tirar nada do bolso. A entrada é subsidiada pela indústria — operadoras e marcas parceiras pagam pelo seu primeiro passo. Você prova o método. Tira resultado. E quanto mais resultado você der, <strong>mais subsídio e incentivo a indústria libera pra você crescer</strong>.</p>
-        <div style="border-radius: 12px; overflow: hidden; aspect-ratio: 4/5; background: rgba(13,17,23,0.05); border: 1px solid rgba(13,17,23,0.08);">
-          <img src="assets/images/varejo-escada.jpg" onerror="this.onerror=null;this.src='assets/images/workshop-regional.jpg';" alt="Escada de progressão do lojista" style="width:100%;height:100%;object-fit:cover;">
+      <p class="s-subtitle" style="margin-bottom: 1rem; max-width: 940px;">A entrada é subsidiada pela indústria — operadoras e marcas parceiras pagam pelo seu primeiro passo. Você prova o método. Tira resultado. <strong>Quanto mais resultado você der, mais subsídio a indústria libera.</strong></p>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-top: 1rem;">
+        <div class="varejo-escada-card">
+          <div class="varejo-escada-tag">Entrada gratuita</div>
+          <div class="varejo-escada-name">Start</div>
+          <div class="varejo-escada-desc">Indústria banca sua entrada. Você prova o método e extrai resultado.</div>
+        </div>
+        <div class="varejo-escada-card">
+          <div class="varejo-escada-tag">A formação</div>
+          <div class="varejo-escada-name">Master</div>
+          <div class="varejo-escada-desc">Indústria continua junto. Você estrutura a loja com método e mentoria.</div>
+        </div>
+        <div class="varejo-escada-card varejo-escada-featured">
+          <div class="varejo-escada-tag">Acompanhamento</div>
+          <div class="varejo-escada-name">inPULSO.pro</div>
+          <div class="varejo-escada-desc">Indústria amplia o subsídio conforme você performa. IA + Rodrigo perto.</div>
+        </div>
+        <div class="varejo-escada-card">
+          <div class="varejo-escada-tag">Implementação</div>
+          <div class="varejo-escada-name">Premium</div>
+          <div class="varejo-escada-desc">A gente dentro da operação. Indústria reconhece embaixador.</div>
         </div>
       </div>
-      <div class="s-grid-3" style="grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 1.5rem;">
-        <div style="padding: 1.25rem 1.1rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-radius: 12px; display: flex; flex-direction: column; gap: 0.6rem;">
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red);">Entrada gratuita</div>
-          <div style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.3rem; color: var(--text-dark); letter-spacing: -0.01em;">Start</div>
-          <div style="font-size: 0.78rem; line-height: 1.5; color: var(--muted-2);">Indústria banca sua entrada. Você prova o método e extrai resultado.</div>
-        </div>
-        <div style="padding: 1.25rem 1.1rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-radius: 12px; display: flex; flex-direction: column; gap: 0.6rem;">
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red);">A formação</div>
-          <div style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.3rem; color: var(--text-dark); letter-spacing: -0.01em;">Master</div>
-          <div style="font-size: 0.78rem; line-height: 1.5; color: var(--muted-2);">Indústria continua junto. Você estrutura a loja com método e mentoria.</div>
-        </div>
-        <div style="padding: 1.25rem 1.1rem; background: rgba(244,185,62,0.08); border: 1px solid rgba(244,185,62,0.3); border-radius: 12px; display: flex; flex-direction: column; gap: 0.6rem; box-shadow: 0 8px 20px rgba(244,185,62,0.1);">
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red);">O acompanhamento</div>
-          <div style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.3rem; color: var(--text-dark); letter-spacing: -0.01em;">inPULSO.pro</div>
-          <div style="font-size: 0.78rem; line-height: 1.5; color: var(--muted-2);">Indústria amplia o subsídio conforme você performa. IA configurada e Rodrigo perto.</div>
-        </div>
-        <div style="padding: 1.25rem 1.1rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-radius: 12px; display: flex; flex-direction: column; gap: 0.6rem;">
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red);">A implementação</div>
-          <div style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.3rem; color: var(--text-dark); letter-spacing: -0.01em;">Premium</div>
-          <div style="font-size: 0.78rem; line-height: 1.5; color: var(--muted-2);">A gente dentro da operação, instalando tudo do zero. Indústria reconhece embaixador.</div>
-        </div>
-      </div>
-      <p style="margin-top: 1.5rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; line-height: 1.3; color: var(--claro-red); letter-spacing: -0.01em;">Quanto mais resultado você entrega, mais a indústria investe em você.</p>
+      <p style="margin-top: 1.5rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.35rem; line-height: 1.3; color: var(--claro-red); letter-spacing: -0.01em;">Quanto mais resultado você entrega, mais a indústria investe em você.</p>
     </div>
 
     <!-- ════════════ SLIDE 09 — QUEM TÁ POR TRÁS ════════════ -->
     <div class="slide bg-charcoal" data-slide="9">
       <div class="s-num">09</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>09 · A gente não tá aqui de paraquedas</span></div>
-      <h2 class="s-title">Quem tá te falando isso já viveu o que você vive — <em>em escala bilionária</em>.</h2>
-      <div class="s-cols" style="margin-top: 1.25rem; gap: 1.5rem;">
-        <div style="display: grid; grid-template-columns: 130px 1fr; gap: 1.25rem; padding: 1.75rem 1.5rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid var(--claro-yellow); border-radius: 0 12px 12px 0; align-items: start;">
-          <div style="border-radius: 10px; overflow: hidden; aspect-ratio: 4/5; background: rgba(244,185,62,0.08);">
-            <img src="assets/images/varejo-rodrigo.jpg" onerror="this.onerror=null;this.src='assets/images/rodrigo-braga.png';" alt="Rodrigo Braga, fundador PulsarH.ai" style="width:100%;height:100%;object-fit:cover;">
+      <h2 class="s-title">Quem fala com você já viveu o que você vive — <em>em escala bilionária</em>.</h2>
+      <div class="s-cols" style="margin-top: 1.25rem; gap: 1.25rem;">
+        <div class="varejo-autoridade-card">
+          <div class="varejo-autoridade-img">
+            <img src="assets/images/varejo-rodrigo.jpg" onerror="this.onerror=null;this.src='assets/images/rodrigo-braga.png';" alt="Rodrigo Braga">
           </div>
-          <div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.6rem;">O método · PulsarH.ai</div>
-            <h3 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; color: var(--text-light); letter-spacing: -0.01em; margin-bottom: 0.85rem; line-height: 1.2;">21 anos de chão de loja.</h3>
-            <p style="margin: 0; font-size: 0.92rem; line-height: 1.55; color: var(--text-light);">Sete como Gerente Nacional em rede com <strong style="color: var(--claro-yellow);">4.500 vendedores</strong> e <strong style="color: var(--claro-yellow);">R$ 1 bilhão por ano</strong> sob gestão. Rodrigo Braga. O método que entra na sua loja foi escrito <strong>dentro</strong> de loja de verdade — não em sala de aula.</p>
+          <div class="varejo-autoridade-body">
+            <div class="varejo-autoridade-tag">O método · PulsarH.ai</div>
+            <h3 class="varejo-autoridade-title">21 anos de chão de loja.</h3>
+            <p class="varejo-autoridade-desc">Sete como Gerente Nacional em rede com <strong style="color: var(--claro-yellow);">4.500 vendedores</strong> e <strong style="color: var(--claro-yellow);">R$ 1 bilhão/ano</strong>. O método que entra na sua loja foi escrito <strong>dentro</strong> de loja de verdade.</p>
           </div>
         </div>
-        <div style="display: grid; grid-template-columns: 130px 1fr; gap: 1.25rem; padding: 1.75rem 1.5rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid var(--claro-yellow); border-radius: 0 12px 12px 0; align-items: start;">
-          <div style="border-radius: 10px; overflow: hidden; aspect-ratio: 4/5; background: rgba(244,185,62,0.08);">
-            <img src="assets/images/varejo-tradeup.jpg" onerror="this.onerror=null;this.src='assets/images/hero-pdv.jpg';" alt="TradeUp PDV em escala" style="width:100%;height:100%;object-fit:cover;">
+        <div class="varejo-autoridade-card">
+          <div class="varejo-autoridade-img">
+            <img src="assets/images/varejo-tradeup.jpg" onerror="this.onerror=null;this.src='assets/images/hero-pdv.jpg';" alt="TradeUp escala">
           </div>
-          <div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.6rem;">A infraestrutura · TradeUp</div>
-            <h3 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; color: var(--text-light); letter-spacing: -0.01em; margin-bottom: 0.85rem; line-height: 1.2;">Maior integrador de telecom no varejo.</h3>
-            <p style="margin: 0; font-size: 0.92rem; line-height: 1.55; color: var(--text-light);">Plataforma TradeAppOne com mais de <strong style="color: var(--claro-yellow);">200 mil usuários</strong>. Opera com <strong>Claro, Nextel, Oi, Vivo, TIM</strong> desde sempre. Quando a gente fala em "rede grande" — é dela que estamos falando.</p>
+          <div class="varejo-autoridade-body">
+            <div class="varejo-autoridade-tag">A infraestrutura · TradeUp</div>
+            <h3 class="varejo-autoridade-title">Maior integrador de telecom no varejo.</h3>
+            <p class="varejo-autoridade-desc">Plataforma TradeAppOne com mais de <strong style="color: var(--claro-yellow);">200 mil usuários</strong>. Opera com Claro, Nextel, Oi, Vivo, TIM. Quando a gente fala em "rede grande", é dela que estamos falando.</p>
           </div>
         </div>
       </div>
-      <p style="margin-top: 1.75rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.25rem; line-height: 1.35; color: var(--text-light);">Você não tá contratando coach. Tá contratando <span style="color: var(--claro-yellow); font-weight: 600;">experiência destilada</span> de quem operou em escala bilionária — agora dentro da sua porta.</p>
+      <p style="margin-top: 1.5rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.2rem; line-height: 1.35; color: var(--text-light);">Você não tá contratando coach. Tá contratando <span style="color: var(--claro-yellow); font-weight: 600;">experiência destilada</span> de quem operou em escala bilionária — agora dentro da sua porta.</p>
     </div>
 
     <!-- ════════════ SLIDE 10 — OS PLANOS ════════════ -->
@@ -1233,134 +1445,127 @@
       <div class="s-num">10</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>10 · Quanto custa — e quanto retorna</span></div>
       <h2 class="s-title">Faz a <em>conta</em> com a gente.</h2>
-      <div class="s-grid-3" style="grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.25rem;">
-        <div style="padding: 1.4rem 1.4rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; display: flex; flex-direction: column; gap: 0.5rem;">
-          <div style="display: flex; align-items: baseline; gap: 0.85rem; flex-wrap: wrap;">
-            <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; color: var(--text-light); letter-spacing: -0.01em;">Start</span>
-            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; font-weight: 700; color: var(--claro-yellow);">R$ 297 único</span>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem; margin-top: 1rem;">
+        <div class="varejo-plano-card">
+          <div style="display: flex; align-items: baseline; gap: 0.85rem; flex-wrap: wrap; margin-bottom: 0.4rem;">
+            <span class="varejo-plano-name">Start</span>
+            <span class="varejo-plano-price">R$ 297 único</span>
           </div>
-          <div style="font-size: 0.78rem; color: var(--muted); font-style: italic;">entrada gratuita pro lojista · indústria banca 100%</div>
-          <p style="margin: 0.4rem 0 0; font-size: 0.86rem; line-height: 1.55; color: var(--muted);">Plataforma + 1 aula ao vivo por semana + comunidade Rentabiliza.</p>
-          <div style="margin-top: 0.6rem; padding: 0.85rem 1rem; background: rgba(244,185,62,0.08); border-left: 2px solid var(--claro-yellow); border-radius: 0 6px 6px 0;">
-            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow);">Faz a conta</span>
-            <p style="margin: 4px 0 0; font-size: 0.82rem; line-height: 1.5; color: var(--text-light);">Pra você, <strong style="color: var(--claro-yellow);">R$ 0</strong>. Pra indústria, R$ 297 investidos no seu onboarding. Você prova o método sem tirar nada do bolso.</p>
-          </div>
-        </div>
-        <div style="padding: 1.4rem 1.4rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; display: flex; flex-direction: column; gap: 0.5rem;">
-          <div style="display: flex; align-items: baseline; gap: 0.85rem; flex-wrap: wrap;">
-            <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; color: var(--text-light); letter-spacing: -0.01em;">Master</span>
-            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; font-weight: 700; color: var(--claro-yellow);">R$ 297/mês · 3 meses</span>
-          </div>
-          <div style="font-size: 0.78rem; color: var(--muted); font-style: italic;">trimestre R$ 891 · pode ser subsidiado</div>
-          <p style="margin: 0.4rem 0 0; font-size: 0.86rem; line-height: 1.55; color: var(--muted);">Tudo do Start + formação Gestor na Era da IA + 3 mentorias com Rodrigo.</p>
-          <div style="margin-top: 0.6rem; padding: 0.85rem 1rem; background: rgba(244,185,62,0.08); border-left: 2px solid var(--claro-yellow); border-radius: 0 6px 6px 0;">
-            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow);">Faz a conta</span>
-            <p style="margin: 4px 0 0; font-size: 0.82rem; line-height: 1.5; color: var(--text-light);">R$ 297/mês é menos que uma corrida de aplicativo de ida e volta. E pode cair pra menos — operadoras parceiras subsidiam parte do plano.</p>
+          <div class="varejo-plano-sub">entrada gratuita pro lojista · indústria banca 100%</div>
+          <p class="varejo-plano-desc">Plataforma + 1 aula ao vivo/semana + comunidade.</p>
+          <div class="varejo-plano-conta">
+            <span class="varejo-plano-conta-label">Faz a conta</span>
+            <span>Pra você, <strong style="color: var(--claro-yellow);">R$ 0</strong>. Indústria banca o onboarding.</span>
           </div>
         </div>
-        <div style="padding: 1.4rem 1.4rem; background: rgba(244,185,62,0.06); border: 1px solid rgba(244,185,62,0.3); border-radius: 12px; display: flex; flex-direction: column; gap: 0.5rem; box-shadow: 0 8px 24px rgba(244,185,62,0.08); position: relative;">
-          <div style="position: absolute; top: -10px; right: 16px; padding: 4px 10px; background: var(--claro-yellow); color: var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; border-radius: 4px;">★ Recomendado</div>
-          <div style="display: flex; align-items: baseline; gap: 0.85rem; flex-wrap: wrap;">
-            <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; color: var(--text-light); letter-spacing: -0.01em;">inPULSO.pro</span>
-            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; font-weight: 700; color: var(--claro-yellow);">R$ 497/mês · 6 meses</span>
+        <div class="varejo-plano-card">
+          <div style="display: flex; align-items: baseline; gap: 0.85rem; flex-wrap: wrap; margin-bottom: 0.4rem;">
+            <span class="varejo-plano-name">Master</span>
+            <span class="varejo-plano-price">R$ 297/mês · 3 meses</span>
           </div>
-          <div style="font-size: 0.78rem; color: var(--muted); font-style: italic;">semestre R$ 2.982 · pode ser subsidiado</div>
-          <p style="margin: 0.4rem 0 0; font-size: 0.86rem; line-height: 1.55; color: var(--muted);">Tudo do Master + agente de IA + 6 mentorias com Rodrigo + cadeira pra sócio/gerente.</p>
-          <div style="margin-top: 0.6rem; padding: 0.85rem 1rem; background: rgba(244,185,62,0.12); border-left: 2px solid var(--claro-yellow); border-radius: 0 6px 6px 0;">
-            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow);">Faz a conta</span>
-            <p style="margin: 4px 0 0; font-size: 0.82rem; line-height: 1.5; color: var(--text-light);">R$ 497/mês é o preço de uma comissão de plano de telefonia recorrente. A IA recupera <strong>um</strong> cliente dormente — você paga o plano. Resto vira lucro.</p>
+          <div class="varejo-plano-sub">trim. R$ 891 · pode ser subsidiado</div>
+          <p class="varejo-plano-desc">Tudo do Start + formação Gestor na Era da IA + 3 mentorias com Rodrigo.</p>
+          <div class="varejo-plano-conta">
+            <span class="varejo-plano-conta-label">Faz a conta</span>
+            <span>Menos que uma corrida de aplicativo de ida e volta.</span>
           </div>
         </div>
-        <div style="padding: 1.4rem 1.4rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; display: flex; flex-direction: column; gap: 0.5rem;">
-          <div style="display: flex; align-items: baseline; gap: 0.85rem; flex-wrap: wrap;">
-            <span style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; color: var(--text-light); letter-spacing: -0.01em;">Premium</span>
-            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; font-weight: 700; color: var(--claro-yellow);">R$ 4.997 único</span>
+        <div class="varejo-plano-card varejo-plano-featured">
+          <span class="varejo-plano-badge">★ Recomendado</span>
+          <div style="display: flex; align-items: baseline; gap: 0.85rem; flex-wrap: wrap; margin-bottom: 0.4rem;">
+            <span class="varejo-plano-name">inPULSO.pro</span>
+            <span class="varejo-plano-price">R$ 497/mês · 6 meses</span>
           </div>
-          <div style="font-size: 0.78rem; color: var(--muted); font-style: italic;">pagamento único · 6 meses inclusos · vitalício</div>
-          <p style="margin: 0.4rem 0 0; font-size: 0.86rem; line-height: 1.55; color: var(--muted);">Tudo + implementação na sua loja: site, vídeos, ERP, IA pronta. Selo Embaixador vitalício.</p>
-          <div style="margin-top: 0.6rem; padding: 0.85rem 1rem; background: rgba(244,185,62,0.08); border-left: 2px solid var(--claro-yellow); border-radius: 0 6px 6px 0;">
-            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow);">Faz a conta</span>
-            <p style="margin: 4px 0 0; font-size: 0.82rem; line-height: 1.5; color: var(--text-light);">Agência <strong style="font-family: 'JetBrains Mono', monospace;">R$ 8-15k</strong> + consultor <strong style="font-family: 'JetBrains Mono', monospace;">R$ 12-24k</strong> + dev IA <strong style="font-family: 'JetBrains Mono', monospace;">R$ 6-10k</strong>. Mínimo separado: <strong style="color: var(--claro-yellow); font-family: 'JetBrains Mono', monospace;">R$ 26 mil</strong>. A gente entrega tudo junto por <strong style="color: var(--claro-yellow); font-family: 'JetBrains Mono', monospace;">R$ 4.997</strong>.</p>
+          <div class="varejo-plano-sub">sem. R$ 2.982 · pode ser subsidiado</div>
+          <p class="varejo-plano-desc">Tudo do Master + agente de IA configurado + 6 mentorias com Rodrigo + cadeira pra sócio/gerente.</p>
+          <div class="varejo-plano-conta">
+            <span class="varejo-plano-conta-label">Faz a conta</span>
+            <span>Preço de uma comissão de plano recorrente. A IA recupera <strong>um</strong> cliente — pagou.</span>
+          </div>
+        </div>
+        <div class="varejo-plano-card">
+          <div style="display: flex; align-items: baseline; gap: 0.85rem; flex-wrap: wrap; margin-bottom: 0.4rem;">
+            <span class="varejo-plano-name">Premium</span>
+            <span class="varejo-plano-price">R$ 4.997 único</span>
+          </div>
+          <div class="varejo-plano-sub">6 meses inclusos · benefícios vitalícios</div>
+          <p class="varejo-plano-desc">Implementação na loja: site, vídeos, ERP, IA pronta. Selo Embaixador vitalício.</p>
+          <div class="varejo-plano-conta">
+            <span class="varejo-plano-conta-label">Faz a conta</span>
+            <span>Agência <strong>R$ 8-15k</strong> + consultor <strong>R$ 12-24k</strong> + dev <strong>R$ 6-10k</strong> = <strong style="color: var(--claro-yellow);">R$ 26k mín</strong>. A gente entrega tudo por <strong style="color: var(--claro-yellow);">R$ 4.997</strong>.</span>
           </div>
         </div>
       </div>
-      <div style="margin-top: 1.25rem; padding: 1rem 1.5rem; background: linear-gradient(135deg, var(--claro-yellow), #E0A52A); border-radius: 12px; color: var(--ink);">
-        <p style="margin: 0; font-size: 0.95rem; line-height: 1.5; font-weight: 600;">Cada plano pode ter parte ou totalidade subsidiada pela indústria — operadoras, marcas e parceiros — conforme seu desempenho e ambição. <strong>Quanto mais você cresce, mais a indústria investe em você.</strong></p>
+      <div style="margin-top: 1.25rem; padding: 0.85rem 1.25rem; background: linear-gradient(135deg, var(--claro-yellow), #E0A52A); border-radius: 10px; color: var(--ink);">
+        <p style="margin: 0; font-size: 0.92rem; line-height: 1.5; font-weight: 600; text-align: center;">Cada plano pode ser subsidiado pela indústria — operadoras, marcas, parceiros. <strong>Quanto mais você cresce, mais a indústria investe em você.</strong></p>
       </div>
     </div>
 
     <!-- ════════════ SLIDE 11 — O RESULTADO ════════════ -->
     <div class="slide bg-light" data-slide="11">
+      <div class="s-bg-photo" style="background-image: url('assets/images/varejo-gestor-ia.jpg'), url('assets/images/dashboard-celular.jpg');"></div>
       <div class="s-num">11</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>11 · O que muda na sua vida</span></div>
       <h2 class="s-title">Você se torna um <em>gestor na era da IA</em>.</h2>
-      <div style="display: grid; grid-template-columns: 1fr 220px; gap: 2rem; align-items: start; margin-top: 1rem;">
-        <div>
-          <p class="s-subtitle" style="margin-bottom: 0.85rem;">Não é frase de efeito. É consequência prática de operar com humanização nas pessoas, processos no piloto automático e tecnologia de ponta trabalhando 24 horas por você.</p>
-          <p style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.25rem; color: var(--claro-red); letter-spacing: -0.01em;">E o que isso significa pro seu bolso:</p>
-        </div>
-        <div style="border-radius: 12px; overflow: hidden; aspect-ratio: 4/5; background: rgba(13,17,23,0.05); border: 1px solid rgba(13,17,23,0.08);">
-          <img src="assets/images/varejo-gestor-ia.jpg" onerror="this.onerror=null;this.src='assets/images/dashboard-celular.jpg';" alt="Lojista como gestor moderno" style="width:100%;height:100%;object-fit:cover;">
-        </div>
-      </div>
-      <div class="s-grid-3" style="margin-top: 1.25rem;">
-        <div style="padding: 1.4rem 1.5rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-top: 3px solid var(--claro-red); border-radius: 4px 4px 12px 12px;">
+      <p class="s-subtitle" style="margin-bottom: 0.85rem; max-width: 920px;">Consequência prática de operar com humanização nas pessoas, processos no piloto automático e tecnologia trabalhando 24h por você.</p>
+      <p style="margin: 0 0 1rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.2rem; color: var(--claro-red); letter-spacing: -0.01em;">E o que isso significa pro seu bolso:</p>
+      <div class="s-grid-3" style="margin-top: 0.5rem;">
+        <div style="padding: 1.25rem 1.5rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-top: 3px solid var(--claro-red); border-radius: 4px 4px 12px 12px;">
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.5rem;">Mais venda</div>
-          <p style="margin: 0; font-size: 0.88rem; line-height: 1.55; color: var(--muted-2);">Time treinado fecha serviço junto do produto. Ticket triplica. Cliente fica mais tempo. Comissão recorrente entra todo mês.</p>
+          <p style="margin: 0; font-size: 0.85rem; line-height: 1.5; color: var(--muted-2);">Time treinado fecha serviço junto do produto. <strong style="color: var(--text-dark);">Ticket triplica. Comissão recorrente todo mês.</strong></p>
         </div>
-        <div style="padding: 1.4rem 1.5rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-top: 3px solid var(--claro-red); border-radius: 4px 4px 12px 12px;">
+        <div style="padding: 1.25rem 1.5rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-top: 3px solid var(--claro-red); border-radius: 4px 4px 12px 12px;">
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.5rem;">Menos custo</div>
-          <p style="margin: 0; font-size: 0.88rem; line-height: 1.55; color: var(--muted-2);">IA assume trabalho de máquina. Você economiza vendedor sem perder venda. Processo automatizado corta desperdício invisível.</p>
+          <p style="margin: 0; font-size: 0.85rem; line-height: 1.5; color: var(--muted-2);">IA assume trabalho de máquina. <strong style="color: var(--text-dark);">Economiza vendedor sem perder venda.</strong> Processo automatizado corta desperdício.</p>
         </div>
-        <div style="padding: 1.4rem 1.5rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-top: 3px solid var(--claro-red); border-radius: 4px 4px 12px 12px;">
+        <div style="padding: 1.25rem 1.5rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-top: 3px solid var(--claro-red); border-radius: 4px 4px 12px 12px;">
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.5rem;">Mais rentabilidade</div>
-          <p style="margin: 0; font-size: 0.88rem; line-height: 1.55; color: var(--muted-2);">Margem dobra. Marca ganha cara de grande. Indústria reconhece e investe. Loja vira ativo — não emprego.</p>
+          <p style="margin: 0; font-size: 0.85rem; line-height: 1.5; color: var(--muted-2);">Margem dobra. Marca ganha cara de grande. <strong style="color: var(--text-dark);">Loja vira ativo — não emprego.</strong></p>
         </div>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 1.5rem;">
-        <div style="padding: 1rem 1rem; text-align: center; border-right: 1px solid rgba(13,17,23,0.08);">
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.4rem;">Mês 1</div>
-          <div style="font-size: 0.85rem; line-height: 1.4; color: var(--text-dark); font-weight: 500;">Você sente diferença no caixa.</div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 1rem;">
+        <div style="padding: 0.7rem 0.8rem; text-align: center; border-right: 1px solid rgba(13,17,23,0.08);">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.3rem;">Mês 1</div>
+          <div style="font-size: 0.78rem; line-height: 1.3; color: var(--text-dark); font-weight: 500;">Diferença no caixa.</div>
         </div>
-        <div style="padding: 1rem 1rem; text-align: center; border-right: 1px solid rgba(13,17,23,0.08);">
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.4rem;">Mês 3</div>
-          <div style="font-size: 0.85rem; line-height: 1.4; color: var(--text-dark); font-weight: 500;">A operação roda quando você sai.</div>
+        <div style="padding: 0.7rem 0.8rem; text-align: center; border-right: 1px solid rgba(13,17,23,0.08);">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.3rem;">Mês 3</div>
+          <div style="font-size: 0.78rem; line-height: 1.3; color: var(--text-dark); font-weight: 500;">Operação roda sem você.</div>
         </div>
-        <div style="padding: 1rem 1rem; text-align: center; border-right: 1px solid rgba(13,17,23,0.08);">
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.4rem;">Mês 6</div>
-          <div style="font-size: 0.85rem; line-height: 1.4; color: var(--text-dark); font-weight: 500;">Você fatura mais trabalhando menos.</div>
+        <div style="padding: 0.7rem 0.8rem; text-align: center; border-right: 1px solid rgba(13,17,23,0.08);">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.3rem;">Mês 6</div>
+          <div style="font-size: 0.78rem; line-height: 1.3; color: var(--text-dark); font-weight: 500;">Fatura mais, trabalha menos.</div>
         </div>
-        <div style="padding: 1rem 1rem; text-align: center;">
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--r-mint); margin-bottom: 0.4rem;">Mês 12</div>
-          <div style="font-size: 0.85rem; line-height: 1.4; color: var(--text-dark); font-weight: 500;">Loja virou ativo, não emprego.</div>
+        <div style="padding: 0.7rem 0.8rem; text-align: center;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--r-mint); margin-bottom: 0.3rem;">Mês 12</div>
+          <div style="font-size: 0.78rem; line-height: 1.3; color: var(--text-dark); font-weight: 500;">Loja virou ativo, não emprego.</div>
         </div>
       </div>
-      <div style="margin-top: 1.25rem; padding: 1.25rem 1.75rem; background: linear-gradient(135deg, var(--claro-yellow), #E0A52A); border-radius: 12px; color: var(--ink);">
-        <p style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.4rem; line-height: 1.3; letter-spacing: -0.01em;">Não é projeção otimista. <strong>É consequência de virar gestor na era da IA.</strong></p>
+      <div style="margin-top: 1rem; padding: 0.85rem 1.5rem; background: linear-gradient(135deg, var(--claro-yellow), #E0A52A); border-radius: 10px; color: var(--ink); text-align: center;">
+        <p style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.2rem; line-height: 1.25; letter-spacing: -0.01em;">Não é projeção otimista. <strong>É consequência de virar gestor na era da IA.</strong></p>
       </div>
     </div>
 
     <!-- ════════════ SLIDE 12 — ENCERRAMENTO ════════════ -->
     <div class="slide bg-dark" data-slide="12">
-      <div class="s-bg-photo" style="background-image: url('assets/images/varejo-rede.jpg'), url('assets/images/hero-pdv.jpg'); background-position: center center; opacity: 0.32;"></div>
+      <div class="s-bg-photo" style="background-image: url('assets/images/varejo-rede.jpg'), url('assets/images/hero-pdv.jpg');"></div>
       <div class="s-num">12</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>12 · A escolha</span></div>
-      <h2 class="s-title" style="font-size: clamp(2.4rem, 5vw, 4.5rem); line-height: 1.05; margin-top: 1.5rem; margin-bottom: 1.5rem;">Você não tá sozinho nessa.<br>Você faz parte de uma <em>rede</em> que tá crescendo.</h2>
-      <p class="s-subtitle" style="margin-bottom: 2rem; font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(1.05rem, 1.5vw, 1.35rem); line-height: 1.5; max-width: 880px;">
-        Lojistas como você. Operando em todo o Brasil. Trocando estratégia. Indicando cliente. Fechando parceria. Crescendo juntos — porque entenderam que ninguém cresce sozinho na era da IA.
+      <h2 class="s-title" style="font-size: clamp(2.2rem, 4.5vw, 4rem); line-height: 1.05; margin-top: 1.5rem; margin-bottom: 1.5rem;">Você não tá sozinho nessa.<br>Você faz parte de uma <em>rede</em> que tá crescendo.</h2>
+      <p class="s-subtitle" style="margin-bottom: 1.75rem; font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(1rem, 1.4vw, 1.3rem); line-height: 1.45; max-width: 880px;">
+        Lojistas como você. Em todo o Brasil. Trocando estratégia. Indicando cliente. Fechando parceria. Crescendo juntos — porque entenderam que ninguém cresce sozinho na era da IA.
       </p>
-      <div style="margin-top: 1rem; padding: 2.25rem 2.5rem; background: linear-gradient(135deg, var(--claro-yellow), #E0A52A); border-radius: 16px; color: var(--ink); position: relative; z-index: 1;">
-        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.65rem;">
-          <li style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: clamp(1.4rem, 2.4vw, 1.95rem); line-height: 1.25; letter-spacing: -0.01em;">O <strong>método</strong> existe.</li>
-          <li style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: clamp(1.4rem, 2.4vw, 1.95rem); line-height: 1.25; letter-spacing: -0.01em;">A <strong>rede</strong> já tá rodando.</li>
-          <li style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 700; font-size: clamp(1.6rem, 2.8vw, 2.3rem); line-height: 1.25; letter-spacing: -0.02em;">A <strong>escolha</strong> é sua.</li>
+      <div style="margin-top: 0.85rem; padding: 1.85rem 2.25rem; background: linear-gradient(135deg, var(--claro-yellow), #E0A52A); border-radius: 14px; color: var(--ink); position: relative; z-index: 1;">
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.55rem;">
+          <li style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: clamp(1.25rem, 2.2vw, 1.85rem); line-height: 1.2; letter-spacing: -0.01em;">O <strong>método</strong> existe.</li>
+          <li style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: clamp(1.25rem, 2.2vw, 1.85rem); line-height: 1.2; letter-spacing: -0.01em;">A <strong>rede</strong> já tá rodando.</li>
+          <li style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 700; font-size: clamp(1.45rem, 2.6vw, 2.15rem); line-height: 1.2; letter-spacing: -0.02em;">A <strong>escolha</strong> é sua.</li>
         </ul>
       </div>
       <div style="position: absolute; bottom: 32px; left: 80px; right: 80px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); z-index: 2;">
-        Rentabiliza.ai · PulsarH.ai × TradeUp · 2026
+        Rentabiliza.ai · TradeUp × PulsarH.ai · 2026
       </div>
     </div>
-
   </div>
 
   <!-- CONTROLS -->
