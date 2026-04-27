@@ -161,9 +161,12 @@
       justify-content: flex-start;
       padding-top: 3rem;
     }
-    .slide[data-slide="2"], .slide[data-slide="9"] {
+    .slide[data-slide="9"] {
       justify-content: flex-start;
       padding-top: 3.5rem;
+    }
+    .slide[data-slide="2"] {
+      justify-content: center;
     }
     .slide.active {
       opacity: 1;
@@ -225,13 +228,79 @@
 
     /* ═══════════════════════════════ VAREJO COMPONENTES ═══════════════════════════════ */
 
-    /* Rotina (slide 02 — lista de 6 itens em 2 colunas, compacto) */
+    /* Slide 02 grid — 2 colunas: conteúdo à esquerda, imagem portrait à direita */
+    .varejo-s2-grid {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 2.5rem;
+      align-items: stretch;
+      margin-top: 1.5rem;
+    }
+    .varejo-s2-content {
+      display: flex; flex-direction: column;
+      gap: 1.25rem;
+    }
+    .varejo-rotina-stack {
+      display: flex; flex-direction: column;
+      gap: 0.65rem;
+    }
+    .varejo-s2-quote {
+      padding: 1.1rem 1.5rem;
+      background: rgba(13,17,23,0.55);
+      border: 1px solid rgba(244,185,62,0.28);
+      border-left: 4px solid var(--claro-yellow);
+      border-radius: 0 12px 12px 0;
+      backdrop-filter: blur(8px);
+    }
+    .varejo-s2-quote p {
+      margin: 0;
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 1.55rem;
+      line-height: 1.25;
+      color: var(--text-light);
+      letter-spacing: -0.01em;
+    }
+    .varejo-s2-close {
+      margin: 0;
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.2rem;
+      line-height: 1.4;
+      color: var(--text-light);
+    }
+    .varejo-s2-image {
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      align-self: stretch;
+      min-height: 420px;
+    }
+    .varejo-s2-image img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    @media (max-width: 900px) {
+      .varejo-s2-grid {
+        grid-template-columns: 1fr;
+      }
+      .varejo-s2-image {
+        min-height: 280px;
+        order: -1;
+      }
+    }
+
+    /* Rotina (slide 02 — lista de 6 itens, agora coluna única no s2-grid) */
     .varejo-rotina {
       position: relative;
       padding-left: 22px;
       font-family: 'Fraunces', serif;
       font-weight: 400;
-      font-size: 1rem;
+      font-size: 1.05rem;
       line-height: 1.35;
       color: var(--text-light);
     }
@@ -1215,22 +1284,28 @@
 
     <!-- ════════════ SLIDE 02 — O ESPELHO ════════════ -->
     <div class="slide bg-charcoal" data-slide="2">
-      <div class="s-bg-photo s-bg-photo-top" style="background-image: url('assets/images/varejo-espelho.jpg'), url('assets/images/avatar-parceiro.jpg');"></div>
       <div class="s-num">02</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>02 · Deixa eu te perguntar uma coisa</span></div>
       <h2 class="s-title">A sua semana é <em>exatamente</em> essa, ou tô errado?</h2>
-      <div class="s-grid-3" style="grid-template-columns: repeat(2, 1fr); gap: 0.85rem 1.5rem; margin-top: 1.25rem;">
-        <div class="varejo-rotina"><span class="varejo-rotina-arrow">→</span>Você chega antes do time.</div>
-        <div class="varejo-rotina"><span class="varejo-rotina-arrow">→</span>Resolve a primeira urgência antes do café.</div>
-        <div class="varejo-rotina"><span class="varejo-rotina-arrow">→</span>Vende, atende, cobra, briga com fornecedor.</div>
-        <div class="varejo-rotina"><span class="varejo-rotina-arrow">→</span>Treina vendedor novo, ajeita vitrine.</div>
-        <div class="varejo-rotina"><span class="varejo-rotina-arrow">→</span>Fecha caixa, paga conta, volta exausto.</div>
-        <div class="varejo-rotina"><span class="varejo-rotina-arrow">→</span>Dorme pensando no que precisa fazer amanhã.</div>
+      <div class="varejo-s2-grid">
+        <div class="varejo-s2-content">
+          <div class="varejo-rotina-stack">
+            <div class="varejo-rotina"><span class="varejo-rotina-arrow">→</span>Você chega antes do time.</div>
+            <div class="varejo-rotina"><span class="varejo-rotina-arrow">→</span>Resolve a primeira urgência antes do café.</div>
+            <div class="varejo-rotina"><span class="varejo-rotina-arrow">→</span>Vende, atende, cobra, briga com fornecedor.</div>
+            <div class="varejo-rotina"><span class="varejo-rotina-arrow">→</span>Treina vendedor novo, ajeita vitrine.</div>
+            <div class="varejo-rotina"><span class="varejo-rotina-arrow">→</span>Fecha caixa, paga conta, volta exausto.</div>
+            <div class="varejo-rotina"><span class="varejo-rotina-arrow">→</span>Dorme pensando no que precisa fazer amanhã.</div>
+          </div>
+          <div class="varejo-s2-quote">
+            <p>A loja fatura. Você não cresce.</p>
+          </div>
+          <p class="varejo-s2-close">Não é falta de cliente. Não é falta de produto. <span style="color: var(--claro-yellow); font-weight: 600;">É falta de método instalado.</span></p>
+        </div>
+        <div class="varejo-s2-image">
+          <img src="assets/images/varejo-espelho.jpg" onerror="this.onerror=null;this.src='assets/images/avatar-parceiro.jpg';" alt="Lojista exausto fechando caixa">
+        </div>
       </div>
-      <div style="margin-top: 1.5rem; padding: 1.25rem 1.75rem; background: rgba(13,17,23,0.55); border: 1px solid rgba(244,185,62,0.28); border-left: 4px solid var(--claro-yellow); border-radius: 0 12px 12px 0; backdrop-filter: blur(8px);">
-        <p style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.55rem; line-height: 1.25; color: var(--text-light); letter-spacing: -0.01em;">A loja fatura. Você não cresce.</p>
-      </div>
-      <p style="margin-top: 1.25rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.25rem; line-height: 1.4; color: var(--text-light);">Não é falta de cliente. Não é falta de produto. <span style="color: var(--claro-yellow); font-weight: 600;">É falta de método instalado.</span></p>
     </div>
 
     <!-- ════════════ SLIDE 03 — O DINHEIRO NA MESA ════════════ -->
