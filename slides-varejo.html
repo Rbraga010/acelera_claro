@@ -198,6 +198,20 @@
         radial-gradient(ellipse 50% 40% at 90% 100%, rgba(20,20,22,0.35), transparent 60%);
     }
     .bg-charcoal .s-bg-photo { opacity: 0.45; }
+
+    /* Variação top — imagem ancorada no topo + overlay vertical denso embaixo
+       (pra slides onde o conteúdo fica mais alto e a imagem não pode aparecer
+       como foreground na metade inferior). Usado em slides como o 02 espelho. */
+    .s-bg-photo-top {
+      background-position: center top !important;
+      opacity: 0.32 !important;
+    }
+    .s-bg-photo-top::after {
+      background:
+        linear-gradient(180deg, rgba(20,20,22,0.55) 0%, rgba(20,20,22,0.6) 35%, rgba(20,20,22,0.85) 75%, rgba(20,20,22,0.95) 100%),
+        linear-gradient(95deg, rgba(20,20,22,0.5) 0%, rgba(20,20,22,0.35) 50%, rgba(20,20,22,0.15) 100%) !important;
+    }
+
     .bg-light .s-bg-photo {
       opacity: 0.42;
       filter: saturate(0.78) contrast(1.02);
@@ -227,12 +241,12 @@
       font-weight: 600;
     }
 
-    /* Transformação cards (slide 06 — 4 cards 2x2 com micro-imagem) */
+    /* Transformação cards (slide 06 — 4 cards 2x2 com imagem maior) */
     .varejo-transform-card {
       display: grid;
-      grid-template-columns: 76px 1fr;
-      gap: 14px;
-      padding: 1rem 1.1rem;
+      grid-template-columns: 110px 1fr;
+      gap: 18px;
+      padding: 1.15rem 1.25rem;
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.1);
       border-left: 3px solid var(--claro-yellow);
@@ -240,9 +254,9 @@
       align-items: center;
     }
     .varejo-transform-img {
-      width: 76px; height: 76px;
+      width: 110px; height: 110px;
       object-fit: cover;
-      border-radius: 8px;
+      border-radius: 10px;
       flex-shrink: 0;
     }
     .varejo-transform-content {
@@ -250,17 +264,17 @@
     }
     .varejo-transform-eyebrow {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.62rem;
+      font-size: 0.66rem;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--claro-yellow);
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.45rem;
     }
     .varejo-transform-body {
       margin: 0;
-      font-size: 0.84rem;
-      line-height: 1.45;
+      font-size: 0.88rem;
+      line-height: 1.5;
       color: var(--text-light);
     }
 
@@ -1201,7 +1215,7 @@
 
     <!-- ════════════ SLIDE 02 — O ESPELHO ════════════ -->
     <div class="slide bg-charcoal" data-slide="2">
-      <div class="s-bg-photo" style="background-image: url('assets/images/varejo-espelho.jpg'), url('assets/images/avatar-parceiro.jpg');"></div>
+      <div class="s-bg-photo s-bg-photo-top" style="background-image: url('assets/images/varejo-espelho.jpg'), url('assets/images/avatar-parceiro.jpg');"></div>
       <div class="s-num">02</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>02 · Deixa eu te perguntar uma coisa</span></div>
       <h2 class="s-title">A sua semana é <em>exatamente</em> essa, ou tô errado?</h2>
@@ -1253,7 +1267,7 @@
       <div class="s-bg-photo" style="background-image: url('assets/images/varejo-mao-na-massa.jpg'), url('assets/images/time-loja.jpg');"></div>
       <div class="s-num">04</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>04 · A gente coloca a mão na massa</span></div>
-      <h2 class="s-title">A gente não é coach. <em>A gente entra junto</em>.</h2>
+      <h2 class="s-title">Nós não somos coach. <em>A gente entra junto</em>.</h2>
       <p class="s-subtitle" style="margin-bottom: 1.25rem; max-width: 880px;">Você já comprou curso. Já assistiu palestra. Já contratou consultor de terno que entregou apresentação bonita e sumiu. <strong style="color: var(--claro-yellow);">Mudou alguma coisa?</strong></p>
       <div style="margin-top: 1.25rem; padding: 1.75rem 2rem; background: linear-gradient(135deg, var(--claro-yellow), #E0A52A); border-radius: 14px; color: var(--ink);">
         <p style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 700; font-size: clamp(1.3rem, 2.2vw, 1.85rem); line-height: 1.25; letter-spacing: -0.02em;">
