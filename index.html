@@ -108,7 +108,18 @@
       min-height: 92vh;
       display: flex; align-items: center;
     }
-    /* Imagem de fundo — PDV brasileiro real */
+    /* Vídeo de fundo — empreendedor real, em loop */
+    .hero-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center right;
+      opacity: 0.55;
+      filter: saturate(0.88) contrast(1.05) brightness(1.05);
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* Fallback se vídeo não carregar */
     .hero::before {
       content: ''; position: absolute; inset: 0;
       background-image: url('assets/images/hero-pdv.jpg');
@@ -117,6 +128,7 @@
       opacity: 0.5;
       filter: saturate(0.85) contrast(1.04) brightness(1.08);
       pointer-events: none;
+      z-index: 0;
     }
     /* Overlay gradient pra garantir leitura — dark à esquerda, esvaziando à direita */
     .hero::after {
@@ -882,6 +894,9 @@
 
   <!-- ══ HERO ══ -->
   <section class="hero">
+    <video class="hero-video" autoplay loop muted playsinline preload="auto" aria-hidden="true">
+      <source src="assets/videos/hero-entrepreneur.mp4" type="video/mp4">
+    </video>
     <div class="hero-inner">
       <div class="hero-brand-stack">
         <img src="assets/brand/chevron-primary.png" alt="Rentabiliza.ai — Impossible Chevron" class="hero-symbol">
@@ -1083,11 +1098,11 @@
             </div>
             <div>
               <div class="card-spec-label">Leitura</div>
-              <div class="card-spec-value">~15 min</div>
+              <div class="card-spec-value">~12 min</div>
             </div>
             <div>
               <div class="card-spec-label">Seções</div>
-              <div class="card-spec-value">13</div>
+              <div class="card-spec-value">11</div>
             </div>
           </div>
           <span class="card-cta">
@@ -1192,7 +1207,7 @@
           <span class="r-name">Rentabiliza</span><span class="r-dot">.</span><span class="r-ai">ai</span>
         </div>
         <p class="footer-tagline">
-          Plataforma de gestão, humanização e IA aplicada ao PDV de parceiros de telecom. Para a Claro.
+          Plataforma de gestão, humanização e IA aplicada ao PDV. Para pequenas empresas que querem operar como gigantes.
         </p>
         <div class="footer-sig">
           PulsarH.ai <span>×</span> TradeUp
@@ -1206,10 +1221,23 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <div>Rentabiliza.ai · Proposta para a Claro · V2.0 · Abril 2026</div>
+      <div>Rentabiliza.ai · Abril 2026</div>
       <div>PulsarH.ai × TradeUp</div>
     </div>
   </footer>
+
+  <script>
+    // Hero video — garante autoplay loop em browsers que pausam antes de interação
+    (function() {
+      const v = document.querySelector('.hero-video');
+      if (!v) return;
+      v.play().catch(() => {});
+      // Tenta novamente após primeiro evento de scroll/touch
+      const retry = () => { v.play().catch(() => {}); };
+      window.addEventListener('scroll', retry, { once: true, passive: true });
+      window.addEventListener('touchstart', retry, { once: true, passive: true });
+    })();
+  </script>
 
 </body>
 </html>
