@@ -288,6 +288,10 @@
       object-position: center right;
       opacity: 0.32;
       filter: saturate(0.85) contrast(1.05) brightness(0.92);
+      /* Scale 1.08 com origem top-left pra cortar marca d'água do Veo
+         no canto inferior direito (clipada pelo overflow hidden do .doc-hero) */
+      transform: scale(1.08);
+      transform-origin: top left;
       pointer-events: none;
       z-index: 0;
     }

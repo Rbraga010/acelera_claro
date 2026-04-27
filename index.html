@@ -108,25 +108,32 @@
       min-height: 92vh;
       display: flex; align-items: center;
     }
-    /* Vídeo de fundo — empreendedor real, em loop */
+    /* Vídeo de fundo — empreendedor real, em loop. Opaque (filter dim) pra
+       não vazar a imagem de fallback por baixo. Scale 1.08 com origem
+       top-left pra empurrar a marca d'água do Veo (canto inferior direito)
+       pra fora do viewport — a área crescida fica clipada pelo overflow
+       hidden do .hero. */
     .hero-video {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
       object-fit: cover;
       object-position: center right;
-      opacity: 0.55;
-      filter: saturate(0.88) contrast(1.05) brightness(1.05);
+      opacity: 1;
+      filter: saturate(0.88) contrast(1.05) brightness(0.5);
+      transform: scale(1.08);
+      transform-origin: top left;
       pointer-events: none;
       z-index: 0;
     }
-    /* Fallback se vídeo não carregar */
+    /* Imagem de fallback — só aparece se o vídeo falhar em carregar
+       (vídeo opaco cobre 100% durante playback) */
     .hero::before {
       content: ''; position: absolute; inset: 0;
       background-image: url('assets/images/hero-pdv.jpg');
       background-size: cover;
       background-position: center right;
       opacity: 0.5;
-      filter: saturate(0.85) contrast(1.04) brightness(1.08);
+      filter: saturate(0.85) contrast(1.04) brightness(0.6);
       pointer-events: none;
       z-index: 0;
     }
