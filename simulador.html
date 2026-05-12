@@ -115,187 +115,93 @@
       margin-bottom: 40px;
     }
 
-    /* ═════════════ CONTROLES ═════════════ */
-    section.controls {
+    /* ═════════════ QUICK PARAMS (toolbar compacta) ═════════════ */
+    .quick-params {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 0;
       background: var(--charcoal);
       border: 1px solid var(--border-cold);
-      border-radius: 16px;
-      padding: 28px 32px;
+      border-radius: 14px;
+      padding: 14px 20px;
       margin-bottom: 32px;
+      align-items: center;
     }
-    .controls-head {
+    .qp-group {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      margin-bottom: 24px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border-cold);
+      gap: 8px;
+      padding: 4px 16px;
+      border-right: 1px dashed var(--border-cold);
     }
-    .controls-head .eyebrow {
+    .qp-group:last-child { border-right: none; }
+    .qp-label {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 700;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+    .qp-inp {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 3px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+    .qp-inp .tag {
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .qp-inp input {
+      width: 52px;
+      padding: 5px 6px;
+      background: var(--surface);
+      border: 1px solid var(--border-cold);
+      border-radius: 5px;
       color: var(--amber);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+      -moz-appearance: textfield;
+    }
+    .qp-inp input::-webkit-outer-spin-button,
+    .qp-inp input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .qp-inp input:focus {
+      outline: none;
+      border-color: var(--amber);
+      box-shadow: 0 0 0 2px var(--amber-pale);
+    }
+    .qp-inp input.wide { width: 64px; }
+    .qp-inp .suffix {
+      font-size: 10px;
+      color: var(--text-dim);
+      margin-left: -2px;
     }
     .reset-btn {
       background: transparent;
       border: 1px solid var(--border-warm);
       color: var(--amber);
-      padding: 8px 16px;
+      padding: 6px 12px;
       border-radius: 999px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       cursor: pointer;
       transition: all 0.2s;
+      margin-left: auto;
     }
     .reset-btn:hover {
       background: var(--amber-pale);
       border-color: var(--amber);
-    }
-    .ctrl-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px 28px;
-    }
-    .ctrl-group-title {
-      grid-column: 1 / -1;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9.5px;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      padding: 8px 0 4px;
-      border-top: 1px dashed var(--border-cold);
-    }
-    .ctrl-group-title:first-of-type { border-top: none; padding-top: 0; }
-    .ctrl {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .ctrl label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    }
-    .ctrl label .val {
-      font-size: 14px;
-      letter-spacing: 0.02em;
-      color: var(--amber);
-      font-weight: 700;
-      text-transform: none;
-    }
-    .ctrl input[type=range] {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 100%;
-      height: 4px;
-      background: var(--surface);
-      border-radius: 4px;
-      outline: none;
-      cursor: pointer;
-    }
-    .ctrl input[type=range]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 16px; height: 16px;
-      background: var(--amber);
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 0 0 4px var(--amber-pale);
-      transition: all 0.15s;
-    }
-    .ctrl input[type=range]::-webkit-slider-thumb:hover {
-      box-shadow: 0 0 0 6px var(--amber-pale);
-    }
-    .ctrl input[type=range]::-moz-range-thumb {
-      width: 16px; height: 16px;
-      background: var(--amber);
-      border-radius: 50%;
-      cursor: pointer;
-      border: none;
-    }
-    .ctrl input[type=number] {
-      width: 100%;
-      padding: 8px 12px;
-      background: var(--surface);
-      border: 1px solid var(--border-cold);
-      border-radius: 8px;
-      color: var(--text-light);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      font-weight: 600;
-    }
-    .ctrl input[type=number]:focus {
-      outline: none;
-      border-color: var(--amber);
-    }
-
-    /* Details — aquisição mês a mês */
-    .ctrl-details {
-      margin-top: 24px;
-      padding-top: 20px;
-      border-top: 1px dashed var(--border-cold);
-    }
-    .ctrl-details summary {
-      cursor: pointer;
-      display: flex;
-      align-items: baseline;
-      gap: 12px;
-      padding: 8px 0;
-      list-style: none;
-      font-family: 'JetBrains Mono', monospace;
-    }
-    .ctrl-details summary::-webkit-details-marker { display: none; }
-    .ctrl-details summary::before {
-      content: '▸';
-      color: var(--amber);
-      transition: transform 0.2s;
-      display: inline-block;
-      font-size: 11px;
-    }
-    .ctrl-details[open] summary::before { transform: rotate(90deg); }
-    .summary-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--amber);
-    }
-    .summary-hint {
-      font-size: 10px;
-      color: var(--text-dim);
-      font-weight: 400;
-      letter-spacing: 0.05em;
-      text-transform: none;
-    }
-    .ctrl-meses-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 16px 0 20px;
-      padding: 12px 16px;
-      background: rgba(244, 185, 62, 0.04);
-      border: 1px dashed var(--border-warm);
-      border-radius: 8px;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .ctrl-meses-info {
-      font-size: 12px;
-      color: var(--text-dim);
-      line-height: 1.4;
     }
 
     /* ═════════════ KPI CARDS ═════════════ */
@@ -517,6 +423,34 @@
       color: var(--amber);
     }
     .data-table tr:hover { background: rgba(255,255,255,0.02); }
+    .data-table input.cell-input {
+      width: 80px;
+      padding: 6px 8px;
+      background: var(--surface);
+      border: 1px solid var(--border-cold);
+      border-radius: 6px;
+      color: var(--amber);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: right;
+      -moz-appearance: textfield;
+    }
+    .data-table input.cell-input::-webkit-outer-spin-button,
+    .data-table input.cell-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .data-table input.cell-input:focus {
+      outline: none;
+      border-color: var(--amber);
+      box-shadow: 0 0 0 2px var(--amber-pale);
+    }
+    .data-table .col-edit-hint {
+      display: inline-block;
+      font-size: 9px;
+      color: var(--amber);
+      margin-left: 4px;
+      letter-spacing: 0.1em;
+      font-weight: 400;
+    }
     .data-table td.warn-cell {
       color: var(--warn);
       font-weight: 700;
@@ -587,133 +521,57 @@
       <div class="head-meta"><span class="dot"></span>Simulador · Cenários de escala</div>
     </header>
 
-    <h1 class="app-title">Simulador de <em>escala</em>.<br>Ajuste os números. Veja o que muda.</h1>
-    <p class="app-sub">Cenário base: 2º semestre 2026 · 30 parceiros novos por mês entrando pelo Start · Conversão 30/15/5% pra Master/Pro/Premium no mês seguinte · Subsídio decrescente 100/70/30/0 conforme Slide 07. Mexa nos sliders abaixo pra estressar o modelo.</p>
+    <h1 class="app-title">Simulador de <em>escala</em>.<br>Edite a tabela. Veja o que muda.</h1>
+    <p class="app-sub">Parâmetros globais na barra abaixo. <strong>Aquisição mês a mês é editável direto na tabela</strong> — qualquer alteração recalcula gráficos, capacidade e split na hora.</p>
 
-    <!-- ═════════════ CONTROLES ═════════════ -->
-    <section class="controls">
-      <div class="controls-head">
-        <span class="eyebrow">● Controles · Cenário</span>
-        <button class="reset-btn" onclick="resetar()">↻ Resetar default</button>
+    <!-- ═════════════ QUICK PARAMS (toolbar compacta) ═════════════ -->
+    <section class="quick-params">
+      <div class="qp-group">
+        <span class="qp-label">Período</span>
+        <span class="qp-inp"><input type="number" id="periodo" value="6" min="3" max="24" step="1"><span class="suffix">meses</span></span>
       </div>
-      <div class="ctrl-grid">
-
-        <div class="ctrl-group-title">Aquisição & Conversão</div>
-
-        <div class="ctrl">
-          <label>Start novos / mês (padrão) <span class="val" id="v-aquisicao">30</span></label>
-          <input type="range" id="aquisicao" min="0" max="200" value="30" step="5">
-        </div>
-        <div class="ctrl">
-          <label>Período (meses) <span class="val" id="v-periodo">6</span></label>
-          <input type="range" id="periodo" min="3" max="24" value="6" step="1">
-        </div>
-        <div class="ctrl">
-          <label>% Conversão → Master <span class="val" id="v-pctMaster">30%</span></label>
-          <input type="range" id="pctMaster" min="0" max="100" value="30" step="1">
-        </div>
-        <div class="ctrl">
-          <label>% Conversão → Pro <span class="val" id="v-pctPro">15%</span></label>
-          <input type="range" id="pctPro" min="0" max="100" value="15" step="1">
-        </div>
-        <div class="ctrl">
-          <label>% Conversão → Premium <span class="val" id="v-pctPremium">5%</span></label>
-          <input type="range" id="pctPremium" min="0" max="100" value="5" step="1">
-        </div>
-
-        <div class="ctrl-group-title">Renovação (% que renova ao fim do ciclo)</div>
-
-        <div class="ctrl">
-          <label>↻ Master renova (3 meses) <span class="val" id="v-renovMaster">30%</span></label>
-          <input type="range" id="renovMaster" min="0" max="100" value="30" step="5">
-        </div>
-        <div class="ctrl">
-          <label>↻ Pro renova (6 meses) <span class="val" id="v-renovPro">40%</span></label>
-          <input type="range" id="renovPro" min="0" max="100" value="40" step="5">
-        </div>
-        <div class="ctrl">
-          <label>↻ Premium renova (6 meses) <span class="val" id="v-renovPremium">20%</span></label>
-          <input type="range" id="renovPremium" min="0" max="100" value="20" step="5">
-        </div>
-
-        <div class="ctrl-group-title">Valores dos planos (R$)</div>
-
-        <div class="ctrl">
-          <label>Start <span class="val">R$</span></label>
-          <input type="number" id="valStart" value="297" min="0" step="1">
-        </div>
-        <div class="ctrl">
-          <label>Master <span class="val">R$</span></label>
-          <input type="number" id="valMaster" value="997" min="0" step="1">
-        </div>
-        <div class="ctrl">
-          <label>Pro <span class="val">R$</span></label>
-          <input type="number" id="valPro" value="2997" min="0" step="1">
-        </div>
-        <div class="ctrl">
-          <label>Premium <span class="val">R$</span></label>
-          <input type="number" id="valPremium" value="4997" min="0" step="1">
-        </div>
-
-        <div class="ctrl-group-title">Split Marca Parceira / Lojista (decrescente · Slide 07)</div>
-
-        <div class="ctrl">
-          <label>Marca paga Start <span class="val" id="v-mpStart">100%</span></label>
-          <input type="range" id="mpStart" min="0" max="100" value="100" step="5">
-        </div>
-        <div class="ctrl">
-          <label>Marca paga Master <span class="val" id="v-mpMaster">70%</span></label>
-          <input type="range" id="mpMaster" min="0" max="100" value="70" step="5">
-        </div>
-        <div class="ctrl">
-          <label>Marca paga Pro <span class="val" id="v-mpPro">30%</span></label>
-          <input type="range" id="mpPro" min="0" max="100" value="30" step="5">
-        </div>
-        <div class="ctrl">
-          <label>Marca paga Premium <span class="val" id="v-mpPremium">0%</span></label>
-          <input type="range" id="mpPremium" min="0" max="100" value="0" step="5">
-        </div>
-
-        <div class="ctrl-group-title">Split entre operadores</div>
-
-        <div class="ctrl">
-          <label>% TradeUp (off-the-top) <span class="val" id="v-pctTradeUp">15%</span></label>
-          <input type="range" id="pctTradeUp" min="0" max="50" value="15" step="1">
-        </div>
-        <div class="ctrl">
-          <label>% PulsarH.ai (do líquido) <span class="val" id="v-pctPulsarH">50%</span></label>
-          <input type="range" id="pctPulsarH" min="0" max="100" value="50" step="5">
-        </div>
-
-        <div class="ctrl-group-title">Capacidade operacional (limites)</div>
-
-        <div class="ctrl">
-          <label>Máx mentorias / dia <span class="val" id="v-maxMentoriaDia">3</span></label>
-          <input type="range" id="maxMentoriaDia" min="1" max="10" value="3" step="1">
-        </div>
-        <div class="ctrl">
-          <label>Dias úteis / mês <span class="val" id="v-diasUteis">22</span></label>
-          <input type="range" id="diasUteis" min="20" max="30" value="22" step="1">
-        </div>
-        <div class="ctrl">
-          <label>Máx implementações / mês <span class="val" id="v-maxImpl">5</span></label>
-          <input type="range" id="maxImpl" min="1" max="20" value="5" step="1">
-        </div>
-
+      <div class="qp-group">
+        <span class="qp-label">Aquisição padrão</span>
+        <span class="qp-inp"><input type="number" id="aquisicao" value="30" min="0" max="500" step="5" class="wide"><span class="suffix">Start/mês</span></span>
       </div>
-
-      <!-- Aquisição customizada mês a mês -->
-      <details class="ctrl-details" id="ctrl-aq-meses">
-        <summary>
-          <span class="summary-label">⚙ Personalizar aquisição mês a mês</span>
-          <span class="summary-hint">(opcional · sobrescreve o valor padrão)</span>
-        </summary>
-        <div class="ctrl-meses-head">
-          <span class="ctrl-meses-info">Edite quantos parceiros entram pelo Start em cada mês individualmente.</span>
-          <button class="reset-btn" type="button" onclick="aplicarValorPadrao()">↻ Aplicar valor padrão a todos</button>
-        </div>
-        <div id="aquisicao-meses" class="ctrl-grid"></div>
-      </details>
+      <div class="qp-group">
+        <span class="qp-label">Conversão</span>
+        <span class="qp-inp"><span class="tag">M</span><input type="number" id="pctMaster" value="30" min="0" max="100"><span class="suffix">%</span></span>
+        <span class="qp-inp"><span class="tag">Pro</span><input type="number" id="pctPro" value="15" min="0" max="100"><span class="suffix">%</span></span>
+        <span class="qp-inp"><span class="tag">Prem</span><input type="number" id="pctPremium" value="5" min="0" max="100"><span class="suffix">%</span></span>
+      </div>
+      <div class="qp-group">
+        <span class="qp-label">↻ Renovação</span>
+        <span class="qp-inp"><span class="tag">M·3m</span><input type="number" id="renovMaster" value="30" min="0" max="100"><span class="suffix">%</span></span>
+        <span class="qp-inp"><span class="tag">Pro·6m</span><input type="number" id="renovPro" value="40" min="0" max="100"><span class="suffix">%</span></span>
+        <span class="qp-inp"><span class="tag">Prem·6m</span><input type="number" id="renovPremium" value="20" min="0" max="100"><span class="suffix">%</span></span>
+      </div>
+      <div class="qp-group">
+        <span class="qp-label">Valores R$</span>
+        <span class="qp-inp"><span class="tag">S</span><input type="number" id="valStart" value="297" class="wide"></span>
+        <span class="qp-inp"><span class="tag">M</span><input type="number" id="valMaster" value="997" class="wide"></span>
+        <span class="qp-inp"><span class="tag">P</span><input type="number" id="valPro" value="2997" class="wide"></span>
+        <span class="qp-inp"><span class="tag">Pr</span><input type="number" id="valPremium" value="4997" class="wide"></span>
+      </div>
+      <div class="qp-group">
+        <span class="qp-label">Subsídio marca %</span>
+        <span class="qp-inp"><span class="tag">S</span><input type="number" id="mpStart" value="100" min="0" max="100"></span>
+        <span class="qp-inp"><span class="tag">M</span><input type="number" id="mpMaster" value="70" min="0" max="100"></span>
+        <span class="qp-inp"><span class="tag">P</span><input type="number" id="mpPro" value="30" min="0" max="100"></span>
+        <span class="qp-inp"><span class="tag">Pr</span><input type="number" id="mpPremium" value="0" min="0" max="100"></span>
+      </div>
+      <div class="qp-group">
+        <span class="qp-label">Split</span>
+        <span class="qp-inp"><span class="tag">TradeUp</span><input type="number" id="pctTradeUp" value="15" min="0" max="100"><span class="suffix">%</span></span>
+        <span class="qp-inp"><span class="tag">PulsarH</span><input type="number" id="pctPulsarH" value="50" min="0" max="100"><span class="suffix">%</span></span>
+      </div>
+      <div class="qp-group">
+        <span class="qp-label">Capacidade</span>
+        <span class="qp-inp"><input type="number" id="maxMentoriaDia" value="3" min="1" max="20"><span class="suffix">ment/dia</span></span>
+        <span class="qp-inp"><input type="number" id="diasUteis" value="22" min="20" max="30"><span class="suffix">dias</span></span>
+        <span class="qp-inp"><input type="number" id="maxImpl" value="5" min="1" max="50"><span class="suffix">impl/mês</span></span>
+      </div>
+      <button class="reset-btn" onclick="resetar()">↻ Resetar</button>
     </section>
 
     <!-- ═════════════ KPIs ═════════════ -->
@@ -810,18 +668,18 @@
       </div>
     </div>
 
-    <!-- ═════════════ TABELA ═════════════ -->
+    <!-- ═════════════ TABELA EDITÁVEL ═════════════ -->
     <div class="table-card">
       <div class="chart-head">
-        <div class="chart-title">Detalhamento mês a mês</div>
-        <div class="chart-sub">● Tabela completa do período</div>
+        <div class="chart-title">Detalhamento mês a mês <span class="col-edit-hint">· Start novos editável</span></div>
+        <div class="chart-sub">● Editou? Os gráficos atualizam.</div>
       </div>
       <div style="overflow-x: auto;">
         <table class="data-table" id="dataTable">
           <thead>
             <tr>
               <th>Mês</th>
-              <th class="num">Start novos</th>
+              <th class="num">Start novos <span class="col-edit-hint">✎</span></th>
               <th class="num">Master ativos</th>
               <th class="num">Pro ativos</th>
               <th class="num">Premium impl.</th>
@@ -1097,7 +955,7 @@
         const cellImpl = s.alertaImpl[i];
         tb.innerHTML += `<tr>
           <td class="month">${m}</td>
-          <td class="num">${Math.round(s.startNovos[i])}</td>
+          <td class="num"><input type="number" class="cell-input" id="aq-${i}" value="${Math.round(s.startNovos[i])}" min="0" max="500" step="1"></td>
           <td class="num">${Math.round(s.masterAtivos[i])}</td>
           <td class="num">${Math.round(s.proAtivos[i])}</td>
           <td class="num">${Math.round(s.premiumImpl[i])}</td>
@@ -1107,6 +965,11 @@
           <td class="num">${fmtBRL(s.recMes[i])}</td>
           <td class="num" style="color:var(--amber)">${fmtBRL(s.recAcum[i])}</td>
         </tr>`;
+      });
+
+      // Bind events nos inputs editáveis (Start novos por mês)
+      tb.querySelectorAll('input.cell-input').forEach(el => {
+        el.addEventListener('input', run);
       });
 
       const sum = (a) => a.reduce((x,y)=>x+y, 0);
@@ -1275,76 +1138,41 @@
     // UPDATE LOOP
     // ═══════════════════════════════════════════════════
     function refreshLabels() {
-      const map = [
-        ['aquisicao', v => v],
-        ['periodo', v => v],
-        ['pctMaster', v => v + '%'],
-        ['pctPro', v => v + '%'],
-        ['pctPremium', v => v + '%'],
-        ['renovMaster', v => v + '%'],
-        ['renovPro', v => v + '%'],
-        ['renovPremium', v => v + '%'],
-        ['mpStart', v => v + '%'],
-        ['mpMaster', v => v + '%'],
-        ['mpPro', v => v + '%'],
-        ['mpPremium', v => v + '%'],
-        ['pctTradeUp', v => v + '%'],
-        ['pctPulsarH', v => v + '%'],
-        ['maxMentoriaDia', v => v],
-        ['diasUteis', v => v],
-        ['maxImpl', v => v],
-      ];
-      map.forEach(([id, fn]) => {
-        const el = document.getElementById('v-' + id);
-        const inp = document.getElementById(id);
-        if (el && inp) el.textContent = fn(inp.value);
-      });
-      // Labels dos meses individuais
-      document.querySelectorAll('[id^="aq-"]').forEach(el => {
-        const idx = el.id.replace('aq-', '');
-        const lbl = document.getElementById('v-aq-' + idx);
-        if (lbl) lbl.textContent = el.value;
-      });
+      // Toolbar quick-params usa <input> diretos, sem .val spans — nada a fazer
     }
 
-    // Rebuild inputs mês-a-mês quando muda período
-    let currentPeriodo = -1;
-    function rebuildAquisicaoMeses() {
-      const n = Number(document.getElementById('periodo').value);
-      if (n === currentPeriodo) return;
-      const baseVal = Number(document.getElementById('aquisicao').value);
-      const wrapper = document.getElementById('aquisicao-meses');
-      // Preserva valores existentes pra meses que ainda existem
-      const prev = {};
-      wrapper.querySelectorAll('input').forEach(el => {
-        const idx = el.id.replace('aq-', '');
-        prev[idx] = Number(el.value);
-      });
-      wrapper.innerHTML = '';
-      for (let i = 0; i < n; i++) {
-        const v = prev[i] != null ? prev[i] : baseVal;
-        const div = document.createElement('div');
-        div.className = 'ctrl';
-        div.innerHTML = `
-          <label>${fmtMonth(i)} <span class="val" id="v-aq-${i}">${v}</span></label>
-          <input type="range" id="aq-${i}" min="0" max="500" value="${v}" step="5">
-        `;
-        wrapper.appendChild(div);
+    // Snapshot/restore de foco e seleção pra preservar UX ao editar a tabela
+    function snapshotFocus() {
+      const el = document.activeElement;
+      if (!el || !el.id) return null;
+      return { id: el.id, selStart: el.selectionStart, selEnd: el.selectionEnd };
+    }
+    function restoreFocus(snap) {
+      if (!snap) return;
+      const el = document.getElementById(snap.id);
+      if (el) {
+        el.focus();
+        if (snap.selStart != null && el.setSelectionRange) {
+          try { el.setSelectionRange(snap.selStart, snap.selEnd); } catch(e) {}
+        }
       }
-      wrapper.querySelectorAll('input').forEach(el => el.addEventListener('input', run));
-      currentPeriodo = n;
     }
 
-    function aplicarValorPadrao() {
-      const baseVal = Number(document.getElementById('aquisicao').value);
-      document.querySelectorAll('[id^="aq-"]').forEach(el => {
-        el.value = baseVal;
-      });
-      run();
+    // Quando muda "aquisicao padrão" — aplica a todos os meses (sobrescreve tabela)
+    let lastAquisicaoPadrao = null;
+    function maybeApplyAquisicaoPadrao() {
+      const v = Number(document.getElementById('aquisicao').value);
+      if (lastAquisicaoPadrao === null) { lastAquisicaoPadrao = v; return; }
+      if (v !== lastAquisicaoPadrao) {
+        // Padrão mudou → aplica a todos os inputs da tabela
+        document.querySelectorAll('input.cell-input').forEach(el => { el.value = v; });
+        lastAquisicaoPadrao = v;
+      }
     }
 
     function run() {
-      rebuildAquisicaoMeses();
+      const snap = snapshotFocus();
+      maybeApplyAquisicaoPadrao();
       refreshLabels();
       const inp = getInputs();
       const s = simular(inp);
@@ -1352,6 +1180,7 @@
       renderCapacity(s);
       renderTable(s);
       renderCharts(s);
+      restoreFocus(snap);
     }
 
     function resetar() {
@@ -1359,14 +1188,14 @@
         const el = document.getElementById(k);
         if (el) el.value = v;
       });
-      // Limpa customização mês a mês
-      currentPeriodo = -1;
-      document.getElementById('aquisicao-meses').innerHTML = '';
+      lastAquisicaoPadrao = DEFAULTS.aquisicao;
+      // Limpa inputs da tabela — serão recriados com aquisicao padrão
+      document.querySelectorAll('input.cell-input').forEach(el => { el.value = DEFAULTS.aquisicao; });
       run();
     }
 
-    // Bind eventos
-    document.querySelectorAll('.controls input').forEach(el => {
+    // Bind eventos da toolbar quick-params
+    document.querySelectorAll('.quick-params input').forEach(el => {
       el.addEventListener('input', run);
     });
 
