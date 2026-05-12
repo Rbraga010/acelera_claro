@@ -242,6 +242,62 @@
       border-color: var(--amber);
     }
 
+    /* Details — aquisição mês a mês */
+    .ctrl-details {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px dashed var(--border-cold);
+    }
+    .ctrl-details summary {
+      cursor: pointer;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 8px 0;
+      list-style: none;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .ctrl-details summary::-webkit-details-marker { display: none; }
+    .ctrl-details summary::before {
+      content: '▸';
+      color: var(--amber);
+      transition: transform 0.2s;
+      display: inline-block;
+      font-size: 11px;
+    }
+    .ctrl-details[open] summary::before { transform: rotate(90deg); }
+    .summary-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+    .summary-hint {
+      font-size: 10px;
+      color: var(--text-dim);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-transform: none;
+    }
+    .ctrl-meses-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 16px 0 20px;
+      padding: 12px 16px;
+      background: rgba(244, 185, 62, 0.04);
+      border: 1px dashed var(--border-warm);
+      border-radius: 8px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .ctrl-meses-info {
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.4;
+    }
+
     /* ═════════════ KPI CARDS ═════════════ */
     .kpi-grid {
       display: grid;
@@ -545,7 +601,7 @@
         <div class="ctrl-group-title">Aquisição & Conversão</div>
 
         <div class="ctrl">
-          <label>Start novos / mês <span class="val" id="v-aquisicao">30</span></label>
+          <label>Start novos / mês (padrão) <span class="val" id="v-aquisicao">30</span></label>
           <input type="range" id="aquisicao" min="0" max="200" value="30" step="5">
         </div>
         <div class="ctrl">
@@ -563,6 +619,21 @@
         <div class="ctrl">
           <label>% Conversão → Premium <span class="val" id="v-pctPremium">5%</span></label>
           <input type="range" id="pctPremium" min="0" max="100" value="5" step="1">
+        </div>
+
+        <div class="ctrl-group-title">Renovação (% que renova ao fim do ciclo)</div>
+
+        <div class="ctrl">
+          <label>↻ Master renova (3 meses) <span class="val" id="v-renovMaster">30%</span></label>
+          <input type="range" id="renovMaster" min="0" max="100" value="30" step="5">
+        </div>
+        <div class="ctrl">
+          <label>↻ Pro renova (6 meses) <span class="val" id="v-renovPro">40%</span></label>
+          <input type="range" id="renovPro" min="0" max="100" value="40" step="5">
+        </div>
+        <div class="ctrl">
+          <label>↻ Premium renova (6 meses) <span class="val" id="v-renovPremium">20%</span></label>
+          <input type="range" id="renovPremium" min="0" max="100" value="20" step="5">
         </div>
 
         <div class="ctrl-group-title">Valores dos planos (R$)</div>
@@ -630,6 +701,19 @@
         </div>
 
       </div>
+
+      <!-- Aquisição customizada mês a mês -->
+      <details class="ctrl-details" id="ctrl-aq-meses">
+        <summary>
+          <span class="summary-label">⚙ Personalizar aquisição mês a mês</span>
+          <span class="summary-hint">(opcional · sobrescreve o valor padrão)</span>
+        </summary>
+        <div class="ctrl-meses-head">
+          <span class="ctrl-meses-info">Edite quantos parceiros entram pelo Start em cada mês individualmente.</span>
+          <button class="reset-btn" type="button" onclick="aplicarValorPadrao()">↻ Aplicar valor padrão a todos</button>
+        </div>
+        <div id="aquisicao-meses" class="ctrl-grid"></div>
+      </details>
     </section>
 
     <!-- ═════════════ KPIs ═════════════ -->
@@ -768,6 +852,7 @@
     const DEFAULTS = {
       aquisicao: 30, periodo: 6,
       pctMaster: 30, pctPro: 15, pctPremium: 5,
+      renovMaster: 30, renovPro: 40, renovPremium: 20,
       valStart: 297, valMaster: 997, valPro: 2997, valPremium: 4997,
       mpStart: 100, mpMaster: 70, mpPro: 30, mpPremium: 0,
       pctTradeUp: 15, pctPulsarH: 50,
@@ -780,12 +865,23 @@
 
     function getInputs() {
       const get = (id, isNum=true) => isNum ? Number(document.getElementById(id).value) : document.getElementById(id).value;
+      const periodo = get('periodo');
+      // Aquisição mês a mês (sobrescreve o padrão se elementos existirem)
+      const aquisicaoMes = [];
+      for (let i = 0; i < periodo; i++) {
+        const el = document.getElementById('aq-' + i);
+        aquisicaoMes.push(el ? Number(el.value) : get('aquisicao'));
+      }
       return {
         aquisicao: get('aquisicao'),
-        periodo: get('periodo'),
+        periodo,
+        aquisicaoMes,
         pctMaster: get('pctMaster') / 100,
         pctPro: get('pctPro') / 100,
         pctPremium: get('pctPremium') / 100,
+        renovMaster: get('renovMaster') / 100,
+        renovPro: get('renovPro') / 100,
+        renovPremium: get('renovPremium') / 100,
         valStart: get('valStart'),
         valMaster: get('valMaster'),
         valPro: get('valPro'),
@@ -830,16 +926,44 @@
       const premiumNovos = new Array(n).fill(0);
       const masterNovos = new Array(n).fill(0);
       const proNovos = new Array(n).fill(0);
+      // Distinção origem (upgrades novos vs renovações) — pra registrar
+      const masterRenov = new Array(n).fill(0);
+      const proRenov = new Array(n).fill(0);
+      const premiumRenov = new Array(n).fill(0);
 
-      // Cohort entra Start em mês i
-      // No mês i+1, upgrade: pctMaster*aq → Master, pctPro*aq → Pro, pctPremium*aq → Premium
+      // 1ª passagem: Start + upgrades originais (do Start → planos pagos no mês seguinte)
       for (let i = 0; i < n; i++) {
-        startNovos[i] = inp.aquisicao;
+        startNovos[i] = inp.aquisicaoMes[i] != null ? inp.aquisicaoMes[i] : inp.aquisicao;
         const upMonth = i + 1;
         if (upMonth < n) {
-          masterNovos[upMonth] += inp.aquisicao * inp.pctMaster;
-          proNovos[upMonth] += inp.aquisicao * inp.pctPro;
-          premiumNovos[upMonth] += inp.aquisicao * inp.pctPremium;
+          masterNovos[upMonth] += startNovos[i] * inp.pctMaster;
+          proNovos[upMonth] += startNovos[i] * inp.pctPro;
+          premiumNovos[upMonth] += startNovos[i] * inp.pctPremium;
+        }
+      }
+
+      // 2ª passagem: Renovações cascading
+      // Master ciclo 3 meses · Pro 6 meses · Premium 6 meses
+      // Quem entra no Master em mês i, ao fim do ciclo (i+3), renova com prob renovMaster → entra novamente no Master em i+3
+      // Processado em ordem: quando chega no mês i+3, masterNovos[i+3] já inclui renovações de i (que podem renovar de novo em i+6)
+      for (let i = 0; i < n; i++) {
+        const renMaster = i + 3;
+        const renPro = i + 6;
+        const renPremium = i + 6;
+        if (renMaster < n && inp.renovMaster > 0 && masterNovos[i] > 0) {
+          const add = masterNovos[i] * inp.renovMaster;
+          masterNovos[renMaster] += add;
+          masterRenov[renMaster] += add;
+        }
+        if (renPro < n && inp.renovPro > 0 && proNovos[i] > 0) {
+          const add = proNovos[i] * inp.renovPro;
+          proNovos[renPro] += add;
+          proRenov[renPro] += add;
+        }
+        if (renPremium < n && inp.renovPremium > 0 && premiumNovos[i] > 0) {
+          const add = premiumNovos[i] * inp.renovPremium;
+          premiumNovos[renPremium] += add;
+          premiumRenov[renPremium] += add;
         }
       }
 
@@ -887,9 +1011,16 @@
       const alertaMent = mentorias.map(m => m > capMentMes ? 'alert' : (m > capMentMes * 0.85 ? 'warn' : ''));
       const alertaImpl = implementacoes.map(v => v > capImpl ? 'alert' : (v > capImpl * 0.85 ? 'warn' : ''));
 
+      // Totais de renovação
+      const totalRenovMaster = masterRenov.reduce((a,b)=>a+b, 0);
+      const totalRenovPro = proRenov.reduce((a,b)=>a+b, 0);
+      const totalRenovPremium = premiumRenov.reduce((a,b)=>a+b, 0);
+
       return {
         meses, startNovos, masterAtivos, proAtivos, premiumImpl,
         masterNovos, proNovos, premiumNovos,
+        masterRenov, proRenov, premiumRenov,
+        totalRenovMaster, totalRenovPro, totalRenovPremium,
         recStart, recMaster, recPro, recPremium, recMes, recAcum,
         marcaMes, lojistaMes, totalBruto,
         tradeup, pulsarh, marcos, liquido,
@@ -997,16 +1128,18 @@
     // CHARTS
     // ═══════════════════════════════════════════════════
     const CHART_COLORS = {
-      start: 'rgba(244, 185, 62, 0.45)',
-      master: 'rgba(244, 185, 62, 0.65)',
-      pro: 'rgba(244, 185, 62, 0.85)',
-      premium: '#F4B93E',
-      line: '#FFC856',
-      mint: '#3DDC97',
-      coral: '#FF6B47',
-      danger: '#FF4E4E',
-      grid: 'rgba(255,255,255,0.05)',
-      text: '#8B8B93',
+      // Cores distintas por plano
+      start:    '#6FBFFF',   // azul céu — entrada
+      master:   '#3DDC97',   // mint — crescimento
+      pro:      '#FF6B47',   // coral — aceleração
+      premium:  '#F4B93E',   // âmbar dourado — top tier
+      // Apoio
+      line:     '#FFC856',
+      mint:     '#3DDC97',
+      coral:    '#FF6B47',
+      danger:   '#FF4E4E',
+      grid:     'rgba(255,255,255,0.05)',
+      text:     '#8B8B93',
     };
 
     Chart.defaults.font.family = "'Inter', sans-serif";
@@ -1083,7 +1216,7 @@
           labels: ['Marca parceira', 'Lojista'],
           datasets: [{
             data: [s.marcaTotal, s.lojistaTotal],
-            backgroundColor: [CHART_COLORS.premium, CHART_COLORS.mint],
+            backgroundColor: ['#F4B93E', '#B8881D'],
             borderColor: 'var(--charcoal)', borderWidth: 3,
           }]
         },
@@ -1103,7 +1236,7 @@
           labels: ['TradeUp', 'PulsarH.ai', 'Marcos sócio'],
           datasets: [{
             data: [s.tradeup, s.pulsarh, s.marcos],
-            backgroundColor: [CHART_COLORS.coral, CHART_COLORS.premium, CHART_COLORS.mint],
+            backgroundColor: ['#9B7DFF', '#F4B93E', '#FFC856'],
             borderColor: 'var(--charcoal)', borderWidth: 3,
           }]
         },
@@ -1148,6 +1281,9 @@
         ['pctMaster', v => v + '%'],
         ['pctPro', v => v + '%'],
         ['pctPremium', v => v + '%'],
+        ['renovMaster', v => v + '%'],
+        ['renovPro', v => v + '%'],
+        ['renovPremium', v => v + '%'],
         ['mpStart', v => v + '%'],
         ['mpMaster', v => v + '%'],
         ['mpPro', v => v + '%'],
@@ -1163,9 +1299,52 @@
         const inp = document.getElementById(id);
         if (el && inp) el.textContent = fn(inp.value);
       });
+      // Labels dos meses individuais
+      document.querySelectorAll('[id^="aq-"]').forEach(el => {
+        const idx = el.id.replace('aq-', '');
+        const lbl = document.getElementById('v-aq-' + idx);
+        if (lbl) lbl.textContent = el.value;
+      });
+    }
+
+    // Rebuild inputs mês-a-mês quando muda período
+    let currentPeriodo = -1;
+    function rebuildAquisicaoMeses() {
+      const n = Number(document.getElementById('periodo').value);
+      if (n === currentPeriodo) return;
+      const baseVal = Number(document.getElementById('aquisicao').value);
+      const wrapper = document.getElementById('aquisicao-meses');
+      // Preserva valores existentes pra meses que ainda existem
+      const prev = {};
+      wrapper.querySelectorAll('input').forEach(el => {
+        const idx = el.id.replace('aq-', '');
+        prev[idx] = Number(el.value);
+      });
+      wrapper.innerHTML = '';
+      for (let i = 0; i < n; i++) {
+        const v = prev[i] != null ? prev[i] : baseVal;
+        const div = document.createElement('div');
+        div.className = 'ctrl';
+        div.innerHTML = `
+          <label>${fmtMonth(i)} <span class="val" id="v-aq-${i}">${v}</span></label>
+          <input type="range" id="aq-${i}" min="0" max="500" value="${v}" step="5">
+        `;
+        wrapper.appendChild(div);
+      }
+      wrapper.querySelectorAll('input').forEach(el => el.addEventListener('input', run));
+      currentPeriodo = n;
+    }
+
+    function aplicarValorPadrao() {
+      const baseVal = Number(document.getElementById('aquisicao').value);
+      document.querySelectorAll('[id^="aq-"]').forEach(el => {
+        el.value = baseVal;
+      });
+      run();
     }
 
     function run() {
+      rebuildAquisicaoMeses();
       refreshLabels();
       const inp = getInputs();
       const s = simular(inp);
@@ -1180,6 +1359,9 @@
         const el = document.getElementById(k);
         if (el) el.value = v;
       });
+      // Limpa customização mês a mês
+      currentPeriodo = -1;
+      document.getElementById('aquisicao-meses').innerHTML = '';
       run();
     }
 
