@@ -119,131 +119,191 @@
     }
     .hero p strong { color: var(--amber); font-weight: 600; }
 
-    /* ═══════════════════════════════ PARAM PANEL ═══════════════════════════════ */
-    /* Painel ÚNICO de parâmetros, layout em grid limpo */
-    .params {
-      background: var(--charcoal);
-      border: 1px solid var(--border-strong);
-      border-radius: 16px;
-      padding: 28px 32px;
-      margin-bottom: 32px;
-    }
-    .params-head {
+    /* ═══════════════════════════════ TOOLBAR MINI ═══════════════════════════════ */
+    /* Toolbar discreta acima dos KPIs: Capacidade + Split sócios */
+    .toolbar-mini {
       display: flex;
-      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0;
       align-items: center;
-      margin-bottom: 24px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
+      padding: 10px 18px;
+      background: var(--charcoal);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 28px;
     }
-    .params-title {
-      font-family: 'Fraunces', serif;
-      font-style: italic;
-      font-weight: 600;
-      font-size: 1.35rem;
-      letter-spacing: -0.01em;
+    .tm-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 16px;
+      border-right: 1px dashed var(--border);
     }
-    .params-title-mono {
+    .tm-group:last-of-type { border-right: none; }
+    .tm-label {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 700;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+    .tm-inp {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+    .tm-inp .tag {
+      font-size: 9px;
+      color: var(--text-mute);
+      letter-spacing: 0.04em;
+    }
+    .tm-inp input {
+      width: 50px;
+      padding: 5px 6px;
+      background: var(--ink);
+      border: 1px solid var(--border-strong);
+      border-radius: 5px;
       color: var(--amber);
-      margin-bottom: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+      -moz-appearance: textfield;
+    }
+    .tm-inp input::-webkit-outer-spin-button,
+    .tm-inp input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .tm-inp input:focus {
+      outline: none;
+      border-color: var(--amber);
+      box-shadow: 0 0 0 2px var(--amber-glow);
+    }
+    .tm-inp .suf {
+      font-size: 9px;
+      color: var(--text-mute);
+      letter-spacing: 0.04em;
     }
     .btn-reset {
       background: transparent;
       border: 1px solid var(--border-warm);
       color: var(--amber);
-      padding: 8px 18px;
+      padding: 6px 14px;
       border-radius: 999px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .btn-reset:hover {
-      background: var(--amber-glow);
-      border-color: var(--amber);
-    }
-
-    .params-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-    .params-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
-
-    .group {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px 20px;
-    }
-    .group-label {
       font-family: 'JetBrains Mono', monospace;
       font-size: 9.5px;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--text-dim);
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+      margin-left: auto;
     }
-    .group-label .dot-start { color: var(--color-start); }
-    .group-label .dot-master { color: var(--color-master); }
-    .group-label .dot-pro { color: var(--color-pro); }
-    .group-label .dot-premium { color: var(--color-premium); }
-
-    .field {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      padding: 6px 0;
-      border-top: 1px dashed var(--border);
+    .btn-reset:hover {
+      background: var(--amber-glow);
+      border-color: var(--amber);
     }
-    .field:first-of-type { border-top: none; padding-top: 0; }
-    .field-label {
-      font-family: 'Inter', sans-serif;
-      font-size: 12.5px;
-      color: var(--text-dim);
-      font-weight: 500;
-    }
-    .field-input {
-      width: 80px;
-      padding: 7px 9px;
+    .btn-action {
       background: var(--ink);
       border: 1px solid var(--border-strong);
+      color: var(--text-dim);
+      padding: 6px 12px;
       border-radius: 6px;
-      color: var(--amber);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      font-weight: 700;
-      text-align: right;
-      transition: border-color 0.15s, box-shadow 0.15s;
-      -moz-appearance: textfield;
-    }
-    .field-input::-webkit-outer-spin-button,
-    .field-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-    .field-input:focus {
-      outline: none;
-      border-color: var(--amber);
-      box-shadow: 0 0 0 3px var(--amber-glow);
-    }
-    .field-unit {
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-action:hover {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+
+    /* ═══════════════════════════════ CONFIG ROW (acima da tabela) ═══════════════════════════════ */
+    .cfg-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+      gap: 0;
+      background: var(--ink);
+      border: 1px solid var(--border-strong);
+      border-radius: 12px 12px 0 0;
+      border-bottom: none;
+      padding: 12px 18px;
+      margin-top: 24px;
+    }
+    .cfg-grp {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 4px 18px;
+      border-right: 1px solid var(--border);
+      min-width: 0;
+    }
+    .cfg-grp:last-of-type { border-right: none; }
+    .cfg-grp-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .cfg-grp-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .cfg-inp {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .cfg-inp .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
       color: var(--text-mute);
       letter-spacing: 0.04em;
-      min-width: 50px;
-      text-align: left;
+    }
+    .cfg-inp input {
+      width: 56px;
+      padding: 5px 6px;
+      background: var(--charcoal);
+      border: 1px solid var(--border-strong);
+      border-radius: 5px;
+      color: var(--amber);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-align: center;
+      -moz-appearance: textfield;
+    }
+    .cfg-inp input.wide { width: 70px; }
+    .cfg-inp input::-webkit-outer-spin-button,
+    .cfg-inp input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .cfg-inp input:focus {
+      outline: none;
+      border-color: var(--amber);
+      box-shadow: 0 0 0 2px var(--amber-glow);
+    }
+    .cfg-inp .suf {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--text-mute);
+    }
+    .cfg-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      vertical-align: middle;
+      margin-right: 2px;
     }
 
     /* ═══════════════════════════════ KPIs ═══════════════════════════════ */
@@ -425,10 +485,17 @@
     /* ═══════════════════════════════ TABELA ═══════════════════════════════ */
     .table-wrap {
       background: var(--charcoal);
-      border: 1px solid var(--border);
-      border-radius: 16px;
+      border: 1px solid var(--border-strong);
+      border-top: none;
+      border-radius: 0 0 16px 16px;
       padding: 24px 28px;
     }
+    .table-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .table-zone.hidden .cfg-row,
+    .table-zone.hidden .table-wrap { display: none; }
     .table-head {
       display: flex;
       justify-content: space-between;
@@ -567,192 +634,25 @@
     </header>
 
     <section class="hero">
-      <h1>Simulador de <em>escala</em>.<br>Define os parâmetros. Vê o que acontece.</h1>
-      <p>Parâmetros globais e cadência por mês no painel abaixo. Tudo recalcula em tempo real: <strong>KPIs, gráficos, capacidade operacional e split entre TradeUp · PulsarH.ai · Marcos sócio.</strong></p>
+      <h1>Simulador de <em>escala</em>.<br>Edita a tabela. Acompanha o resultado.</h1>
+      <p>Capacidade operacional e split entre sócios na <strong>barra fina abaixo</strong>. Toda a configuração de simulação (conversão, renovação, valores, subsídio, Start novos por mês) está <strong>diretamente na tabela</strong> ao fim. KPIs e gráficos atualizam em tempo real.</p>
     </section>
 
-    <!-- ═══════════════════════════ PARÂMETROS ═══════════════════════════ -->
-    <section class="params">
-      <div class="params-head">
-        <div>
-          <div class="params-title-mono">● Definição de cenário</div>
-          <div class="params-title">Define os parâmetros do programa.</div>
-        </div>
-        <button class="btn-reset" onclick="resetar()">↻ Resetar</button>
+    <!-- ═══════════════════════════ TOOLBAR MINI: Capacidade + Split sócios ═══════════════════════════ -->
+    <section class="toolbar-mini">
+      <div class="tm-group">
+        <span class="tm-label">Capacidade</span>
+        <span class="tm-inp"><input type="number" id="maxMentDia" value="4" min="1" max="20"><span class="suf">ment/dia</span></span>
+        <span class="tm-inp"><input type="number" id="diasUteis" value="20" min="20" max="30"><span class="suf">dias úteis</span></span>
+        <span class="tm-inp"><input type="number" id="maxImpl" value="10" min="1" max="50"><span class="suf">impl/mês</span></span>
       </div>
-
-      <div class="params-grid">
-        <!-- Horizonte temporal -->
-        <div class="group">
-          <div class="group-label">⏱ Horizonte temporal</div>
-          <div class="field">
-            <span class="field-label">Período total</span>
-            <input class="field-input" type="number" id="periodo" value="6" min="3" max="36">
-            <span class="field-unit">meses</span>
-          </div>
-          <div class="field">
-            <span class="field-label">Start novos · padrão</span>
-            <input class="field-input" type="number" id="aquisicao" value="50" min="0" max="500">
-            <span class="field-unit">/mês</span>
-          </div>
-        </div>
-
-        <!-- Conversão -->
-        <div class="group">
-          <div class="group-label">🔀 Conversão Start →</div>
-          <div class="field">
-            <span class="field-label"><span style="color:var(--color-master)">●</span> Master</span>
-            <input class="field-input" type="number" id="pctMaster" value="15" min="0" max="100">
-            <span class="field-unit">%</span>
-          </div>
-          <div class="field">
-            <span class="field-label"><span style="color:var(--color-pro)">●</span> Pro</span>
-            <input class="field-input" type="number" id="pctPro" value="5" min="0" max="100">
-            <span class="field-unit">%</span>
-          </div>
-          <div class="field">
-            <span class="field-label"><span style="color:var(--color-premium)">●</span> Premium</span>
-            <input class="field-input" type="number" id="pctPremium" value="5" min="0" max="100">
-            <span class="field-unit">%</span>
-          </div>
-        </div>
-
-        <!-- Renovação -->
-        <div class="group">
-          <div class="group-label">↻ Renovação ao fim do ciclo</div>
-          <div class="field">
-            <span class="field-label">Start · mensal</span>
-            <input class="field-input" type="number" id="renovStart" value="20" min="0" max="100">
-            <span class="field-unit">%</span>
-          </div>
-          <div class="field">
-            <span class="field-label">Master · trimestral</span>
-            <input class="field-input" type="number" id="renovMaster" value="10" min="0" max="100">
-            <span class="field-unit">%</span>
-          </div>
-          <div class="field">
-            <span class="field-label">Pro · trimestral</span>
-            <input class="field-input" type="number" id="renovPro" value="10" min="0" max="100">
-            <span class="field-unit">%</span>
-          </div>
-          <div class="field">
-            <span class="field-label">Premium · semestral</span>
-            <input class="field-input" type="number" id="renovPremium" value="5" min="0" max="100">
-            <span class="field-unit">%</span>
-          </div>
-        </div>
-
-        <!-- Preços -->
-        <div class="group">
-          <div class="group-label">💰 Valores por plano</div>
-          <div class="field">
-            <span class="field-label"><span style="color:var(--color-start)">●</span> Start</span>
-            <input class="field-input" type="number" id="valStart" value="297" min="0">
-            <span class="field-unit">/mês</span>
-          </div>
-          <div class="field">
-            <span class="field-label"><span style="color:var(--color-master)">●</span> Master</span>
-            <input class="field-input" type="number" id="valMaster" value="997" min="0">
-            <span class="field-unit">/tri</span>
-          </div>
-          <div class="field">
-            <span class="field-label"><span style="color:var(--color-pro)">●</span> Pro</span>
-            <input class="field-input" type="number" id="valPro" value="2997" min="0">
-            <span class="field-unit">/tri</span>
-          </div>
-          <div class="field">
-            <span class="field-label"><span style="color:var(--color-premium)">●</span> Premium</span>
-            <input class="field-input" type="number" id="valPremium" value="4997" min="0">
-            <span class="field-unit">/sem</span>
-          </div>
-        </div>
-
-        <!-- Subsídio marca parceira -->
-        <div class="group">
-          <div class="group-label">🏭 Subsídio · marca parceira</div>
-          <div class="field">
-            <span class="field-label">Start</span>
-            <input class="field-input" type="number" id="mpStart" value="100" min="0" max="100">
-            <span class="field-unit">%</span>
-          </div>
-          <div class="field">
-            <span class="field-label">Master</span>
-            <input class="field-input" type="number" id="mpMaster" value="80" min="0" max="100">
-            <span class="field-unit">%</span>
-          </div>
-          <div class="field">
-            <span class="field-label">Pro</span>
-            <input class="field-input" type="number" id="mpPro" value="60" min="0" max="100">
-            <span class="field-unit">%</span>
-          </div>
-          <div class="field">
-            <span class="field-label">Premium</span>
-            <input class="field-input" type="number" id="mpPremium" value="20" min="0" max="100">
-            <span class="field-unit">%</span>
-          </div>
-        </div>
-
-        <!-- Split operadores -->
-        <div class="group">
-          <div class="group-label">⚖ Split entre operadores</div>
-          <div class="field">
-            <span class="field-label">TradeUp (off-the-top)</span>
-            <input class="field-input" type="number" id="pctTradeUp" value="15" min="0" max="100">
-            <span class="field-unit">%</span>
-          </div>
-          <div class="field">
-            <span class="field-label">PulsarH.ai (do líquido)</span>
-            <input class="field-input" type="number" id="pctPulsarH" value="50" min="0" max="100">
-            <span class="field-unit">%</span>
-          </div>
-          <div class="field">
-            <span class="field-label">Marcos sócio (do líquido)</span>
-            <span class="field-unit" id="pctMarcos-disp" style="color:var(--amber); font-weight:700;">50%</span>
-            <span class="field-unit">auto</span>
-          </div>
-        </div>
-
-        <!-- Capacidade -->
-        <div class="group">
-          <div class="group-label">🚧 Capacidade operacional</div>
-          <div class="field">
-            <span class="field-label">Mentorias / dia</span>
-            <input class="field-input" type="number" id="maxMentDia" value="4" min="1" max="20">
-            <span class="field-unit">/dia</span>
-          </div>
-          <div class="field">
-            <span class="field-label">Dias úteis / mês</span>
-            <input class="field-input" type="number" id="diasUteis" value="20" min="20" max="30">
-            <span class="field-unit">dias</span>
-          </div>
-          <div class="field">
-            <span class="field-label">Implementações / mês</span>
-            <input class="field-input" type="number" id="maxImpl" value="10" min="1" max="50">
-            <span class="field-unit">/mês</span>
-          </div>
-        </div>
-
-        <!-- Cobrança recorrente -->
-        <div class="group">
-          <div class="group-label">📅 Ciclos de cobrança</div>
-          <div class="field">
-            <span class="field-label"><span style="color:var(--color-start)">●</span> Start</span>
-            <span class="field-unit" style="color:var(--text)">mensal · 1 mês</span>
-          </div>
-          <div class="field">
-            <span class="field-label"><span style="color:var(--color-master)">●</span> Master</span>
-            <span class="field-unit" style="color:var(--text)">trimestral · 3 meses</span>
-          </div>
-          <div class="field">
-            <span class="field-label"><span style="color:var(--color-pro)">●</span> Pro</span>
-            <span class="field-unit" style="color:var(--text)">trimestral · 3 meses</span>
-          </div>
-          <div class="field">
-            <span class="field-label"><span style="color:var(--color-premium)">●</span> Premium</span>
-            <span class="field-unit" style="color:var(--text)">semestral · 6 meses</span>
-          </div>
-        </div>
+      <div class="tm-group">
+        <span class="tm-label">Split sócios</span>
+        <span class="tm-inp"><span class="tag">TradeUp</span><input type="number" id="pctTradeUp" value="15" min="0" max="100"><span class="suf">%</span></span>
+        <span class="tm-inp"><span class="tag">PulsarH</span><input type="number" id="pctPulsarH" value="50" min="0" max="100"><span class="suf">%</span></span>
+        <span class="tm-inp"><span class="tag">Marcos</span><span id="pctMarcos-disp" style="color:var(--amber);font-weight:700;font-size:12px;">50%</span><span class="suf">auto</span></span>
       </div>
+      <button class="btn-reset" onclick="resetar()">↻ Resetar</button>
     </section>
 
     <!-- ═══════════════════════════ KPIs ═══════════════════════════ -->
@@ -842,36 +742,90 @@
       </div>
     </div>
 
-    <!-- ═══════════════════════════ TABELA ═══════════════════════════ -->
-    <div class="table-wrap">
-      <div class="table-head">
-        <div>
-          <div class="chart-title">Cadência mês a mês <span class="edit-hint">✎ Start novos editável</span></div>
+    <!-- ═══════════════════════════ TABELA + CONFIG INLINE ═══════════════════════════ -->
+    <section class="table-zone" id="tableZone">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 4px;">
+        <div class="chart-title" style="font-family:'Fraunces',serif;font-style:italic;font-weight:600;font-size:1.3rem;">
+          Cadência mês a mês <span class="edit-hint">✎ Start novos editável</span>
         </div>
-        <div class="chart-sub">● Tabela completa</div>
+        <div class="table-actions">
+          <button class="btn-action" id="btnAddMes">+ Mês</button>
+          <button class="btn-action" id="btnRemMes">− Mês</button>
+          <button class="btn-action" id="btnToggle">👁 Ocultar tabela</button>
+        </div>
       </div>
-      <div class="table-overflow">
-        <table class="data" id="dataTable">
-          <thead>
-            <tr>
-              <th>Mês</th>
-              <th class="num">Start novos ✎</th>
-              <th class="num">Start ativos</th>
-              <th class="num">Master ativos</th>
-              <th class="num">Pro ativos</th>
-              <th class="num">Premium impl.</th>
-              <th class="num">Aulas</th>
-              <th class="num">Mentorias</th>
-              <th class="num">Implem.</th>
-              <th class="num">Receita</th>
-              <th class="num">Acumulado</th>
-            </tr>
-          </thead>
-          <tbody id="tbody"></tbody>
-          <tfoot id="tfoot"></tfoot>
-        </table>
+
+      <!-- Config row: configuração global vinculada à tabela -->
+      <div class="cfg-row">
+        <div class="cfg-grp">
+          <span class="cfg-grp-label">🔀 Conversão Start →</span>
+          <div class="cfg-grp-row">
+            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-master)"></span><span class="tag">Master</span><input type="number" id="pctMaster" value="15" min="0" max="100"><span class="suf">%</span></span>
+            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-pro)"></span><span class="tag">Pro</span><input type="number" id="pctPro" value="5" min="0" max="100"><span class="suf">%</span></span>
+            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-premium)"></span><span class="tag">Prem</span><input type="number" id="pctPremium" value="5" min="0" max="100"><span class="suf">%</span></span>
+          </div>
+        </div>
+
+        <div class="cfg-grp">
+          <span class="cfg-grp-label">↻ Renovação</span>
+          <div class="cfg-grp-row">
+            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-start)"></span><span class="tag">S·1m</span><input type="number" id="renovStart" value="20" min="0" max="100"><span class="suf">%</span></span>
+            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-master)"></span><span class="tag">M·3m</span><input type="number" id="renovMaster" value="10" min="0" max="100"><span class="suf">%</span></span>
+            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-pro)"></span><span class="tag">P·3m</span><input type="number" id="renovPro" value="10" min="0" max="100"><span class="suf">%</span></span>
+            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-premium)"></span><span class="tag">Pr·6m</span><input type="number" id="renovPremium" value="5" min="0" max="100"><span class="suf">%</span></span>
+          </div>
+        </div>
+
+        <div class="cfg-grp">
+          <span class="cfg-grp-label">💰 Valores R$</span>
+          <div class="cfg-grp-row">
+            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-start)"></span><span class="tag">S/mês</span><input type="number" id="valStart" value="297" min="0" class="wide"></span>
+            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-master)"></span><span class="tag">M/tri</span><input type="number" id="valMaster" value="997" min="0" class="wide"></span>
+            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-pro)"></span><span class="tag">P/tri</span><input type="number" id="valPro" value="2997" min="0" class="wide"></span>
+            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-premium)"></span><span class="tag">Pr/sem</span><input type="number" id="valPremium" value="4997" min="0" class="wide"></span>
+          </div>
+        </div>
+
+        <div class="cfg-grp">
+          <span class="cfg-grp-label">🏭 Subsídio marca</span>
+          <div class="cfg-grp-row">
+            <span class="cfg-inp"><span class="tag">S</span><input type="number" id="mpStart" value="100" min="0" max="100"><span class="suf">%</span></span>
+            <span class="cfg-inp"><span class="tag">M</span><input type="number" id="mpMaster" value="80" min="0" max="100"><span class="suf">%</span></span>
+            <span class="cfg-inp"><span class="tag">P</span><input type="number" id="mpPro" value="60" min="0" max="100"><span class="suf">%</span></span>
+            <span class="cfg-inp"><span class="tag">Pr</span><input type="number" id="mpPremium" value="20" min="0" max="100"><span class="suf">%</span></span>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <!-- Tabela mês a mês — Start novos editável (input campo a campo) -->
+      <div class="table-wrap">
+        <div class="table-overflow">
+          <table class="data" id="dataTable">
+            <thead>
+              <tr>
+                <th>Mês</th>
+                <th class="num">Start novos ✎</th>
+                <th class="num">Start ativos</th>
+                <th class="num">Master ativos</th>
+                <th class="num">Pro ativos</th>
+                <th class="num">Premium impl.</th>
+                <th class="num">Aulas</th>
+                <th class="num">Mentorias</th>
+                <th class="num">Implem.</th>
+                <th class="num">Receita</th>
+                <th class="num">Acumulado</th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+            <tfoot id="tfoot"></tfoot>
+          </table>
+        </div>
+      </div>
+
+      <!-- Inputs ocultos — período e aquisição padrão ainda usados pelo JS -->
+      <input type="hidden" id="periodo" value="6">
+      <input type="hidden" id="aquisicao" value="50">
+    </section>
 
     <footer class="foot">
       <span class="foot-meta">Rentabiliza.ai · Simulador · Maio 2026 · PulsarH.ai × TradeUp</span>
@@ -1419,9 +1373,36 @@
       recalc();
     }
 
-    // ─── Bind inputs globais ───
-    document.querySelectorAll('.params input').forEach(el => {
+    // ─── Bind inputs da toolbar + config row ───
+    document.querySelectorAll('.toolbar-mini input, .cfg-row input, #periodo, #aquisicao').forEach(el => {
       el.addEventListener('input', recalc);
+    });
+
+    // ─── Botões + Mês / − Mês / Ocultar tabela ───
+    document.getElementById('btnAddMes').addEventListener('click', () => {
+      const el = $('periodo');
+      const cur = Number(el.value) || 6;
+      if (cur < 36) {
+        el.value = cur + 1;
+        recalc();
+      }
+    });
+
+    document.getElementById('btnRemMes').addEventListener('click', () => {
+      const el = $('periodo');
+      const cur = Number(el.value) || 6;
+      if (cur > 3) {
+        el.value = cur - 1;
+        state.aquisicaoMes = state.aquisicaoMes.slice(0, cur - 1);
+        recalc();
+      }
+    });
+
+    document.getElementById('btnToggle').addEventListener('click', () => {
+      const z = document.getElementById('tableZone');
+      const btn = document.getElementById('btnToggle');
+      z.classList.toggle('hidden');
+      btn.textContent = z.classList.contains('hidden') ? '👁 Mostrar tabela' : '👁 Ocultar tabela';
     });
 
     // ─── Init ───
