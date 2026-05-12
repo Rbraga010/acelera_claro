@@ -946,32 +946,69 @@
         (exImpl ? ` — <strong style="color:var(--danger)">excede em ${s.picoImpl - s.capImpl}</strong>. Reduza % Premium, escale time de implementação.` : '');
     }
 
+    // Render incremental: tbody é estruturado uma vez (ou quando muda período),
+    // depois só atualiza as células calculadas — preservando os inputs editáveis.
+    let renderedPeriodo = -1;
+
     function renderTable(s) {
       const tb = document.getElementById('tbody');
       const tf = document.getElementById('tfoot');
-      tb.innerHTML = '';
+      const n = s.meses.length;
+
+      // Recria estrutura só quando o período muda
+      if (renderedPeriodo !== n) {
+        tb.innerHTML = '';
+        s.meses.forEach((m, i) => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td class="month">${m}</td>
+            <td class="num"><input type="number" class="cell-input" id="aq-${i}" value="${Math.round(s.startNovos[i])}" min="0" max="500" step="1"></td>
+            <td class="num" id="cell-master-${i}">0</td>
+            <td class="num" id="cell-pro-${i}">0</td>
+            <td class="num" id="cell-premium-${i}">0</td>
+            <td class="num" id="cell-aulas-${i}">0</td>
+            <td class="num" id="cell-mentorias-${i}">0</td>
+            <td class="num" id="cell-impl-${i}">0</td>
+            <td class="num" id="cell-receita-${i}">R$ 0</td>
+            <td class="num" id="cell-acum-${i}" style="color:var(--amber)">R$ 0</td>
+          `;
+          tb.appendChild(tr);
+        });
+        // Bind events nos inputs editáveis (só na criação)
+        tb.querySelectorAll('input.cell-input').forEach(el => {
+          el.addEventListener('input', run);
+        });
+        renderedPeriodo = n;
+      }
+
+      // Atualiza apenas as células calculadas — NUNCA toca nos inputs
       s.meses.forEach((m, i) => {
         const cellMent = s.alertaMent[i];
         const cellImpl = s.alertaImpl[i];
-        tb.innerHTML += `<tr>
-          <td class="month">${m}</td>
-          <td class="num"><input type="number" class="cell-input" id="aq-${i}" value="${Math.round(s.startNovos[i])}" min="0" max="500" step="1"></td>
-          <td class="num">${Math.round(s.masterAtivos[i])}</td>
-          <td class="num">${Math.round(s.proAtivos[i])}</td>
-          <td class="num">${Math.round(s.premiumImpl[i])}</td>
-          <td class="num">${s.aulas[i]}</td>
-          <td class="num ${cellMent ? cellMent+'-cell' : ''}">${s.mentorias[i]}${cellMent==='alert'?' ⚠':''}</td>
-          <td class="num ${cellImpl ? cellImpl+'-cell' : ''}">${s.implementacoes[i]}${cellImpl==='alert'?' ⚠':''}</td>
-          <td class="num">${fmtBRL(s.recMes[i])}</td>
-          <td class="num" style="color:var(--amber)">${fmtBRL(s.recAcum[i])}</td>
-        </tr>`;
+
+        const setText = (id, val) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = val;
+        };
+        const setCell = (id, val, cls) => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.textContent = val;
+            el.className = 'num' + (cls ? ' ' + cls + '-cell' : '');
+          }
+        };
+
+        setText('cell-master-' + i, Math.round(s.masterAtivos[i]));
+        setText('cell-pro-' + i, Math.round(s.proAtivos[i]));
+        setText('cell-premium-' + i, Math.round(s.premiumImpl[i]));
+        setText('cell-aulas-' + i, s.aulas[i]);
+        setCell('cell-mentorias-' + i, s.mentorias[i] + (cellMent === 'alert' ? ' ⚠' : ''), cellMent);
+        setCell('cell-impl-' + i, s.implementacoes[i] + (cellImpl === 'alert' ? ' ⚠' : ''), cellImpl);
+        setText('cell-receita-' + i, fmtBRL(s.recMes[i]));
+        setText('cell-acum-' + i, fmtBRL(s.recAcum[i]));
       });
 
-      // Bind events nos inputs editáveis (Start novos por mês)
-      tb.querySelectorAll('input.cell-input').forEach(el => {
-        el.addEventListener('input', run);
-      });
-
+      // Footer (sempre re-renderiza, é leve)
       const sum = (a) => a.reduce((x,y)=>x+y, 0);
       tf.innerHTML = `<tr>
         <td class="month">Total</td>
@@ -1189,8 +1226,8 @@
         if (el) el.value = v;
       });
       lastAquisicaoPadrao = DEFAULTS.aquisicao;
-      // Limpa inputs da tabela — serão recriados com aquisicao padrão
-      document.querySelectorAll('input.cell-input').forEach(el => { el.value = DEFAULTS.aquisicao; });
+      // Força reconstrução da tabela (recria inputs com valor padrão)
+      renderedPeriodo = -1;
       run();
     }
 
