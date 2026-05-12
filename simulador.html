@@ -780,8 +780,8 @@
             <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-start)"></span><span class="tag">S·1m</span><input type="number" id="renovStart" value="20" min="0" max="100"><span class="suf">%</span></span>
             <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-master)"></span><span class="tag">M·3m</span><input type="number" id="renovMaster" value="10" min="0" max="100"><span class="suf">%</span></span>
             <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-pro)"></span><span class="tag">P·3m</span><input type="number" id="renovPro" value="10" min="0" max="100"><span class="suf">%</span></span>
-            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-premium)"></span><span class="tag">Pr·6m</span><input type="number" id="renovPremium" value="5" min="0" max="100"><span class="suf">%</span></span>
           </div>
+          <div style="font-family:'Inter',sans-serif;font-size:11px;color:var(--text-mute);font-style:italic;margin-top:-4px;">Premium é implementação (semestral) — sem renovação recorrente.</div>
         </div>
 
         <div class="cfg-grp">
@@ -851,7 +851,7 @@
       periodo: 6,
       aquisicao: 50,
       pctMaster: 15, pctPro: 5, pctPremium: 5,
-      renovStart: 20, renovMaster: 10, renovPro: 10, renovPremium: 5,
+      renovStart: 20, renovMaster: 10, renovPro: 10, renovPremium: 0,
       valStart: 297, valMaster: 997, valPro: 2997, valPremium: 4997,
       mpStart: 100, mpMaster: 80, mpPro: 60, mpPremium: 20,
       pctTradeUp: 15, pctPulsarH: 50,
@@ -924,7 +924,7 @@
         renovStart: num('renovStart') / 100,
         renovMaster: num('renovMaster') / 100,
         renovPro: num('renovPro') / 100,
-        renovPremium: num('renovPremium') / 100,
+        renovPremium: 0, // Premium é implementação — não tem renovação recorrente
         valStart: num('valStart'),
         valMaster: num('valMaster'),
         valPro: num('valPro'),
