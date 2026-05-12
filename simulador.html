@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador · Rentabiliza.ai · Cenários de escala</title>
+  <meta name="description" content="Simulador interativo de cenários de aquisição, conversão e capacidade operacional do Rentabiliza.ai.">
+
+  <link rel="icon" type="image/svg+xml" href="assets/brand/logo-mono-amber.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300..700&family=JetBrains+Mono:wght@400..700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <style>
+    :root {
+      --ink: #0D1117;
+      --charcoal: #1A2430;
+      --surface: #242F3E;
+      --surface-raised: #2D3B4F;
+      --cream: #F4F1E8;
+      --paper: #FAFAF7;
+      --amber: #F4B93E;
+      --amber-deep: #B8881D;
+      --amber-light: #FFC856;
+      --amber-glow: rgba(244, 185, 62, 0.25);
+      --amber-pale: rgba(244, 185, 62, 0.08);
+      --text-light: #F4F1E8;
+      --text-dim: #8B8B93;
+      --muted: #5F5E5A;
+      --border-warm: rgba(244, 185, 62, 0.35);
+      --border-cold: rgba(255, 255, 255, 0.08);
+      --r-mint: #3DDC97;
+      --r-coral: #FF6B47;
+      --danger: #FF4E4E;
+      --warn: #FFB347;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background: var(--ink);
+      color: var(--text-light);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 400;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 32px 40px 80px;
+    }
+
+    /* ═════════════ HEADER ═════════════ */
+    header.app-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 32px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--border-cold);
+    }
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 2px;
+      font-family: 'Fraunces', serif;
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+    .brand .r-name { font-style: italic; color: var(--text-light); }
+    .brand .r-dot { color: var(--amber); }
+    .brand .r-ai { color: var(--amber); font-weight: 300; font-size: 0.7em; }
+    .head-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .head-meta .dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--amber);
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    h1.app-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      font-weight: 500;
+      letter-spacing: -0.025em;
+      line-height: 1.05;
+      margin-bottom: 12px;
+      color: var(--text-light);
+    }
+    h1.app-title em {
+      font-style: italic;
+      font-weight: 600;
+      color: var(--amber);
+    }
+    .app-sub {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: 1.15rem;
+      color: var(--text-dim);
+      max-width: 720px;
+      line-height: 1.5;
+      margin-bottom: 40px;
+    }
+
+    /* ═════════════ CONTROLES ═════════════ */
+    section.controls {
+      background: var(--charcoal);
+      border: 1px solid var(--border-cold);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 32px;
+    }
+    .controls-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-cold);
+    }
+    .controls-head .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+    .reset-btn {
+      background: transparent;
+      border: 1px solid var(--border-warm);
+      color: var(--amber);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .reset-btn:hover {
+      background: var(--amber-pale);
+      border-color: var(--amber);
+    }
+    .ctrl-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px 28px;
+    }
+    .ctrl-group-title {
+      grid-column: 1 / -1;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: 8px 0 4px;
+      border-top: 1px dashed var(--border-cold);
+    }
+    .ctrl-group-title:first-of-type { border-top: none; padding-top: 0; }
+    .ctrl {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .ctrl label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .ctrl label .val {
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      color: var(--amber);
+      font-weight: 700;
+      text-transform: none;
+    }
+    .ctrl input[type=range] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 4px;
+      background: var(--surface);
+      border-radius: 4px;
+      outline: none;
+      cursor: pointer;
+    }
+    .ctrl input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px; height: 16px;
+      background: var(--amber);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 0 4px var(--amber-pale);
+      transition: all 0.15s;
+    }
+    .ctrl input[type=range]::-webkit-slider-thumb:hover {
+      box-shadow: 0 0 0 6px var(--amber-pale);
+    }
+    .ctrl input[type=range]::-moz-range-thumb {
+      width: 16px; height: 16px;
+      background: var(--amber);
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+    }
+    .ctrl input[type=number] {
+      width: 100%;
+      padding: 8px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border-cold);
+      border-radius: 8px;
+      color: var(--text-light);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .ctrl input[type=number]:focus {
+      outline: none;
+      border-color: var(--amber);
+    }
+
+    /* ═════════════ KPI CARDS ═════════════ */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .kpi {
+      background: var(--charcoal);
+      border: 1px solid var(--border-cold);
+      border-top: 3px solid var(--amber);
+      border-radius: 4px 4px 12px 12px;
+      padding: 24px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi.kpi-hero {
+      grid-column: span 2;
+      background: linear-gradient(135deg, var(--charcoal), var(--surface));
+      border-top-color: var(--amber);
+    }
+    .kpi-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 12px;
+    }
+    .kpi-value {
+      font-family: 'Fraunces', serif;
+      font-weight: 600;
+      font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+    .kpi-hero .kpi-value {
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+      color: var(--amber);
+    }
+    .kpi-sub {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.4;
+    }
+    .kpi-sub strong { color: var(--amber-light); }
+    .kpi-mini {
+      display: flex;
+      gap: 16px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border-cold);
+    }
+    .kpi-mini > div {
+      flex: 1;
+    }
+    .kpi-mini-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 4px;
+    }
+    .kpi-mini-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-light);
+    }
+
+    /* ═════════════ CHARTS GRID ═════════════ */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .chart-card {
+      background: var(--charcoal);
+      border: 1px solid var(--border-cold);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .chart-card.full { grid-column: 1 / -1; }
+    .chart-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 20px;
+    }
+    .chart-title {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 1.3rem;
+      color: var(--text-light);
+      letter-spacing: -0.01em;
+    }
+    .chart-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .chart-wrap {
+      position: relative;
+      height: 320px;
+    }
+    .chart-wrap.tall { height: 380px; }
+    .chart-wrap.donut { height: 260px; }
+
+    /* ═════════════ CAPACITY ALERTS ═════════════ */
+    .capacity-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .cap-card {
+      background: var(--charcoal);
+      border: 1px solid var(--border-cold);
+      border-left: 4px solid var(--r-mint);
+      border-radius: 0 12px 12px 0;
+      padding: 24px;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .cap-card.alert {
+      border-left-color: var(--danger);
+      background: linear-gradient(135deg, var(--charcoal), rgba(255, 78, 78, 0.06));
+    }
+    .cap-card.warn {
+      border-left-color: var(--warn);
+    }
+    .cap-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .cap-status {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--r-mint);
+    }
+    .cap-card.alert .cap-status { background: var(--danger); animation: pulse 1.4s infinite; }
+    .cap-card.warn .cap-status { background: var(--warn); }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.6; }
+    }
+    .cap-headline {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 1.5rem;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+    .cap-message {
+      font-size: 0.92rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .cap-message strong { color: var(--text-light); }
+    .cap-card.alert .cap-message strong { color: var(--danger); }
+
+    /* ═════════════ TABELA ═════════════ */
+    .table-card {
+      background: var(--charcoal);
+      border: 1px solid var(--border-cold);
+      border-radius: 16px;
+      padding: 28px;
+      overflow-x: auto;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+    }
+    .data-table th {
+      text-align: left;
+      padding: 12px 14px;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      border-bottom: 1px solid var(--border-cold);
+    }
+    .data-table th.num { text-align: right; }
+    .data-table td {
+      padding: 14px;
+      color: var(--text-light);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .data-table td.num { text-align: right; }
+    .data-table td.month {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--amber);
+    }
+    .data-table tr:hover { background: rgba(255,255,255,0.02); }
+    .data-table td.warn-cell {
+      color: var(--warn);
+      font-weight: 700;
+    }
+    .data-table td.alert-cell {
+      color: var(--danger);
+      font-weight: 700;
+    }
+    .data-table tfoot td {
+      border-top: 2px solid var(--amber);
+      border-bottom: none;
+      font-weight: 700;
+      padding-top: 16px;
+    }
+    .data-table tfoot td.month {
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    /* ═════════════ FOOTER ═════════════ */
+    footer.app-foot {
+      margin-top: 60px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border-cold);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .foot-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .back-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--amber);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border-warm);
+      padding-bottom: 2px;
+    }
+    .back-link:hover { color: var(--amber-light); border-color: var(--amber); }
+
+    /* Responsivo */
+    @media (max-width: 980px) {
+      .container { padding: 24px 20px 60px; }
+      .charts-grid { grid-template-columns: 1fr; }
+      .kpi.kpi-hero { grid-column: span 1; }
+      .capacity-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header class="app-head">
+      <a href="index.html" class="brand" aria-label="Rentabiliza.ai">
+        <span class="r-name">Rentabiliza</span><span class="r-dot">.</span><span class="r-ai">ai</span>
+      </a>
+      <div class="head-meta"><span class="dot"></span>Simulador · Cenários de escala</div>
+    </header>
+
+    <h1 class="app-title">Simulador de <em>escala</em>.<br>Ajuste os números. Veja o que muda.</h1>
+    <p class="app-sub">Cenário base: 2º semestre 2026 · 30 parceiros novos por mês entrando pelo Start · Conversão 30/15/5% pra Master/Pro/Premium no mês seguinte. Mexa nos sliders abaixo pra estressar o modelo.</p>
+
+    <!-- ═════════════ CONTROLES ═════════════ -->
+    <section class="controls">
+      <div class="controls-head">
+        <span class="eyebrow">● Controles · Cenário</span>
+        <button class="reset-btn" onclick="resetar()">↻ Resetar default</button>
+      </div>
+      <div class="ctrl-grid">
+
+        <div class="ctrl-group-title">Aquisição & Conversão</div>
+
+        <div class="ctrl">
+          <label>Start novos / mês <span class="val" id="v-aquisicao">30</span></label>
+          <input type="range" id="aquisicao" min="0" max="200" value="30" step="5">
+        </div>
+        <div class="ctrl">
+          <label>Período (meses) <span class="val" id="v-periodo">6</span></label>
+          <input type="range" id="periodo" min="3" max="24" value="6" step="1">
+        </div>
+        <div class="ctrl">
+          <label>% Conversão → Master <span class="val" id="v-pctMaster">30%</span></label>
+          <input type="range" id="pctMaster" min="0" max="100" value="30" step="1">
+        </div>
+        <div class="ctrl">
+          <label>% Conversão → Pro <span class="val" id="v-pctPro">15%</span></label>
+          <input type="range" id="pctPro" min="0" max="100" value="15" step="1">
+        </div>
+        <div class="ctrl">
+          <label>% Conversão → Premium <span class="val" id="v-pctPremium">5%</span></label>
+          <input type="range" id="pctPremium" min="0" max="100" value="5" step="1">
+        </div>
+
+        <div class="ctrl-group-title">Valores dos planos (R$)</div>
+
+        <div class="ctrl">
+          <label>Start <span class="val">R$</span></label>
+          <input type="number" id="valStart" value="297" min="0" step="1">
+        </div>
+        <div class="ctrl">
+          <label>Master <span class="val">R$</span></label>
+          <input type="number" id="valMaster" value="997" min="0" step="1">
+        </div>
+        <div class="ctrl">
+          <label>Pro <span class="val">R$</span></label>
+          <input type="number" id="valPro" value="2997" min="0" step="1">
+        </div>
+        <div class="ctrl">
+          <label>Premium <span class="val">R$</span></label>
+          <input type="number" id="valPremium" value="4997" min="0" step="1">
+        </div>
+
+        <div class="ctrl-group-title">Split Marca Parceira / Lojista (subsídio crescente)</div>
+
+        <div class="ctrl">
+          <label>Marca paga Start <span class="val" id="v-mpStart">100%</span></label>
+          <input type="range" id="mpStart" min="0" max="100" value="100" step="5">
+        </div>
+        <div class="ctrl">
+          <label>Marca paga Master <span class="val" id="v-mpMaster">60%</span></label>
+          <input type="range" id="mpMaster" min="0" max="100" value="60" step="5">
+        </div>
+        <div class="ctrl">
+          <label>Marca paga Pro <span class="val" id="v-mpPro">75%</span></label>
+          <input type="range" id="mpPro" min="0" max="100" value="75" step="5">
+        </div>
+        <div class="ctrl">
+          <label>Marca paga Premium <span class="val" id="v-mpPremium">80%</span></label>
+          <input type="range" id="mpPremium" min="0" max="100" value="80" step="5">
+        </div>
+
+        <div class="ctrl-group-title">Split entre operadores</div>
+
+        <div class="ctrl">
+          <label>% TradeUp (off-the-top) <span class="val" id="v-pctTradeUp">15%</span></label>
+          <input type="range" id="pctTradeUp" min="0" max="50" value="15" step="1">
+        </div>
+        <div class="ctrl">
+          <label>% PulsarH.ai (do líquido) <span class="val" id="v-pctPulsarH">50%</span></label>
+          <input type="range" id="pctPulsarH" min="0" max="100" value="50" step="5">
+        </div>
+
+        <div class="ctrl-group-title">Capacidade operacional (limites)</div>
+
+        <div class="ctrl">
+          <label>Máx mentorias / dia <span class="val" id="v-maxMentoriaDia">3</span></label>
+          <input type="range" id="maxMentoriaDia" min="1" max="10" value="3" step="1">
+        </div>
+        <div class="ctrl">
+          <label>Dias úteis / mês <span class="val" id="v-diasUteis">22</span></label>
+          <input type="range" id="diasUteis" min="20" max="30" value="22" step="1">
+        </div>
+        <div class="ctrl">
+          <label>Máx implementações / mês <span class="val" id="v-maxImpl">5</span></label>
+          <input type="range" id="maxImpl" min="1" max="20" value="5" step="1">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═════════════ KPIs ═════════════ -->
+    <div class="kpi-grid">
+      <div class="kpi kpi-hero">
+        <div class="kpi-label">● Receita bruta total · período</div>
+        <div class="kpi-value" id="kpi-receita">R$ 0</div>
+        <div class="kpi-sub" id="kpi-receita-sub">Acumulado de <strong>0 meses</strong> · ticket médio <strong>R$ 0</strong></div>
+        <div class="kpi-mini">
+          <div>
+            <div class="kpi-mini-label">Marca parceira</div>
+            <div class="kpi-mini-val" id="kpi-marca">R$ 0</div>
+          </div>
+          <div>
+            <div class="kpi-mini-label">Lojista</div>
+            <div class="kpi-mini-val" id="kpi-lojista">R$ 0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-label">TradeUp</div>
+        <div class="kpi-value" id="kpi-tradeup">R$ 0</div>
+        <div class="kpi-sub" id="kpi-tradeup-sub">15% off-the-top</div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-label">PulsarH.ai</div>
+        <div class="kpi-value" id="kpi-pulsarh">R$ 0</div>
+        <div class="kpi-sub" id="kpi-pulsarh-sub">50% do líquido</div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-label">Marcos · sócio</div>
+        <div class="kpi-value" id="kpi-marcos">R$ 0</div>
+        <div class="kpi-sub" id="kpi-marcos-sub">50% do líquido</div>
+      </div>
+    </div>
+
+    <!-- ═════════════ CAPACITY ═════════════ -->
+    <div class="capacity-grid">
+      <div class="cap-card" id="cap-mentorias">
+        <div class="cap-label"><span class="cap-status"></span>Capacidade · mentorias</div>
+        <div class="cap-headline" id="cap-mentorias-head">Dentro da capacidade</div>
+        <div class="cap-message" id="cap-mentorias-msg">Máximo configurado: <strong>66 mentorias / mês</strong>. Pico do período: <strong>0</strong>.</div>
+      </div>
+      <div class="cap-card" id="cap-impl">
+        <div class="cap-label"><span class="cap-status"></span>Capacidade · implementações</div>
+        <div class="cap-headline" id="cap-impl-head">Dentro da capacidade</div>
+        <div class="cap-message" id="cap-impl-msg">Máximo configurado: <strong>5 implementações / mês</strong>. Pico do período: <strong>0</strong>.</div>
+      </div>
+    </div>
+
+    <!-- ═════════════ CHARTS ═════════════ -->
+    <div class="charts-grid">
+      <div class="chart-card full">
+        <div class="chart-head">
+          <div class="chart-title">Receita mensal por plano <span style="color: var(--text-dim); font-style: normal; font-weight: 400;">+ acumulado</span></div>
+          <div class="chart-sub">● Barras: receita do mês · Linha âmbar: acumulado</div>
+        </div>
+        <div class="chart-wrap tall"><canvas id="chartReceita"></canvas></div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-head">
+          <div class="chart-title">Esforço operacional</div>
+          <div class="chart-sub">● Linhas vs capacidade</div>
+        </div>
+        <div class="chart-wrap"><canvas id="chartEsforco"></canvas></div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-head">
+          <div class="chart-title">Origem da receita</div>
+          <div class="chart-sub">● Marca × Lojista</div>
+        </div>
+        <div class="chart-wrap donut"><canvas id="chartOrigem"></canvas></div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-head">
+          <div class="chart-title">Split entre operadores</div>
+          <div class="chart-sub">● TradeUp · PulsarH · Marcos</div>
+        </div>
+        <div class="chart-wrap donut"><canvas id="chartSplit"></canvas></div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-head">
+          <div class="chart-title">Stock ativo por plano</div>
+          <div class="chart-sub">● Parceiros ativos / mês</div>
+        </div>
+        <div class="chart-wrap donut"><canvas id="chartStock"></canvas></div>
+      </div>
+    </div>
+
+    <!-- ═════════════ TABELA ═════════════ -->
+    <div class="table-card">
+      <div class="chart-head">
+        <div class="chart-title">Detalhamento mês a mês</div>
+        <div class="chart-sub">● Tabela completa do período</div>
+      </div>
+      <div style="overflow-x: auto;">
+        <table class="data-table" id="dataTable">
+          <thead>
+            <tr>
+              <th>Mês</th>
+              <th class="num">Start novos</th>
+              <th class="num">Master ativos</th>
+              <th class="num">Pro ativos</th>
+              <th class="num">Premium impl.</th>
+              <th class="num">Aulas</th>
+              <th class="num">Mentorias</th>
+              <th class="num">Implem.</th>
+              <th class="num">Receita do mês</th>
+              <th class="num">Acumulado</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+          <tfoot id="tfoot"></tfoot>
+        </table>
+      </div>
+    </div>
+
+    <footer class="app-foot">
+      <span class="foot-meta">Rentabiliza.ai · Simulador · Maio 2026 · PulsarH.ai × TradeUp</span>
+      <a href="index.html" class="back-link">← Voltar à home</a>
+    </footer>
+
+  </div>
+
+  <script>
+    // ═══════════════════════════════════════════════════
+    // STATE
+    // ═══════════════════════════════════════════════════
+    const DEFAULTS = {
+      aquisicao: 30, periodo: 6,
+      pctMaster: 30, pctPro: 15, pctPremium: 5,
+      valStart: 297, valMaster: 997, valPro: 2997, valPremium: 4997,
+      mpStart: 100, mpMaster: 60, mpPro: 75, mpPremium: 80,
+      pctTradeUp: 15, pctPulsarH: 50,
+      maxMentoriaDia: 3, diasUteis: 22, maxImpl: 5,
+    };
+
+    const MESES = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+    const START_MES = 6; // Julho (0-indexed)
+    const START_ANO = 26; // 2026
+
+    function getInputs() {
+      const get = (id, isNum=true) => isNum ? Number(document.getElementById(id).value) : document.getElementById(id).value;
+      return {
+        aquisicao: get('aquisicao'),
+        periodo: get('periodo'),
+        pctMaster: get('pctMaster') / 100,
+        pctPro: get('pctPro') / 100,
+        pctPremium: get('pctPremium') / 100,
+        valStart: get('valStart'),
+        valMaster: get('valMaster'),
+        valPro: get('valPro'),
+        valPremium: get('valPremium'),
+        mpStart: get('mpStart') / 100,
+        mpMaster: get('mpMaster') / 100,
+        mpPro: get('mpPro') / 100,
+        mpPremium: get('mpPremium') / 100,
+        pctTradeUp: get('pctTradeUp') / 100,
+        pctPulsarH: get('pctPulsarH') / 100,
+        maxMentoriaDia: get('maxMentoriaDia'),
+        diasUteis: get('diasUteis'),
+        maxImpl: get('maxImpl'),
+      };
+    }
+
+    function fmtBRL(v) {
+      return 'R$ ' + Math.round(v).toLocaleString('pt-BR');
+    }
+    function fmtMonth(i) {
+      const idx = (START_MES + i) % 12;
+      const yr = START_ANO + Math.floor((START_MES + i) / 12);
+      return MESES[idx] + '/' + yr;
+    }
+
+    // ═══════════════════════════════════════════════════
+    // SIMULAÇÃO
+    // ═══════════════════════════════════════════════════
+    // Master dura 3 meses (mentorias mensais) — termina em mês_upgrade+2
+    // Pro dura 6 meses (mentorias mensais) — termina em mês_upgrade+5
+    // Premium dura 6 meses (em implementação) — termina em mês_upgrade+5
+    // Cohort entra Start no mês N (paga 1×), sobe no mês N+1
+    function simular(inp) {
+      const n = inp.periodo;
+      const meses = Array.from({length: n}, (_, i) => fmtMonth(i));
+
+      // Inicializa arrays
+      const startNovos = new Array(n).fill(0);
+      const masterAtivos = new Array(n).fill(0); // unidades-meses em Master
+      const proAtivos = new Array(n).fill(0);
+      const premiumImpl = new Array(n).fill(0);
+      const premiumNovos = new Array(n).fill(0);
+      const masterNovos = new Array(n).fill(0);
+      const proNovos = new Array(n).fill(0);
+
+      // Cohort entra Start em mês i
+      // No mês i+1, upgrade: pctMaster*aq → Master, pctPro*aq → Pro, pctPremium*aq → Premium
+      for (let i = 0; i < n; i++) {
+        startNovos[i] = inp.aquisicao;
+        const upMonth = i + 1;
+        if (upMonth < n) {
+          masterNovos[upMonth] += inp.aquisicao * inp.pctMaster;
+          proNovos[upMonth] += inp.aquisicao * inp.pctPro;
+          premiumNovos[upMonth] += inp.aquisicao * inp.pctPremium;
+        }
+      }
+
+      // Stocks ativos (Master 3 meses, Pro 6 meses, Premium 6 meses em implementação)
+      for (let i = 0; i < n; i++) {
+        for (let j = Math.max(0, i - 2); j <= i; j++) masterAtivos[i] += (masterNovos[j] || 0);
+        for (let j = Math.max(0, i - 5); j <= i; j++) proAtivos[i] += (proNovos[j] || 0);
+        for (let j = Math.max(0, i - 5); j <= i; j++) premiumImpl[i] += (premiumNovos[j] || 0);
+      }
+
+      // Receita por plano por mês (one-shot no momento da entrada)
+      const recStart = startNovos.map(v => v * inp.valStart);
+      const recMaster = masterNovos.map(v => v * inp.valMaster);
+      const recPro = proNovos.map(v => v * inp.valPro);
+      const recPremium = premiumNovos.map(v => v * inp.valPremium);
+
+      const recMes = recStart.map((v, i) => v + recMaster[i] + recPro[i] + recPremium[i]);
+      const recAcum = [];
+      let acc = 0;
+      recMes.forEach(v => { acc += v; recAcum.push(acc); });
+
+      // Origem (marca/lojista)
+      const marcaMes = recStart.map((v, i) =>
+        v * inp.mpStart + recMaster[i] * inp.mpMaster + recPro[i] * inp.mpPro + recPremium[i] * inp.mpPremium
+      );
+      const lojistaMes = recMes.map((v, i) => v - marcaMes[i]);
+
+      // Split operadores
+      const totalBruto = recMes.reduce((a, b) => a + b, 0);
+      const tradeup = totalBruto * inp.pctTradeUp;
+      const liquido = totalBruto - tradeup;
+      const pulsarh = liquido * inp.pctPulsarH;
+      const marcos = liquido - pulsarh;
+
+      // Entregas
+      const aulas = new Array(n).fill(4); // 1/semana
+      const mentorias = masterAtivos.map((m, i) => Math.round(m + proAtivos[i])); // 1 mentoria/mês × cada ativo
+      const implementacoes = premiumImpl.map(v => Math.round(v));
+
+      // Capacidades
+      const capMentMes = inp.maxMentoriaDia * inp.diasUteis;
+      const capImpl = inp.maxImpl;
+
+      // Alertas mês a mês
+      const alertaMent = mentorias.map(m => m > capMentMes ? 'alert' : (m > capMentMes * 0.85 ? 'warn' : ''));
+      const alertaImpl = implementacoes.map(v => v > capImpl ? 'alert' : (v > capImpl * 0.85 ? 'warn' : ''));
+
+      return {
+        meses, startNovos, masterAtivos, proAtivos, premiumImpl,
+        masterNovos, proNovos, premiumNovos,
+        recStart, recMaster, recPro, recPremium, recMes, recAcum,
+        marcaMes, lojistaMes, totalBruto,
+        tradeup, pulsarh, marcos, liquido,
+        aulas, mentorias, implementacoes,
+        capMentMes, capImpl,
+        alertaMent, alertaImpl,
+        marcaTotal: marcaMes.reduce((a,b)=>a+b,0),
+        lojistaTotal: lojistaMes.reduce((a,b)=>a+b,0),
+        picoMent: Math.max(0, ...mentorias),
+        picoImpl: Math.max(0, ...implementacoes),
+      };
+    }
+
+    // ═══════════════════════════════════════════════════
+    // RENDER
+    // ═══════════════════════════════════════════════════
+    let charts = {};
+
+    function renderKPIs(s) {
+      const ticketMedio = s.totalBruto / (s.meses.length || 1);
+      document.getElementById('kpi-receita').textContent = fmtBRL(s.totalBruto);
+      document.getElementById('kpi-receita-sub').innerHTML = `Acumulado de <strong>${s.meses.length} meses</strong> · ticket médio mensal <strong>${fmtBRL(ticketMedio)}</strong>`;
+      document.getElementById('kpi-marca').textContent = fmtBRL(s.marcaTotal);
+      document.getElementById('kpi-lojista').textContent = fmtBRL(s.lojistaTotal);
+      document.getElementById('kpi-tradeup').textContent = fmtBRL(s.tradeup);
+      document.getElementById('kpi-pulsarh').textContent = fmtBRL(s.pulsarh);
+      document.getElementById('kpi-marcos').textContent = fmtBRL(s.marcos);
+
+      const inp = getInputs();
+      document.getElementById('kpi-tradeup-sub').textContent = (inp.pctTradeUp*100).toFixed(0) + '% off-the-top';
+      document.getElementById('kpi-pulsarh-sub').textContent = (inp.pctPulsarH*100).toFixed(0) + '% do líquido';
+      document.getElementById('kpi-marcos-sub').textContent = (100 - inp.pctPulsarH*100).toFixed(0) + '% do líquido';
+    }
+
+    function renderCapacity(s) {
+      const mentCard = document.getElementById('cap-mentorias');
+      const implCard = document.getElementById('cap-impl');
+
+      // Mentorias
+      const exMent = s.picoMent > s.capMentMes;
+      const wnMent = !exMent && s.picoMent > s.capMentMes * 0.85;
+      mentCard.classList.remove('alert', 'warn');
+      if (exMent) mentCard.classList.add('alert');
+      else if (wnMent) mentCard.classList.add('warn');
+
+      document.getElementById('cap-mentorias-head').textContent =
+        exMent ? '🚨 Estourou! Não dá pra entregar.' :
+        wnMent ? '⚠️ Quase no limite.' : 'Dentro da capacidade.';
+      document.getElementById('cap-mentorias-msg').innerHTML =
+        `Máximo configurado: <strong>${s.capMentMes} mentorias / mês</strong>. Pico do período: <strong${exMent ? ' style="color:var(--danger)"' : ''}>${s.picoMent} mentorias</strong>` +
+        (exMent ? ` — <strong style="color:var(--danger)">excede em ${s.picoMent - s.capMentMes}</strong>. Reduza aquisição, aumente capacidade ou contrate mentor.` : '');
+
+      // Implementações
+      const exImpl = s.picoImpl > s.capImpl;
+      const wnImpl = !exImpl && s.picoImpl > s.capImpl * 0.85;
+      implCard.classList.remove('alert', 'warn');
+      if (exImpl) implCard.classList.add('alert');
+      else if (wnImpl) implCard.classList.add('warn');
+
+      document.getElementById('cap-impl-head').textContent =
+        exImpl ? '🚨 Estourou! Não dá pra entregar.' :
+        wnImpl ? '⚠️ Quase no limite.' : 'Dentro da capacidade.';
+      document.getElementById('cap-impl-msg').innerHTML =
+        `Máximo configurado: <strong>${s.capImpl} implementações / mês</strong>. Pico do período: <strong${exImpl ? ' style="color:var(--danger)"' : ''}>${s.picoImpl}</strong>` +
+        (exImpl ? ` — <strong style="color:var(--danger)">excede em ${s.picoImpl - s.capImpl}</strong>. Reduza % Premium, escale time de implementação.` : '');
+    }
+
+    function renderTable(s) {
+      const tb = document.getElementById('tbody');
+      const tf = document.getElementById('tfoot');
+      tb.innerHTML = '';
+      s.meses.forEach((m, i) => {
+        const cellMent = s.alertaMent[i];
+        const cellImpl = s.alertaImpl[i];
+        tb.innerHTML += `<tr>
+          <td class="month">${m}</td>
+          <td class="num">${Math.round(s.startNovos[i])}</td>
+          <td class="num">${Math.round(s.masterAtivos[i])}</td>
+          <td class="num">${Math.round(s.proAtivos[i])}</td>
+          <td class="num">${Math.round(s.premiumImpl[i])}</td>
+          <td class="num">${s.aulas[i]}</td>
+          <td class="num ${cellMent ? cellMent+'-cell' : ''}">${s.mentorias[i]}${cellMent==='alert'?' ⚠':''}</td>
+          <td class="num ${cellImpl ? cellImpl+'-cell' : ''}">${s.implementacoes[i]}${cellImpl==='alert'?' ⚠':''}</td>
+          <td class="num">${fmtBRL(s.recMes[i])}</td>
+          <td class="num" style="color:var(--amber)">${fmtBRL(s.recAcum[i])}</td>
+        </tr>`;
+      });
+
+      const sum = (a) => a.reduce((x,y)=>x+y, 0);
+      tf.innerHTML = `<tr>
+        <td class="month">Total</td>
+        <td class="num">${Math.round(sum(s.startNovos))}</td>
+        <td class="num">—</td>
+        <td class="num">—</td>
+        <td class="num">${Math.round(sum(s.premiumNovos))} novos</td>
+        <td class="num">${sum(s.aulas)}</td>
+        <td class="num">${sum(s.mentorias)}</td>
+        <td class="num">${sum(s.implementacoes)}</td>
+        <td class="num">${fmtBRL(s.totalBruto)}</td>
+        <td class="num" style="color:var(--amber)">${fmtBRL(s.totalBruto)}</td>
+      </tr>`;
+    }
+
+    // ═══════════════════════════════════════════════════
+    // CHARTS
+    // ═══════════════════════════════════════════════════
+    const CHART_COLORS = {
+      start: 'rgba(244, 185, 62, 0.45)',
+      master: 'rgba(244, 185, 62, 0.65)',
+      pro: 'rgba(244, 185, 62, 0.85)',
+      premium: '#F4B93E',
+      line: '#FFC856',
+      mint: '#3DDC97',
+      coral: '#FF6B47',
+      danger: '#FF4E4E',
+      grid: 'rgba(255,255,255,0.05)',
+      text: '#8B8B93',
+    };
+
+    Chart.defaults.font.family = "'Inter', sans-serif";
+    Chart.defaults.color = CHART_COLORS.text;
+    Chart.defaults.font.size = 11;
+
+    function renderCharts(s) {
+      Object.values(charts).forEach(c => c && c.destroy());
+
+      // ─── Receita mensal + acumulado ───
+      charts.receita = new Chart(document.getElementById('chartReceita'), {
+        type: 'bar',
+        data: {
+          labels: s.meses,
+          datasets: [
+            { label: 'Start', data: s.recStart, backgroundColor: CHART_COLORS.start, stack: 'r' },
+            { label: 'Master', data: s.recMaster, backgroundColor: CHART_COLORS.master, stack: 'r' },
+            { label: 'Pro', data: s.recPro, backgroundColor: CHART_COLORS.pro, stack: 'r' },
+            { label: 'Premium', data: s.recPremium, backgroundColor: CHART_COLORS.premium, stack: 'r' },
+            { label: 'Acumulado', data: s.recAcum, type: 'line', borderColor: CHART_COLORS.line,
+              backgroundColor: 'rgba(255,200,86,0.15)', tension: 0.3, fill: true, yAxisID: 'y2',
+              pointBackgroundColor: CHART_COLORS.line, pointRadius: 5, borderWidth: 3 },
+          ]
+        },
+        options: {
+          maintainAspectRatio: false, responsive: true,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { position: 'bottom', labels: { boxWidth: 12, padding: 16, color: '#F4F1E8' } },
+            tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + fmtBRL(ctx.parsed.y) } }
+          },
+          scales: {
+            x: { stacked: true, grid: { color: CHART_COLORS.grid }, ticks: { color: CHART_COLORS.text } },
+            y: { stacked: true, position: 'left', grid: { color: CHART_COLORS.grid },
+                 ticks: { color: CHART_COLORS.text, callback: v => 'R$ ' + (v/1000).toFixed(0) + 'k' } },
+            y2: { position: 'right', grid: { display: false },
+                  ticks: { color: CHART_COLORS.line, callback: v => 'R$ ' + (v/1000).toFixed(0) + 'k' } },
+          }
+        }
+      });
+
+      // ─── Esforço operacional ───
+      charts.esforco = new Chart(document.getElementById('chartEsforco'), {
+        type: 'line',
+        data: {
+          labels: s.meses,
+          datasets: [
+            { label: 'Mentorias', data: s.mentorias, borderColor: CHART_COLORS.premium,
+              backgroundColor: 'rgba(244,185,62,0.12)', tension: 0.3, fill: true, borderWidth: 3, pointRadius: 4 },
+            { label: 'Implementações', data: s.implementacoes, borderColor: CHART_COLORS.mint,
+              backgroundColor: 'rgba(61,220,151,0.10)', tension: 0.3, fill: true, borderWidth: 3, pointRadius: 4 },
+            { label: 'Cap. mentorias', data: new Array(s.meses.length).fill(s.capMentMes),
+              borderColor: CHART_COLORS.danger, borderDash: [6, 6], borderWidth: 1.5, pointRadius: 0, fill: false },
+            { label: 'Cap. implem.', data: new Array(s.meses.length).fill(s.capImpl),
+              borderColor: CHART_COLORS.coral, borderDash: [3, 3], borderWidth: 1.5, pointRadius: 0, fill: false },
+          ]
+        },
+        options: {
+          maintainAspectRatio: false, responsive: true,
+          plugins: {
+            legend: { position: 'bottom', labels: { boxWidth: 12, padding: 12, color: '#F4F1E8', font: { size: 10 } } }
+          },
+          scales: {
+            x: { grid: { color: CHART_COLORS.grid }, ticks: { color: CHART_COLORS.text } },
+            y: { grid: { color: CHART_COLORS.grid }, ticks: { color: CHART_COLORS.text }, beginAtZero: true },
+          }
+        }
+      });
+
+      // ─── Origem ───
+      charts.origem = new Chart(document.getElementById('chartOrigem'), {
+        type: 'doughnut',
+        data: {
+          labels: ['Marca parceira', 'Lojista'],
+          datasets: [{
+            data: [s.marcaTotal, s.lojistaTotal],
+            backgroundColor: [CHART_COLORS.premium, CHART_COLORS.mint],
+            borderColor: 'var(--charcoal)', borderWidth: 3,
+          }]
+        },
+        options: {
+          maintainAspectRatio: false, responsive: true, cutout: '65%',
+          plugins: {
+            legend: { position: 'bottom', labels: { boxWidth: 12, padding: 12, color: '#F4F1E8' } },
+            tooltip: { callbacks: { label: ctx => ctx.label + ': ' + fmtBRL(ctx.parsed) + ' (' + (ctx.parsed/s.totalBruto*100).toFixed(0) + '%)' } }
+          }
+        }
+      });
+
+      // ─── Split operadores ───
+      charts.split = new Chart(document.getElementById('chartSplit'), {
+        type: 'doughnut',
+        data: {
+          labels: ['TradeUp', 'PulsarH.ai', 'Marcos sócio'],
+          datasets: [{
+            data: [s.tradeup, s.pulsarh, s.marcos],
+            backgroundColor: [CHART_COLORS.coral, CHART_COLORS.premium, CHART_COLORS.mint],
+            borderColor: 'var(--charcoal)', borderWidth: 3,
+          }]
+        },
+        options: {
+          maintainAspectRatio: false, responsive: true, cutout: '65%',
+          plugins: {
+            legend: { position: 'bottom', labels: { boxWidth: 12, padding: 12, color: '#F4F1E8' } },
+            tooltip: { callbacks: { label: ctx => ctx.label + ': ' + fmtBRL(ctx.parsed) + ' (' + (ctx.parsed/s.totalBruto*100).toFixed(0) + '%)' } }
+          }
+        }
+      });
+
+      // ─── Stock por plano (último mês) ───
+      const lastIdx = s.meses.length - 1;
+      charts.stock = new Chart(document.getElementById('chartStock'), {
+        type: 'doughnut',
+        data: {
+          labels: ['Start (cohort entrada)', 'Master ativos', 'Pro ativos', 'Premium em impl.'],
+          datasets: [{
+            data: [s.startNovos[lastIdx], s.masterAtivos[lastIdx], s.proAtivos[lastIdx], s.premiumImpl[lastIdx]],
+            backgroundColor: [CHART_COLORS.start, CHART_COLORS.master, CHART_COLORS.pro, CHART_COLORS.premium],
+            borderColor: 'var(--charcoal)', borderWidth: 3,
+          }]
+        },
+        options: {
+          maintainAspectRatio: false, responsive: true, cutout: '65%',
+          plugins: {
+            legend: { position: 'bottom', labels: { boxWidth: 12, padding: 12, color: '#F4F1E8', font: { size: 10 } } },
+            title: { display: true, text: 'Snapshot · ' + s.meses[lastIdx], color: CHART_COLORS.text, font: { size: 11, family: "'JetBrains Mono', monospace" } }
+          }
+        }
+      });
+    }
+
+    // ═══════════════════════════════════════════════════
+    // UPDATE LOOP
+    // ═══════════════════════════════════════════════════
+    function refreshLabels() {
+      const map = [
+        ['aquisicao', v => v],
+        ['periodo', v => v],
+        ['pctMaster', v => v + '%'],
+        ['pctPro', v => v + '%'],
+        ['pctPremium', v => v + '%'],
+        ['mpStart', v => v + '%'],
+        ['mpMaster', v => v + '%'],
+        ['mpPro', v => v + '%'],
+        ['mpPremium', v => v + '%'],
+        ['pctTradeUp', v => v + '%'],
+        ['pctPulsarH', v => v + '%'],
+        ['maxMentoriaDia', v => v],
+        ['diasUteis', v => v],
+        ['maxImpl', v => v],
+      ];
+      map.forEach(([id, fn]) => {
+        const el = document.getElementById('v-' + id);
+        const inp = document.getElementById(id);
+        if (el && inp) el.textContent = fn(inp.value);
+      });
+    }
+
+    function run() {
+      refreshLabels();
+      const inp = getInputs();
+      const s = simular(inp);
+      renderKPIs(s);
+      renderCapacity(s);
+      renderTable(s);
+      renderCharts(s);
+    }
+
+    function resetar() {
+      Object.entries(DEFAULTS).forEach(([k, v]) => {
+        const el = document.getElementById(k);
+        if (el) el.value = v;
+      });
+      run();
+    }
+
+    // Bind eventos
+    document.querySelectorAll('.controls input').forEach(el => {
+      el.addEventListener('input', run);
+    });
+
+    // Init
+    run();
+  </script>
+</body>
+</html>
