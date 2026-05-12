@@ -532,7 +532,7 @@
     </header>
 
     <h1 class="app-title">Simulador de <em>escala</em>.<br>Ajuste os números. Veja o que muda.</h1>
-    <p class="app-sub">Cenário base: 2º semestre 2026 · 30 parceiros novos por mês entrando pelo Start · Conversão 30/15/5% pra Master/Pro/Premium no mês seguinte. Mexa nos sliders abaixo pra estressar o modelo.</p>
+    <p class="app-sub">Cenário base: 2º semestre 2026 · 30 parceiros novos por mês entrando pelo Start · Conversão 30/15/5% pra Master/Pro/Premium no mês seguinte · Subsídio decrescente 100/70/30/0 conforme Slide 07. Mexa nos sliders abaixo pra estressar o modelo.</p>
 
     <!-- ═════════════ CONTROLES ═════════════ -->
     <section class="controls">
@@ -584,23 +584,23 @@
           <input type="number" id="valPremium" value="4997" min="0" step="1">
         </div>
 
-        <div class="ctrl-group-title">Split Marca Parceira / Lojista (subsídio crescente)</div>
+        <div class="ctrl-group-title">Split Marca Parceira / Lojista (decrescente · Slide 07)</div>
 
         <div class="ctrl">
           <label>Marca paga Start <span class="val" id="v-mpStart">100%</span></label>
           <input type="range" id="mpStart" min="0" max="100" value="100" step="5">
         </div>
         <div class="ctrl">
-          <label>Marca paga Master <span class="val" id="v-mpMaster">60%</span></label>
-          <input type="range" id="mpMaster" min="0" max="100" value="60" step="5">
+          <label>Marca paga Master <span class="val" id="v-mpMaster">70%</span></label>
+          <input type="range" id="mpMaster" min="0" max="100" value="70" step="5">
         </div>
         <div class="ctrl">
-          <label>Marca paga Pro <span class="val" id="v-mpPro">75%</span></label>
-          <input type="range" id="mpPro" min="0" max="100" value="75" step="5">
+          <label>Marca paga Pro <span class="val" id="v-mpPro">30%</span></label>
+          <input type="range" id="mpPro" min="0" max="100" value="30" step="5">
         </div>
         <div class="ctrl">
-          <label>Marca paga Premium <span class="val" id="v-mpPremium">80%</span></label>
-          <input type="range" id="mpPremium" min="0" max="100" value="80" step="5">
+          <label>Marca paga Premium <span class="val" id="v-mpPremium">0%</span></label>
+          <input type="range" id="mpPremium" min="0" max="100" value="0" step="5">
         </div>
 
         <div class="ctrl-group-title">Split entre operadores</div>
@@ -769,7 +769,7 @@
       aquisicao: 30, periodo: 6,
       pctMaster: 30, pctPro: 15, pctPremium: 5,
       valStart: 297, valMaster: 997, valPro: 2997, valPremium: 4997,
-      mpStart: 100, mpMaster: 60, mpPro: 75, mpPremium: 80,
+      mpStart: 100, mpMaster: 70, mpPro: 30, mpPremium: 0,
       pctTradeUp: 15, pctPulsarH: 50,
       maxMentoriaDia: 3, diasUteis: 22, maxImpl: 5,
     };
