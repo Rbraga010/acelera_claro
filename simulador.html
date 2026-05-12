@@ -521,15 +521,29 @@
     }
     table.data th {
       text-align: left;
-      padding: 12px 14px;
-      font-size: 9.5px;
+      padding: 10px 12px;
+      font-size: 9px;
       font-weight: 700;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--text-dim);
       border-bottom: 1px solid var(--border);
+      white-space: nowrap;
     }
     table.data th.num { text-align: right; }
+    table.data th.group-h {
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      padding: 14px 12px 8px;
+      border-bottom: 1px dashed var(--border-strong);
+    }
+    table.data th.group-base { color: var(--color-start); }
+    table.data th.group-inv { color: var(--mint); }
+    table.data th.group-op { color: var(--color-pro); }
+    table.data th.group-dist { color: var(--amber); }
+    table.data td.col-divider { border-left: 1px dashed var(--border-strong); }
+    table.data th.col-divider { border-left: 1px dashed var(--border-strong); }
     table.data td {
       padding: 12px 14px;
       color: var(--text);
@@ -655,7 +669,8 @@
         <span class="tm-inp"><input type="number" id="maxImpl" value="10" min="1" max="50"><span class="suf">impl/mês</span></span>
       </div>
       <div class="tm-group">
-        <span class="tm-label">Split sócios</span>
+        <span class="tm-label">Distribuição</span>
+        <span class="tm-inp"><span class="tag">Impostos</span><input type="number" id="pctImpostos" value="15" min="0" max="100"><span class="suf">%</span></span>
         <span class="tm-inp"><span class="tag">TradeUp</span><input type="number" id="pctTradeUp" value="15" min="0" max="100"><span class="suf">%</span></span>
         <span class="tm-inp"><span class="tag">PulsarH</span><input type="number" id="pctPulsarH" value="50" min="0" max="100"><span class="suf">%</span></span>
         <span class="tm-inp"><span class="tag">Marcos</span><span id="pctMarcos-disp" style="color:var(--amber);font-weight:700;font-size:12px;">50%</span><span class="suf">auto</span></span>
@@ -768,8 +783,8 @@
         <div class="cfg-grp">
           <span class="cfg-grp-label">🔀 Conversão Start →</span>
           <div class="cfg-grp-row">
-            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-master)"></span><span class="tag">Master</span><input type="number" id="pctMaster" value="15" min="0" max="100"><span class="suf">%</span></span>
-            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-pro)"></span><span class="tag">Pro</span><input type="number" id="pctPro" value="5" min="0" max="100"><span class="suf">%</span></span>
+            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-master)"></span><span class="tag">Master</span><input type="number" id="pctMaster" value="20" min="0" max="100"><span class="suf">%</span></span>
+            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-pro)"></span><span class="tag">Pro</span><input type="number" id="pctPro" value="10" min="0" max="100"><span class="suf">%</span></span>
             <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-premium)"></span><span class="tag">Prem</span><input type="number" id="pctPremium" value="5" min="0" max="100"><span class="suf">%</span></span>
           </div>
         </div>
@@ -777,8 +792,8 @@
         <div class="cfg-grp">
           <span class="cfg-grp-label">↻ Renovação</span>
           <div class="cfg-grp-row">
-            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-start)"></span><span class="tag">S·1m</span><input type="number" id="renovStart" value="20" min="0" max="100"><span class="suf">%</span></span>
-            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-master)"></span><span class="tag">M·3m</span><input type="number" id="renovMaster" value="10" min="0" max="100"><span class="suf">%</span></span>
+            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-start)"></span><span class="tag">S·1m</span><input type="number" id="renovStart" value="40" min="0" max="100"><span class="suf">%</span></span>
+            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-master)"></span><span class="tag">M·3m</span><input type="number" id="renovMaster" value="20" min="0" max="100"><span class="suf">%</span></span>
             <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-pro)"></span><span class="tag">P·3m</span><input type="number" id="renovPro" value="10" min="0" max="100"><span class="suf">%</span></span>
           </div>
           <div style="font-family:'Inter',sans-serif;font-size:11px;color:var(--text-mute);font-style:italic;margin-top:-4px;">Premium é implementação (semestral) — sem renovação recorrente.</div>
@@ -805,28 +820,53 @@
         </div>
       </div>
 
-      <!-- Tabela mês a mês — Start novos editável (input campo a campo) -->
+      <!-- Tabela mês a mês — Start novos editável + capacidade editável -->
       <div class="table-wrap">
         <div class="table-overflow">
           <table class="data" id="dataTable">
             <thead>
               <tr>
-                <th>Mês</th>
-                <th class="num">Start novos ✎</th>
-                <th class="num">Start ativos</th>
-                <th class="num">Master ativos</th>
-                <th class="num">Pro ativos</th>
-                <th class="num">Premium impl.</th>
-                <th class="num">Aulas</th>
-                <th class="num">Mentorias</th>
-                <th class="num">Implem.</th>
-                <th class="num">Receita</th>
-                <th class="num">Acumulado</th>
+                <th rowspan="2">Mês</th>
+                <th colspan="6" class="group-h group-base">👥 Base de clientes</th>
+                <th colspan="2" class="group-h group-inv col-divider">💰 Investimento</th>
+                <th colspan="5" class="group-h group-op col-divider">⚙ Operação</th>
+                <th colspan="5" class="group-h group-dist col-divider">💵 Distribuição</th>
+              </tr>
+              <tr>
+                <!-- Base -->
+                <th class="num">Start ✎</th>
+                <th class="num">Start at.</th>
+                <th class="num">Master at.</th>
+                <th class="num">Pro at.</th>
+                <th class="num">Prem impl.</th>
+                <th class="num">Base total</th>
+                <!-- Investimento -->
+                <th class="num col-divider">Marca paga</th>
+                <th class="num">Lojista paga</th>
+                <!-- Operação -->
+                <th class="num col-divider">Aulas</th>
+                <th class="num">Ment.</th>
+                <th class="num">Cap. Ment ✎</th>
+                <th class="num">Impl.</th>
+                <th class="num">Cap. Impl ✎</th>
+                <!-- Distribuição -->
+                <th class="num col-divider">Bruto</th>
+                <th class="num">−Imp.</th>
+                <th class="num">Líquido</th>
+                <th class="num">TradeUp</th>
+                <th class="num">PulsarH + Sócio</th>
               </tr>
             </thead>
             <tbody id="tbody"></tbody>
             <tfoot id="tfoot"></tfoot>
           </table>
+        </div>
+        <div style="margin-top: 16px; padding: 12px 16px; background: var(--ink); border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 11.5px; color: var(--text-dim); line-height: 1.6;">
+          <strong style="color:var(--amber);font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;">Distribuição</strong> ·
+          Bruto → <span style="color:var(--text);">−<span id="legImp">15</span>% impostos</span> = Líquido →
+          <span style="color:var(--text);">−<span id="legTU">15</span>% TradeUp</span> →
+          <span style="color:var(--text);"><span id="legPH">50</span>% PulsarH.ai</span> +
+          <span style="color:var(--text);"><span id="legMK">50</span>% Marcos sócio</span>
         </div>
       </div>
 
@@ -849,12 +889,14 @@
 
     const DEFAULTS = {
       periodo: 6,
-      aquisicao: 50,
-      pctMaster: 15, pctPro: 5, pctPremium: 5,
-      renovStart: 20, renovMaster: 10, renovPro: 10, renovPremium: 0,
+      aquisicao: 50, // valor "padrão" para novos meses adicionados
+      // Rampa pré-definida (Jul→Dez 2026): cenário inicial de crescimento
+      aquisicaoMesDefault: [30, 50, 70, 100, 120, 150],
+      pctMaster: 20, pctPro: 10, pctPremium: 5,
+      renovStart: 40, renovMaster: 20, renovPro: 10, renovPremium: 0,
       valStart: 297, valMaster: 997, valPro: 2997, valPremium: 4997,
       mpStart: 100, mpMaster: 80, mpPro: 60, mpPremium: 20,
-      pctTradeUp: 15, pctPulsarH: 50,
+      pctTradeUp: 15, pctPulsarH: 50, pctImpostos: 15,
       maxMentDia: 4, diasUteis: 20, maxImpl: 10,
     };
 
@@ -883,7 +925,9 @@
 
     // ─── Estado ───
     const state = {
-      aquisicaoMes: [],  // overrides por mês (preenchido conforme tabela)
+      aquisicaoMes: [],   // Start novos por mês (rampa editável)
+      capMentMes: [],     // Capacidade de mentorias por mês (editável)
+      capImplMes: [],     // Capacidade de implementações por mês (editável)
       renderedPeriodo: -1,
       charts: {},
     };
@@ -914,10 +958,26 @@
         if (el) state.aquisicaoMes[i] = Number(el.value) || 0;
       }
 
+      // Capacidade mês a mês (lê inputs da tabela; sync com global)
+      const capMentGlobal = num('maxMentDia') * num('diasUteis');
+      const capImplGlobal = num('maxImpl');
+      while (state.capMentMes.length < periodo) state.capMentMes.push(capMentGlobal);
+      state.capMentMes = state.capMentMes.slice(0, periodo);
+      while (state.capImplMes.length < periodo) state.capImplMes.push(capImplGlobal);
+      state.capImplMes = state.capImplMes.slice(0, periodo);
+      for (let i = 0; i < periodo; i++) {
+        const elM = $('cap-m-' + i);
+        const elI = $('cap-i-' + i);
+        if (elM) state.capMentMes[i] = Number(elM.value) || capMentGlobal;
+        if (elI) state.capImplMes[i] = Number(elI.value) || capImplGlobal;
+      }
+
       return {
         periodo,
         aquisicao: aq,
         aquisicaoMes: state.aquisicaoMes,
+        capMentMes: state.capMentMes,
+        capImplMes: state.capImplMes,
         pctMaster: num('pctMaster') / 100,
         pctPro: num('pctPro') / 100,
         pctPremium: num('pctPremium') / 100,
@@ -933,11 +993,11 @@
         mpMaster: num('mpMaster') / 100,
         mpPro: num('mpPro') / 100,
         mpPremium: num('mpPremium') / 100,
+        pctImpostos: num('pctImpostos') / 100,
         pctTradeUp: num('pctTradeUp') / 100,
         pctPulsarH: num('pctPulsarH') / 100,
-        maxMentDia: num('maxMentDia'),
-        diasUteis: num('diasUteis'),
-        maxImpl: num('maxImpl'),
+        capMentGlobal,
+        capImplGlobal,
       };
     }
 
@@ -1057,47 +1117,62 @@
       );
       const lojistaMes = recMes.map((v, i) => v - marcaMes[i]);
 
-      // 7) Split operadores
-      const totalBruto = sum(recMes);
-      const tradeup = totalBruto * p.pctTradeUp;
-      const liquido = totalBruto - tradeup;
-      const pulsarh = liquido * p.pctPulsarH;
-      const marcos = liquido - pulsarh;
+      // 7) Distribuição financeira mês a mês
+      // Fluxo: Bruto → Impostos (15%) → Líquido → TradeUp (15% do líq) → 85% dividido 50/50 PulsarH/Marcos
+      const impostosMes = recMes.map(v => v * p.pctImpostos);
+      const liquidoMes = recMes.map((v, i) => v - impostosMes[i]);
+      const tradeupMes = liquidoMes.map(v => v * p.pctTradeUp);
+      const disponivelMes = liquidoMes.map((v, i) => v - tradeupMes[i]);
+      const pulsarhMes = disponivelMes.map(v => v * p.pctPulsarH);
+      const marcosMes = disponivelMes.map((v, i) => v - pulsarhMes[i]);
 
-      // 8) Entregas
+      // Totais
+      const totalBruto = sum(recMes);
+      const totalImpostos = sum(impostosMes);
+      const totalLiquido = sum(liquidoMes);
+      const tradeup = sum(tradeupMes);
+      const pulsarh = sum(pulsarhMes);
+      const marcos = sum(marcosMes);
+
+      // 8) Base total de clientes ativos por mês
+      const baseTotal = startAtivos.map((v, i) =>
+        v + masterAtivos[i] + proAtivos[i] + premiumImpl[i]
+      );
+
+      // 9) Entregas
       const aulas = new Array(n).fill(4); // 1 aula em grupo/semana
       const mentorias = new Array(n).fill(0);
       // Mentoria semanal em grupo do Start = já contabilizada como aulas
-      // Mentoria individual Pro: 3 mentorias por trimestre = 1/mês × cada Pro ativo
-      // Master tem mentoria em grupo (na comunidade), não conta como entrega 1:1
-      // Premium tem 6 encontros / semestre = 1/mês × cada Premium em implementação
+      // Pro: 3 mentorias individuais/tri = 1/mês × cada Pro ativo
+      // Premium: 6 encontros/sem = 1/mês × cada Premium em implementação
       for (let i = 0; i < n; i++) {
         mentorias[i] = Math.round(proAtivos[i] + premiumImpl[i]);
       }
-      // Implementações em andamento = Premium em implementação
       const implementacoes = premiumImpl.map(v => Math.round(v));
 
-      // 9) Capacidade
-      const capMent = p.maxMentDia * p.diasUteis;
-      const capImpl = p.maxImpl;
-
-      const alertaMent = mentorias.map(v =>
-        v > capMent ? 'alert' : (v > capMent * 0.85 ? 'warn' : '')
-      );
-      const alertaImpl = implementacoes.map(v =>
-        v > capImpl ? 'alert' : (v > capImpl * 0.85 ? 'warn' : '')
-      );
+      // 10) Capacidade mês a mês (editável)
+      const alertaMent = mentorias.map((v, i) => {
+        const cap = p.capMentMes[i] || p.capMentGlobal;
+        return v > cap ? 'alert' : (v > cap * 0.85 ? 'warn' : '');
+      });
+      const alertaImpl = implementacoes.map((v, i) => {
+        const cap = p.capImplMes[i] || p.capImplGlobal;
+        return v > cap ? 'alert' : (v > cap * 0.85 ? 'warn' : '');
+      });
 
       return {
         meses, periodo: n,
         startNovos, startAtivos, masterNovos, proNovos, premiumNovos,
-        masterAtivos, proAtivos, premiumImpl,
+        masterAtivos, proAtivos, premiumImpl, baseTotal,
         recStart, recMaster, recPro, recPremium, recMes, recAcum,
         marcaMes, lojistaMes,
-        totalBruto, tradeup, pulsarh, marcos, liquido,
+        impostosMes, liquidoMes, tradeupMes, pulsarhMes, marcosMes, disponivelMes,
+        totalBruto, totalImpostos, totalLiquido,
+        tradeup, pulsarh, marcos,
         marcaTotal: sum(marcaMes), lojistaTotal: sum(lojistaMes),
         aulas, mentorias, implementacoes,
-        capMent, capImpl,
+        capMentGlobal: p.capMentGlobal, capImplGlobal: p.capImplGlobal,
+        capMentMes: p.capMentMes, capImplMes: p.capImplMes,
         alertaMent, alertaImpl,
         picoMent: Math.max(0, ...mentorias),
         picoImpl: Math.max(0, ...implementacoes),
@@ -1159,20 +1234,32 @@
           const tr = document.createElement('tr');
           tr.innerHTML = `
             <td class="month">${m}</td>
+            <!-- 👥 Base de clientes -->
             <td class="num"><input class="cell-input" type="number" id="aq-${i}" value="${Math.round(s.startNovos[i])}" min="0" max="500"></td>
             <td class="num" id="c-sa-${i}" style="color:var(--color-start)">0</td>
-            <td class="num" id="c-m-${i}">0</td>
-            <td class="num" id="c-p-${i}">0</td>
-            <td class="num" id="c-pr-${i}">0</td>
-            <td class="num" id="c-au-${i}">0</td>
+            <td class="num" id="c-m-${i}" style="color:var(--color-master)">0</td>
+            <td class="num" id="c-p-${i}" style="color:var(--color-pro)">0</td>
+            <td class="num" id="c-pr-${i}" style="color:var(--color-premium)">0</td>
+            <td class="num" id="c-bt-${i}" style="color:var(--text);font-weight:700;">0</td>
+            <!-- 💰 Investimento -->
+            <td class="num col-divider" id="c-mc-${i}">R$ 0</td>
+            <td class="num" id="c-lj-${i}">R$ 0</td>
+            <!-- ⚙ Operação -->
+            <td class="num col-divider" id="c-au-${i}">0</td>
             <td class="num" id="c-mt-${i}">0</td>
+            <td class="num"><input class="cell-input" type="number" id="cap-m-${i}" value="${s.capMentMes[i] || s.capMentGlobal}" min="0" max="500"></td>
             <td class="num" id="c-im-${i}">0</td>
-            <td class="num" id="c-r-${i}">R$ 0</td>
-            <td class="num" id="c-ac-${i}" style="color:var(--amber)">R$ 0</td>
+            <td class="num"><input class="cell-input" type="number" id="cap-i-${i}" value="${s.capImplMes[i] || s.capImplGlobal}" min="0" max="100"></td>
+            <!-- 💵 Distribuição -->
+            <td class="num col-divider" id="c-br-${i}">R$ 0</td>
+            <td class="num" id="c-imp-${i}" style="color:var(--text-mute)">R$ 0</td>
+            <td class="num" id="c-lq-${i}">R$ 0</td>
+            <td class="num" id="c-tu-${i}" style="color:var(--color-pro)">R$ 0</td>
+            <td class="num" id="c-pm-${i}" style="color:var(--amber);font-weight:700;">R$ 0</td>
           `;
           tb.appendChild(tr);
         });
-        // Bind dos inputs editáveis (uma única vez)
+        // Bind dos inputs editáveis
         tb.querySelectorAll('.cell-input').forEach(el => el.addEventListener('input', recalc));
         state.renderedPeriodo = s.periodo;
       }
@@ -1184,34 +1271,63 @@
         const set = (id, val) => { const el = $(id); if (el) el.textContent = val; };
         const setC = (id, val, cls) => {
           const el = $(id);
-          if (el) { el.textContent = val; el.className = 'num' + (cls ? ' ' + cls + '-cell' : ''); }
+          if (el) {
+            el.textContent = val;
+            const baseClass = el.classList.contains('col-divider') ? 'num col-divider' : 'num';
+            el.className = baseClass + (cls ? ' ' + cls + '-cell' : '');
+          }
         };
 
+        // Base
         set('c-sa-' + i, Math.round(s.startAtivos[i]));
         set('c-m-' + i, Math.round(s.masterAtivos[i]));
         set('c-p-' + i, Math.round(s.proAtivos[i]));
         set('c-pr-' + i, Math.round(s.premiumImpl[i]));
+        set('c-bt-' + i, Math.round(s.baseTotal[i]));
+        // Investimento
+        set('c-mc-' + i, fmtBRL(s.marcaMes[i]));
+        set('c-lj-' + i, fmtBRL(s.lojistaMes[i]));
+        // Operação
         set('c-au-' + i, s.aulas[i]);
         setC('c-mt-' + i, s.mentorias[i] + (ment === 'alert' ? ' ⚠' : ''), ment);
         setC('c-im-' + i, s.implementacoes[i] + (imp === 'alert' ? ' ⚠' : ''), imp);
-        set('c-r-' + i, fmtBRL(s.recMes[i]));
-        set('c-ac-' + i, fmtBRL(s.recAcum[i]));
+        // Distribuição
+        set('c-br-' + i, fmtBRL(s.recMes[i]));
+        set('c-imp-' + i, '−' + fmtBRL(s.impostosMes[i]));
+        set('c-lq-' + i, fmtBRL(s.liquidoMes[i]));
+        set('c-tu-' + i, fmtBRL(s.tradeupMes[i]));
+        set('c-pm-' + i, fmtBRL(s.pulsarhMes[i] + s.marcosMes[i]));
       });
 
-      // Footer (sempre re-renderizado, é leve)
+      // Footer com totais
       tf.innerHTML = `<tr>
         <td class="month">Total</td>
         <td class="num">${Math.round(sum(s.startNovos))}</td>
         <td class="num">—</td>
         <td class="num">—</td>
         <td class="num">—</td>
-        <td class="num">${Math.round(sum(s.premiumNovos))} novos</td>
-        <td class="num">${sum(s.aulas)}</td>
+        <td class="num">${Math.round(sum(s.premiumNovos))}</td>
+        <td class="num">—</td>
+        <td class="num col-divider">${fmtBRL(s.marcaTotal)}</td>
+        <td class="num">${fmtBRL(s.lojistaTotal)}</td>
+        <td class="num col-divider">${sum(s.aulas)}</td>
         <td class="num">${sum(s.mentorias)}</td>
+        <td class="num">—</td>
         <td class="num">${sum(s.implementacoes)}</td>
-        <td class="num">${fmtBRL(s.totalBruto)}</td>
-        <td class="num" style="color:var(--amber)">${fmtBRL(s.totalBruto)}</td>
+        <td class="num">—</td>
+        <td class="num col-divider">${fmtBRL(s.totalBruto)}</td>
+        <td class="num" style="color:var(--text-mute)">−${fmtBRL(s.totalImpostos)}</td>
+        <td class="num">${fmtBRL(s.totalLiquido)}</td>
+        <td class="num" style="color:var(--color-pro)">${fmtBRL(s.tradeup)}</td>
+        <td class="num" style="color:var(--amber)">${fmtBRL(s.pulsarh + s.marcos)}</td>
       </tr>`;
+
+      // Atualiza legenda da distribuição com os % atuais
+      const p = readParams();
+      if ($('legImp')) $('legImp').textContent = (p.pctImpostos * 100).toFixed(0);
+      if ($('legTU')) $('legTU').textContent = (p.pctTradeUp * 100).toFixed(0);
+      if ($('legPH')) $('legPH').textContent = (p.pctPulsarH * 100).toFixed(0);
+      if ($('legMK')) $('legMK').textContent = (100 - p.pctPulsarH * 100).toFixed(0);
     }
 
     function renderCharts(s) {
@@ -1346,22 +1462,36 @@
     // ═══════════════════════════════════════════════════════════════════════
 
     let lastAquisicao = null;
+    let lastCapMent = null;
+    let lastCapImpl = null;
 
-    function syncAquisicaoPadrao(p) {
-      // Se o usuário mudou "Start novos padrão", aplica a todos os meses não-customizados
-      // Pra simplicidade: sempre que muda, aplica em TODOS os meses (override)
-      if (lastAquisicao === null) { lastAquisicao = p.aquisicao; return; }
-      if (p.aquisicao !== lastAquisicao) {
+    function syncGlobals(p) {
+      // Aquisição: quando muda no input hidden (apenas via reset), aplica a todos os meses
+      if (lastAquisicao === null) lastAquisicao = p.aquisicao;
+      else if (p.aquisicao !== lastAquisicao) {
         for (let i = 0; i < p.periodo; i++) state.aquisicaoMes[i] = p.aquisicao;
-        document.querySelectorAll('.cell-input').forEach(el => { el.value = p.aquisicao; });
+        document.querySelectorAll('[id^="aq-"]').forEach(el => { el.value = p.aquisicao; });
         lastAquisicao = p.aquisicao;
+      }
+      // Capacidade mentorias: quando muda no global, sincroniza todos os meses
+      if (lastCapMent === null) lastCapMent = p.capMentGlobal;
+      else if (p.capMentGlobal !== lastCapMent) {
+        for (let i = 0; i < p.periodo; i++) state.capMentMes[i] = p.capMentGlobal;
+        document.querySelectorAll('[id^="cap-m-"]').forEach(el => { el.value = p.capMentGlobal; });
+        lastCapMent = p.capMentGlobal;
+      }
+      // Capacidade implementações
+      if (lastCapImpl === null) lastCapImpl = p.capImplGlobal;
+      else if (p.capImplGlobal !== lastCapImpl) {
+        for (let i = 0; i < p.periodo; i++) state.capImplMes[i] = p.capImplGlobal;
+        document.querySelectorAll('[id^="cap-i-"]').forEach(el => { el.value = p.capImplGlobal; });
+        lastCapImpl = p.capImplGlobal;
       }
     }
 
     function recalc() {
       const p = readParams();
-      syncAquisicaoPadrao(p);
-      // Re-ler depois do sync
+      syncGlobals(p);
       const pReal = readParams();
       const s = simular(pReal);
       renderKPIs(s, pReal);
@@ -1372,12 +1502,20 @@
 
     function resetar() {
       Object.entries(DEFAULTS).forEach(([k, v]) => {
+        if (Array.isArray(v) || typeof v === 'object') return;
         const el = $(k);
         if (el) el.value = v;
       });
-      state.aquisicaoMes = new Array(DEFAULTS.periodo).fill(DEFAULTS.aquisicao);
+      // Reset rampa de aquisição com defaults
+      state.aquisicaoMes = [...DEFAULTS.aquisicaoMesDefault];
+      // Capacidade volta a sincronizar com global
+      const capMentG = DEFAULTS.maxMentDia * DEFAULTS.diasUteis;
+      state.capMentMes = new Array(DEFAULTS.periodo).fill(capMentG);
+      state.capImplMes = new Array(DEFAULTS.periodo).fill(DEFAULTS.maxImpl);
       state.renderedPeriodo = -1;
       lastAquisicao = DEFAULTS.aquisicao;
+      lastCapMent = capMentG;
+      lastCapImpl = DEFAULTS.maxImpl;
       recalc();
     }
 
@@ -1414,8 +1552,13 @@
     });
 
     // ─── Init ───
-    state.aquisicaoMes = new Array(DEFAULTS.periodo).fill(DEFAULTS.aquisicao);
+    state.aquisicaoMes = [...DEFAULTS.aquisicaoMesDefault];
+    const capMentGInit = DEFAULTS.maxMentDia * DEFAULTS.diasUteis;
+    state.capMentMes = new Array(DEFAULTS.periodo).fill(capMentGInit);
+    state.capImplMes = new Array(DEFAULTS.periodo).fill(DEFAULTS.maxImpl);
     lastAquisicao = DEFAULTS.aquisicao;
+    lastCapMent = capMentGInit;
+    lastCapImpl = DEFAULTS.maxImpl;
     recalc();
   </script>
 </body>
