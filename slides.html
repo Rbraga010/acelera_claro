@@ -1093,49 +1093,48 @@
     </div>
 
     <!-- ════════════ SLIDE 05 — A NOSSA CONVICÇÃO ════════════ -->
-    <div class="slide bg-light" data-slide="5" style="padding-right: 0; overflow: hidden;">
-      <div class="s-num" style="z-index: 5;">05</div>
-      <div style="display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 0; height: 100%; align-items: stretch;">
-        <!-- Coluna texto -->
-        <div style="display: flex; flex-direction: column; justify-content: center; padding-right: 3rem; position: relative; z-index: 2;">
-          <div class="s-eyebrow"><span class="s-dot"></span><span>05 · No Que a Gente Acredita</span></div>
-          <h2 class="s-title">Pequena empresa cresce até o <em>limite</em> da gestão do dono.</h2>
-          <p class="s-subtitle" style="margin-bottom: 1.5rem; font-family: 'Fraunces', serif; font-weight: 400; font-size: 1.2rem; line-height: 1.5;">
-            A nossa convicção é simples: o lojista não cresce porque opera no improviso. Não é falta de mercado. Não é falta de produto. É falta de método instalado.
-          </p>
-          <div style="padding: 1.5rem 1.75rem; background: rgba(13,17,23,0.06); border: 1px solid rgba(13,17,23,0.1); border-left: 4px solid var(--claro-red); border-radius: 0 14px 14px 0;">
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 1rem;">Quando o método entra</div>
-            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.7rem;">
-              <li style="font-size: 1rem; line-height: 1.5; color: var(--text-dark); padding-left: 22px; position: relative;">
-                <span style="position: absolute; left: 0; color: var(--claro-red); font-weight: 700;">→</span>
-                Parceiro <strong>para de vender só produto</strong> — começa a vender serviço.
-              </li>
-              <li style="font-size: 1rem; line-height: 1.5; color: var(--text-dark); padding-left: 22px; position: relative;">
-                <span style="position: absolute; left: 0; color: var(--claro-red); font-weight: 700;">→</span>
-                Parceiro <strong>para de operar sozinho</strong> — começa a gerir.
-              </li>
-              <li style="font-size: 1rem; line-height: 1.5; color: var(--text-dark); padding-left: 22px; position: relative;">
-                <span style="position: absolute; left: 0; color: var(--claro-red); font-weight: 700;">→</span>
-                Parceiro <strong>para de ser revendedor</strong> — começa a ser embaixador.
-              </li>
-            </ul>
-          </div>
-          <p style="margin-top: 1.5rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.25rem; line-height: 1.4; color: var(--text-dark);">
-            E a sua marca ganha <span style="color: var(--claro-red); font-weight: 600;">exatamente o que cobertura de massa não compra</span>: parceiro performando, fiel e ativo.
-          </p>
+    <div class="slide bg-light" data-slide="5" style="overflow: hidden;">
+      <!-- Imagem full-bleed atrás de tudo -->
+      <div style="position: absolute; inset: 0; background-image: url('assets/images/hero-pdv.jpg'), url('assets/images/varejo-marca-grande.jpg'); background-size: cover; background-position: center; z-index: 0;"></div>
+      <!-- Overlay papel: 100% opaco na esquerda → 0% na direita (foto aparece pura na direita) -->
+      <div style="position: absolute; inset: 0; background: linear-gradient(90deg, var(--paper) 0%, var(--paper) 38%, rgba(250,250,247,0.92) 48%, rgba(250,250,247,0.55) 60%, rgba(250,250,247,0.18) 72%, rgba(250,250,247,0) 82%); z-index: 1;"></div>
+      <!-- Vinheta inferior sutil pra ancorar a base sem invadir o miolo -->
+      <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,17,23,0) 65%, rgba(13,17,23,0.25) 100%); z-index: 1; pointer-events: none;"></div>
+
+      <div class="s-num" style="z-index: 4;">05</div>
+
+      <!-- Coluna texto (ocupa ~55% esquerda, sobre overlay opaco) -->
+      <div style="position: relative; z-index: 3; max-width: 56%; display: flex; flex-direction: column; justify-content: center; height: 100%;">
+        <div class="s-eyebrow"><span class="s-dot"></span><span>05 · No Que a Gente Acredita</span></div>
+        <h2 class="s-title">Pequena empresa cresce até o <em>limite</em> da gestão do dono.</h2>
+        <p class="s-subtitle" style="margin-bottom: 1.5rem; font-family: 'Fraunces', serif; font-weight: 400; font-size: 1.2rem; line-height: 1.5;">
+          A nossa convicção é simples: o lojista não cresce porque opera no improviso. Não é falta de mercado. Não é falta de produto. É falta de método instalado.
+        </p>
+        <div style="padding: 1.5rem 1.75rem; background: rgba(13,17,23,0.06); border: 1px solid rgba(13,17,23,0.1); border-left: 4px solid var(--claro-red); border-radius: 0 14px 14px 0;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 1rem;">Quando o método entra</div>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.7rem;">
+            <li style="font-size: 1rem; line-height: 1.5; color: var(--text-dark); padding-left: 22px; position: relative;">
+              <span style="position: absolute; left: 0; color: var(--claro-red); font-weight: 700;">→</span>
+              Parceiro <strong>para de vender só produto</strong> — começa a vender serviço.
+            </li>
+            <li style="font-size: 1rem; line-height: 1.5; color: var(--text-dark); padding-left: 22px; position: relative;">
+              <span style="position: absolute; left: 0; color: var(--claro-red); font-weight: 700;">→</span>
+              Parceiro <strong>para de operar sozinho</strong> — começa a gerir.
+            </li>
+            <li style="font-size: 1rem; line-height: 1.5; color: var(--text-dark); padding-left: 22px; position: relative;">
+              <span style="position: absolute; left: 0; color: var(--claro-red); font-weight: 700;">→</span>
+              Parceiro <strong>para de ser revendedor</strong> — começa a ser embaixador.
+            </li>
+          </ul>
         </div>
-        <!-- Coluna imagem com degradê robusto -->
-        <div style="position: relative; align-self: stretch; min-height: 100%; overflow: hidden; margin-right: -80px;">
-          <div style="position: absolute; inset: 0; background-image: url('assets/images/hero-pdv.jpg'), url('assets/images/varejo-marca-grande.jpg'); background-size: cover; background-position: center;"></div>
-          <!-- Degradê forte da esquerda pra direita, fundindo com fundo claro -->
-          <div style="position: absolute; inset: 0; background: linear-gradient(90deg, var(--paper) 0%, rgba(250,250,247,0.65) 14%, rgba(250,250,247,0.18) 32%, rgba(250,250,247,0) 55%);"></div>
-          <!-- Vinheta inferior pra ancorar (sem cobrir o centro vivo) -->
-          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,17,23,0) 60%, rgba(13,17,23,0.35) 100%);"></div>
-          <!-- Acento âmbar canto inferior direito -->
-          <div style="position: absolute; right: 80px; bottom: 32px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); background: rgba(13,17,23,0.55); padding: 0.5rem 0.85rem; border-radius: 999px; backdrop-filter: blur(6px); z-index: 3;">
-            <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--claro-red); margin-right: 0.55rem; vertical-align: middle;"></span>Varejo de tecnologia · PDV real
-          </div>
-        </div>
+        <p style="margin-top: 1.5rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.25rem; line-height: 1.4; color: var(--text-dark);">
+          E a sua marca ganha <span style="color: var(--claro-red); font-weight: 600;">exatamente o que cobertura de massa não compra</span>: parceiro performando, fiel e ativo.
+        </p>
+      </div>
+
+      <!-- Pill âmbar canto inferior direito -->
+      <div style="position: absolute; right: 80px; bottom: 32px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); background: rgba(13,17,23,0.55); padding: 0.5rem 0.85rem; border-radius: 999px; backdrop-filter: blur(6px); z-index: 4;">
+        <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--claro-red); margin-right: 0.55rem; vertical-align: middle;"></span>Varejo de tecnologia · PDV real
       </div>
     </div>
 
