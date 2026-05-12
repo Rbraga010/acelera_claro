@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rentabiliza.ai · Apresentação · Varejo e Lojistas</title>
+  <title>Rentabiliza.ai · Apresentação · Parceiros Comerciais</title>
   <meta name="description" content="Você pode operar como gigante — sem deixar de ser dono. Apresentação para o varejista que quer parar de operar no improviso e começar a faturar como rede nacional. 12 slides em 12-15 minutos.">
 
   <!-- Open Graph -->
@@ -632,8 +632,18 @@
       color: rgba(244,185,62,0.12);
       pointer-events: none; user-select: none;
       letter-spacing: -0.05em;
+      z-index: 3;
     }
     .bg-light .s-num { color: rgba(244,185,62,0.08); }
+    /* Quando há bg-photo, número precisa de mais opacidade + text-shadow */
+    .slide .s-bg-photo ~ .s-num {
+      color: rgba(244,185,62,0.32);
+      text-shadow: 0 2px 12px rgba(13,17,23,0.45);
+    }
+    .bg-light .s-bg-photo ~ .s-num {
+      color: rgba(184,136,29,0.22);
+      text-shadow: 0 2px 12px rgba(244,241,232,0.6);
+    }
 
     /* ═══════════════════════════════ QUOTE ═══════════════════════════════ */
     .s-quote {
@@ -1255,7 +1265,7 @@
     <a href="index.html" style="display:inline-flex; align-items:baseline; gap:0.6rem;" aria-label="Rentabiliza.ai">
       <span class="brand-top-wordmark"><span class="r-name">Rentabiliza</span><span class="r-dot">.</span><span class="r-ai">ai</span></span>
       <span class="brand-top-divider"></span>
-      <span class="brand-top-text">Apresentação · Varejo e Lojistas · 2026</span>
+      <span class="brand-top-text">Apresentação · Parceiros Comerciais · 2026</span>
     </a>
   </div>
 
@@ -1269,7 +1279,7 @@
       <div class="s-bg-photo" style="background-image: url('assets/images/varejo-capa-hero.jpg'), url('assets/images/hero-main.jpg');"></div>
       <div class="s-num">01</div>
       <div style="position: absolute; top: 32px; right: 80px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); z-index: 2;">Para o Lojista · 2026</div>
-      <div class="s-eyebrow"><span class="s-dot"></span><span>Para varejistas que querem crescer na era da IA</span></div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>Para varejistas que querem crescer rentabilidade na era da IA</span></div>
       <h1 class="s-title" style="font-size: clamp(2.6rem, 5.8vw, 5.4rem); line-height: 1.05; margin-top: 1.5rem; max-width: 1080px;">Você pode operar como <em>gigante</em> — sem deixar de ser <em>dono</em>.</h1>
       <p class="s-subtitle" style="margin-top: 1.5rem; margin-bottom: 2.5rem; max-width: 800px; font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(1.05rem, 1.55vw, 1.4rem); line-height: 1.45;">
         Mais venda, mais lucro, mais tempo livre. IA trabalhando, time fiel, operação rodando — mesmo quando você não está olhando.
@@ -1300,6 +1310,7 @@
           <div class="varejo-s2-quote">
             <p>A loja fatura. Você não cresce.</p>
           </div>
+          <p class="varejo-s2-dado" style="margin: 0; padding: 10px 14px; background: rgba(244,185,62,0.08); border-left: 3px solid var(--claro-yellow); border-radius: 0 6px 6px 0; font-size: 0.92rem; line-height: 1.5; color: var(--text-light);"><strong style="color: var(--claro-yellow);">80% das pequenas empresas brasileiras não passam de sobreviventes</strong> — e o dono é o teto. <span style="opacity: 0.7; font-size: 0.82rem;">Fonte: SEBRAE</span></p>
           <p class="varejo-s2-close">Não é falta de cliente. Não é falta de produto. <span style="color: var(--claro-yellow); font-weight: 600;">É falta de método instalado.</span></p>
         </div>
         <div class="varejo-s2-image">
@@ -1311,9 +1322,9 @@
     <!-- ════════════ SLIDE 03 — O DINHEIRO NA MESA ════════════ -->
     <div class="slide bg-light" data-slide="3">
       <div class="s-num">03</div>
-      <div class="s-eyebrow"><span class="s-dot"></span><span>03 · A indústria quer te pagar</span></div>
-      <h2 class="s-title">A indústria está <em>louca</em> pra investir em você. Você não tá vendo.</h2>
-      <p class="s-subtitle" style="margin-bottom: 1.25rem;">Cada celular vendido sem fechar plano, sem fechar seguro, sem fechar garantia — é comissão da indústria deixada na mesa. Comissão recorrente, todo mês, por anos.</p>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>03 · As marcas parceiras querem te pagar</span></div>
+      <h2 class="s-title">As marcas parceiras estão <em>loucas</em> pra investir em você. E você não tá vendo.</h2>
+      <p class="s-subtitle" style="margin-bottom: 1.25rem;">Cada produto que você vende sem fechar um serviço — plano, seguro, garantia — é comissão de marcas parceiras deixada na mesa. Comissão fixa ou recorrente que você deixa de ganhar todo mês, por anos.</p>
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 0.5rem; align-items: stretch;">
         <div style="padding: 1.5rem 1.75rem; background: rgba(13,17,23,0.05); border: 1px solid rgba(13,17,23,0.1); border-radius: 12px; display: flex; flex-direction: column;">
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.85rem;">Faz a conta</div>
@@ -1330,11 +1341,12 @@
           </p>
         </div>
         <div style="padding: 1.5rem 1.75rem; background: linear-gradient(135deg, rgba(244,185,62,0.08), rgba(244,185,62,0.02)); border: 1px solid rgba(244,185,62,0.25); border-radius: 12px; display: flex; flex-direction: column; justify-content: center;">
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.85rem;">Por que ela paga</div>
-          <p style="margin: 0; font-size: 0.95rem; line-height: 1.55; color: var(--muted-2);">A indústria já entendeu que o lojista que vende serviço vale <strong style="color: var(--text-dark); font-family: 'JetBrains Mono', monospace;">4× mais</strong>. Por isso ela paga comissão recorrente, oferece bônus, abre parceria.</p>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.85rem;">Por que elas pagam</div>
+          <p style="margin: 0 0 0.85rem; font-size: 0.95rem; line-height: 1.55; color: var(--muted-2);">As marcas parceiras já entenderam que o lojista que vende serviço vale <strong style="color: var(--text-dark); font-family: 'JetBrains Mono', monospace;">4× mais</strong>. Por isso pagam comissão recorrente, oferecem bônus, abrem parceria.</p>
+          <p style="margin: 0; font-size: 0.85rem; line-height: 1.5; color: var(--muted-2); font-style: italic;">Cada celular, geladeira, fogão, TV e etc. vendido sem fechar serviços agregados é dinheiro que você deixa na mesa.</p>
         </div>
       </div>
-      <p style="margin-top: 1.5rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.45rem; line-height: 1.3; color: var(--claro-red); letter-spacing: -0.01em;">O dinheiro tá aí. A indústria quer te pagar. Falta você abrir os olhos.</p>
+      <p style="margin-top: 1.5rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.45rem; line-height: 1.3; color: var(--claro-red); letter-spacing: -0.01em;">O dinheiro tá aí. As marcas parceiras querem te pagar. Falta você abrir os olhos.</p>
     </div>
 
     <!-- ════════════ SLIDE 04 — A SAÍDA ════════════ -->
@@ -1357,8 +1369,8 @@
     <!-- ════════════ SLIDE 05 — O RENTABILIZA.AI ════════════ -->
     <div class="slide bg-light" data-slide="5">
       <div class="s-num">05</div>
-      <div class="s-eyebrow"><span class="s-dot"></span><span>05 · Quem a gente é</span></div>
-      <h2 class="s-title">Plataforma que <em>instala</em> dentro da sua loja o que rede grande tem.</h2>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>05 · Quem somos de verdade</span></div>
+      <h2 class="s-title">Solução que <em>instala</em> dentro da sua loja o que rede grande tem.</h2>
       <p class="s-subtitle" style="margin-bottom: 1.25rem;">O Rentabiliza.ai é uma plataforma de implementação executiva pra varejistas que querem parar de operar no improviso e começar a operar como rede nacional.</p>
       <div style="margin: 1rem 0 1.25rem; padding: 1.25rem 1.5rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-radius: 12px; text-align: center;">
         <p style="margin: 0; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: clamp(1.15rem, 2vw, 1.7rem); line-height: 1.25; color: var(--text-dark); letter-spacing: -0.01em;">
@@ -1398,20 +1410,20 @@
     <div class="slide bg-charcoal" data-slide="6">
       <div class="s-num">06</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>06 · A transformação</span></div>
-      <h2 class="s-title">A gente entra na sua loja e <em>muda</em> quatro coisas. Ao mesmo tempo.</h2>
+      <h2 class="s-title">A gente entra na sua loja e <em>muda</em> quatro coisas, ao mesmo tempo.</h2>
       <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.85rem; margin-top: 1rem;">
         <div class="varejo-transform-card">
           <img src="assets/images/varejo-time-vende.jpg" onerror="this.onerror=null;this.src='assets/images/avatar-parceiro.jpg';" alt="Vendedor consultivo no PDV" class="varejo-transform-img">
           <div class="varejo-transform-content">
             <div class="varejo-transform-eyebrow">01 · Time que vende mais</div>
-            <p class="varejo-transform-body">Cliente entrava com R$ 80, sai com R$ 280. <strong style="color: var(--claro-yellow);">Ticket triplica. Margem dobra.</strong></p>
+            <p class="varejo-transform-body">Cliente entrava com R$ 80, sai com R$ 160. <strong style="color: var(--claro-yellow);">Ticket dobra. Margem dobra.</strong></p>
           </div>
         </div>
         <div class="varejo-transform-card">
           <img src="assets/images/varejo-processo-roda.jpg" onerror="this.onerror=null;this.src='assets/images/time-loja.jpg';" alt="Daily de 15 minutos" class="varejo-transform-img">
           <div class="varejo-transform-content">
             <div class="varejo-transform-eyebrow">02 · Processo que roda sem você</div>
-            <p class="varejo-transform-body">Daily de 15min. 1:1 sem briga. Indicador no celular. <strong style="color: var(--claro-yellow);">A loja para de parar quando você sai.</strong></p>
+            <p class="varejo-transform-body">Matinal de vendas — 15min. Sem briga. Indicador no celular. <strong style="color: var(--claro-yellow);">Visualiza ontem, passa hoje.</strong></p>
           </div>
         </div>
         <div class="varejo-transform-card">
@@ -1425,7 +1437,7 @@
           <img src="assets/images/varejo-marca-grande.jpg" onerror="this.onerror=null;this.src='assets/images/embaixador-selo.jpg';" alt="Marca com cara de gente grande" class="varejo-transform-img">
           <div class="varejo-transform-content">
             <div class="varejo-transform-eyebrow">04 · Marca com cara de gente grande</div>
-            <p class="varejo-transform-body">Site, vídeo, identidade visual. <strong style="color: var(--claro-yellow);">Sua loja entra no nível das grandes — sem agência cobrando R$ 8k.</strong></p>
+            <p class="varejo-transform-body">Site, vídeo, identidade visual. <strong style="color: var(--claro-yellow);">Sua loja entra no nível das grandes — sem agência cobrando R$ 8 mil, R$ 10 mil, R$ 15 mil ou mais.</strong></p>
           </div>
         </div>
       </div>
@@ -1452,7 +1464,14 @@
           </div>
           <p style="margin: 0 0 0.4rem; font-size: 0.86rem; line-height: 1.5; color: var(--text-light);">Seis rituais semanais que viram piloto automático:</p>
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.65; color: var(--text-light);">
-            <strong style="color: var(--claro-yellow);">P</strong>lanejar &middot; <strong style="color: var(--claro-yellow);">U</strong>sar &middot; <strong style="color: var(--claro-yellow);">L</strong>apidar &middot; <strong style="color: var(--claro-yellow);">S</strong>ustentar &middot; <strong style="color: var(--claro-yellow);">A</strong>lavancar &middot; <strong style="color: var(--claro-yellow);">R</strong>eplicar
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px 12px;">
+              <span><strong style="color: var(--claro-yellow);">P</strong>lanejar</span>
+              <span><strong style="color: var(--claro-yellow);">U</strong>sar</span>
+              <span><strong style="color: var(--claro-yellow);">L</strong>apidar</span>
+              <span><strong style="color: var(--claro-yellow);">S</strong>ustentar</span>
+              <span><strong style="color: var(--claro-yellow);">A</strong>lavancar</span>
+              <span><strong style="color: var(--claro-yellow);">R</strong>eplicar</span>
+            </div>
           </div>
           <p style="margin: 0.3rem 0 0; font-size: 0.86rem; font-style: italic; color: var(--claro-yellow); font-weight: 600;">A loja roda sozinha.</p>
         </div>
@@ -1472,61 +1491,61 @@
       <div class="s-bg-photo" style="background-image: url('assets/images/varejo-escada.jpg'), url('assets/images/workshop-regional.jpg');"></div>
       <div class="s-num">08</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>08 · Onde você entra</span></div>
-      <h2 class="s-title">Quatro níveis. Você entra <em>de graça</em> — porque a indústria paga.</h2>
-      <p class="s-subtitle" style="margin-bottom: 1rem; max-width: 940px;">A entrada é subsidiada pela indústria — operadoras e marcas parceiras pagam pelo seu primeiro passo. Você prova o método. Tira resultado. <strong>Quanto mais resultado você der, mais subsídio a indústria libera.</strong></p>
+      <h2 class="s-title">Quatro níveis. <em>Entrada subsidiada</em> pelas marcas parceiras.</h2>
+      <p class="s-subtitle" style="margin-bottom: 1rem; max-width: 940px;">A entrada é subsidiada por marcas parceiras que pagam pelo seu primeiro passo. Você prova o método. Tira resultado. <strong>Quanto mais resultado você der, mais subsídio a marca parceira libera.</strong></p>
       <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-top: 1rem;">
         <div class="varejo-escada-card">
-          <div class="varejo-escada-tag">Entrada gratuita</div>
+          <div class="varejo-escada-tag">Entrada subsidiada</div>
           <div class="varejo-escada-name">Start</div>
-          <div class="varejo-escada-desc">Indústria banca sua entrada. Você prova o método e extrai resultado.</div>
+          <div class="varejo-escada-desc">Marca parceira banca sua entrada. Você prova o método e extrai resultado.</div>
         </div>
         <div class="varejo-escada-card">
           <div class="varejo-escada-tag">A formação</div>
           <div class="varejo-escada-name">Master</div>
-          <div class="varejo-escada-desc">Indústria continua junto. Você estrutura a loja com método e mentoria.</div>
+          <div class="varejo-escada-desc">Marca parceira continua junto. Você estrutura a loja com método e mentoria.</div>
         </div>
         <div class="varejo-escada-card varejo-escada-featured">
           <div class="varejo-escada-tag">Acompanhamento</div>
           <div class="varejo-escada-name">inPULSO.pro</div>
-          <div class="varejo-escada-desc">Indústria amplia o subsídio conforme você performa. IA + Rodrigo perto.</div>
+          <div class="varejo-escada-desc">Marca parceira amplia o subsídio conforme você performa. IA + Rodrigo perto.</div>
         </div>
         <div class="varejo-escada-card">
           <div class="varejo-escada-tag">Implementação</div>
           <div class="varejo-escada-name">Premium</div>
-          <div class="varejo-escada-desc">A gente dentro da operação. Indústria reconhece embaixador.</div>
+          <div class="varejo-escada-desc">A gente dentro da operação. Marca parceira reconhece embaixador.</div>
         </div>
       </div>
-      <p style="margin-top: 1.5rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.35rem; line-height: 1.3; color: var(--claro-red); letter-spacing: -0.01em;">Quanto mais resultado você entrega, mais a indústria investe em você.</p>
+      <p style="margin-top: 1.5rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.35rem; line-height: 1.3; color: var(--claro-red); letter-spacing: -0.01em;">Quanto mais resultado você entrega, mais a marca parceira investe em você.</p>
     </div>
 
     <!-- ════════════ SLIDE 09 — QUEM TÁ POR TRÁS ════════════ -->
     <div class="slide bg-charcoal" data-slide="9">
       <div class="s-num">09</div>
-      <div class="s-eyebrow"><span class="s-dot"></span><span>09 · A gente não tá aqui de paraquedas</span></div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>09 · A gente não está aqui de paraquedas</span></div>
       <h2 class="s-title">Quem fala com você já viveu o que você vive — <em>em escala bilionária</em>.</h2>
-      <div class="s-cols" style="margin-top: 1.25rem; gap: 1.25rem;">
-        <div class="varejo-autoridade-card">
+      <div class="s-cols" style="margin-top: 1.5rem; gap: 1.5rem; align-items: stretch;">
+        <div class="varejo-autoridade-card" style="display: flex; flex-direction: column;">
           <div class="varejo-autoridade-img">
             <img src="assets/images/varejo-rodrigo.jpg" onerror="this.onerror=null;this.src='assets/images/rodrigo-braga.png';" alt="Rodrigo Braga">
           </div>
-          <div class="varejo-autoridade-body">
+          <div class="varejo-autoridade-body" style="flex: 1; display: flex; flex-direction: column;">
             <div class="varejo-autoridade-tag">O método · PulsarH.ai</div>
             <h3 class="varejo-autoridade-title">21 anos de chão de loja.</h3>
-            <p class="varejo-autoridade-desc">Sete como Gerente Nacional em rede com <strong style="color: var(--claro-yellow);">4.500 vendedores</strong> e <strong style="color: var(--claro-yellow);">R$ 1 bilhão/ano</strong>. O método que entra na sua loja foi escrito <strong>dentro</strong> de loja de verdade.</p>
+            <p class="varejo-autoridade-desc">Liderança de equipes e mais de <strong style="color: var(--claro-yellow);">4.500 vendedores</strong>, impulsionando um faturamento anual <strong style="color: var(--claro-yellow);">acima de R$ 1 bilhão</strong>. Meu método é construído a partir da vivência prática no varejo, dominando gestão de conflitos, superação de objeções e entrega consistente de resultados expressivos.</p>
           </div>
         </div>
-        <div class="varejo-autoridade-card">
+        <div class="varejo-autoridade-card" style="display: flex; flex-direction: column;">
           <div class="varejo-autoridade-img">
             <img src="assets/images/varejo-tradeup.jpg" onerror="this.onerror=null;this.src='assets/images/hero-pdv.jpg';" alt="TradeUp escala">
           </div>
-          <div class="varejo-autoridade-body">
+          <div class="varejo-autoridade-body" style="flex: 1; display: flex; flex-direction: column;">
             <div class="varejo-autoridade-tag">A infraestrutura · TradeUp</div>
-            <h3 class="varejo-autoridade-title">Maior integrador de telecom no varejo.</h3>
-            <p class="varejo-autoridade-desc">Plataforma TradeAppOne com mais de <strong style="color: var(--claro-yellow);">200 mil usuários</strong>. Opera com Claro, Nextel, Oi, Vivo, TIM. Quando a gente fala em "rede grande", é dela que estamos falando.</p>
+            <h3 class="varejo-autoridade-title">Líder em soluções e integração no varejo.</h3>
+            <p class="varejo-autoridade-desc">Empresa <strong>líder no mercado em que atua</strong> — provedora de soluções e a <strong style="color: var(--claro-yellow);">maior integradora</strong> de operadoras de telecom no varejo brasileiro. A plataforma <strong>TradeAppOne</strong> conecta marcas, varejistas e vendedores em escala nacional. Quando a gente fala em "rede grande", é dela que estamos falando.</p>
           </div>
         </div>
       </div>
-      <p style="margin-top: 1.5rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.2rem; line-height: 1.35; color: var(--text-light);">Você não tá contratando coach. Tá contratando <span style="color: var(--claro-yellow); font-weight: 600;">experiência destilada</span> de quem operou em escala bilionária — agora dentro da sua porta.</p>
+      <p style="margin-top: 1.5rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.2rem; line-height: 1.35; color: var(--text-light);">Você não está contratando coach. Está contratando <span style="color: var(--claro-yellow); font-weight: 600;">experiência destilada</span> de quem operou em escala bilionária — agora dentro da sua porta.</p>
     </div>
 
     <!-- ════════════ SLIDE 10 — OS PLANOS ════════════ -->
@@ -1540,11 +1559,11 @@
             <span class="varejo-plano-name">Start</span>
             <span class="varejo-plano-price">R$ 297 único</span>
           </div>
-          <div class="varejo-plano-sub">entrada gratuita pro lojista · indústria banca 100%</div>
+          <div class="varejo-plano-sub">entrada gratuita pro lojista · marca parceira banca 100%</div>
           <p class="varejo-plano-desc">Plataforma + 1 aula ao vivo/semana + comunidade.</p>
           <div class="varejo-plano-conta">
             <span class="varejo-plano-conta-label">Faz a conta</span>
-            <span>Pra você, <strong style="color: var(--claro-yellow);">R$ 0</strong>. Indústria banca o onboarding.</span>
+            <span>Pra você, <strong style="color: var(--claro-yellow);">R$ 0</strong>. A marca parceira banca o onboarding.</span>
           </div>
         </div>
         <div class="varejo-plano-card">
@@ -1586,7 +1605,7 @@
         </div>
       </div>
       <div style="margin-top: 1.25rem; padding: 0.85rem 1.25rem; background: linear-gradient(135deg, var(--claro-yellow), #E0A52A); border-radius: 10px; color: var(--ink);">
-        <p style="margin: 0; font-size: 0.92rem; line-height: 1.5; font-weight: 600; text-align: center;">Cada plano pode ser subsidiado pela indústria — operadoras, marcas, parceiros. <strong>Quanto mais você cresce, mais a indústria investe em você.</strong></p>
+        <p style="margin: 0; font-size: 0.92rem; line-height: 1.5; font-weight: 600; text-align: center;">Cada plano pode ser subsidiado por <strong>marcas parceiras</strong> — operadoras, indústrias de bens duráveis, fornecedores. <strong>Quanto mais você cresce, mais a marca parceira investe em você.</strong></p>
       </div>
     </div>
 
@@ -1601,7 +1620,7 @@
       <div class="s-grid-3" style="margin-top: 0.5rem;">
         <div style="padding: 1.25rem 1.5rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-top: 3px solid var(--claro-red); border-radius: 4px 4px 12px 12px;">
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.5rem;">Mais venda</div>
-          <p style="margin: 0; font-size: 0.85rem; line-height: 1.5; color: var(--muted-2);">Time treinado fecha serviço junto do produto. <strong style="color: var(--text-dark);">Ticket triplica. Comissão recorrente todo mês.</strong></p>
+          <p style="margin: 0; font-size: 0.85rem; line-height: 1.5; color: var(--muted-2);">Time treinado adiciona <strong>serviços agregados</strong> no mesmo atendimento. <strong style="color: var(--text-dark);">Ticket duplica ou triplica. Comissão recorrente todo mês.</strong></p>
         </div>
         <div style="padding: 1.25rem 1.5rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-top: 3px solid var(--claro-red); border-radius: 4px 4px 12px 12px;">
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.5rem;">Menos custo</div>
@@ -1609,7 +1628,7 @@
         </div>
         <div style="padding: 1.25rem 1.5rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-top: 3px solid var(--claro-red); border-radius: 4px 4px 12px 12px;">
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.5rem;">Mais rentabilidade</div>
-          <p style="margin: 0; font-size: 0.85rem; line-height: 1.5; color: var(--muted-2);">Margem dobra. Marca ganha cara de grande. <strong style="color: var(--text-dark);">Loja vira ativo — não emprego.</strong></p>
+          <p style="margin: 0; font-size: 0.85rem; line-height: 1.5; color: var(--muted-2);"><strong>Margem dobra ou triplica.</strong> Marca ganha cara de grande. <strong style="color: var(--text-dark);">Loja vira ativo — não emprego.</strong></p>
         </div>
       </div>
       <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 1rem;">
@@ -1640,16 +1659,18 @@
       <div class="s-bg-photo" style="background-image: url('assets/images/varejo-rede.jpg'), url('assets/images/hero-pdv.jpg');"></div>
       <div class="s-num">12</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>12 · A escolha</span></div>
-      <h2 class="s-title" style="font-size: clamp(2.2rem, 4.5vw, 4rem); line-height: 1.05; margin-top: 1.5rem; margin-bottom: 1.5rem;">Você não tá sozinho nessa.<br>Você faz parte de uma <em>rede</em> que tá crescendo.</h2>
+      <h2 class="s-title" style="font-size: clamp(2.2rem, 4.5vw, 4rem); line-height: 1.05; margin-top: 1.5rem; margin-bottom: 1.5rem;">Você não está sozinho nessa.<br>Você faz parte de uma <em>rede</em> que está crescendo.</h2>
       <p class="s-subtitle" style="margin-bottom: 1.75rem; font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(1rem, 1.4vw, 1.3rem); line-height: 1.45; max-width: 880px;">
-        Lojistas como você. Em todo o Brasil. Trocando estratégia. Indicando cliente. Fechando parceria. Crescendo juntos — porque entenderam que ninguém cresce sozinho na era da IA.
+        Lojistas como você, em todo o Brasil, trocando estratégia, indicando cliente, fechando parceria — crescendo juntos, porque entenderam que ninguém cresce sozinho na era da IA.
       </p>
-      <div style="margin-top: 0.85rem; padding: 1.85rem 2.25rem; background: linear-gradient(135deg, var(--claro-yellow), #E0A52A); border-radius: 14px; color: var(--ink); position: relative; z-index: 1;">
-        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.55rem;">
-          <li style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: clamp(1.25rem, 2.2vw, 1.85rem); line-height: 1.2; letter-spacing: -0.01em;">O <strong>método</strong> existe.</li>
-          <li style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: clamp(1.25rem, 2.2vw, 1.85rem); line-height: 1.2; letter-spacing: -0.01em;">A <strong>rede</strong> já tá rodando.</li>
-          <li style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 700; font-size: clamp(1.45rem, 2.6vw, 2.15rem); line-height: 1.2; letter-spacing: -0.02em;">A <strong>escolha</strong> é sua.</li>
-        </ul>
+      <div style="margin-top: 0.85rem; padding: 1.65rem 2.25rem; background: linear-gradient(135deg, var(--claro-yellow), #E0A52A); border-radius: 14px; color: var(--ink); position: relative; z-index: 1;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; font-family: 'Fraunces', serif; font-style: italic; font-weight: 700; letter-spacing: -0.015em; line-height: 1.15;">
+          <span style="font-size: clamp(1.2rem, 2vw, 1.7rem);">O <strong>método</strong> existe</span>
+          <span style="opacity: 0.45; font-weight: 400;">—</span>
+          <span style="font-size: clamp(1.2rem, 2vw, 1.7rem);">A <strong>rede</strong> já está rodando</span>
+          <span style="opacity: 0.45; font-weight: 400;">—</span>
+          <span style="font-size: clamp(1.35rem, 2.3vw, 1.95rem);">A <strong>escolha</strong> é sua.</span>
+        </div>
       </div>
       <div style="position: absolute; bottom: 32px; left: 80px; right: 80px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); z-index: 2;">
         Rentabiliza.ai · TradeUp × PulsarH.ai · 2026

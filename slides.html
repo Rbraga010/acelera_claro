@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rentabiliza.ai · Apresentação · Indústria e Parceiros</title>
-  <meta name="description" content="Apresentação executiva do Rentabiliza.ai para indústrias, marcas e operadoras que dependem de canal de varejo distribuído — método instalado dentro do PDV parceiro. 12 slides para decisão executiva em 30 minutos.">
+  <title>Rentabiliza.ai · Apresentação Executiva</title>
+  <meta name="description" content="Apresentação Executiva do Rentabiliza.ai para marcas parceiras e operadoras que dependem de canal de varejo distribuído — método instalado dentro do PDV parceiro. 12 slides para decisão executiva em 30 minutos.">
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
@@ -320,8 +320,19 @@
       color: rgba(244,185,62,0.12);
       pointer-events: none; user-select: none;
       letter-spacing: -0.05em;
+      z-index: 3;
     }
     .bg-light .s-num { color: rgba(244,185,62,0.08); }
+    /* Quando há bg-photo (slide com imagem atmosférica de fundo), o número
+       precisa de mais opacidade e text-shadow pra ficar visível e padronizado */
+    .slide .s-bg-photo ~ .s-num {
+      color: rgba(244,185,62,0.32);
+      text-shadow: 0 2px 12px rgba(13,17,23,0.45);
+    }
+    .bg-light .s-bg-photo ~ .s-num {
+      color: rgba(184,136,29,0.22);
+      text-shadow: 0 2px 12px rgba(244,241,232,0.6);
+    }
 
     /* ═══════════════════════════════ QUOTE ═══════════════════════════════ */
     .s-quote {
@@ -443,6 +454,28 @@
     }
     .s-table tbody td:first-child { color: var(--gold-soft); font-weight: 700; font-family: 'Outfit', sans-serif; }
     .s-table tbody td:nth-child(3) { color: var(--text-light); font-weight: 500; }
+
+    /* Tabela de investimento (slide 07) — compactada pra caber no viewport em fullscreen */
+    .s-table-investimento .s-table { font-size: 0.84rem; }
+    .s-table-investimento .s-table thead th { padding: 0.7rem 0.85rem; font-size: 0.62rem; }
+    .s-table-investimento .s-table tbody td { padding: 0.55rem 0.85rem; }
+    .s-table-investimento .s-table-logic { font-size: 0.78rem; color: var(--muted-2); }
+    .s-pct-big {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--claro-yellow);
+      line-height: 1;
+    }
+    .s-pct-mid {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem; font-weight: 600;
+      color: var(--claro-yellow);
+    }
+    .s-pct-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
 
     /* Pack overview rows */
     .s-pack-row {
@@ -943,7 +976,7 @@
     <a href="index.html" style="display:inline-flex; align-items:baseline; gap:0.6rem;" aria-label="Rentabiliza.ai">
       <span class="brand-top-wordmark"><span class="r-name">Rentabiliza</span><span class="r-dot">.</span><span class="r-ai">ai</span></span>
       <span class="brand-top-divider"></span>
-      <span class="brand-top-text">Apresentação · Indústria e Parceiros · Abril 2026</span>
+      <span class="brand-top-text">Apresentação Executiva · Abril 2026</span>
     </a>
   </div>
 
@@ -957,10 +990,10 @@
       <div class="s-bg-photo" style="background-image: url('assets/images/industria-01-capa.jpg'), url('assets/images/hero-pdv.jpg');"></div>
       <div class="s-num">01</div>
       <div style="position: absolute; top: 32px; right: 80px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); z-index: 2;">Deck V2.0</div>
-      <div class="s-eyebrow"><span class="s-dot"></span><span>Apresentação Institucional · Abril 2026</span></div>
+      <div class="s-eyebrow"><span class="s-dot"></span><span>Apresentação Executiva · Para parceiros comerciais · Abril 2026</span></div>
       <h1 class="s-title" style="font-size: clamp(2.8rem, 6.2vw, 5.8rem); line-height: 1.05; margin-top: 1.5rem;">A sua <em>rede de canal</em> de <em>2030</em> começa agora.</h1>
       <p class="s-subtitle" style="margin-top: 1.75rem; margin-bottom: 3rem; max-width: 860px; font-family: 'Fraunces', serif; font-weight: 400; font-size: clamp(1.1rem, 1.8vw, 1.5rem); line-height: 1.45;">
-        Hoje, a sua rede de PMEs, lojistas e distribuidores vende próximo de zero serviço. Em 12 meses, pode virar a maior comunidade de embaixadores ativos do Brasil.
+        Hoje, a sua rede de PMEs, lojistas, distribuidores e pequeno varejo vende próximo de zero serviço. Em 12 meses, pode virar a maior comunidade de embaixadores ativos do Brasil.
       </p>
       <div style="display: inline-flex; gap: 2rem; flex-wrap: wrap; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--claro-yellow); position: relative; z-index: 1;">
         <span style="display: inline-flex; align-items: center; gap: 8px;"><span style="width: 5px; height: 5px; background: var(--claro-yellow); border-radius: 50%;"></span>Mais penetração</span>
@@ -974,8 +1007,8 @@
     <div class="slide bg-light" data-slide="2">
       <div class="s-num">02</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>02 · A Potência Não Explorada</span></div>
-      <h2 class="s-title">Milhares de PMEs e lojistas. <em>Potência</em> que ninguém ativou.</h2>
-      <p class="s-subtitle" style="margin-bottom: 1.5rem;">A sua rede de pequenos negócios, lojistas locais e distribuidores é uma das maiores forças comerciais do país — e uma das menos exploradas. Hoje, ela opera em três realidades que travam o resultado:</p>
+      <h2 class="s-title">Milhares de pontos de venda. <em>Potência</em> que ninguém ativou.</h2>
+      <p class="s-subtitle" style="margin-bottom: 1.5rem;">A sua rede de pequenos negócios, lojistas, distribuidores e varejos locais é uma das maiores forças comerciais do país — e uma das menos exploradas. Hoje, ela opera em três realidades que travam o resultado:</p>
       <div class="s-grid-3" style="margin-top: 0.5rem;">
         <div style="padding: 1.5rem 1.5rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-radius: 12px;">
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.6rem;">01 · Penetração</div>
@@ -983,7 +1016,7 @@
         </div>
         <div style="padding: 1.5rem 1.5rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-radius: 12px;">
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.6rem;">02 · Churn</div>
-          <p style="font-size: 0.92rem; line-height: 1.5; color: var(--muted-2); margin: 0;">PME entra e sai do canal sem cerimônia. Engajamento baixo gera presença irregular, treinamento perdido, custo de aquisição que não amortiza. <strong style="color: var(--text-dark);">Você refaz a base de parceiros toda hora.</strong></p>
+          <p style="font-size: 0.92rem; line-height: 1.5; color: var(--muted-2); margin: 0;">PMEs e MPEs entram e saem do canal sem cerimônia. Engajamento baixo gera presença irregular, treinamento perdido, custo de aquisição que não amortiza. <strong style="color: var(--text-dark);">Você refaz a base de parceiros toda hora.</strong></p>
         </div>
         <div style="padding: 1.5rem 1.5rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-radius: 12px;">
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.6rem;">03 · Identidade</div>
@@ -991,7 +1024,7 @@
         </div>
       </div>
       <p style="margin-top: 2rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.4rem; line-height: 1.4; color: var(--text-dark);">
-        A pergunta não é se a rede tem potencial. <span style="color: var(--claro-red); font-weight: 600;">Tem.</span> É se alguém vai ativar essa potência com método dentro de cada PDV.
+        A pergunta não é se a rede tem potencial — <span style="color: var(--claro-red); font-weight: 600;">ela tem, e muito</span>. A questão é se alguém vai ativar essa potência com método e foco dentro de cada PDV.
       </p>
     </div>
 
@@ -1000,7 +1033,7 @@
       <div class="s-num">03</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>03 · A Lacuna</span></div>
       <h2 class="s-title">A rede já foi <em>treinada</em> várias vezes. E ainda assim, não vende além do produto.</h2>
-      <p class="s-subtitle" style="margin-bottom: 1.5rem;">Por que iniciativas anteriores de desenvolvimento de canal — financiadas por indústrias e operadoras — não escalaram resultado real?</p>
+      <p class="s-subtitle" style="margin-bottom: 1.5rem;">Por que iniciativas anteriores de desenvolvimento de canal — financiadas por marcas parceiras e operadoras — não escalaram resultado real?</p>
       <div class="s-table-wrap" style="margin-top: 0.75rem;">
         <table class="s-table" style="font-size: 0.92rem;">
           <thead>
@@ -1025,7 +1058,7 @@
       <div class="s-bg-photo" style="background-image: url('assets/images/industria-04-movimento.jpg'), url('assets/images/time-loja.jpg');"></div>
       <div class="s-num">04</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>04 · A Solução</span></div>
-      <h2 class="s-title">Não somos plataforma. Somos <em>movimento</em>.</h2>
+      <h2 class="s-title">Não somos curso. Somos <em>movimento</em>.</h2>
       <p class="s-subtitle" style="margin-bottom: 1.5rem;">O Rentabiliza.ai é o movimento que instala gestão moderna dentro do PDV de cada lojista da sua rede — e os transforma em embaixadores ativos da sua marca. Não é capacitação. É implementação acompanhada, em escala, com identidade comum.</p>
       <div class="s-grid-3" style="margin-top: 0.5rem;">
         <div class="s-method">
@@ -1094,7 +1127,7 @@
     <div class="slide bg-charcoal" data-slide="6">
       <div class="s-num">06</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>06 · A Escada de Valor</span></div>
-      <h2 class="s-title">Quatro níveis. Parceiro <em>escolhe</em> onde entra. Sobe quando o resultado pede.</h2>
+      <h2 class="s-title">Quatro níveis.<br>Parceiro <em>escolhe</em> onde entra e sobe quando o resultado pede.</h2>
       <p class="s-subtitle" style="margin-bottom: 1.5rem;">A arquitetura do programa permite onboarding em massa e crescimento por mérito:</p>
       <div class="s-grid-3" style="grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 0.5rem;">
         <div style="padding: 1.4rem 1.25rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; display: flex; flex-direction: column; gap: 0.85rem;">
@@ -1127,18 +1160,18 @@
       </p>
     </div>
 
-    <!-- ════════════ SLIDE 07 — O MODELO DE FINANCIAMENTO ⭐ ════════════ -->
+    <!-- ════════════ SLIDE 07 — INVESTIMENTO PROPORCIONAL À PERFORMANCE ⭐ ════════════ -->
     <div class="slide bg-dark" data-slide="7">
       <div class="s-num">07</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>07 · A Virada Comercial</span></div>
-      <h2 class="s-title">Indústria investe <em>à medida</em> da performance e ambição do parceiro.</h2>
-      <p class="s-subtitle" style="margin-bottom: 1.5rem;">O modelo de financiamento foi desenhado para distribuir risco e investimento ao longo da escada — sem investimento inicial massivo, sem comprometimento de orçamento sem retorno medido:</p>
-      <div class="s-table-wrap" style="margin-top: 0.5rem;">
-        <table class="s-table" style="font-size: 0.92rem;">
+      <h2 class="s-title" style="font-size: clamp(1.6rem, 3.2vw, 2.6rem);">Investimento <em>proporcional</em> à performance e ambição do parceiro.</h2>
+      <p class="s-subtitle" style="margin-bottom: 1rem; font-size: clamp(0.88rem, 1.15vw, 1.05rem);">As marcas parceiras investem ao longo da escada — sem investimento inicial massivo, sem comprometimento de orçamento sem retorno medido:</p>
+      <div class="s-table-wrap s-table-investimento" style="margin-top: 0.4rem;">
+        <table class="s-table">
           <thead>
             <tr>
               <th style="width: 22%;">Plano</th>
-              <th style="width: 18%; text-align: center;">Indústria</th>
+              <th style="width: 18%; text-align: center;">Marca Parceira</th>
               <th style="width: 18%; text-align: center;">Parceiro</th>
               <th>Lógica</th>
             </tr>
@@ -1146,33 +1179,33 @@
           <tbody>
             <tr>
               <td><strong style="color: var(--text-light);">Start · R$ 297</strong></td>
-              <td style="text-align: center;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; font-weight: 700; color: var(--claro-yellow);">100%</span><br><span style="font-size: 0.78rem; color: var(--muted);">R$ 297</span></td>
-              <td style="text-align: center; color: var(--muted);"><span style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 600;">0%</span></td>
-              <td style="color: var(--muted-2); font-size: 0.88rem;">Onboarding em massa — indústria investe na entrada</td>
+              <td style="text-align: center;"><span class="s-pct-big">100%</span><br><span class="s-pct-sub">R$ 297</span></td>
+              <td style="text-align: center; color: var(--muted);"><span class="s-pct-mid">0%</span></td>
+              <td class="s-table-logic">Onboarding em massa — marca parceira investe na entrada</td>
             </tr>
             <tr>
               <td><strong style="color: var(--text-light);">Master · R$ 297/mês</strong></td>
-              <td style="text-align: center;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; font-weight: 700; color: var(--claro-yellow);">70%</span><br><span style="font-size: 0.78rem; color: var(--muted);">R$ 207,90</span></td>
-              <td style="text-align: center;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 600; color: var(--text-light);">30%</span><br><span style="font-size: 0.78rem; color: var(--muted);">R$ 89,10</span></td>
-              <td style="color: var(--muted-2); font-size: 0.88rem;">Lojista entrou no jogo — indústria acelera formação</td>
+              <td style="text-align: center;"><span class="s-pct-big">70%</span><br><span class="s-pct-sub">R$ 207,90</span></td>
+              <td style="text-align: center;"><span class="s-pct-mid" style="color: var(--text-light);">30%</span><br><span class="s-pct-sub">R$ 89,10</span></td>
+              <td class="s-table-logic">Lojista entrou no jogo — marca parceira acelera formação</td>
             </tr>
             <tr>
               <td><strong style="color: var(--text-light);">Pro · R$ 497/mês</strong></td>
-              <td style="text-align: center;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; font-weight: 700; color: var(--claro-yellow);">30%</span><br><span style="font-size: 0.78rem; color: var(--muted);">R$ 149,10</span></td>
-              <td style="text-align: center;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 600; color: var(--text-light);">70%</span><br><span style="font-size: 0.78rem; color: var(--muted);">R$ 347,90</span></td>
-              <td style="color: var(--muted-2); font-size: 0.88rem;">Lojista convertido — indústria retém</td>
+              <td style="text-align: center;"><span class="s-pct-big">30%</span><br><span class="s-pct-sub">R$ 149,10</span></td>
+              <td style="text-align: center;"><span class="s-pct-mid" style="color: var(--text-light);">70%</span><br><span class="s-pct-sub">R$ 347,90</span></td>
+              <td class="s-table-logic">Lojista convertido — marca parceira retém</td>
             </tr>
             <tr>
               <td><strong style="color: var(--text-light);">Premium · R$ 4.997</strong></td>
-              <td style="text-align: center; color: var(--muted);"><span style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 600;">0%</span></td>
-              <td style="text-align: center;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; font-weight: 700; color: var(--claro-yellow);">100%</span></td>
-              <td style="color: var(--muted-2); font-size: 0.88rem;">Lojista de alta performance — sem ônus à indústria</td>
+              <td style="text-align: center; color: var(--muted);"><span class="s-pct-mid">0%</span></td>
+              <td style="text-align: center;"><span class="s-pct-big">100%</span></td>
+              <td class="s-table-logic">Lojista de alta performance — sem ônus à marca parceira</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p style="margin-top: 1.5rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.3rem; line-height: 1.4; color: var(--text-light);">
-        Indústria paga <span style="color: var(--claro-yellow); font-weight: 600;">mais</span> onde o lojista ainda está chegando. Paga <span style="color: var(--claro-yellow); font-weight: 600;">menos</span> onde ele já está performando. <span style="color: var(--claro-yellow); font-weight: 600;">Risco proporcional ao retorno.</span>
+      <p style="margin-top: 1rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: clamp(1rem, 1.4vw, 1.2rem); line-height: 1.4; color: var(--text-light);">
+        A marca parceira paga <span style="color: var(--claro-yellow); font-weight: 600;">mais</span> onde o lojista ainda está chegando. Paga <span style="color: var(--claro-yellow); font-weight: 600;">menos</span> onde ele já está performando. <span style="color: var(--claro-yellow); font-weight: 600;">Risco proporcional ao retorno.</span>
       </p>
     </div>
 
@@ -1181,8 +1214,8 @@
       <div class="s-bg-photo" style="background-image: url('assets/images/industria-08-contrapartida.jpg'), url('assets/images/dashboard-celular.jpg');"></div>
       <div class="s-num">08</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>08 · A Contrapartida</span></div>
-      <h2 class="s-title"><em>Três</em> entregas que nenhum programa anterior ofereceu juntas.</h2>
-      <p class="s-subtitle" style="margin-bottom: 1.75rem;">Em troca do investimento, o programa garante:</p>
+      <h2 class="s-title"><em>Três</em> entregas juntas que nenhum programa anterior ofereceu.</h2>
+      <p class="s-subtitle" style="margin-bottom: 1.75rem;">O programa garante:</p>
       <div class="s-grid-3" style="margin-top: 0.5rem;">
         <div style="padding: 1.75rem 1.5rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-top: 3px solid var(--claro-red); border-radius: 4px 4px 12px 12px;">
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.6rem;">01 · Conteúdo enviesado</div>
@@ -1209,38 +1242,38 @@
     <div class="slide bg-charcoal" data-slide="9">
       <div class="s-num">09</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>09 · A Meta</span></div>
-      <h2 class="s-title">Hoje, próximo de <em>zero</em>. A meta é construir patamar — não evento.</h2>
-      <p class="s-subtitle" style="margin-bottom: 1.5rem;">A linha de base da sua rede hoje é venda de serviço próxima de zero por PDV/mês. O programa estabelece três patamares de meta — todos defensáveis, todos auditáveis, todos conservadores:</p>
+      <h2 class="s-title">Hoje, próximo de <em>zero</em>?</h2>
+      <p class="s-subtitle" style="margin-bottom: 1.5rem;">A meta é construir patamar — não evento. A linha de base da sua rede é venda de serviço próxima de zero por PDV/mês. O programa estabelece três patamares — todos defensáveis, todos auditáveis, todos conservadores.</p>
       <div class="s-grid-3" style="margin-top: 0.5rem;">
         <div style="padding: 1.5rem 1.4rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; text-align: center;">
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.6rem;">Conservador · 90 dias</div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 3.2rem; color: var(--claro-yellow); line-height: 1; margin-bottom: 0.4rem;">+5</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 3.2rem; color: var(--claro-yellow); line-height: 1; margin-bottom: 0.4rem;">+4</div>
           <div style="font-size: 0.82rem; color: var(--text-light); font-weight: 600; margin-bottom: 0.6rem;">vendas de serviço por PDV/mês</div>
-          <div style="font-size: 0.78rem; color: var(--muted); line-height: 1.5; font-style: italic;">Patamar alcançável já no primeiro ciclo de 90 dias após implementação.</div>
+          <div style="font-size: 0.78rem; color: var(--muted); line-height: 1.5; font-style: italic;">≈ 1/semana. Alcançável já no primeiro ciclo de 90 dias após implementação.</div>
         </div>
         <div style="padding: 1.5rem 1.4rem; background: rgba(244,185,62,0.06); border: 1px solid rgba(244,185,62,0.3); border-radius: 12px; text-align: center; box-shadow: 0 8px 24px rgba(244,185,62,0.08);">
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-yellow); margin-bottom: 0.6rem;">Realista · 6 meses</div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 3.2rem; color: var(--claro-yellow); line-height: 1; margin-bottom: 0.4rem;">+15</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 3.2rem; color: var(--claro-yellow); line-height: 1; margin-bottom: 0.4rem;">+12</div>
           <div style="font-size: 0.82rem; color: var(--text-light); font-weight: 600; margin-bottom: 0.6rem;">vendas de serviço por PDV/mês</div>
-          <div style="font-size: 0.78rem; color: var(--muted); line-height: 1.5; font-style: italic;">Patamar atingido por parceiros do nível Master/Pro após 6 meses no programa.</div>
+          <div style="font-size: 0.78rem; color: var(--muted); line-height: 1.5; font-style: italic;">≈ 3/semana. Atingido por parceiros do nível Master/Pro após 6 meses no programa.</div>
         </div>
         <div style="padding: 1.5rem 1.4rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; text-align: center;">
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.6rem;">Alta Performance · 12 meses</div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 3.2rem; color: var(--claro-yellow); line-height: 1; margin-bottom: 0.4rem;">+25</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 3.2rem; color: var(--claro-yellow); line-height: 1; margin-bottom: 0.4rem;">+20</div>
           <div style="font-size: 0.82rem; color: var(--text-light); font-weight: 600; margin-bottom: 0.6rem;">vendas de serviço por PDV/mês</div>
-          <div style="font-size: 0.78rem; color: var(--muted); line-height: 1.5; font-style: italic;">Referência dos parceiros Embaixadores ao final do ciclo de 12 meses.</div>
+          <div style="font-size: 0.78rem; color: var(--muted); line-height: 1.5; font-style: italic;">≈ 5/semana. Referência dos parceiros Embaixadores ao final do ciclo.</div>
         </div>
       </div>
       <div style="margin-top: 1.75rem; padding: 1.4rem 1.75rem; background: linear-gradient(135deg, var(--claro-yellow), #E0A52A); border-radius: 14px; color: var(--ink);">
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.6rem;">Tradução em ativações</div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
           <div style="font-size: 1rem; line-height: 1.4; font-weight: 600;">
-            Em <strong style="font-family: 'JetBrains Mono', monospace;">1.000 parceiros</strong> ativos no patamar conservador (+5/mês):<br>
-            <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 700;">+60 mil ativações de serviço/ano.</span>
+            Em <strong style="font-family: 'JetBrains Mono', monospace;">1.000 parceiros</strong> ativos no patamar conservador (+4/mês):<br>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 700;">+48 mil ativações de serviço/ano.</span>
           </div>
           <div style="font-size: 1rem; line-height: 1.4; font-weight: 600;">
-            Em <strong style="font-family: 'JetBrains Mono', monospace;">3.000 parceiros</strong>, atingindo o realista (+15/mês):<br>
-            <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 700;">+540 mil ativações de serviço/ano.</span>
+            Em <strong style="font-family: 'JetBrains Mono', monospace;">3.000 parceiros</strong>, atingindo o realista (+12/mês):<br>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 700;">+432 mil ativações de serviço/ano.</span>
           </div>
         </div>
       </div>
@@ -1253,7 +1286,7 @@
     <div class="slide bg-dark" data-slide="10">
       <div class="s-num">10</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>10 · Como Escala</span></div>
-      <h2 class="s-title">Três cenários. <em>Apetite</em> da indústria decide.</h2>
+      <h2 class="s-title">Três cenários. <em>Apetite</em> da marca parceira decide.</h2>
       <p class="s-subtitle" style="margin-bottom: 1.5rem;">O programa é modular. Escala por onda, com KPI auditável por ciclo, com ponto de decisão formal entre ciclos. Sem comprometimento massivo na assinatura inicial.</p>
       <div class="s-grid-3" style="margin-top: 0.5rem;">
         <div style="padding: 1.6rem 1.5rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; position: relative; overflow: hidden;">
@@ -1272,7 +1305,7 @@
           <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.6rem; color: var(--claro-yellow); margin: 0.5rem 0 0.25rem;">1.000 parceiros</div>
           <div style="font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; font-weight: 600;">18 meses</div>
           <div style="font-size: 0.85rem; color: var(--muted); line-height: 1.55; margin-bottom: 0.75rem;">Escala validada em 3 a 4 regiões do país.</div>
-          <div style="font-size: 0.78rem; color: var(--muted-2); line-height: 1.5; padding-top: 0.85rem; border-top: 1px solid rgba(244,185,62,0.15);">Ondas trimestrais + executivos da indústria participando.</div>
+          <div style="font-size: 0.78rem; color: var(--muted-2); line-height: 1.5; padding-top: 0.85rem; border-top: 1px solid rgba(244,185,62,0.15);">Ondas trimestrais + executivos da marca parceira participando.</div>
         </div>
         <div style="padding: 1.6rem 1.5rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; position: relative; overflow: hidden;">
           <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--claro-yellow); opacity: 0.6;"></div>
@@ -1285,7 +1318,7 @@
         </div>
       </div>
       <p style="margin-top: 1.5rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.25rem; line-height: 1.4; color: var(--text-light);">
-        A indústria <span style="color: var(--claro-yellow); font-weight: 600;">começa onde fizer sentido</span> — e expande conforme o resultado validar.
+        A marca parceira <span style="color: var(--claro-yellow); font-weight: 600;">começa onde fizer sentido</span> — e expande conforme o resultado validar.
       </p>
     </div>
 
@@ -1295,25 +1328,25 @@
       <div class="s-num">11</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>11 · A Autoridade</span></div>
       <h2 class="s-title"><em>Duas</em> marcas. Uma entrega.</h2>
-      <p class="s-subtitle" style="margin-bottom: 1.75rem;">O Rentabiliza.ai é entregue por uma parceria que combina infraestrutura de canal já vigente com a sua operação e metodologia destilada em escala bilionária:</p>
+      <p class="s-subtitle" style="margin-bottom: 1.75rem;">O Rentabiliza.ai é entregue por uma parceria que combina infraestrutura de canal já vigente com a sua operação e metodologia destilada em escala real:</p>
       <div class="s-cols" style="margin-top: 0.5rem; gap: 1.5rem;">
         <div style="padding: 2rem 1.75rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-left: 4px solid var(--claro-red); border-radius: 0 12px 12px 0;">
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.85rem;">TradeUp · A Infraestrutura</div>
-          <h3 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; color: var(--text-dark); letter-spacing: -0.01em; margin-bottom: 1rem; line-height: 1.2;">Maior integrador de canal telecom.</h3>
+          <h3 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; color: var(--text-dark); letter-spacing: -0.01em; margin-bottom: 1rem; line-height: 1.2;">Empresa líder no mercado em que atua.</h3>
           <p style="font-size: 0.95rem; line-height: 1.6; color: var(--muted-2); margin: 0;">
-            Empresa líder de tecnologia e alavancagem de varejo telecom. Operadora da plataforma TradeAppOne — <strong style="color: var(--claro-red);">maior integrador de vendas das operadoras Claro, Nextel, Oi, Vivo e TIM</strong> no varejo brasileiro. Mais de 200 mil usuários cadastrados. Relação fiscal e contratual com a indústria já vigente. <strong>A TradeUp é a contratante formal do programa.</strong>
+            Provedora de soluções e a <strong style="color: var(--claro-red);">maior integradora entre as operadoras de telefonia e o varejo brasileiro</strong>. Através de suas plataformas e soluções, contempla mais de <strong>1 milhão de transações por mês</strong>, com <strong>+500 redes varejistas</strong> e <strong>+200 mil usuários</strong>. <strong>A TradeUp é a contratante formal do programa.</strong>
           </p>
         </div>
         <div style="padding: 2rem 1.75rem; background: rgba(13,17,23,0.04); border: 1px solid rgba(13,17,23,0.08); border-left: 4px solid var(--claro-red); border-radius: 0 12px 12px 0;">
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--claro-red); margin-bottom: 0.85rem;">PulsarH.ai · O Método</div>
           <h3 style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; color: var(--text-dark); letter-spacing: -0.01em; margin-bottom: 1rem; line-height: 1.2;">Vinte e um anos de chão de loja.</h3>
           <p style="font-size: 0.95rem; line-height: 1.6; color: var(--muted-2); margin: 0;">
-            Marca de educação executiva fundada por <strong>Rodrigo Braga</strong>. <strong style="color: var(--claro-red);">21 anos de varejo</strong>, sete como Gerente Nacional em rede com 4.500 vendedores e R$ 1 bilhão/ano em faturamento. A PulsarH é a curadoria pedagógica e técnica do programa — quem garante que o método chega na loja já testado em escala bilionária.
+            Marca de educação executiva fundada por <strong>Rodrigo Braga</strong>. <strong style="color: var(--claro-red);">21 anos de varejo</strong>, sete como Gerente Nacional em rede com <strong>4.500 vendedores e R$ 1 bilhão/ano</strong> em faturamento. A PulsarH é a curadoria pedagógica e técnica do programa — quem garante que o método chega na loja já testado em escala real.
           </p>
         </div>
       </div>
       <p style="margin-top: 1.75rem; font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: 1.25rem; line-height: 1.4; color: var(--text-dark);">
-        A indústria contrata a TradeUp. A TradeUp gerencia a entrega. A PulsarH.ai entrega o método. <span style="color: var(--claro-red); font-weight: 600;">Sem nova fricção fiscal. Sem nova due diligence.</span>
+        A marca parceira contrata a TradeUp. A TradeUp gerencia a entrega. A PulsarH.ai entrega o método. <span style="color: var(--claro-red); font-weight: 600;">Sem nova fricção fiscal. Sem nova due diligence.</span>
       </p>
     </div>
 
