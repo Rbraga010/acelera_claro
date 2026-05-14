@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rentabiliza.ai · Modelo de Negócio · TradeUp × PulsarH.ai</title>
+  <meta name="description" content="Memorando pré-contratual da parceria operacional Rentabiliza.ai entre TradeUp Group e PulsarH.ai. Define responsabilidades, divisão de receita, fluxo de caixa e governança.">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Rentabiliza.ai · Modelo de Negócio">
+  <meta property="og:description" content="Memorando pré-contratual TradeUp × PulsarH.ai. Define escopo, divisão de receita e governança da parceria operacional.">
+  <meta property="og:image" content="https://rentabilizaai.gestaopulsarh.com.br/assets/images/og-image.png">
+  <meta property="og:url" content="https://rentabilizaai.gestaopulsarh.com.br/escopo.html">
+  <meta property="og:site_name" content="Rentabiliza.ai">
+  <meta property="og:locale" content="pt_BR">
+
+  <meta name="theme-color" content="#0D1117">
+  <link rel="icon" type="image/svg+xml" href="assets/brand/logo-mono-amber.svg">
+  <link rel="stylesheet" href="assets/brand/rentabiliza-tokens.css">
+
+  <style>
+    @font-face {
+      font-family: 'Fraunces';
+      src: url('assets/fonts/Fraunces-Variable.ttf') format('truetype-variations');
+      font-weight: 100 900; font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Fraunces';
+      src: url('assets/fonts/Fraunces-Italic-Variable.ttf') format('truetype-variations');
+      font-weight: 100 900; font-style: italic;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('assets/fonts/Inter-Variable.ttf') format('truetype-variations');
+      font-weight: 100 900; font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'JetBrains Mono';
+      src: url('assets/fonts/JetBrainsMono-Variable.ttf') format('truetype-variations');
+      font-weight: 100 800; font-style: normal;
+      font-display: swap;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #FAFAF7;
+      color: #1A1A1A;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ───────── Top bar ───────── */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(13, 17, 23, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(244,185,62,0.18);
+      color: #F4F1E8;
+    }
+    .topbar-inner {
+      max-width: 1080px; margin: 0 auto;
+      padding: 14px 32px;
+      display: flex; justify-content: space-between; align-items: center; gap: 24px;
+    }
+    .topbar-brand {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "SOFT" 50, "WONK" 0;
+      font-size: 22px; line-height: 1;
+      display: inline-flex; align-items: baseline;
+      letter-spacing: -0.02em;
+    }
+    .topbar-brand .r-name { font-style: italic; font-weight: 600; color: #F4F1E8; }
+    .topbar-brand .r-dot { color: #F4B93E; font-weight: 600; }
+    .topbar-brand .r-ai { color: #F4B93E; font-weight: 300; font-size: 0.65em; margin-left: 0.02em; }
+    .topbar-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: #8B8B93;
+    }
+    .topbar-meta strong { color: #F4B93E; font-weight: 600; }
+    .topbar-back {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #8B8B93;
+      transition: color 0.2s ease;
+    }
+    .topbar-back:hover { color: #F4B93E; }
+
+    /* ───────── Hero ───────── */
+    .hero {
+      padding: 96px 32px 64px;
+      background: #0D1117;
+      color: #F4F1E8;
+      border-bottom: 1px solid rgba(244,185,62,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 85% 20%, rgba(244,185,62,0.12), transparent 60%),
+        radial-gradient(ellipse 40% 40% at 10% 100%, rgba(244,185,62,0.05), transparent 60%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1080px; margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: #F4B93E;
+      padding: 7px 14px;
+      background: rgba(244,185,62,0.06);
+      border: 1px solid rgba(244,185,62,0.22);
+      border-radius: 100px;
+      margin-bottom: 32px;
+    }
+    .eyebrow::before {
+      content: ''; width: 5px; height: 5px;
+      background: #F4B93E; border-radius: 50%;
+    }
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "SOFT" 50, "WONK" 0;
+      font-style: italic; font-weight: 600;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .hero h1 em {
+      color: #F4B93E;
+      font-style: italic;
+      font-weight: 600;
+    }
+    .hero-sub {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+      line-height: 1.5;
+      color: rgba(244,241,232,0.78);
+      max-width: 780px;
+    }
+    .hero-meta {
+      margin-top: 36px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(244,185,62,0.18);
+      display: flex; flex-wrap: wrap; gap: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: #8B8B93;
+    }
+    .hero-meta span { color: #F4B93E; }
+
+    /* ───────── Disclaimer banner ───────── */
+    .disclaimer {
+      background: rgba(244,185,62,0.06);
+      border-top: 1px solid rgba(244,185,62,0.2);
+      border-bottom: 1px solid rgba(244,185,62,0.15);
+      padding: 18px 32px;
+    }
+    .disclaimer-inner {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; align-items: center; gap: 18px;
+      font-size: 14px; line-height: 1.5;
+      color: #5F5E5A;
+    }
+    .disclaimer-label {
+      flex-shrink: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: #B8881D;
+      padding: 5px 11px;
+      background: rgba(244,185,62,0.12);
+      border-radius: 4px;
+    }
+
+    /* ───────── Content ───────── */
+    .content {
+      max-width: 880px; margin: 0 auto;
+      padding: 80px 32px 64px;
+    }
+    .section {
+      margin-bottom: 72px;
+      scroll-margin-top: 80px;
+    }
+    .section-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: #F4B93E;
+      margin-bottom: 12px;
+    }
+    .section h2 {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "SOFT" 50, "WONK" 0;
+      font-style: italic; font-weight: 600;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #1A1A1A;
+      margin-bottom: 24px;
+    }
+    .section h2 em {
+      color: #F4B93E;
+      font-style: italic;
+      font-weight: 600;
+    }
+    .section h3 {
+      font-family: 'Fraunces', serif;
+      font-style: italic; font-weight: 600;
+      font-size: 1.4rem;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: #1A1A1A;
+      margin: 36px 0 14px;
+    }
+    .section h4 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: #B8881D;
+      margin: 28px 0 12px;
+    }
+    .section p {
+      font-size: 1.02rem; line-height: 1.65;
+      color: #3A3A3A;
+      margin-bottom: 16px;
+    }
+    .section p strong { color: #1A1A1A; font-weight: 600; }
+    .section ul {
+      list-style: none; padding: 0;
+      margin: 16px 0 24px;
+    }
+    .section ul li {
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 10px;
+      font-size: 1rem; line-height: 1.6;
+      color: #3A3A3A;
+    }
+    .section ul li::before {
+      content: '→';
+      position: absolute; left: 0; top: 0;
+      color: #F4B93E;
+      font-weight: 700;
+    }
+    .section ul li strong { color: #1A1A1A; font-weight: 600; }
+
+    /* Pull quote / lead callout */
+    .lead-callout {
+      margin: 24px 0 40px;
+      padding: 24px 28px;
+      background: rgba(244,185,62,0.06);
+      border-left: 4px solid #F4B93E;
+      border-radius: 0 12px 12px 0;
+    }
+    .lead-callout p {
+      font-family: 'Fraunces', serif;
+      font-style: italic; font-weight: 500;
+      font-size: 1.15rem; line-height: 1.5;
+      color: #1A1A1A;
+      margin: 0;
+    }
+    .lead-callout p strong { font-weight: 600; }
+
+    /* Tables */
+    .table-wrap {
+      margin: 24px 0 32px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(13,17,23,0.1);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    table thead th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: #B8881D;
+      text-align: left;
+      padding: 14px 18px;
+      background: rgba(244,185,62,0.07);
+      border-bottom: 1px solid rgba(244,185,62,0.2);
+    }
+    table tbody td {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(13,17,23,0.06);
+      vertical-align: top;
+      color: #3A3A3A;
+      line-height: 1.5;
+    }
+    table tbody tr:last-child td { border-bottom: none; }
+    table tbody tr:nth-child(odd) td { background: rgba(13,17,23,0.015); }
+    table tbody td strong { color: #1A1A1A; font-weight: 600; }
+    table tbody td.amber { color: #B8881D; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+
+    /* Two-col block */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin: 24px 0 32px;
+    }
+    .two-col .col {
+      padding: 24px 26px;
+      background: rgba(13,17,23,0.03);
+      border: 1px solid rgba(13,17,23,0.07);
+      border-radius: 12px;
+    }
+    .two-col .col h4 {
+      margin: 0 0 14px;
+    }
+    .two-col .col ul {
+      margin: 0;
+    }
+    .two-col .col ul li {
+      font-size: 0.92rem;
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
+    .two-col .col ul li::before { font-size: 0.9rem; }
+
+    /* Highlight box (deep amber) */
+    .highlight {
+      margin: 32px 0;
+      padding: 28px 32px;
+      background: linear-gradient(135deg, #F4B93E, #E0A52A);
+      color: #0D1117;
+      border-radius: 14px;
+    }
+    .highlight h4 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: #0D1117;
+      margin: 0 0 12px;
+      opacity: 0.7;
+    }
+    .highlight p {
+      font-family: 'Fraunces', serif;
+      font-style: italic; font-weight: 600;
+      font-size: 1.25rem; line-height: 1.4;
+      color: #0D1117;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+
+    /* Calc block */
+    .calc-block {
+      margin: 20px 0 28px;
+      padding: 22px 26px;
+      background: #0D1117;
+      color: #F4F1E8;
+      border-radius: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92rem; line-height: 1.7;
+    }
+    .calc-block .calc-label {
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: #F4B93E;
+      margin-bottom: 14px;
+    }
+    .calc-block .calc-divider {
+      display: block;
+      height: 1px;
+      background: rgba(244,185,62,0.2);
+      margin: 10px 0 12px;
+    }
+    .calc-block strong { color: #F4B93E; font-weight: 700; }
+    .calc-block .calc-total {
+      font-size: 1.1rem;
+      color: #F4B93E;
+      font-weight: 700;
+    }
+
+    /* Footer */
+    .doc-footer {
+      max-width: 880px; margin: 0 auto;
+      padding: 48px 32px 80px;
+      border-top: 1px solid rgba(13,17,23,0.08);
+      text-align: center;
+    }
+    .doc-footer p {
+      font-family: 'Fraunces', serif;
+      font-style: italic; font-weight: 500;
+      font-size: 1.1rem; line-height: 1.5;
+      color: #1A1A1A;
+      margin-bottom: 6px;
+    }
+    .doc-footer p:last-child {
+      margin-bottom: 0;
+      margin-top: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-style: normal;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8B8B93;
+    }
+    .doc-footer p:nth-of-type(1) { font-weight: 600; color: #F4B93E; }
+
+    @media (max-width: 720px) {
+      .topbar-meta { display: none; }
+      .hero { padding: 64px 24px 48px; }
+      .content { padding: 56px 20px 48px; }
+      .two-col { grid-template-columns: 1fr; gap: 16px; }
+      .section h2 { font-size: 1.6rem; }
+      .table-wrap { font-size: 0.85rem; overflow-x: auto; }
+      table { min-width: 480px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="topbar-brand" aria-label="Rentabiliza.ai — home">
+        <span class="r-name">Rentabiliza</span><span class="r-dot">.</span><span class="r-ai">ai</span>
+      </a>
+      <div class="topbar-meta">Modelo de Negócio · <strong>v1 · Abril 2026</strong></div>
+      <a href="index.html" class="topbar-back">← Home</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">Memorando Pré-Contratual</span>
+      <h1>Modelo de <em>Negócio</em>.</h1>
+      <p class="hero-sub">
+        Parceria operacional Rentabiliza.ai.<br>
+        TradeUp Group atua como <strong>intermediadora/integradora e gestora financeira</strong>.<br>
+        PulsarH.ai responde pela curadoria pedagógica e entrega técnica.
+      </p>
+      <div class="hero-meta">
+        <span>● TradeUp × PulsarH.ai</span>
+        <span>·</span>
+        <span>● 9 seções</span>
+        <span>·</span>
+        <span>● Abril 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="disclaimer">
+    <div class="disclaimer-inner">
+      <span class="disclaimer-label">Natureza</span>
+      <span>Este documento não constitui contrato. Estabelece a base operacional que será formalizada em instrumento contratual após revisão jurídica das partes.</span>
+    </div>
+  </div>
+
+  <main class="content">
+
+    <!-- 01 · VISÃO GERAL -->
+    <section class="section" id="visao-geral">
+      <div class="section-num">01 · Visão Geral da Parceria</div>
+      <h2>Duas <em>marcas</em>. Uma entrega.</h2>
+      <p>Rentabiliza.ai é a marca operada em parceria por <strong>TradeUp Group</strong> e <strong>PulsarH.ai</strong>. As partes atuam em camadas complementares e independentes do ponto de vista jurídico.</p>
+
+      <div class="two-col">
+        <div class="col">
+          <h4>TradeUp · Infraestrutura</h4>
+          <p style="font-size: 0.95rem; margin-bottom: 0;">Aporta infraestrutura comercial, fiscal e de cobrança. Atua como <strong>contratada formal</strong> perante operadoras, indústrias, varejos e demais parceiros institucionais que contratam ou financiam o programa. Conduz a venda em conjunto com a PulsarH.ai, emite nota fiscal, processa cobrança e efetua repasses.</p>
+        </div>
+        <div class="col">
+          <h4>PulsarH.ai · Método</h4>
+          <p style="font-size: 0.95rem; margin-bottom: 0;">Aporta metodologia, conteúdo, curadoria pedagógica, mentorias conduzidas por Rodrigo Braga e a entrega operacional do programa. Responde pela experiência do cliente final. A TradeUp pode disponibilizar um executivo para o acompanhamento do programa, caso julgue necessário.</p>
+        </div>
+      </div>
+
+      <div class="lead-callout">
+        <p>A relação configura <strong>cooperação contínua</strong>, com responsabilidades delimitadas, divisão de receita por plano e ciclo de repasse quinzenal. Cada parte arca integralmente com os próprios custos operacionais dentro da fatia que lhe cabe.</p>
+      </div>
+    </section>
+
+    <!-- 02 · MATRIZ DE RESPONSABILIDADES -->
+    <section class="section" id="responsabilidades">
+      <div class="section-num">02 · Matriz de Responsabilidades</div>
+      <h2>Atribuições <em>por parte</em>.</h2>
+
+      <h3>TradeUp Group</h3>
+      <ul>
+        <li>Frente comercial institucional (<strong>operadoras, indústrias, varejos e demais parceiros</strong>)</li>
+        <li>Prospecção e formalização contratual com os parceiros (em frente comercial conjunta com PulsarH.ai)</li>
+        <li>Gateway de pagamento, cobrança e processamento de recebíveis</li>
+        <li>Emissão fiscal, contabilidade e suporte jurídico</li>
+        <li>Repasse quinzenal à PulsarH.ai</li>
+        <li>Suporte de primeira linha ao parceiro — questões administrativas, fiscais e de cobrança</li>
+        <li>Operação da plataforma TradeAppOne para integração comercial com operadoras</li>
+      </ul>
+
+      <h3>PulsarH.ai</h3>
+      <ul>
+        <li>Entrega integral de método, conteúdo e formação</li>
+        <li>Disponibilização de Rodrigo Braga em mentorias, sessões executivas e produção de conteúdo</li>
+        <li>Comunidade Rentabiliza (Telegram e encontros ao vivo)</li>
+        <li>Configuração de IA, agentes, automações e plataforma de gestão</li>
+        <li>Implementação Premium na operação do parceiro (site, vídeos, ERP e agentes pré-configurados)</li>
+        <li>Suporte de segunda linha ao parceiro — método, conteúdo, mentoria e IA</li>
+        <li>Curadoria pedagógica e atualização contínua do programa</li>
+      </ul>
+
+      <h3>Frentes conjuntas</h3>
+      <ul>
+        <li>Marketing institucional do Rentabiliza.ai (decisão conjunta — cada parte arca com sua fatia)</li>
+        <li><strong>Suporte mútuo nas negociações</strong> — reuniões em conjunto, prospecção em dupla e fechamento alinhado com parceiros institucionais</li>
+        <li><strong>Investimentos exclusivos da PulsarH.ai</strong> (justificam sua maior fatia de partilha): infraestrutura de IA, agentes e robôs, visitas presenciais, produção de conteúdo, materiais didáticos, plataforma e comunidade</li>
+        <li>Estratégia de produto e roadmap</li>
+        <li>Definição de novos planos, ajustes de preço e abertura de novas frentes comerciais</li>
+      </ul>
+    </section>
+
+    <!-- 03 · DIVISÃO DA RECEITA -->
+    <section class="section" id="divisao-receita">
+      <div class="section-num">03 · Divisão da Receita Recorrente</div>
+      <h2>Regra de <em>partilha</em>.</h2>
+
+      <h4>Base de cálculo</h4>
+      <p>Os percentuais incidem sobre a <strong>receita líquida</strong>, definida como o valor efetivamente recebido pela TradeUp após dedução de impostos (Simples Nacional, ISS ou regime aplicável), taxa de gateway, taxas bancárias de processamento e devoluções ou estornos formalizados.</p>
+      <p>A receita líquida é apurada por plano, em base mensal, e consolidada em relatório quinzenal compartilhado entre as partes.</p>
+
+      <h4>Tabela de divisão</h4>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Plano</th>
+              <th style="text-align: center;">TradeUp</th>
+              <th style="text-align: center;">PulsarH.ai</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Start · R$ 0 (30 dias trial)</strong></td>
+              <td class="amber" style="text-align: center;">—</td>
+              <td class="amber" style="text-align: center;">—</td>
+            </tr>
+            <tr>
+              <td><strong>Master · R$ 297/mês</strong></td>
+              <td class="amber" style="text-align: center;">15%</td>
+              <td class="amber" style="text-align: center;">85%</td>
+            </tr>
+            <tr>
+              <td><strong>Pro · R$ 697/tri</strong></td>
+              <td class="amber" style="text-align: center;">15%</td>
+              <td class="amber" style="text-align: center;">85%</td>
+            </tr>
+            <tr>
+              <td><strong>Premium · R$ 4.997/sem</strong></td>
+              <td class="amber" style="text-align: center;">15%</td>
+              <td class="amber" style="text-align: center;">85%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lead-callout">
+        <p><strong>Percentual único de partilha:</strong> 15% TradeUp · 85% PulsarH.ai sobre a receita líquida, independente do plano. A divisão reflete a assimetria estrutural: a PulsarH.ai assume os investimentos exclusivos do programa (infraestrutura de IA, agentes/robôs, visitas presenciais, produção de conteúdo, materiais didáticos, plataforma, mentoria executiva e implementação), proporcionalmente superiores aos custos institucionais e financeiros assumidos pela TradeUp.</p>
+        <p style="margin-top: 1rem;"><strong>Por que único:</strong> simplifica a operação, evita atrito comercial em explicações de percentuais variáveis por plano e mantém previsibilidade na partilha quinzenal.</p>
+      </div>
+    </section>
+
+    <!-- 04 · RECEITAS EXTRAS E COMISSÕES -->
+    <section class="section" id="receitas-extras">
+      <div class="section-num">04 · Receitas Extras e Comissões</div>
+      <h2>Tratamento de itens <em>fora</em> do escopo padrão.</h2>
+
+      <h3>Receitas extras: divisão proporcional</h3>
+      <p>Toda receita acessória gerada pelo programa observa a divisão proporcional ao plano de origem:</p>
+      <ul>
+        <li><strong>Mentoria adicional com Rodrigo Braga</strong> (acima do plano contratado): aplica a divisão do plano de origem</li>
+        <li><strong>Implementação customizada</strong> (escopo adicional ao Premium de R$ 4.997): aplica a divisão Premium (10/90)</li>
+        <li><strong>Workshops presenciais avulsos</strong>: divisão definida na venda, conforme natureza do evento</li>
+        <li><strong>Conteúdo customizado para indústria</strong> (módulos exclusivos para operadora): tratado caso a caso, observada proporcionalidade equivalente</li>
+      </ul>
+
+      <h3>Comissão de indicação</h3>
+      <p>O programa prevê comissionamento para parceiros Embaixadores que indicarem novos lojistas convertidos em planos pagos.</p>
+      <p><strong>Modelo:</strong> 10% recorrentes sobre o valor bruto pago pelo lojista indicado, limitados aos 12 primeiros meses de assinatura ativa. A base bruta foi adotada para simplificar a conferência pelo Embaixador, dispensando explicações sobre carga tributária e taxas.</p>
+      <p><strong>Forma de apuração:</strong> a comissão é apurada sobre o valor bruto e deduzida da receita líquida <strong>antes</strong> da divisão entre TradeUp e PulsarH.ai, tratada como custo de aquisição compartilhado proporcionalmente.</p>
+
+      <h4>Exemplo prático</h4>
+      <div class="calc-block">
+        <div class="calc-label">Embaixador indica lojista no plano Master · 12 meses (recorrente mensal)</div>
+        Receita bruta · R$ 297 × 12 = <strong>R$ 3.564</strong><br>
+        Comissão de 10% sobre bruto · <strong>R$ 356,40</strong><br>
+        Receita líquida estimada (após impostos e taxas) · <strong>R$ 3.029,40</strong>
+        <span class="calc-divider"></span>
+        Receita partilhável (líquida − comissão) · <strong>R$ 2.673</strong><br>
+        TradeUp (15%) · R$ 400,95<br>
+        <span class="calc-total">PulsarH.ai (85%) · R$ 2.272,05</span>
+      </div>
+      <p style="font-size: 0.9rem; color: #5F5E5A; font-style: italic;">A comissão é paga diretamente pela TradeUp ao Embaixador, preservando a centralização fiscal da operação.</p>
+    </section>
+
+    <!-- 05 · CUSTOS COMPARTILHADOS -->
+    <section class="section" id="custos">
+      <div class="section-num">05 · Custos Compartilhados e Operacionais</div>
+      <h2>Estrutura de <em>custos</em>.</h2>
+
+      <p>Cada parte assume os custos operacionais inerentes à fatia de receita que lhe cabe.</p>
+
+      <div class="two-col">
+        <div class="col">
+          <h4>Sob responsabilidade da TradeUp</h4>
+          <ul>
+            <li>Gateway de pagamento e taxas bancárias</li>
+            <li>Encargos fiscais (contabilidade, emissão de NF, ISS)</li>
+            <li>Equipe comercial e relacionamento institucional</li>
+            <li>Suporte de primeira linha ao parceiro</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>Sob responsabilidade da PulsarH.ai</h4>
+          <ul>
+            <li>Disponibilização de Rodrigo Braga em mentorias e produção</li>
+            <li>Produção de conteúdo (vídeo, plataforma e comunidade)</li>
+            <li>Equipe de implementação Premium (design, desenvolvimento e instalação)</li>
+            <li>Viagens, hospedagem e logística de implementação presencial, proporcionais à receita gerada</li>
+            <li>Stack tecnológica (hospedagem, APIs de IA e software)</li>
+            <li>Suporte de segunda linha ao parceiro</li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 06 · FLUXO DE CAIXA -->
+    <section class="section" id="fluxo-caixa">
+      <div class="section-num">06 · Fluxo de Caixa e Repasse Quinzenal</div>
+      <h2>Ciclo <em>financeiro</em>.</h2>
+
+      <h4>Recebimento</h4>
+      <p>A TradeUp é a única recebedora de receitas do programa. Todos os pagamentos provenientes de operadoras, indústria, lojistas ou parceiros são creditados em conta da TradeUp.</p>
+
+      <h4>Apuração</h4>
+      <p>A apuração contábil é <strong>quinzenal</strong> para fins de controle e relatório, com fechamento nos dias 15 e no último dia útil de cada mês.</p>
+
+      <h4>Repasse</h4>
+      <p>O repasse financeiro à PulsarH.ai ocorre em até <strong>5 dias úteis</strong> após o efetivo recebimento da TradeUp pelo parceiro institucional, respeitando o ciclo de 30 dias usual da carteira corporativa. Em caso de feriado bancário ou ocorrência operacional, o prazo é estendido por mais 2 dias úteis mediante comunicação formal.</p>
+
+      <h4>Relatório</h4>
+      <p>A cada repasse, a TradeUp encaminha à PulsarH.ai relatório quinzenal contendo:</p>
+      <ul>
+        <li>Receita bruta total do período</li>
+        <li>Deduções aplicadas (impostos, taxas e comissões pagas)</li>
+        <li>Receita líquida partilhável</li>
+        <li>Receita segmentada por plano (Start, Master, Pro e Premium)</li>
+        <li>Apuração do percentual devido à PulsarH.ai por plano</li>
+        <li>Total líquido a receber</li>
+      </ul>
+      <p>A PulsarH.ai dispõe de 5 dias úteis para impugnar o relatório. Decorrido o prazo sem manifestação, o relatório é considerado aceito e a partilha torna-se definitiva.</p>
+    </section>
+
+    <!-- 07 · RECONHECIMENTO ADIANTADO -->
+    <section class="section" id="adiantados">
+      <div class="section-num">07 · Reconhecimento de Receita em Pagamentos Adiantados</div>
+      <h2>Pagamentos <em>antecipados</em> por contrato em lote.</h2>
+
+      <p>Quando operadora ou indústria efetua pagamento antecipado relativo a uma onda de parceiros (em cenários moderado, realista ou desafiador), a receita é tratada em modelo misto, preservando o equilíbrio de caixa de ambas as partes.</p>
+
+      <div class="lead-callout">
+        <p><strong>Modelo misto:</strong> 30% reconhecidos na assinatura do contrato (com divisão imediata) e 70% reconhecidos conforme ativação efetiva de cada parceiro.</p>
+      </div>
+
+      <h4>30% reconhecidos na assinatura</h4>
+      <p>Os 30% iniciais são partilhados entre TradeUp e PulsarH.ai no ato da contratação, conforme a divisão proporcional dos planos da onda. A antecipação remunera o esforço comercial já realizado pela TradeUp e a estrutura mobilizada pela PulsarH.ai para a entrega.</p>
+
+      <h4>70% reconhecidos por ativação</h4>
+      <p>À medida que cada lojista da onda é ativado no programa, a parcela proporcional é reconhecida e dividida entre as partes.</p>
+
+      <h4>Exemplo prático</h4>
+      <div class="calc-block">
+        <div class="calc-label">Operadora antecipa R$ 297.000 · 1.000 parceiros no plano Start (1 mês de subsídio)</div>
+        Reconhecimento imediato (30%) · <strong>R$ 89.100</strong><br>
+        — TradeUp (20%) · R$ 17.820<br>
+        — <span class="calc-total">PulsarH.ai (80%) · R$ 71.280</span>
+        <span class="calc-divider"></span>
+        Reconhecimento por ativação (70%) · <strong>R$ 207.900</strong><br>
+        Distribuídos conforme ativação de cada parceiro, mantida a proporção 20/80
+      </div>
+
+      <h3>Devolução por não-ativação</h3>
+      <p>Caso a onda contratada não alcance ativação integral no prazo contratual, e a operadora exija devolução proporcional, esta incide <strong>exclusivamente sobre os 70% ainda não reconhecidos</strong>. <strong>Os 30% reconhecidos na assinatura não são devolvidos</strong>, por remunerarem o esforço comercial e a estrutura previamente mobilizados.</p>
+    </section>
+
+    <!-- 08 · GOVERNANÇA -->
+    <section class="section" id="governanca">
+      <div class="section-num">08 · Governança e Decisão</div>
+      <h2>Autonomia <em>delimitada</em> e decisões conjuntas.</h2>
+
+      <h3>Decisões operacionais</h3>
+      <p>Cada parte detém autonomia integral em sua área de responsabilidade. <strong>A TradeUp não interfere em decisões pedagógicas. A PulsarH.ai não interfere em decisões comerciais ou fiscais.</strong></p>
+
+      <h3>Decisões conjuntas obrigatórias</h3>
+      <p>As seguintes matérias exigem acordo formal por escrito de ambas as partes:</p>
+      <ul>
+        <li>Alteração de preço de qualquer plano</li>
+        <li>Lançamento ou descontinuação de plano</li>
+        <li>Modificação da divisão de receita prevista neste documento</li>
+        <li>Celebração de contrato com indústria que envolva escopo customizado superior a <strong>R$ 100.000</strong></li>
+        <li>Investimento em marketing institucional superior a <strong>R$ 5.000/mês</strong></li>
+        <li>Encerramento da parceria</li>
+      </ul>
+
+      <h3>Reuniões de governança</h3>
+      <p>As partes realizam reunião <strong>quinzenal</strong> para:</p>
+      <ul>
+        <li>Revisar o fechamento financeiro da quinzena anterior</li>
+        <li>Acompanhar o pipeline comercial em andamento</li>
+        <li>Avaliar as entregas operacionais do programa</li>
+        <li>Deliberar sobre decisões conjuntas pendentes</li>
+      </ul>
+      <p>Cada reunião é registrada em ata simples, compartilhada entre as partes em até 24 horas.</p>
+    </section>
+
+    <!-- 09 · SAÍDA E CONFLITO -->
+    <section class="section" id="saida">
+      <div class="section-num">09 · Cláusula de Saída e Resolução de Conflitos</div>
+      <h2>Encerramento <em>ordenado</em> da parceria.</h2>
+
+      <h3>Saída amigável</h3>
+      <p>Qualquer das partes pode encerrar a parceria mediante <strong>aviso prévio de 90 dias</strong>, no curso do qual:</p>
+      <ul>
+        <li>Os contratos vigentes com indústria e parceiros são honrados até o término natural</li>
+        <li>Os parceiros ativos seguem recebendo a entrega integral pelo período contratado</li>
+        <li>A divisão de receita permanece vigente para todos os contratos em curso na data do aviso, até a respectiva conclusão</li>
+      </ul>
+
+      <h3>Saída por descumprimento</h3>
+      <p>Em caso de descumprimento de obrigação material prevista neste documento — exemplificativamente, ausência de repasse pela TradeUp por período superior a 30 dias ou interrupção da entrega de conteúdo pela PulsarH.ai pelo mesmo período — a parte adimplente poderá promover rescisão <strong>com efeito imediato</strong>, mediante notificação formal.</p>
+
+      <h3>Resolução de conflitos</h3>
+      <p>Controvérsias não solucionadas em reunião de governança serão submetidas a mediação extrajudicial na cidade de São Paulo, com mediador escolhido por consenso. Inexistindo composição, fica eleito o foro da Capital de São Paulo.</p>
+
+      <h3>Direitos sobre marcas e ativos</h3>
+      <p>A marca <strong>Rentabiliza.ai</strong> é submarca da PulsarH.ai, desenvolvida sob curadoria e propriedade da PulsarH. Em qualquer cenário de encerramento da parceria, a titularidade permanece com a PulsarH.ai.</p>
+      <p>A marca <strong>PulsarH.ai</strong> permanece de titularidade exclusiva de Rodrigo Braga em qualquer cenário. A marca <strong>TradeUp</strong> permanece de titularidade exclusiva da TradeUp Group em qualquer cenário.</p>
+      <p>A metodologia, os conteúdos, os agentes de IA e os sistemas desenvolvidos no curso da parceria são de titularidade da PulsarH.ai. A infraestrutura comercial, o gateway e a relação contratual com a indústria são de titularidade da TradeUp.</p>
+    </section>
+
+    <!-- ANEXO · SIMULAÇÕES -->
+    <section class="section" id="anexo">
+      <div class="section-num">Anexo · Simulações Numéricas por Cenário</div>
+      <h2>Distribuição <em>aplicada</em> em cenários de referência.</h2>
+
+      <h3>Cenário 1 · 1.000 parceiros no Start trial (30 dias)</h3>
+      <p style="font-size: 0.92rem; color: #5F5E5A;">Receita bruta no Start: <strong style="color: #1A1A1A;">R$ 0</strong> · Trial gratuito por 30 dias bancado pela marca parceira. O Start é o funil de aquisição em massa — não gera receita direta, apenas o pipeline de conversão para Master/Pro/Premium nos meses seguintes.</p>
+
+      <h3>Cenário 2 · 500 parceiros no Master ao longo de 12 meses (recorrente mensal)</h3>
+      <p style="font-size: 0.92rem; color: #5F5E5A;">Receita bruta: 500 × R$ 297 × 12 = R$ 1.782.000 · Receita líquida estimada (carga tributária aproximada de 15%): <strong style="color: #1A1A1A;">R$ 1.514.700</strong></p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Quem</th><th style="text-align: center;">%</th><th style="text-align: right;">Valor</th></tr></thead>
+          <tbody>
+            <tr><td>TradeUp</td><td class="amber" style="text-align: center;">15%</td><td class="amber" style="text-align: right;">R$ 227.205</td></tr>
+            <tr><td>PulsarH.ai</td><td class="amber" style="text-align: center;">85%</td><td class="amber" style="text-align: right;">R$ 1.287.495</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Cenário 3 · 200 parceiros no Pro ao longo de 6 meses (2 trimestres)</h3>
+      <p style="font-size: 0.92rem; color: #5F5E5A;">Receita bruta: 200 × R$ 697 × 2 = R$ 278.800 · Receita líquida estimada: <strong style="color: #1A1A1A;">R$ 236.980</strong></p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Quem</th><th style="text-align: center;">%</th><th style="text-align: right;">Valor</th></tr></thead>
+          <tbody>
+            <tr><td>TradeUp</td><td class="amber" style="text-align: center;">15%</td><td class="amber" style="text-align: right;">R$ 35.547</td></tr>
+            <tr><td>PulsarH.ai</td><td class="amber" style="text-align: center;">85%</td><td class="amber" style="text-align: right;">R$ 201.433</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Cenário 4 · 50 parceiros no Premium ao longo de 12 meses (2 semestres)</h3>
+      <p style="font-size: 0.92rem; color: #5F5E5A;">Receita bruta: 50 × R$ 4.997 × 2 = R$ 499.700 · Receita líquida estimada: <strong style="color: #1A1A1A;">R$ 424.745</strong></p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Quem</th><th style="text-align: center;">%</th><th style="text-align: right;">Valor</th></tr></thead>
+          <tbody>
+            <tr><td>TradeUp</td><td class="amber" style="text-align: center;">15%</td><td class="amber" style="text-align: right;">R$ 63.711,75</td></tr>
+            <tr><td>PulsarH.ai</td><td class="amber" style="text-align: center;">85%</td><td class="amber" style="text-align: right;">R$ 361.033,25</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Cenário consolidado · onda mista de 1.750 parceiros em horizonte de 12 meses</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Plano</th>
+              <th style="text-align: center;">Parceiros</th>
+              <th style="text-align: right;">Receita líquida</th>
+              <th style="text-align: right;">TradeUp (15%)</th>
+              <th style="text-align: right;">PulsarH.ai (85%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Start</strong></td><td style="text-align: center;">1.000 (trial)</td><td style="text-align: right;" class="amber">R$ 0</td><td style="text-align: right;">—</td><td style="text-align: right;">—</td></tr>
+            <tr><td><strong>Master</strong></td><td style="text-align: center;">500 (12m)</td><td style="text-align: right;" class="amber">R$ 1.514.700</td><td style="text-align: right;">R$ 227.205</td><td style="text-align: right;">R$ 1.287.495</td></tr>
+            <tr><td><strong>Pro</strong></td><td style="text-align: center;">200 (2tri)</td><td style="text-align: right;" class="amber">R$ 236.980</td><td style="text-align: right;">R$ 35.547</td><td style="text-align: right;">R$ 201.433</td></tr>
+            <tr><td><strong>Premium</strong></td><td style="text-align: center;">50 (2sem)</td><td style="text-align: right;" class="amber">R$ 424.745</td><td style="text-align: right;">R$ 63.712</td><td style="text-align: right;">R$ 361.033</td></tr>
+            <tr style="background: rgba(244,185,62,0.07);">
+              <td><strong style="color: #B8881D;">TOTAL</strong></td>
+              <td style="text-align: center;"><strong>1.750</strong></td>
+              <td style="text-align: right;" class="amber"><strong>R$ 2.176.425</strong></td>
+              <td style="text-align: right;" class="amber"><strong>R$ 326.464</strong></td>
+              <td style="text-align: right;" class="amber"><strong>R$ 1.849.961</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="font-size: 0.9rem; color: #5F5E5A; font-style: italic; margin-top: 12px;">Os valores apresentados são ilustrativos. A apuração definitiva considera a carga tributária efetiva, as taxas reais de gateway e as comissões pagas a Embaixadores no período.</p>
+    </section>
+
+  </main>
+
+  <footer class="doc-footer">
+    <p>Documento elaborado para fins operacionais e pré-contratuais.</p>
+    <p style="color: #1A1A1A;">Próxima etapa: revisão jurídica pelas partes e formalização em instrumento contratual.</p>
+    <p>TradeUp Group · PulsarH.ai · Abril 2026</p>
+  </footer>
+
+</body>
+</html>
