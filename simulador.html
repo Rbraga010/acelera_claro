@@ -802,9 +802,9 @@
         <div class="cfg-grp">
           <span class="cfg-grp-label">💰 Valores R$</span>
           <div class="cfg-grp-row">
-            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-start)"></span><span class="tag">S/mês</span><input type="number" id="valStart" value="297" min="0" class="wide"></span>
-            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-master)"></span><span class="tag">M/tri</span><input type="number" id="valMaster" value="997" min="0" class="wide"></span>
-            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-pro)"></span><span class="tag">P/tri</span><input type="number" id="valPro" value="2997" min="0" class="wide"></span>
+            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-start)"></span><span class="tag">S/trial</span><input type="number" id="valStart" value="0" min="0" class="wide"></span>
+            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-master)"></span><span class="tag">M/mês</span><input type="number" id="valMaster" value="297" min="0" class="wide"></span>
+            <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-pro)"></span><span class="tag">P/tri</span><input type="number" id="valPro" value="697" min="0" class="wide"></span>
             <span class="cfg-inp"><span class="cfg-dot" style="background:var(--color-premium)"></span><span class="tag">Pr/sem</span><input type="number" id="valPremium" value="4997" min="0" class="wide"></span>
           </div>
         </div>
@@ -889,19 +889,27 @@
 
     const DEFAULTS = {
       periodo: 6,
-      aquisicao: 50, // valor "padrão" para novos meses adicionados
-      // Rampa pré-definida (Jul→Dez 2026): cenário inicial de crescimento
+      aquisicao: 50,
       aquisicaoMesDefault: [30, 50, 70, 100, 120, 150],
       pctMaster: 20, pctPro: 10, pctPremium: 5,
-      renovStart: 40, renovMaster: 20, renovPro: 10, renovPremium: 0,
-      valStart: 297, valMaster: 997, valPro: 2997, valPremium: 4997,
-      mpStart: 100, mpMaster: 80, mpPro: 60, mpPremium: 20,
+      renovStart: 0, renovMaster: 80, renovPro: 50, renovPremium: 0,
+      // PENDÊNCIA Rodrigo: estrutura de planos em revisão (modelo Marcos)
+      // Start = R$ 0 trial 30 dias (não gera receita direta)
+      // Master = R$ 297/mês recorrente
+      // Pro = R$ 697/tri (era 497, subido pra 697)
+      // Premium = R$ 4.997/sem mantido
+      valStart: 0, valMaster: 297, valPro: 697, valPremium: 4997,
+      mpStart: 100, mpMaster: 70, mpPro: 30, mpPremium: 0,
       pctTradeUp: 15, pctPulsarH: 50, pctImpostos: 15,
       maxMentDia: 4, diasUteis: 20, maxImpl: 10,
     };
 
-    // Ciclos de cobrança (em meses) — alinhado com o modelo aprovado pelo Rodrigo
-    const CICLO = { start: 1, master: 3, pro: 3, premium: 6 };
+    // Ciclos de cobrança (em meses)
+    // Start: 30 dias trial (1 mês, R$ 0)
+    // Master: mensal recorrente (paga 1× a cada mês)
+    // Pro: trimestral (paga 1× a cada 3 meses)
+    // Premium: semestral (paga 1× a cada 6 meses)
+    const CICLO = { start: 1, master: 1, pro: 3, premium: 6 };
 
     const MESES = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
     const START_MES = 6;  // Julho (0-indexed)
