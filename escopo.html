@@ -286,28 +286,63 @@
       position: relative; z-index: 2;
     }
 
-    /* ─── Brand top ─── */
+    /* ─── Brand top · padrão alinhado com slides.html (caixa com blur) ─── */
     .brand-top {
-      position: absolute; top: 32px; left: 80px;
-      display: flex; align-items: center; gap: 1rem;
+      position: fixed; top: 1.25rem; left: 1.5rem; z-index: 1000;
+      display: flex; align-items: baseline; gap: 0.6rem;
+      padding: 0.4rem 0.85rem;
+      background: rgba(13,17,23,0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+    }
+    .brand-top a {
+      display: inline-flex; align-items: baseline; gap: 0.6rem;
+      text-decoration: none;
+    }
+    .brand-top .wordmark {
+      font-family: 'Fraunces', serif;
+      font-variation-settings: "SOFT" 50, "WONK" 0;
+      font-size: 18px; line-height: 1;
+      display: inline-flex; align-items: baseline;
+      letter-spacing: -0.02em;
+    }
+    .brand-top .wordmark .n { font-style: italic; font-weight: 600; color: #F4F1E8; }
+    .brand-top .wordmark .d { color: var(--amber); font-weight: 600; }
+    .brand-top .wordmark .a { color: var(--amber); font-weight: 300; font-size: 0.65em; margin-left: 0.02em; }
+    .brand-top-divider {
+      width: 1px; height: 14px;
+      background: rgba(255,255,255,0.18);
+      align-self: center;
+    }
+    .brand-top-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600; font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── Home link top-right ─── */
+    .home-link {
+      position: fixed; top: 2rem; right: 2.5rem; z-index: 1000;
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.7rem; font-weight: 700;
       letter-spacing: 0.18em; text-transform: uppercase;
       color: var(--muted);
-      z-index: 3;
+      padding: 0.4rem 0.85rem;
+      background: rgba(13,17,23,0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      transition: all 0.15s;
     }
-    .brand-top .wordmark {
-      font-family: 'Fraunces', serif;
-      font-size: 1.2rem;
-      letter-spacing: -0.02em;
-      font-weight: 500;
-      text-transform: none;
+    .home-link:hover {
+      color: var(--amber);
+      border-color: var(--border-warm);
     }
-    .brand-top .wordmark .n { font-style: italic; color: var(--text-light); }
-    .brand-top .wordmark .d { color: var(--amber); }
-    .brand-top .wordmark .a { color: var(--amber); font-weight: 300; font-size: 0.7em; }
-    .bg-light .brand-top { color: var(--muted-dark); }
-    .bg-light .brand-top .wordmark .n { color: var(--text-dark); }
 
     /* ─── Controles ─── */
     .slide-controls {
@@ -393,7 +428,9 @@
       .s-cols, .s-cols.cols-3, .s-cols.cols-4 { grid-template-columns: 1fr; }
       .slide-controls { display: none; }
       .fullscreen-btn { display: none; }
+      .home-link { display: none; }
       .brand-top { position: relative; top: auto; left: auto; margin-bottom: 1.5rem; }
+      .brand-top-divider, .brand-top-text { display: none; }
       .s-num { display: none; }
     }
   </style>
@@ -402,15 +439,21 @@
 
   <div class="progress-bar"><div class="progress-fill" id="progressBar"></div></div>
 
+  <!-- WORDMARK RENTABILIZA TOP-LEFT (mesma estrutura do slides.html) -->
+  <div class="brand-top">
+    <a href="index.html" aria-label="Rentabiliza.ai · home">
+      <span class="wordmark"><span class="n">Rentabiliza</span><span class="d">.</span><span class="a">ai</span></span>
+      <span class="brand-top-divider"></span>
+      <span class="brand-top-text">Modelo de Negócio · Maio 2026</span>
+    </a>
+  </div>
+
+  <a href="doc.html" class="home-link">Documento →</a>
+
   <div class="deck" id="deck">
 
     <!-- ════════════ SLIDE 01 — CAPA ════════════ -->
     <div class="slide bg-dark active" data-slide="1">
-      <div class="brand-top">
-        <span class="wordmark"><span class="n">Rentabiliza</span><span class="d">.</span><span class="a">ai</span></span>
-        <span>·</span>
-        <span>Modelo de Negócio · Maio 2026</span>
-      </div>
       <div class="s-num">01</div>
       <div class="s-eyebrow"><span class="s-dot"></span><span>Memorando pré-contratual</span></div>
       <h1 class="s-title">Modelo de <em>Negócio</em>.<br>Parceria operacional Rentabiliza.ai.</h1>
@@ -786,6 +829,7 @@
   <!-- ─── Controles ─── -->
   <div class="slide-controls">
     <div class="slide-counter"><span class="current" id="currentSlide">01</span>/ 12</div>
+    <button class="slide-btn" id="capaBtn" title="Voltar à capa (Home)" aria-label="Voltar à capa">⌂</button>
     <button class="slide-btn" id="prevBtn">←</button>
     <button class="slide-btn" id="nextBtn">→</button>
   </div>
@@ -829,6 +873,7 @@
 
     document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
     document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+    document.getElementById('capaBtn').addEventListener('click', () => goTo(0));
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); goTo(current + 1); }
