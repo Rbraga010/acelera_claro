@@ -98,13 +98,13 @@
   --r-fraunces-axes: "SOFT" var(--r-fraunces-soft), "WONK" var(--r-fraunces-wonk);
 
   /* Display scale */
-  --r-fs-display-xl: clamp(56px, 7vw, 104px);
-  --r-fs-display-lg: clamp(44px, 5.5vw, 72px);
-  --r-fs-display-md: clamp(32px, 4vw, 48px);
-  --r-fs-display-sm: 28px;
+  --r-fs-display-xl: clamp(45px, 5.6vw, 83px);
+  --r-fs-display-lg: clamp(35px, 4.4vw, 58px);
+  --r-fs-display-md: clamp(26px, 3.2vw, 38px);
+  --r-fs-display-sm: 22px;
 
   /* Body */
-  --r-fs-body-lg: 20px;
+  --r-fs-body-lg: 16px;
   --r-fs-body-md: 16px;
   --r-fs-body-sm: 14px;
 

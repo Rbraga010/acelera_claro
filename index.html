@@ -170,9 +170,9 @@
       font-family: var(--r-font-display);
       font-variation-settings: var(--r-fraunces-axes);
       font-style: italic;
-      font-size: var(--r-fs-display-xl);
+      font-size: clamp(26px, 3.5vw, 50px);
       font-weight: 600;
-      line-height: 1.02;
+      line-height: 1.06;
       letter-spacing: var(--r-tr-display);
       color: var(--r-fg);
       max-width: 1040px;
@@ -188,7 +188,7 @@
       font-variation-settings: var(--r-fraunces-axes);
       font-style: normal;
       font-weight: 400;
-      font-size: clamp(20px, 2vw, 26px);
+      font-size: clamp(18px, 1.8vw, 22px);
       line-height: 1.4;
       color: var(--r-text-on-dark);
       max-width: 820px;
@@ -403,7 +403,7 @@
       font-variation-settings: var(--r-fraunces-axes);
       font-style: italic;
       font-weight: 600;
-      font-size: 26px;
+      font-size: 21px;
       line-height: 1.1;
       letter-spacing: -0.015em;
       color: var(--r-fg);
@@ -491,21 +491,19 @@
       line-height: 1.65;
       color: var(--r-fg-muted);
     }
-    /* 3 colunas: [big1] [big2] [stack small1 + small2] */
+    /* Feature (topo, largura toda) + 3 cards de identidade embaixo */
     .cards-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 0.82fr;
-      grid-template-rows: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       grid-template-areas:
-        "big1 big2a small1"
-        "big1 big2b small2";
+        "feat feat feat"
+        "aud1 aud2 aud3";
       gap: 20px;
     }
-    .card-big-1 { grid-area: big1; }
-    .card-big-2a { grid-area: big2a; }
-    .card-big-2b { grid-area: big2b; }
-    .card-small-1 { grid-area: small1; }
-    .card-small-2 { grid-area: small2; }
+    .card-feature { grid-area: feat; }
+    .card-aud-1 { grid-area: aud1; }
+    .card-aud-2 { grid-area: aud2; }
+    .card-aud-3 { grid-area: aud3; }
 
     .card {
       position: relative;
@@ -526,12 +524,13 @@
       transform: translateY(-2px);
       box-shadow: 0 12px 32px rgba(13, 17, 23, 0.08);
     }
-    .card-big {
-      min-height: 420px;
+    .card-feature {
+      min-height: 280px;
     }
-    .card-big .card-title {
-      font-size: 34px;
+    .card-feature .card-title {
+      font-size: 32px;
     }
+    .card-feature .card-desc { max-width: 600px; }
     .card-small {
       padding: 24px 22px;
       min-height: 200px;
@@ -560,15 +559,23 @@
       font-size: 13px;
     }
     /* Big cards — fundo branco com foto editorial translúcida + overlay paper-warm */
-    .card-big-1, .card-big-2a, .card-big-2b {
+    .card-feature, .card-aud-1, .card-aud-2, .card-aud-3 {
       background: var(--r-bg-elev-2, #FFFFFF);
     }
+    .card-aud-1, .card-aud-2, .card-aud-3 { min-height: 300px; }
+    .card-aud-1 .card-title, .card-aud-2 .card-title, .card-aud-3 .card-title {
+      font-size: 16px; margin-bottom: 12px;
+    }
+    .card-aud-1 .card-desc, .card-aud-2 .card-desc, .card-aud-3 .card-desc {
+      font-size: 14.5px; margin-bottom: 24px; line-height: 1.55;
+    }
+    .card-aud-1 .card-cta, .card-aud-2 .card-cta, .card-aud-3 .card-cta { margin-top: auto; }
     /* big2a e big2b são metade da altura — herdam look big mas com min-height menor */
     .card-big-2a, .card-big-2b {
       min-height: 200px;
     }
     .card-big-2a .card-title, .card-big-2b .card-title {
-      font-size: 26px;
+      font-size: 21px;
       margin-bottom: 10px;
     }
     .card-big-2a .card-desc, .card-big-2b .card-desc {
@@ -591,9 +598,11 @@
       font-size: 13px;
     }
     /* Imagem de fundo (camada profunda) */
-    .card-big-1::after, .card-big-2a::after, .card-big-2b::after {
+    /* Imagem de fundo só no card feature */
+    .card-feature::after {
       content: '';
       position: absolute; inset: 0;
+      background-image: url('assets/images/card-doc-bg.jpg');
       background-size: cover;
       background-position: center;
       opacity: 0.28;
@@ -601,18 +610,7 @@
       pointer-events: none;
       z-index: 0;
     }
-    .card-big-1::after {
-      background-image: url('assets/images/card-doc-bg.jpg');
-    }
-    .card-big-2a::after {
-      background-image: url('assets/images/card-pitch-bg.jpg');
-    }
-    .card-big-2b::after {
-      background-image: url('assets/images/card-pitch-bg.jpg');
-      filter: saturate(0.85) contrast(1.02) hue-rotate(-15deg);
-    }
-    /* Overlay cream gradient — garante legibilidade do texto à esquerda, imagem respira à direita */
-    .card-big-1::before, .card-big-2a::before, .card-big-2b::before {
+    .card-feature::before {
       content: '';
       position: absolute; inset: 0;
       background:
@@ -621,15 +619,9 @@
       pointer-events: none;
       z-index: 1;
     }
-    /* Conteúdo textual acima de tudo */
-    .card-big-1 > *, .card-big-2a > *, .card-big-2b > * { position: relative; z-index: 2; }
-    /* No hover, imagem fica um pouco mais visível */
-    .card-big-1:hover::after, .card-big-2a:hover::after, .card-big-2b:hover::after { opacity: 0.38; }
-    .card-big-1:hover::before, .card-big-2a:hover::before, .card-big-2b:hover::before {
-      background:
-        linear-gradient(95deg, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.82) 35%, rgba(255,255,255,0.45) 70%, rgba(255,255,255,0.25) 100%),
-        radial-gradient(ellipse 60% 40% at 85% 0%, rgba(244,185,62,0.18), transparent 60%);
-    }
+    .card-feature > * { position: relative; z-index: 2; }
+    .card-feature:hover::after { opacity: 0.38; }
+
     /* Card restrito (04 · em construção) */
     .card-restricted {
       opacity: 0.82;
@@ -741,7 +733,7 @@
     .context-section .r-eyebrow { margin-bottom: 40px; }
     .context-body p {
       font-family: var(--r-font-body);
-      font-size: 20px;
+      font-size: 16px;
       line-height: 1.6;
       color: var(--r-fg);
       font-weight: 400;
@@ -754,7 +746,7 @@
       font-variation-settings: var(--r-fraunces-axes);
       font-style: italic;
       font-weight: 600 !important;
-      font-size: 28px !important;
+      font-size: 22px !important;
       color: var(--r-fg) !important;
       line-height: 1.35 !important;
       margin-top: 56px !important;
@@ -854,15 +846,13 @@
     /* ═══════════════════════════════ RESPONSIVE ═══════════════════════════════ */
     @media (max-width: 1100px) {
       .cards-grid {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto auto;
+        grid-template-columns: repeat(3, 1fr);
         grid-template-areas:
-          "big1 big2a"
-          "big1 big2b"
-          "small1 small2";
+          "feat feat feat"
+          "aud1 aud2 aud3";
       }
-      .card-big { min-height: 440px; }
-      .card-small { min-height: 200px; }
+      .card-feature { min-height: 260px; }
+      .card-aud-1, .card-aud-2, .card-aud-3 { min-height: 300px; }
     }
     /* MOBILE PERFORMANCE — vídeo escondido em telas pequenas pra economizar dados/bateria.
        Fallback (hero::before) ganha mais opacidade pra preencher o espaço visualmente. */
@@ -882,7 +872,7 @@
       .hero-brand-stack .hero-symbol { width: clamp(68px, 16vw, 86px); }
       .hero-brand-wordmark { font-size: 24px; }
       .hero-brand-version { font-size: 9px; }
-      .hero-title { font-size: clamp(36px, 10vw, 56px); margin-bottom: 28px; }
+      .hero-title { font-size: clamp(29px, 8vw, 45px); margin-bottom: 28px; }
       .hero-sub { font-size: 17px; margin-bottom: 40px; }
       .hero-triad { flex-direction: column; align-items: flex-start; gap: 14px; padding-top: 28px; }
       .hero-triad-sep { display: none; }
@@ -892,7 +882,7 @@
       .intro-scroller { padding: 8px 0 24px; }
       .intro-track { gap: 14px; animation-duration: 24s; }
       .intro-card { flex: 0 0 260px; max-width: 260px; padding: 24px; min-height: 220px; }
-      .intro-card-title { font-size: 22px; }
+      .intro-card-title { font-size: 18px; }
       .intro-scroll-cue { padding: 0 20px; font-size: 10px; gap: 12px; }
       .cards-section, .context-section, .footer { padding-left: 20px; padding-right: 20px; }
       .cards-section { padding-top: 64px; padding-bottom: 64px; }
@@ -900,19 +890,18 @@
         grid-template-columns: 1fr;
         grid-template-rows: auto;
         grid-template-areas:
-          "big1"
-          "big2a"
-          "big2b"
-          "small1"
-          "small2";
+          "feat"
+          "aud1"
+          "aud2"
+          "aud3";
       }
       .card { grid-column: span 1; min-height: auto; padding: 28px; }
       .card-big { min-height: auto; }
       .card-big .card-title { font-size: 32px; }
       .card-title { font-size: 28px; }
       .context-section { padding-top: 80px; padding-bottom: 80px; }
-      .context-body p { font-size: 17px; }
-      .context-accent { font-size: 22px !important; }
+      .context-body p { font-size: 14px; }
+      .context-accent { font-size: 18px !important; }
       .footer-inner { grid-template-columns: 1fr; gap: 32px; }
       .footer-bottom { flex-direction: column; gap: 12px; }
     }
@@ -938,7 +927,7 @@
         margin-bottom: 22px;
       }
       .hero-title {
-        font-size: clamp(30px, 9.5vw, 42px);
+        font-size: clamp(26px, 7.6vw, 34px);
         line-height: 1.06;
         margin-bottom: 20px;
         text-wrap: balance;
@@ -982,7 +971,7 @@
         padding: 22px;
         min-height: 200px;
       }
-      .intro-card-title { font-size: 20px; }
+      .intro-card-title { font-size: 16px; }
       .intro-card-desc { font-size: 13px; }
       .intro-scroll-cue { font-size: 9px; padding: 0 18px; }
 
@@ -1012,11 +1001,72 @@
       .hero-brand-stack { gap: 10px; margin-bottom: 28px; }
       .hero-brand-stack .hero-symbol { width: 52px; }
       .hero-brand-wordmark { font-size: 18px; }
-      .hero-title { font-size: clamp(26px, 11vw, 34px); margin-bottom: 16px; }
+      .hero-title { font-size: clamp(23px, 9vw, 28px); margin-bottom: 16px; }
       .hero-sub { font-size: 15px; margin-bottom: 24px; }
       .hero-cta-primary, .hero-cta-secondary { font-size: 14.5px; padding: 13px 18px; }
       .intro-card { flex: 0 0 220px; max-width: 220px; }
     }
+
+    /* ══ SEÇÕES INSTITUCIONAIS + PAINEL COLABORADORES ══ */
+    .inst{padding:92px 0;}
+    .inst .iwrap{max-width:1000px;margin:0 auto;padding:0 24px;}
+    .inst-dark{background:var(--r-ink,#0D1117);color:#F4F1E8;}
+    .inst-paper{background:#FAFAF7;color:#0D1117;}
+    .inst-cream{background:#F4F1E8;color:#0D1117;}
+    .inst .ieye{font-family:var(--r-font-mono,'JetBrains Mono',monospace);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--r-amber,#F4B93E);display:inline-flex;align-items:center;gap:9px;margin-bottom:16px;}
+    .inst .ieye::before{content:"";width:22px;height:1px;background:currentColor;opacity:.7;}
+    .inst h2{font-family:var(--r-font-display,'Fraunces',serif);font-weight:600;font-size:clamp(28px,3.8vw,44px);line-height:1.08;letter-spacing:-.02em;max-width:22ch;margin-bottom:18px;}
+    .inst h2 em{font-style:italic;color:var(--r-amber,#F4B93E);}
+    .inst p.ilede{font-family:var(--r-font-body,'Inter',sans-serif);font-size:clamp(16px,1.9vw,19px);line-height:1.6;max-width:62ch;opacity:.92;}
+    .inst-dark p.ilede{color:rgba(244,241,232,.86);}
+    .inst-paper p.ilede,.inst-cream p.ilede{color:#33383f;}
+    .igrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:36px;}
+    .icard{border-radius:16px;padding:26px 26px;border:1px solid rgba(13,17,23,.10);background:#fff;}
+    .inst-dark .icard{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.10);}
+    .icard h3{font-family:var(--r-font-display,'Fraunces',serif);font-weight:600;font-size:20px;margin-bottom:8px;}
+    .icard h3 em{font-style:italic;color:var(--r-amber,#F4B93E);}
+    .icard p{font-size:14.5px;line-height:1.55;opacity:.85;}
+    .isteps{counter-reset:st;display:grid;gap:14px;margin-top:36px;}
+    .istep{display:flex;gap:18px;align-items:flex-start;border-left:2px solid rgba(244,185,62,.4);padding:6px 0 6px 20px;}
+    .istep .sn{font-family:var(--r-font-mono,monospace);color:var(--r-amber,#F4B93E);font-weight:700;font-size:13px;min-width:34px;}
+    .istep b{font-family:var(--r-font-display,serif);font-weight:600;font-size:18px;display:block;margin-bottom:3px;}
+    .istep span{font-size:14.5px;opacity:.82;}
+    .inums{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:22px;margin-top:36px;}
+    .inum b{font-family:var(--r-font-display,serif);font-weight:600;font-size:clamp(34px,4.4vw,50px);color:var(--r-amber,#F4B93E);display:block;line-height:1;}
+    .inum span{font-size:14px;opacity:.82;margin-top:8px;display:block;}
+    .ivalues{display:grid;gap:12px;margin-top:32px;max-width:760px;}
+    .ival{padding-left:26px;position:relative;font-size:16px;line-height:1.55;}
+    .ival::before{content:"◆";position:absolute;left:0;top:.1em;color:var(--r-amber,#F4B93E);font-size:12px;}
+    .ival b{font-weight:600;}
+    .icta-btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--r-font-body,'Inter',sans-serif);font-weight:600;font-size:15px;padding:15px 30px;border-radius:60px;text-decoration:none;background:var(--r-amber,#F4B93E);color:#0D1117;margin-top:26px;transition:.2s;border:none;cursor:pointer;}
+    .icta-btn:hover{filter:brightness(1.06);transform:translateY(-2px);}
+    .icta-ghost{background:transparent;border:1.5px solid rgba(244,185,62,.5);color:var(--r-amber,#F4B93E);}
+    /* botão colaboradores fixo */
+    .colab-fab{position:fixed;top:16px;right:16px;z-index:70;font-family:var(--r-font-mono,monospace);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:10px 16px;border-radius:40px;background:rgba(13,17,23,.72);backdrop-filter:blur(8px);border:1px solid rgba(244,185,62,.45);color:var(--r-amber,#F4B93E);cursor:pointer;}
+    .colab-fab:hover{background:rgba(13,17,23,.9);}
+    /* modal */
+    .colab-ov{position:fixed;inset:0;z-index:90;background:rgba(6,8,12,.78);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px;}
+    .colab-ov.on{display:flex;}
+    .colab-box{background:#12161f;border:1px solid rgba(244,185,62,.3);border-radius:18px;padding:34px;max-width:440px;width:100%;color:#F4F1E8;}
+    .colab-box h3{font-family:var(--r-font-display,serif);font-weight:600;font-size:24px;margin-bottom:8px;}
+    .colab-box p{font-size:14px;opacity:.75;margin-bottom:20px;}
+    .colab-box input{width:100%;padding:14px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:#fff;font-size:15px;margin-bottom:12px;}
+    .colab-box .err{color:#FF6B47;font-size:13px;margin-bottom:10px;display:none;}
+    .colab-links{display:none;gap:10px;flex-direction:column;}
+    .colab-links a{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-radius:10px;background:rgba(244,185,62,.08);border:1px solid rgba(244,185,62,.22);color:#F4F1E8;text-decoration:none;font-size:15px;}
+    .colab-links a:hover{background:rgba(244,185,62,.15);}
+    .colab-links a span{color:var(--r-amber,#F4B93E);}
+    .colab-acc{border:1px solid rgba(244,185,62,.22);border-radius:10px;overflow:hidden;background:rgba(244,185,62,.05);}
+    .colab-acc summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;color:#F4F1E8;font-size:15px;}
+    .colab-acc summary::-webkit-details-marker{display:none;}
+    .colab-acc .acc-ar{color:var(--r-amber,#F4B93E);transition:transform .2s;}
+    .colab-acc[open] .acc-ar{transform:rotate(180deg);}
+    .colab-acc a{margin:0 8px 8px;padding:11px 14px;font-size:14px;}
+    .colab-acc a:first-of-type{margin-top:2px;}
+    .colab-acc .acc-soon{margin:0 8px 8px;padding:11px 14px;font-size:14px;display:flex;justify-content:space-between;align-items:center;color:rgba(244,241,232,.4);border-radius:10px;background:rgba(255,255,255,.02);cursor:not-allowed;}
+    .colab-acc .acc-soon span{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:rgba(244,185,62,.55);border:1px solid rgba(244,185,62,.3);padding:2px 8px;border-radius:20px;}
+    .colab-x{float:right;background:none;border:none;color:#F4F1E8;opacity:.6;font-size:22px;cursor:pointer;margin-top:-8px;}
+
   </style>
 </head>
 <body>
@@ -1024,7 +1074,7 @@
   <!-- ══ HERO ══ -->
   <section class="hero">
     <video class="hero-video" autoplay loop muted playsinline preload="metadata" poster="assets/images/hero-pdv.jpg" aria-hidden="true">
-      <source src="assets/videos/hero-entrepreneur.mp4" type="video/mp4" media="(min-width: 769px)">
+      <source src="assets/videos/hero-entrepreneur.mp4" type="video/mp4">
     </video>
     <div class="hero-inner">
       <div class="hero-brand-stack">
@@ -1037,24 +1087,22 @@
         </div>
       </div>
       <h1 class="hero-title">
-        Ajudamos pequenas empresas a operar como <em>gigantes.</em>
+        Transformamos quem representa a sua empresa em quem <em>impulsiona o seu crescimento.</em>
       </h1>
       <p class="hero-sub">
-        Pessoas, processos e IA trabalhando juntos — instalados dentro do negócio para gerar mais venda, mais margem e crescimento que não para.
+        Acreditamos que toda empresa cresce pelas pessoas que desenvolve. Inclusive as que não estão na sua folha de pagamento.
       </p>
-      <div class="hero-triad" role="list">
-        <span class="hero-triad-item" role="listitem">Mais lucro</span>
-        <span class="hero-triad-sep" aria-hidden="true"></span>
-        <span class="hero-triad-item" role="listitem">Menos caos</span>
-        <span class="hero-triad-sep" aria-hidden="true"></span>
-        <span class="hero-triad-item" role="listitem">Crescimento que dura</span>
-      </div>
+      <ul style="list-style:none;display:grid;gap:16px;max-width:660px;margin:40px 0 8px;padding:0;">
+        <li style="position:relative;padding-left:26px;font-family:var(--r-font-body);font-size:clamp(15px,1.35vw,16px);color:var(--r-text-on-dark);opacity:.86;line-height:1.5;"><span style="position:absolute;left:0;top:.15em;color:var(--r-amber);">◆</span>Desenvolvemos quem realmente influencia a decisão de compra no seu canal.</li>
+        <li style="position:relative;padding-left:26px;font-family:var(--r-font-body);font-size:clamp(15px,1.35vw,16px);color:var(--r-text-on-dark);opacity:.86;line-height:1.5;"><span style="position:absolute;left:0;top:.15em;color:var(--r-amber);">◆</span>Transformamos parceiros comerciais em defensores do crescimento da sua empresa.</li>
+        <li style="position:relative;padding-left:26px;font-family:var(--r-font-body);font-size:clamp(15px,1.35vw,16px);color:var(--r-text-on-dark);opacity:.86;line-height:1.5;"><span style="position:absolute;left:0;top:.15em;color:var(--r-amber);">◆</span>Criamos vantagem competitiva através das pessoas, não apenas das campanhas.</li>
+      </ul>
       <div class="hero-cta-group">
-        <a href="escopo.html" class="hero-cta-primary" aria-label="Ver proposta completa">
-          Ver proposta completa
+        <a href="#contato" class="hero-cta-primary" aria-label="Fale com a gente">
+          Fale com a gente
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
-        <a href="#contato" class="hero-cta-secondary" aria-label="Falar com a equipe Rentabiliza.ai">Falar com a gente</a>
+        <a href="doc.html" class="hero-cta-secondary" aria-label="Conhecer o movimento">Conhecer o movimento</a>
       </div>
     </div>
   </section>
@@ -1075,9 +1123,9 @@
             <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
             <path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>
           </svg>
-          <div class="intro-card-num">01 · Acessível</div>
-          <h3 class="intro-card-title">Solução de <em style="font-family:inherit;color:var(--r-mint);">gigante</em>. Investimento de loja pequena.</h3>
-          <p class="intro-card-desc">Padrão de gestão das grandes empresas, num plano que cabe no caixa do parceiro.</p>
+          <div class="intro-card-num">01</div>
+          <h3 class="intro-card-title">É o ativo mais valioso do seu <em style="font-family:inherit;color:var(--r-mint);">canal.</em></h3>
+          <p class="intro-card-desc">As pessoas que influenciam cada decisão de compra.</p>
         </article>
 
         <!-- CARD 02 · layers -->
@@ -1087,9 +1135,9 @@
             <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/>
             <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/>
           </svg>
-          <div class="intro-card-num">02 · Simples</div>
-          <h3 class="intro-card-title">Instalado dentro do PDV.</h3>
-          <p class="intro-card-desc">Pessoas, processos e IA instalados dentro do PDV.</p>
+          <div class="intro-card-num">02</div>
+          <h3 class="intro-card-title">É o fim do <em style="font-family:inherit;color:var(--r-coral);">abandono da ponta.</em></h3>
+          <p class="intro-card-desc">Desenvolver quem realmente vende, em vez de só disputar consumidores.</p>
         </article>
 
         <!-- CARD 03 · store -->
@@ -1100,9 +1148,9 @@
             <path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/>
             <path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-2.741-2.913a.45.45 0 0 0-.9 0A2.7 2.7 0 0 1 13.62 12a2.7 2.7 0 0 1-2.742-2.913a.45.45 0 0 0-.9 0A2.7 2.7 0 0 1 7.24 12a2.7 2.7 0 0 1-2.79-2.913a.45.45 0 0 0-.9 0A2.7 2.7 0 0 1 2 10V7"/>
           </svg>
-          <div class="intro-card-num">03 · Multi-canal</div>
-          <h3 class="intro-card-title">MPE, varejos e <em style="font-family:inherit;color:var(--r-coral);">revendedores</em>.</h3>
-          <p class="intro-card-desc">MPE, varejos, revendedores e PME.</p>
+          <div class="intro-card-num">03</div>
+          <h3 class="intro-card-title">É um <em style="font-family:inherit;color:var(--r-mint);">movimento</em>, não um treinamento.</h3>
+          <p class="intro-card-desc">Propósito, comunidade e constância que mudam comportamento.</p>
         </article>
 
         <!-- CARD 04 · trending-up -->
@@ -1111,9 +1159,9 @@
             <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
             <polyline points="16 7 22 7 22 13"/>
           </svg>
-          <div class="intro-card-num">04 · Escalável</div>
-          <h3 class="intro-card-title">Ondas <em style="font-family: inherit; color: var(--r-mint);">auditáveis</em>.</h3>
-          <p class="intro-card-desc">Ondas auditáveis de centenas a milhares de parceiros, com KPI medido em cada onda.</p>
+          <div class="intro-card-num">04</div>
+          <h3 class="intro-card-title">É desenvolvimento de pessoas que vira <em style="font-family:inherit;color:var(--r-mint);">venda.</em></h3>
+          <p class="intro-card-desc">A preferência deixa de ser campanha e passa a ser escolha.</p>
         </article>
 
         <!-- CARD 05 · target -->
@@ -1123,9 +1171,9 @@
             <circle cx="12" cy="12" r="6"/>
             <circle cx="12" cy="12" r="2"/>
           </svg>
-          <div class="intro-card-num">05 · Direcionado</div>
-          <h3 class="intro-card-title">Mais venda, mais <em style="font-family:inherit;color:var(--r-mint);">margem</em>.</h3>
-          <p class="intro-card-desc">Mais venda, mais margem, crescimento que dura.</p>
+          <div class="intro-card-num">05</div>
+          <h3 class="intro-card-title">É a virada de chave do seu <em style="font-family:inherit;color:var(--r-mint);">canal</em>, com zero investimento seu.</h3>
+          <p class="intro-card-desc">Na largada, você não paga nada. Primeiro a gente entrega valor. Depois você investe só em quem gerar resultado.</p>
         </article>
 
         <!-- CARD 06 · shield-check -->
@@ -1134,9 +1182,9 @@
             <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
             <path d="m9 12 2 2 4-4"/>
           </svg>
-          <div class="intro-card-num">06 · Comprovado</div>
-          <h3 class="intro-card-title">Quem <em style="font-family:inherit;color:var(--r-coral);">viveu</em> o balcão.</h3>
-          <p class="intro-card-desc">Feita por quem viveu o balcão, não por quem leu sobre ele.</p>
+          <div class="intro-card-num">06</div>
+          <h3 class="intro-card-title">É <em style="font-family:inherit;color:var(--r-coral);">IA</em> que acelera e método que transforma.</h3>
+          <p class="intro-card-desc">Medição e personalização a serviço das pessoas.</p>
         </article>
 
         <!-- ═══ CLONES para loop seamless (aria-hidden) ═══ -->
@@ -1145,9 +1193,9 @@
             <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
             <path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>
           </svg>
-          <div class="intro-card-num">01 · Acessível</div>
-          <h3 class="intro-card-title">Solução de <em style="font-family:inherit;color:var(--r-mint);">gigante</em>. Investimento de loja pequena.</h3>
-          <p class="intro-card-desc">Padrão de gestão das grandes empresas, num plano que cabe no caixa do parceiro.</p>
+          <div class="intro-card-num">01</div>
+          <h3 class="intro-card-title">É o ativo mais valioso do seu <em style="font-family:inherit;color:var(--r-mint);">canal.</em></h3>
+          <p class="intro-card-desc">As pessoas que influenciam cada decisão de compra.</p>
         </article>
         <article class="intro-card" aria-hidden="true">
           <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round">
@@ -1155,9 +1203,9 @@
             <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/>
             <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/>
           </svg>
-          <div class="intro-card-num">02 · Simples</div>
-          <h3 class="intro-card-title">Instalado dentro do PDV.</h3>
-          <p class="intro-card-desc">Pessoas, processos e IA instalados dentro do PDV.</p>
+          <div class="intro-card-num">02</div>
+          <h3 class="intro-card-title">É o fim do <em style="font-family:inherit;color:var(--r-coral);">abandono da ponta.</em></h3>
+          <p class="intro-card-desc">Desenvolver quem realmente vende, em vez de só disputar consumidores.</p>
         </article>
         <article class="intro-card" aria-hidden="true">
           <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round">
@@ -1166,18 +1214,18 @@
             <path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/>
             <path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-2.741-2.913a.45.45 0 0 0-.9 0A2.7 2.7 0 0 1 13.62 12a2.7 2.7 0 0 1-2.742-2.913a.45.45 0 0 0-.9 0A2.7 2.7 0 0 1 7.24 12a2.7 2.7 0 0 1-2.79-2.913a.45.45 0 0 0-.9 0A2.7 2.7 0 0 1 2 10V7"/>
           </svg>
-          <div class="intro-card-num">03 · Multi-canal</div>
-          <h3 class="intro-card-title">MPE, varejos e <em style="font-family:inherit;color:var(--r-coral);">revendedores</em>.</h3>
-          <p class="intro-card-desc">MPE, varejos, revendedores e PME.</p>
+          <div class="intro-card-num">03</div>
+          <h3 class="intro-card-title">É um <em style="font-family:inherit;color:var(--r-mint);">movimento</em>, não um treinamento.</h3>
+          <p class="intro-card-desc">Propósito, comunidade e constância que mudam comportamento.</p>
         </article>
         <article class="intro-card" aria-hidden="true">
           <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round">
             <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
             <polyline points="16 7 22 7 22 13"/>
           </svg>
-          <div class="intro-card-num">04 · Escalável</div>
-          <h3 class="intro-card-title">Ondas <em style="font-family: inherit; color: var(--r-mint);">auditáveis</em>.</h3>
-          <p class="intro-card-desc">Ondas auditáveis de centenas a milhares de parceiros, com KPI medido em cada onda.</p>
+          <div class="intro-card-num">04</div>
+          <h3 class="intro-card-title">É desenvolvimento de pessoas que vira <em style="font-family:inherit;color:var(--r-mint);">venda.</em></h3>
+          <p class="intro-card-desc">A preferência deixa de ser campanha e passa a ser escolha.</p>
         </article>
         <article class="intro-card" aria-hidden="true">
           <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round">
@@ -1185,18 +1233,18 @@
             <circle cx="12" cy="12" r="6"/>
             <circle cx="12" cy="12" r="2"/>
           </svg>
-          <div class="intro-card-num">05 · Direcionado</div>
-          <h3 class="intro-card-title">Mais venda, mais <em style="font-family:inherit;color:var(--r-mint);">margem</em>.</h3>
-          <p class="intro-card-desc">Mais venda, mais margem, crescimento que dura.</p>
+          <div class="intro-card-num">05</div>
+          <h3 class="intro-card-title">É a virada de chave do seu <em style="font-family:inherit;color:var(--r-mint);">canal</em>, com zero investimento seu.</h3>
+          <p class="intro-card-desc">Na largada, você não paga nada. Primeiro a gente entrega valor. Depois você investe só em quem gerar resultado.</p>
         </article>
         <article class="intro-card" aria-hidden="true">
           <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round">
             <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
             <path d="m9 12 2 2 4-4"/>
           </svg>
-          <div class="intro-card-num">06 · Comprovado</div>
-          <h3 class="intro-card-title">Quem <em style="font-family:inherit;color:var(--r-coral);">viveu</em> o balcão.</h3>
-          <p class="intro-card-desc">Feita por quem viveu o balcão, não por quem leu sobre ele.</p>
+          <div class="intro-card-num">06</div>
+          <h3 class="intro-card-title">É <em style="font-family:inherit;color:var(--r-coral);">IA</em> que acelera e método que transforma.</h3>
+          <p class="intro-card-desc">Medição e personalização a serviço das pessoas.</p>
         </article>
       </div>
     </div>
@@ -1212,155 +1260,94 @@
   <section class="cards-section surface-light">
     <div class="cards-inner">
       <div class="cards-head">
-        <div class="r-eyebrow">Detalhamento</div>
-        <h2><em>Humanizamos</em>, <em>estruturamos</em> e <em>aceleramos</em> sua empresa.</h2>
-        <p class="cards-sub">A era da inteligência artificial — e das relações cada vez mais superficiais — exige outro tipo de gestor. Capaz de orquestrar pessoas, processos e IA na mesma operação. Capaz de decidir por dado sem perder a leitura humana. Capaz de crescer sem quebrar a si mesmo nem o time.</p>
+        <h2>As empresas nunca tiveram tanta tecnologia. E, ao mesmo tempo, nunca dependeram tanto das <em>pessoas.</em></h2>
+        <p class="cards-sub">Toda venda continua acontecendo entre pessoas. Toda confiança continua sendo construída por pessoas. Toda preferência continua sendo influenciada por pessoas.<br><br>Mesmo assim, a maior parte dos investimentos ainda acontece em mídia, campanhas e promoção.<br><br>Nós acreditamos em outro caminho. Antes de conquistar consumidores, é preciso conquistar quem influencia consumidores.<br><br>Por isso nasceu o Rentabiliza.ai. Um movimento criado para ajudar empresas a desenvolverem relacionamentos mais fortes com quem movimenta seus canais todos os dias.<br><br>Porque, quando uma empresa decide investir genuinamente nas pessoas da sua rede, ela deixa de construir apenas vendas. Ela passa a construir confiança. E confiança continua sendo o ativo mais difícil de copiar.</p>
       </div>
 
-      <div class="cards-grid">
-        <!-- CAIXA 01 · DOCUMENTO COMPLETO — GRANDE -->
-        <a href="doc.html" class="card card-big card-big-1">
-          <span class="card-num">01</span>
-          <span class="card-tag">Para o Parceiro</span>
-          <h3 class="card-title">Documento <em>Completo</em></h3>
-          <p class="card-desc">
-            A apresentação oficial do Rentabiliza.ai envolvendo: Leitura do Canal, Método, Arquitetura dos Pacotes, Cenários de Escala (KPIs auditáveis) e Plano Go-to-market. Marcas parceiras, operadoras, redes de varejo e demais investidores do método. Um documento que o diretor leva ao comitê para sustentar o projeto.
-          </p>
-          <div class="card-specs">
-            <div>
-              <div class="card-spec-label">Formato</div>
-              <div class="card-spec-value">Carta institucional</div>
-            </div>
-            <div>
-              <div class="card-spec-label">Leitura</div>
-              <div class="card-spec-value">~12 min</div>
-            </div>
-            <div>
-              <div class="card-spec-label">Seções</div>
-              <div class="card-spec-value">11</div>
-            </div>
-          </div>
-          <span class="card-cta">
-            Abrir documento
-            <span class="card-cta-arrow">↗</span>
-          </span>
-        </a>
-
-        <!-- CAIXA 02A · PITCH MARCAS PARCEIRAS — MEDIANA (topo coluna 2) -->
-        <a href="slides.html" class="card card-big card-big-2a">
-          <span class="card-num">02</span>
-          <span class="card-tag">Para Marcas Parceiras</span>
-          <h3 class="card-title">Apresentação · <em>Marcas Parceiras</em></h3>
-          <p class="card-desc">
-            Direcionada ao board da empresa, focada no pitch de entrega do projeto — pilares da Leitura do Canal, Modelo de Financiamento Partilhado e Cenários de Escala com KPIs auditáveis para operadoras, marcas parceiras, redes de varejo e demais investidores do método.
-          </p>
-          <div class="card-specs">
-            <div>
-              <div class="card-spec-label">Formato</div>
-              <div class="card-spec-value">12 slides</div>
-            </div>
-            <div>
-              <div class="card-spec-label">Duração</div>
-              <div class="card-spec-value">30 min</div>
-            </div>
-            <div>
-              <div class="card-spec-label">Audiência</div>
-              <div class="card-spec-value">Diretoria · Board</div>
-            </div>
-          </div>
-          <span class="card-cta">
-            Abrir apresentação
-            <span class="card-cta-arrow">↗</span>
-          </span>
-        </a>
-
-        <!-- CAIXA 02B · PITCH PARCEIROS COMERCIAIS (VAREJO) — MEDIANA (base coluna 2) -->
-        <a href="slides-varejo.html" class="card card-big card-big-2b">
-          <span class="card-num">02</span>
-          <span class="card-tag">Para Parceiros Comerciais</span>
-          <h3 class="card-title">Apresentação · <em>Parceiros Comerciais</em></h3>
-          <p class="card-desc">
-            Orientada diretamente ao lojista, PME, MPE, pequeno e médio varejo, distribuidores e demais parceiros comerciais. Foca no problema real do PDV e na aplicação do método que muda o jogo, com planos de desenvolvimento sustentável. Linguagem de balcão, decisão em 25 minutos.
-          </p>
-          <div class="card-specs">
-            <div>
-              <div class="card-spec-label">Formato</div>
-              <div class="card-spec-value">12 slides</div>
-            </div>
-            <div>
-              <div class="card-spec-label">Duração</div>
-              <div class="card-spec-value">25 min</div>
-            </div>
-            <div>
-              <div class="card-spec-label">Audiência</div>
-              <div class="card-spec-value">Lojista · Sócio</div>
-            </div>
-          </div>
-          <span class="card-cta">
-            Abrir apresentação
-            <span class="card-cta-arrow">↗</span>
-          </span>
-        </a>
-
-        <!-- CAIXA 03 · MANIFESTO — PEQUENA (topo coluna 3) -->
-        <a href="manifesto.html" class="card card-small card-small-1">
-          <span class="card-num">03</span>
-          <span class="card-tag">Para Uso Interno</span>
-          <h3 class="card-title">Manifesto da <em>Marca</em></h3>
-          <p class="card-desc">
-            O DNA do Rentabiliza.ai — visão, missão, valores, identidade visual e regras de aplicação. Referência do time para conteúdo, branding e comunicação.
-          </p>
-          <div class="card-specs">
-            <div>
-              <div class="card-spec-label">Formato</div>
-              <div class="card-spec-value">Manifesto</div>
-            </div>
-            <div>
-              <div class="card-spec-label">Leitura</div>
-              <div class="card-spec-value">~8 min</div>
-            </div>
-            <div>
-              <div class="card-spec-label">Versão</div>
-              <div class="card-spec-value">v2</div>
-            </div>
-          </div>
-          <span class="card-cta">
-            Ler manifesto
-            <span class="card-cta-arrow">↗</span>
-          </span>
-        </a>
-
-        <!-- CAIXA 04 · MODELO DE NEGÓCIO — PEQUENA (base coluna 3) -->
-        <a href="escopo.html" class="card card-small card-small-2">
-          <span class="card-num">04</span>
-          <span class="card-tag">Para Alinhamento Interno</span>
-          <h3 class="card-title">Modelo de <em>Negócio</em></h3>
-          <p class="card-desc">
-            Parceria operacional TradeUp × PulsarH.ai — responsabilidades, divisão de receita, fluxo de caixa e governança.
-          </p>
-          <div class="card-specs">
-            <div>
-              <div class="card-spec-label">Formato</div>
-              <div class="card-spec-value">Pré-contratual</div>
-            </div>
-            <div>
-              <div class="card-spec-label">Versão</div>
-              <div class="card-spec-value">v1 · Abril 2026</div>
-            </div>
-            <div>
-              <div class="card-spec-label">Acesso</div>
-              <div class="card-spec-value">Interno</div>
-            </div>
-          </div>
-          <span class="card-cta">
-            Abrir documento
-            <span class="card-cta-arrow">↗</span>
-          </span>
-        </a>
-      </div>
     </div>
   </section>
 
+
+
+  <!-- ══ SEÇÕES INSTITUCIONAIS ══ -->
+  <section class="inst inst-dark"><div class="iwrap">
+    <div class="ieye">Quem somos</div>
+    <h2>Nascemos de dentro do varejo. <em>Não de fora.</em></h2>
+    <p class="ilede">O Rentabiliza.ai não veio de sala de aula nem de PowerPoint. Veio do chão de loja — de 21 anos liderando operação, onde viramos uma das piores redes de serviço na melhor do país em 6 meses. O que a gente aprendeu ali virou método. E o método virou movimento.</p>
+  </div></section>
+
+  <section class="inst inst-paper"><div class="iwrap">
+    <div class="ieye">No que acreditamos</div>
+    <h2>Todo canal cresce até o limite do <em>compromisso.</em></h2>
+    <p class="ilede">Não é falta de mercado, de produto ou de verba. É falta de método e de gente comprometida. A gente não ensina a vender — instala o compromisso dentro do canal, com pessoas, processo e IA trabalhando juntos.</p>
+  </div></section>
+
+  <section class="inst inst-cream"><div class="iwrap">
+    <div class="ieye">O que entregamos</div>
+    <h2>O que a sua marca <em>ganha.</em></h2>
+    <div class="igrid">
+      <div class="icard"><h3>Conteúdo <em>direcionado</em></h3><p>Aula, mentoria e um agente de IA calibrados pra mover o SEU portfólio.</p></div>
+      <div class="icard"><h3>Seus executivos <em>no palco</em></h3><p>A liderança da marca ao vivo, conectando o lojista à sua bandeira.</p></div>
+      <div class="icard"><h3>Identidade de <em>embaixador</em></h3><p>Selo, comunidade e presença regional que fazem o revendedor vestir a sua camisa.</p></div>
+    </div>
+  </div></section>
+
+  <section class="inst inst-dark"><div class="iwrap">
+    <div class="ieye">Como funciona</div>
+    <h2>Um movimento em <em>quatro tempos.</em></h2>
+    <div class="isteps">
+      <div class="istep"><span class="sn">01</span><div><b>Sensibilização</b><span>O lojista sai do caos e enxerga o que dá pra fazer diferente.</span></div></div>
+      <div class="istep"><span class="sn">02</span><div><b>Engajamento</b><span>Ganha ritmo e para de andar sozinho, com a IA operando junto.</span></div></div>
+      <div class="istep"><span class="sn">03</span><div><b>Singularidade</b><span>O caminho sob medida, onde o resultado aparece.</span></div></div>
+      <div class="istep"><span class="sn">04</span><div><b>Pertencimento</b><span>A comunidade viva. O revendedor vira embaixador e não quer mais sair.</span></div></div>
+    </div>
+  </div></section>
+
+  <section class="inst inst-paper"><div class="iwrap">
+    <div class="ieye">Nossos valores</div>
+    <h2>Cinco princípios <em>inegociáveis.</em></h2>
+    <div class="ivalues">
+      <div class="ival"><b>Implementamos, não ensinamos.</b> Ninguém cresce por assistir aula; cresce quando o sistema entra em operação.</div>
+      <div class="ival"><b>Humano primeiro, tecnologia depois.</b> A IA é alavanca — libera a pessoa pra pensar, decidir e cuidar de gente.</div>
+      <div class="ival"><b>Dinheiro no bolso, paz na cabeça.</b> Crescimento que destrói quem cresce não serve.</div>
+      <div class="ival"><b>Estruturado é mais rápido.</b> Método não atrasa; atalho é retrabalho disfarçado.</div>
+      <div class="ival"><b>Brasil pede respeito.</b> Pequeno negócio merece a mesma gestão que multinacional tem.</div>
+    </div>
+  </div></section>
+
+  <section class="inst inst-dark"><div class="iwrap">
+    <div class="ieye">Nossos números</div>
+    <h2>A experiência que <em>sustenta a promessa.</em></h2>
+    <div class="inums">
+      <div class="inum"><b>+15</b><span>empresas com implementação de IA</span></div>
+      <div class="inum"><b>+100</b><span>alunos em cursos e workshops</span></div>
+      <div class="inum"><b>+20</b><span>comerciantes mentorados</span></div>
+      <div class="inum"><b>21 anos</b><span>de varejo real</span></div>
+      <div class="inum"><b>4.500</b><span>vendedores liderados</span></div>
+      <div class="inum"><b>R$ 1 bi</b><span>por ano sob gestão</span></div>
+    </div>
+    <p class="ilede" style="margin-top:28px;">E o risco é nosso: a marca só investe em quem engaja.</p>
+  </div></section>
+
+  <section class="inst inst-cream"><div class="iwrap">
+    <div class="ieye">Pra quem é</div>
+    <h2>Feito pra quem vende <em>por gente.</em></h2>
+    <p class="ilede">Se a sua marca depende de uma pessoa pra ser escolhida no balcão — telecom, cosméticos, seguros, fintech, automotivo — o movimento é pra você. Onde a venda é ativa, o compromisso do canal vira resultado.</p>
+  </div></section>
+
+  <section class="inst inst-dark"><div class="iwrap" style="text-align:center;">
+    <div class="ieye" style="justify-content:center;">Área restrita</div>
+    <h2 style="margin:0 auto 14px;">Painel de <em>colaboradores.</em></h2>
+    <p class="ilede" style="margin:0 auto;">Apresentações, proposta e material comercial. Acesso do time e parceiros.</p>
+    <button class="icta-btn" onclick="openColab()">Acessar painel</button>
+  </div></section>
+
+  <section class="inst inst-cream"><div class="iwrap" style="text-align:center;">
+    <div class="ieye" style="justify-content:center;">Vamos conversar</div>
+    <h2 style="margin:0 auto 14px;">Vamos ligar o motor <em>do seu canal?</em></h2>
+    <p class="ilede" style="margin:0 auto;">Conte qual é a sua rede. A gente desenha a primeira onda.</p>
+    <a class="icta-btn" href="#contato">Falar com a gente</a>
+  </div></section>
 
   <!-- ══ FOOTER ══ -->
   <footer class="footer" id="contato">
@@ -1400,6 +1387,46 @@
       window.addEventListener('scroll', retry, { once: true, passive: true });
       window.addEventListener('touchstart', retry, { once: true, passive: true });
     })();
+  </script>
+
+
+  <button class="colab-fab" onclick="openColab()">🔒 Painel Colaboradores</button>
+  <div class="colab-ov" id="colabOv">
+    <div class="colab-box">
+      <button class="colab-x" onclick="closeColab()">×</button>
+      <h3>Painel de Colaboradores</h3>
+      <p>Acesso restrito ao time e parceiros. Digite a senha.</p>
+      <div id="colabGate">
+        <input type="password" id="colabPw" placeholder="Senha" onkeydown="if(event.key==='Enter')tryColab()">
+        <div class="err" id="colabErr">Senha incorreta.</div>
+        <button class="icta-btn" style="margin-top:0;width:100%;justify-content:center;" onclick="tryColab()">Entrar</button>
+      </div>
+      <div class="colab-links" id="colabLinks">
+        <a href="proposta.html">Proposta comercial <span>↗</span></a>
+        <details class="colab-acc">
+          <summary>Apresentações Comerciais <span class="acc-ar">▾</span></summary>
+          <a href="slides-claro.html">Claro <span>↗</span></a>
+          <span class="acc-soon">TIM <span>em construção</span></span>
+          <span class="acc-soon">Motorola DIMO <span>em construção</span></span>
+          <span class="acc-soon">Levanci Cowork <span>em construção</span></span>
+        </details>
+        <a href="entregaveis.html">Apresentação de Entregáveis <span>↗</span></a>
+        <a href="slides-varejo.html">Apresentação · Parceiros <span>↗</span></a>
+        <a href="doc.html">Business Case <span>↗</span></a>
+        <a href="escopo.html">Modelo de Negócio <span>↗</span></a>
+        <a href="manifesto.html">Manifesto da Marca <span>↗</span></a>
+      </div>
+    </div>
+  </div>
+  <script>
+    function openColab(){document.getElementById('colabOv').classList.add('on');}
+    function closeColab(){document.getElementById('colabOv').classList.remove('on');}
+    function tryColab(){
+      var v=document.getElementById('colabPw').value;
+      if(v==='Pulsar@2026'){document.getElementById('colabGate').style.display='none';document.getElementById('colabLinks').style.display='flex';}
+      else{document.getElementById('colabErr').style.display='block';}
+    }
+    document.getElementById('colabOv').addEventListener('click',function(e){if(e.target===this)closeColab();});
   </script>
 
 </body>
