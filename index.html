@@ -266,37 +266,30 @@
       max-width: var(--r-container-max);
       margin: 0 auto 40px;
       padding: 0 32px;
-      display: flex; align-items: center; justify-content: space-between; gap: 24px;
     }
-    .rail-arrows { display: flex; gap: 10px; }
-    .rail-btn {
-      width: 42px; height: 42px;
-      border-radius: 50%;
-      border: 1px solid rgba(244,241,232,.18);
-      color: var(--r-fg);
-      display: inline-flex; align-items: center; justify-content: center;
-      transition: border-color var(--r-transition-base), color var(--r-transition-base), opacity var(--r-transition-base);
-    }
-    .rail-btn:hover { border-color: var(--r-amber); color: var(--r-amber); }
-    .rail-btn[disabled] { opacity: .3; pointer-events: none; }
-    .rail-btn svg { width: 17px; height: 17px; }
-
+    /* Carrossel flutuante — loop contínuo, pausa no hover */
     .intro-scroller {
-      overflow-x: auto;
-      overscroll-behavior-x: contain;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      padding: 4px max(32px, calc((100vw - var(--r-container-max)) / 2 + 32px)) 8px;
+      overflow: hidden;
+      padding: 4px 0 8px;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
+              mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
+    }
+    .intro-track {
       display: flex;
       gap: 18px;
-      scroll-padding-left: max(32px, calc((100vw - var(--r-container-max)) / 2 + 32px));
+      width: max-content;
+      animation: intro-scroll 34s linear infinite;
+      will-change: transform;
     }
-    .intro-scroller::-webkit-scrollbar { display: none; }
+    .intro-track:hover { animation-play-state: paused; }
+    @keyframes intro-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(calc(-50% - 9px)); }
+    }
     .intro-card {
       flex: 0 0 320px;
       max-width: 320px;
       min-height: 250px;
-      scroll-snap-align: start;
       display: flex; flex-direction: column;
       padding: 30px 28px;
       background: rgba(255,255,255,.03);
@@ -680,7 +673,8 @@
       .hero-points { margin-top: 28px; }
       .hero-points li { font-size: 15px; padding: 11px 0 11px 22px; }
       .intro-head { margin-bottom: 28px; padding: 0 20px; }
-      .intro-scroller { padding-left: 20px; padding-right: 20px; scroll-padding-left: 20px; gap: 14px; }
+      .intro-track { gap: 14px; animation-duration: 28s; }
+      @keyframes intro-scroll { from { transform: translateX(0); } to { transform: translateX(calc(-50% - 7px)); } }
       .intro-card { flex: 0 0 272px; max-width: 272px; padding: 26px 24px; min-height: 230px; }
       .intro-card-title { font-size: 19px; }
       .intro-scroll-cue { padding: 0 20px; font-size: 10px; gap: 12px; margin-top: 32px; }
@@ -750,17 +744,10 @@
   <section class="intro-section">
     <div class="intro-head">
       <div class="r-eyebrow">O que é o Rentabiliza.ai</div>
-      <div class="rail-arrows">
-        <button class="rail-btn" data-rail-prev aria-label="Anterior">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        </button>
-        <button class="rail-btn" data-rail-next aria-label="Próximo">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
-      </div>
     </div>
 
-    <div class="intro-scroller" data-rail>
+    <div class="intro-scroller">
+      <div class="intro-track">
         <!-- CARD 01 · sparkles -->
         <article class="intro-card">
           <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round" aria-hidden="true">
@@ -830,11 +817,72 @@
           <h3 class="intro-card-title">É <em style="font-family:inherit;color:var(--r-coral);">IA</em> que acelera e método que transforma.</h3>
           <p class="intro-card-desc">Medição e personalização a serviço das pessoas.</p>
         </article>
+
+        <!-- ═══ CLONES para loop seamless (aria-hidden) ═══ -->
+        <article class="intro-card" aria-hidden="true">
+          <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round">
+            <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+            <path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>
+          </svg>
+          <div class="intro-card-num">01</div>
+          <h3 class="intro-card-title">É o ativo mais valioso do seu <em style="font-family:inherit;color:var(--r-mint);">canal.</em></h3>
+          <p class="intro-card-desc">As pessoas que influenciam cada decisão de compra.</p>
+        </article>
+        <article class="intro-card" aria-hidden="true">
+          <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round">
+            <path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/>
+            <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/>
+            <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/>
+          </svg>
+          <div class="intro-card-num">02</div>
+          <h3 class="intro-card-title">É o fim do <em style="font-family:inherit;color:var(--r-coral);">abandono da ponta.</em></h3>
+          <p class="intro-card-desc">Desenvolver quem realmente vende, em vez de só disputar consumidores.</p>
+        </article>
+        <article class="intro-card" aria-hidden="true">
+          <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round">
+            <path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/>
+            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+            <path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/>
+            <path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-2.741-2.913a.45.45 0 0 0-.9 0A2.7 2.7 0 0 1 13.62 12a2.7 2.7 0 0 1-2.742-2.913a.45.45 0 0 0-.9 0A2.7 2.7 0 0 1 7.24 12a2.7 2.7 0 0 1-2.79-2.913a.45.45 0 0 0-.9 0A2.7 2.7 0 0 1 2 10V7"/>
+          </svg>
+          <div class="intro-card-num">03</div>
+          <h3 class="intro-card-title">É um <em style="font-family:inherit;color:var(--r-mint);">movimento</em>, não um treinamento.</h3>
+          <p class="intro-card-desc">Propósito, comunidade e constância que mudam comportamento.</p>
+        </article>
+        <article class="intro-card" aria-hidden="true">
+          <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round">
+            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+            <polyline points="16 7 22 7 22 13"/>
+          </svg>
+          <div class="intro-card-num">04</div>
+          <h3 class="intro-card-title">É desenvolvimento de pessoas que vira <em style="font-family:inherit;color:var(--r-mint);">venda.</em></h3>
+          <p class="intro-card-desc">A preferência deixa de ser campanha e passa a ser escolha.</p>
+        </article>
+        <article class="intro-card" aria-hidden="true">
+          <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="12" r="6"/>
+            <circle cx="12" cy="12" r="2"/>
+          </svg>
+          <div class="intro-card-num">05</div>
+          <h3 class="intro-card-title">É a virada de chave do seu <em style="font-family:inherit;color:var(--r-mint);">canal</em>, com zero investimento seu.</h3>
+          <p class="intro-card-desc">Na largada, você não paga nada. Primeiro a gente entrega valor. Depois você investe só em quem gerar resultado.</p>
+        </article>
+        <article class="intro-card" aria-hidden="true">
+          <svg class="intro-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round">
+            <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+          <div class="intro-card-num">06</div>
+          <h3 class="intro-card-title">É <em style="font-family:inherit;color:var(--r-coral);">IA</em> que acelera e método que transforma.</h3>
+          <p class="intro-card-desc">Medição e personalização a serviço das pessoas.</p>
+        </article>
+      </div>
     </div>
 
     <div class="intro-scroll-cue">
       <div class="r-rule"></div>
-      <span>Implementação por <strong>PulsarH.ai × TradeUp</strong></span>
+      <span>Implementação por <strong>PulsarH.ai</strong></span>
       <div class="r-rule"></div>
     </div>
   </section>
@@ -971,33 +1019,10 @@
       window.addEventListener('touchstart', retry, { once: true, passive: true });
     })();
 
-    // Trilho manual — setas com scroll-snap
-    (function() {
-      const rail = document.querySelector('[data-rail]');
-      if (!rail) return;
-      const step = () => {
-        const card = rail.querySelector('.intro-card');
-        return card ? (card.getBoundingClientRect().width + 18) * 2 : 640;
-      };
-      const prev = document.querySelector('[data-rail-prev]');
-      const next = document.querySelector('[data-rail-next]');
-      const sync = () => {
-        if (!prev || !next) return;
-        prev.toggleAttribute('disabled', rail.scrollLeft <= 4);
-        next.toggleAttribute('disabled', rail.scrollLeft >= rail.scrollWidth - rail.clientWidth - 4);
-      };
-      prev && prev.addEventListener('click', () => rail.scrollBy({ left: -step(), behavior: 'smooth' }));
-      next && next.addEventListener('click', () => rail.scrollBy({ left: step(), behavior: 'smooth' }));
-      rail.addEventListener('scroll', sync, { passive: true });
-      window.addEventListener('resize', sync);
-      sync();
-    })();
-
     // Reveal sutil no scroll (respeita prefers-reduced-motion via CSS)
     (function() {
       const groups = [
         '.hero-title, .hero-sub, .hero-points, .hero-cta-group',
-        '.intro-card',
         '.cards-head > *',
         '.inst .ieye, .inst h2, .inst .ilede, .inst .icta-btn',
         '.icard, .istep, .inum, .ival'
