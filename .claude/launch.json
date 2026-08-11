@@ -6,6 +6,12 @@
       "runtimeExecutable": "npx",
       "runtimeArgs": ["--yes", "serve", ".", "-p", "4321", "--no-clipboard"],
       "port": 4321
+    },
+    {
+      "name": "rentabiliza-preview-b",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "serve", ".", "-p", "4329", "--no-clipboard"],
+      "port": 4329
     }
   ]
 }
